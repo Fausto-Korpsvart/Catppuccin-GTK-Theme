@@ -25,7 +25,7 @@ So, this is my first attempt with GTK themes, which currently only works on the 
 
 #### Installing themes in GNOME
 
-- 1 Download the theme from: [Catppuccin GTK Theme](https://www.pling.com/p/1706139/) and unzip the files.
+- 1 Download the theme from: [Catppuccin GTK Theme](https://www.pling.com/s/Gnome/p/1715554) and unzip the files.
 - Cut the unzipped files and paste it into any of the following paths:
   - '~/.local/share' Create the folder 'themes' and paste the themes folders inside.
   - '~/.themes' in the 'home' directory, Create the folder '.themes' and paste the theme folders inside.
@@ -36,9 +36,9 @@ So, this is my first attempt with GTK themes, which currently only works on the 
 
 #### More themes of the 'Code Editors Colours for GTK Themes' series
 **Catppuccin**
-- [**Catppuccin GTK Themes**](https://www.pling.com/p/1706139/) <br>
-- [**Catppuccin Shell Themes**](https://www.pling.com/p/1706218/) <br>
-- [**Catppuccin Icon Themes**](https://www.pling.com/p/1706189/) <br>
+- [**Catppuccin GTK Themes**](https://www.pling.com/p/1715554/) <br>
+- [**Catppuccin Shell Themes**](https://www.pling.com/p/1715555/) <br>
+- [**Catppuccin Icon Themes**](https://www.pling.com/p/1715570/) <br>
 **Material**
 - [**DeepOcean GTK Themes**](https://www.pling.com/p/1706139/) <br>
 - [**DeepOcean Shell Themes**](https://www.pling.com/p/1706218/) <br>
