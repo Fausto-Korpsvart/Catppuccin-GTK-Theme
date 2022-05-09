@@ -1,0 +1,3 @@
+let l:bm_file_version = 1
+let l:bm_sessions = {'default': {'/home/fausto/.themes/Catppuccin_Mid_Dark/gnome-shell/gnome-shell.css': [{'sign_idx': 9501, 'line_nr': 3482, 'content': '#dashtodockContainer #dash .dash-background {'},{'sign_idx': 9500, 'line_nr': 3228, 'content': '.dash-background {'},],}}
+let l:bm_current_session = 'default'
