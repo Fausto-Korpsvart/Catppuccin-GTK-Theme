@@ -1,12 +1,12 @@
 [Desktop Entry]
 Type=X-GNOME-Metatheme
-Name=Catppuccin
+Name=Cattppuccin_Mid_Dark
 Comment=An elegant GTK theme with the 'Catppuccin' colour palette based on '@Vinceliuice's Graphite' theme.
 Encoding=UTF-8
 
 [X-GNOME-Metatheme]
-GtkTheme=Catppuccin
-MetacityTheme=Cattppuccin
+GtkTheme=Cattppuccin_Mid_Dark
+MetacityTheme=Cattppuccin_Mid_Dark
 IconTheme=Catppuccin_Icons
-CursorTheme=Catppuccin
+CursorTheme=Catppuccin-Mid-Dark
 ButtonLayout=close,minimize,maximize:menu
