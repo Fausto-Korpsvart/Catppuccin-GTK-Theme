@@ -4,9 +4,10 @@
 **Catppuccin**
 ![Catppuccin](https://raw.githubusercontent.com/Fausto-Korpsvart/Catppuccin-GTK-Theme/main/screenshots/catppuccin02.png)
 **Catppuccin**
+
 ---
 
-Material is a GTK theme based on the [Catppuccin colour palette for Neovim](https://github.com/catppuccin/nvim) and [Graphite](https://www.pling.com/p/1598493) theme by [@VinceLiuice](https://www.pling.com/u/vinceliuice) and part of the 'Code Editors Colours for GTK Themes' series.
+Catppuccin is a GTK theme based on the [Catppuccin colour palette for Neovim](https://github.com/catppuccin/nvim) and [Graphite](https://www.pling.com/p/1598493) theme by [@VinceLiuice](https://www.pling.com/u/vinceliuice) and part of the 'Code Editors Colours for GTK Themes' series.
 
 The idea was born because I wanted a GTK theme to match the color palettes of my Xmonad TWM and Neovim setups. I use various colour palettes for my working environment based on the themes of my Neovim code editor; I have used the most popular code editors but in Neovim I feel more comfortable, so based on the theme of my Neovim setup I set my working environment as Xmonad TWM and the Gnome or KDE desktops.
 
@@ -27,34 +28,35 @@ So, this is my first attempt with GTK themes, which currently only works on the 
 
 - 1 Download the theme from: [Catppuccin GTK Theme](https://www.pling.com/s/Gnome/p/1715554) and unzip the files.
 - Cut the unzipped files and paste it into any of the following paths:
-  - '~/.local/share' Create the folder 'themes' and paste the themes folders inside.
   - '~/.themes' in the 'home' directory, Create the folder '.themes' and paste the theme folders inside.
-- With Gnome Tweaks you can change every detail, the shell, the icons, the theme...
+  - For Gnome 42 you need to put the file in '~/.config/gtk-4.0' and rename to 'gtk.css', (I change the names to identify each file)
+- With Gnome Tweaks you can change every detail, the shell, the icons, the theme, except for Gnome 42.
 
 ---
 
+#### More themes of the 'Code Editors Colours for GTK Themes'
 
-#### More themes of the 'Code Editors Colours for GTK Themes' series
-**Catppuccin**
+      **Catppuccin**
+
 - [**Catppuccin GTK Themes**](https://www.pling.com/p/1715554/) <br>
 - [**Catppuccin Shell Themes**](https://www.pling.com/p/1715555/) <br>
 - [**Catppuccin Icon Themes**](https://www.pling.com/p/1715570/) <br>
-**Material**
+  **Material**
 - [**DeepOcean GTK Themes**](https://www.pling.com/p/1706139/) <br>
 - [**DeepOcean Shell Themes**](https://www.pling.com/p/1706218/) <br>
 - [**DeepOcean Icon Themes**](https://www.pling.com/p/1706189/) <br>
 - [**Palenight GTK Themes**](https://www.pling.com/p/1706139/) <br>
 - [**Palenight Shell Themes**](https://www.pling.com/p/1706218/) <br>
 - [**Palenight Icon Themes**](https://www.pling.com/p/1706189/) <br>
-**Tokyo Night**
+  **Tokyo Night**
 - [**Tokyo Night GTK Themes**](https://www.pling.com/p/1681315/) <br>
 - [**Tokyo Night Shell Themes**](https://www.pling.com/p/1681470/) <br>
 - [**Tokyo Night Icon Themes**](https://www.pling.com/p/1681475/) <br>
-**Gruvbox**
+  **Gruvbox**
 - [**Gruvbox GTK Themes**](https://www.pling.com/p/1681313/) <br>
 - [**Gruvbox Shell Themes**](https://www.pling.com/p/1681451/) <br>
 - [**Gruvbox Icons Themes**](https://www.pling.com/p/1681460/) <br>
-**Everforest**
+  **Everforest**
 - [**Everforest GTK Themes**](https://www.pling.com/p/1695467/) <br>
 - [**Everforest Shell Themes**](https://www.pling.com/p/1695475/) <br>
 - [**Everforest Icons Themes**](https://www.pling.com/p/1695476/) <br>
