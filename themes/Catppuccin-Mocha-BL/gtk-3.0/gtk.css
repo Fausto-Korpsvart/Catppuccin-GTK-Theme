@@ -13992,7 +13992,8 @@ window#gnome-system-monitor.background.csd
 filechooser stack.view scrolledwindow treeview.view header button,
 treeview.view header button:disabled,
 filechooser stack.view scrolledwindow treeview.view header button:disabled {
-  background-color: #1e1e2e;
+  background-color: transparent;
+  margin: 1px;
 }
 
 treeview.view button.dnd,
@@ -17294,13 +17295,13 @@ popover.emoji-completion .emoji:hover {
 .nautilus-window.background.csd placessidebar > viewport.frame {
   background-color: transparent;
   color: #cdd6f4;
-  margin: 4px;
+  margin: 2px 0 2px 6px;
   border-radius: 12px;
 }
 
 .nautilus-window.background.csd placessidebar > viewport.frame > list {
   background: none;
-  padding: 2px;
+  padding: 4px 0 4px 4px;
 }
 
 .nautilus-window.background.csd
@@ -17464,9 +17465,9 @@ filechooser
 
 .nautilus-window.background.csd notebook > stack {
   background-color: #11111b;
-  border: 1px solid rgba(87, 82, 104, 0.6);
+  border: 1px solid rgba(87, 82, 104, 0.2);
   border-radius: 12px;
-  margin: 0 6px 6px 0;
+  margin: 0 6px 6px 6px;
 }
 
 .nautilus-window.background.csd
