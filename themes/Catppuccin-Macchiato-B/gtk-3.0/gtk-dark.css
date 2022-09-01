@@ -13542,7 +13542,7 @@ box.vertical headerbar {
 }
 
 .nautilus-window headerbar > box.horizontal.left {
-  padding: 0 6px;
+  padding: 0 10px;
   padding-right: 60px;
 }
 
@@ -17320,13 +17320,13 @@ popover.emoji-completion .emoji:hover {
 .nautilus-window.background.csd placessidebar > viewport.frame {
   background-color: transparent;
   color: #cad3f5;
-  margin: 2px 0 2px 6px;
+  margin: 0;
   border-radius: 12px;
 }
 
 .nautilus-window.background.csd placessidebar > viewport.frame > list {
   background: none;
-  padding: 4px 0 4px 4px;
+  padding: 0 0 0 8px;
 }
 
 .nautilus-window.background.csd
@@ -17492,7 +17492,7 @@ filechooser
   background-color: #181926;
   border: 1px solid rgba(73, 77, 100, 0.2);
   border-radius: 12px;
-  margin: 0 6px 6px 6px;
+  margin: 0 6px 6px;
 }
 
 .nautilus-window.background.csd
