@@ -1,8 +1,6 @@
 ## Catppuccin theme for GTK
 
-![Catppuccin](https://raw.githubusercontent.com/Fausto-Korpsvart/Catppuccin-GTK-Theme/main/screenshots/catppuccin03.png)
-**Catppuccin**
-![Catppuccin](https://raw.githubusercontent.com/Fausto-Korpsvart/Catppuccin-GTK-Theme/main/screenshots/catppuccin02.png)
+![Catppuccin](https://raw.githubusercontent.com/Fausto-Korpsvart/Catppuccin-GTK-Theme/main/screenshots/Catppuccin.png)
 **Catppuccin**
 
 ---
