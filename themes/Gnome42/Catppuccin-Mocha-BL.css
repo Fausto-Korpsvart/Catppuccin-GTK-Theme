@@ -11,25 +11,25 @@ define variables for them in _colors.scss */
 /* Catppuccin Mocha Borderless Theme */
 
 /* The main accent color and the matching text value */
-@define-color accent_bg_color #F5E0DC;
-@define-color accent_fg_color #1E1E2E;
-@define-color accent_color @accent_bg_color;
+@define-color accent_color #89b4fa;
+@define-color accent_bg_color shade(#89b4fa, 0.5);
+@define-color accent_fg_color #cdd6f4;
 
 /* Destructive-action buttons */
-@define-color destructive_bg_color #F28FAD;
-@define-color destructive_fg_color #d9e0ee;
-@define-color destructive_color #E8A2AF;
+@define-color destructive_color #f38ba8;
+@define-color destructive_bg_color shade(#f38ba8, 0.5);
+@define-color destructive_fg_color #cdd6f4;
 
 /* Levelbars, entries, labels and infobars. These don't need text colors */
-@define-color success_bg_color #ABE9B3;
-@define-color success_fg_color #d9e0ee;
-@define-color success_color #B5E8E0;
-@define-color warning_bg_color #F8BD96;
-@define-color warning_fg_color #302D41;
-@define-color warning_color #FAE3B0;
-@define-color error_bg_color #F28FAD;
-@define-color error_fg_color #d9e0ee;
-@define-color error_color #E8A2AF;
+@define-color success_color #a6e3a1;
+@define-color success_bg_color shade(#a6e3a1, 0.5);
+@define-color success_fg_color #cdd6f4;
+@define-color warning_color #fab387;
+@define-color warning_bg_color shade(#fab387, 0.5);
+@define-color warning_fg_color #cdd6f4;
+@define-color error_color #f38ba8;
+@define-color error_bg_color shade(#f38ba8, 0.5);
+@define-color error_fg_color #cdd6f4;
 
 /* Window */
 @define-color window_bg_color #1e1e2e;
@@ -132,103 +132,59 @@ windowcontrols button:not(.suggested-action):not(.destructive-action) {
   border-radius: 9999px;
 }
 
-windowcontrols button:not(.suggested-action):not(.destructive-action).minimize,
-windowcontrols button:not(.suggested-action):not(.destructive-action).maximize,
-windowcontrols button:not(.suggested-action):not(.destructive-action).close {
-  color: transparent;
-}
-
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).minimize
-  image,
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).maximize
-  image,
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).close
-  image {
+button.titlebutton.minimize,
+button.titlebutton.maximize,
+button.titlebutton.close,
+windowcontrols button.minimize image,
+windowcontrols button.maximize image,
+windowcontrols button.close image {
   padding: 0;
-}
-
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).minimize:hover,
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).minimize:active {
-  background-color: #f9e2af;
-  color: transparent;
-}
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).maximize:hover,
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).maximize:active {
-  background-color: #94e2d5;
-  color: transparent;
-}
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).close:hover,
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).close:active {
-  background-color: #eba0ac;
   color: transparent;
 }
 
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).minimize:backdrop,
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).maximize:backdrop,
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).close:backdrop {
+button.titlebutton.close,
+button.titlebutton.close:hover:backdrop,
+windowcontrols > button.close,
+windowcontrols > button.close:hover:backdrop {
+  background-color: #f38ba8;
+}
+
+button.titlebutton.close:hover,
+windowcontrols > button.close:hover {
+  background-color: shade(#f38ba8, 0.5);
+}
+
+button.titlebutton.maximize,
+button.titlebutton.maximize:hover:backdrop,
+windowcontrols > button.maximize,
+windowcontrols > button.maximize:hover:backdrop {
+  background-color: #a6e3a1;
+}
+
+button.titlebutton.maximize:hover,
+windowcontrols > button.maximize:hover {
+  background-color: shade(#a6e3a1, 0.5);
+}
+
+button.titlebutton.minimize,
+button.titlebutton.minimize:hover:backdrop,
+windowcontrols > button.minimize,
+windowcontrols > button.minimize:hover:backdrop {
+  background-color: #fab387;
+}
+
+button.titlebutton.minimize:hover,
+windowcontrols > button.minimize:hover {
+  background-color: shade(#fab387, 0.5);
+}
+
+button.titlebutton.close:backdrop,
+button.titlebutton.maximize:backdrop,
+button.titlebutton.minimize:backdrop,
+windowcontrols > button.close:backdrop,
+windowcontrols > button.maximize:backdrop,
+windowcontrols > button.minimize:backdrop {
   background-color: #45475a;
-  color: transparent;
-}
-
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).minimize:backdrop:hover,
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).minimize:backdrop:active {
-  background-color: #fab387;
-  color: transparent;
-}
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).maximize:backdrop:hover,
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).maximize:backdrop:active {
-  background-color: #a6e3a1;
-  color: transparent;
-}
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).close:backdrop:hover,
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).close:backdrop:active {
-  background-color: #f38ba8;
-  color: transparent;
-}
-
-windowcontrols button:not(.suggested-action):not(.destructive-action).minimize {
-  background-color: #fab387;
-}
-
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).minimize:active {
-  background-color: #fab387;
-}
-
-windowcontrols button:not(.suggested-action):not(.destructive-action).maximize {
-  background-color: #a6e3a1;
-}
-
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).maximize:active {
-  background-color: #a6e3a1;
-}
-
-windowcontrols button:not(.suggested-action):not(.destructive-action).close {
-  background-color: #f38ba8;
-}
-
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).close:active {
-  background-color: #f38ba8;
 }
 
 gridview > child:selected,
@@ -246,8 +202,9 @@ calendar > grid > label.today,
 filechooser stack.view scrolledwindow treeview.view:selected,
 stacksidebar row:selected,
 .navigation-sidebar > row:selected {
-  color: #f5e0dc;
-  background-color: rgba(245, 224, 220, 0.2);
+  color: #cba6f7;
+  font-weight: 500;
+  background-color: rgba(205, 214, 244, 0.2);
 }
 
 textview text selection:focus,
@@ -257,6 +214,10 @@ entry > text > selection,
 calendar > grid > label.today:selected {
   color: rgba(0, 0, 0, 0.87);
   background-color: #f5e0dc;
+}
+
+list.frame {
+  border-radius: 12px;
 }
 
 .monospace {
@@ -433,7 +394,7 @@ magnifier {
 }
 switch {
   transition: all 75ms cubic-bezier(0, 0, 0.2, 1);
-  margin: 6px 0;
+  margin: 12px 0;
   padding: 0;
   border: 1px solid rgba(205, 214, 244, 0.7);
   border-radius: 9999px;

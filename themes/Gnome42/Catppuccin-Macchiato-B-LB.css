@@ -11,25 +11,25 @@ define variables for them in _colors.scss */
 /* Catppuccin Macchiato Border Legacy Buttons Theme */
 
 /* The main accent color and the matching text value */
-@define-color accent_bg_color #F0C6C6;
-@define-color accent_fg_color #24273a;
-@define-color accent_color @accent_bg_color;
+@define-color accent_color #8AADF4;
+@define-color accent_bg_color shade(#8AADF4, 0.5);
+@define-color accent_fg_color #cad3f5;
 
 /* Destructive-action buttons */
-@define-color destructive_bg_color #ED8796;
+@define-color destructive_color #ed8796;
+@define-color destructive_bg_color shade(#ed8796, 0.5);
 @define-color destructive_fg_color #cad3f5;
-@define-color destructive_color #EE99A0;
 
 /* Levelbars, entries, labels and infobars. These don't need text colors */
-@define-color success_bg_color #A6DA95;
+@define-color success_color #a6da95;
+@define-color success_bg_color shade(#a6da95, 0.5);
 @define-color success_fg_color #cad3f5;
-@define-color success_color #8BD5CA;
-@define-color warning_bg_color #F5A97F;
-@define-color warning_fg_color #363a4f;
-@define-color warning_color #EED49F;
-@define-color error_bg_color #ED8796;
+@define-color warning_color #f5a97f;
+@define-color warning_bg_color shade(#f5a97f, 0.5);
+@define-color warning_fg_color #cad3f5;
+@define-color error_color #ed8796;
+@define-color error_bg_color shade(#ed8796, 0.5);
 @define-color error_fg_color #cad3f5;
-@define-color error_color #EE99A0;
 
 /* Window */
 @define-color window_bg_color #24273a;
@@ -65,9 +65,6 @@ window.csd {
   box-shadow: 0 2px 2.4px -1px rgba(0, 0, 0, 0.2),
     0 4px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 6px 0 rgba(0, 0, 0, 0.12),
     0 0 0 2px #f5a97f, 0 0 16px transparent;
-  box-shadow: 0 2px 2.4px -1px rgba(0, 0, 0, 0.2),
-    0 4px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 6px 0 rgba(0, 0, 0, 0.12),
-    0 0 0 2px #f5a97f, 0 0 16px transparent;
 }
 
 window.csd:backdrop {
@@ -90,7 +87,7 @@ window.csd.dialog.message {
   padding: 2px;
   border-radius: 0;
   background-color: #24273a;
-  border: 2px solid #f0c6c6;
+  border: 2px solid #b7bdf8;
 }
 
 .solid-csd window.csd:backdrop {
@@ -145,60 +142,37 @@ windowcontrols
 }
 
 windowcontrols
-  button:not(.suggested-action):not(.destructive-action).minimize:hover {
-  background-color: #313448;
-}
-
+  button:not(.suggested-action):not(.destructive-action).minimize:hover,
 windowcontrols
-  button:not(.suggested-action):not(.destructive-action).minimize:active {
-  background-color: #44465d;
-}
+  button:not(.suggested-action):not(.destructive-action).maximize:hover,
 windowcontrols
-  button:not(.suggested-action):not(.destructive-action).maximize:hover {
-  background-color: #313448;
-}
-
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).maximize:active {
-  background-color: #44465d;
-}
-
-windowcontrols
-  button.close:not(.suggested-action):not(.destructive-action):hover {
-  background-color: #f0c6c6;
-  color: #24273a;
-}
-
-windowcontrols
-  button.close:not(.suggested-action):not(.destructive-action):active {
-  background-color: #f5a97f;
-  color: #24273a;
-}
-
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).minimize:backdrop:hover {
-  background-color: #313448;
-}
-
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).minimize:backdrop:active {
-  background-color: #44465d;
-}
+  button:not(.suggested-action):not(.destructive-action).minimize:backdrop:hover,
 windowcontrols
   button:not(.suggested-action):not(.destructive-action).maximize:backdrop:hover {
   background-color: #313448;
 }
 
 windowcontrols
+  button:not(.suggested-action):not(.destructive-action).minimize:active,
+windowcontrols
+  button:not(.suggested-action):not(.destructive-action).maximize:active,
+windowcontrols
+  button:not(.suggested-action):not(.destructive-action).minimize:backdrop:active,
+windowcontrols
   button:not(.suggested-action):not(.destructive-action).maximize:backdrop:active {
   background-color: #44465d;
 }
 
 windowcontrols
+  button.close:not(.suggested-action):not(.destructive-action):hover,
+windowcontrols
   button:not(.suggested-action):not(.destructive-action).close:backdrop:hover {
-  background-color: #f0c6c6;
+  background-color: #8aadf4;
   color: #24273a;
 }
+
+windowcontrols
+  button.close:not(.suggested-action):not(.destructive-action):active,
 windowcontrols
   button:not(.suggested-action):not(.destructive-action).close:backdrop:active {
   background-color: #f5a97f;
@@ -220,8 +194,9 @@ calendar > grid > label.today,
 filechooser stack.view scrolledwindow treeview.view:selected,
 stacksidebar row:selected,
 .navigation-sidebar > row:selected {
-  color: #f0c6c6;
-  background-color: rgba(240, 198, 198, 0.2);
+  color: #f5a97f;
+  font-weight: 500;
+  background-color: rgba(202, 211, 245, 0.2);
 }
 
 textview text selection:focus,
@@ -230,7 +205,11 @@ label > selection,
 entry > text > selection,
 calendar > grid > label.today:selected {
   color: rgba(0, 0, 0, 0.87);
-  background-color: #f0c6c6;
+  background-color: #b7bdf8;
+}
+
+list.frame {
+  border-radius: 12px;
 }
 
 .monospace {
@@ -283,7 +262,7 @@ popover.menu.background > contents {
   background-color: #363a4f;
   background-clip: border-box;
   border-radius: 12px;
-  border: 2px solid #f0c6c6;
+  border: 2px solid #b7bdf8;
 }
 
 popover.menu.background separator {
@@ -318,7 +297,7 @@ popover.menu modelbutton {
 
 popover.menu modelbutton:hover {
   transition: none;
-  background-color: #f0c6c6;
+  background-color: #b7bdf8;
   color: rgba(0, 0, 0, 0.87);
 }
 
@@ -346,12 +325,12 @@ popover.background > contents {
   padding: 6px;
   background-color: #363a4f;
   border-radius: 12px;
-  border: 2px solid #f0c6c6;
+  border: 2px solid #b7bdf8;
 }
 
 popover.background:backdrop > arrow,
 popover.background:backdrop > contents {
-  border: 2px solid #f0c6c6;
+  border: 2px solid #b7bdf8;
 }
 
 popover.background > contents > list,
@@ -423,7 +402,7 @@ magnifier {
 
 switch {
   transition: all 75ms cubic-bezier(0, 0, 0.2, 1);
-  margin: 6px 0;
+  margin: 12px 0;
   padding: 0;
   border: 2px solid rgba(202, 211, 245, 0.7);
   border-radius: 9999px;
@@ -434,8 +413,8 @@ switch {
 }
 
 switch:checked {
-  background-color: #f0c6c6;
-  border-color: #f0c6c6;
+  background-color: #b7bdf8;
+  border-color: #b7bdf8;
 }
 
 switch:disabled {

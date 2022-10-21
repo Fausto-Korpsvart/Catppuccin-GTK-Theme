@@ -11,49 +11,49 @@ define variables for them in _colors.scss */
 /* Catppuccin Latte Border Legacy Buttons Theme */
 
 /* The main accent color and the matching text value */
-@define-color accent_bg_color #5c5f77;
+@define-color accent_color #7287fd;
+@define-color accent_bg_color shade(#7287fd, 0.5);
 @define-color accent_fg_color #eff1f5;
-@define-color accent_color #5c5f77;
 
 /* Destructive-action buttons */
-@define-color destructive_bg_color #dd7878;
-@define-color destructive_fg_color #eff1f5;
 @define-color destructive_color #dd7878;
+@define-color destructive_bg_color shade(#dd7878, 0.5);
+@define-color destructive_fg_color #eff1f5;
 
 /* Levelbars, entries, labels and infobars. These don't need text colors */
-@define-color success_bg_color #5c5f77;
-@define-color success_fg_color #179299;
 @define-color success_color #179299;
-@define-color warning_bg_color #5c5f77;
-@define-color warning_fg_color #df8e1d;
+@define-color success_bg_color shade(#179299, 0.5);
+@define-color success_fg_color #eff1f5;
 @define-color warning_color #df8e1d;
-@define-color error_bg_color #5c5f77;
-@define-color error_fg_color #dd7878;
+@define-color warning_bg_color shade(#df8e1d, 0.5);
+@define-color warning_fg_color #eff1f5;
 @define-color error_color #dd7878;
+@define-color error_bg_color shade(#dd7878, 0.5);
+@define-color error_fg_color #eff1f5;
 
 /* Window */
 @define-color window_bg_color #eff1f5;
-@define-color window_fg_color #11111b;
+@define-color window_fg_color #1e1e2e;
 
 /* Views - e.g. text view or tree view */
 @define-color view_bg_color rgba(239, 241, 245, 0.2);
-@define-color view_fg_color #11111b;
+@define-color view_fg_color #1e1e2e;
 
 /* Header bar, search bar, tab bar */
-@define-color headerbar_bg_color #4c4f69;
+@define-color headerbar_bg_color #363a4f;
 @define-color headerbar_fg_color #eff1f5;
-@define-color headerbar_border_color #4c4f69;
-@define-color headerbar_backdrop_color #4c4f69;
+@define-color headerbar_border_color #363a4f;
+@define-color headerbar_backdrop_color #363a4f;
 @define-color headerbar_shade_color rgba(0, 0, 0, 0.36);
 
 /* Cards, boxed lists */
 @define-color card_bg_color rgba(239, 241, 245, 0.05);
-@define-color card_fg_color #11111b;
+@define-color card_fg_color #1e1e2e;
 @define-color card_shade_color rgba(0, 0, 0, 0.36);
 
 /* Popovers */
 @define-color popover_bg_color #eff1f5;
-@define-color popover_fg_color #11111b;
+@define-color popover_fg_color #1e1e2e;
 
 /* Miscellaneous */
 @define-color shade_color rgba(0, 0, 0, 0.36);
@@ -65,15 +65,12 @@ window.csd {
   box-shadow: 0 2px 2.4px -1px rgba(0, 0, 0, 0.2),
     0 4px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 6px 0 rgba(0, 0, 0, 0.12),
     0 0 0 2px #7287fd, 0 0 16px transparent;
-  box-shadow: 0 2px 2.4px -1px rgba(0, 0, 0, 0.2),
-    0 4px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 6px 0 rgba(0, 0, 0, 0.12),
-    0 0 0 2px #7287fd, 0 0 16px transparent;
 }
 
 window.csd:backdrop {
   box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.3),
     0 1px 2px -1px rgba(0, 0, 0, 0.24), 0 1px 2px -0.6px rgba(0, 0, 0, 0.17),
-    0 0 0 2px #6c6f85, 0 0 16px transparent;
+    0 0 0 2px #5c5f77, 0 0 16px transparent;
 }
 
 window.csd.popup {
@@ -89,12 +86,12 @@ window.csd.dialog.message {
   margin: 0;
   padding: 2px;
   border-radius: 0;
-  background-color: #4c4f69;
-  border: 2px solid #6c6f85;
+  background-color: #363a4f;
+  border: 2px solid #5c5f77;
 }
 
 .solid-csd window.csd:backdrop {
-  background-color: #4c4f69;
+  background-color: #363a4f;
 }
 
 window.csd.maximized,
@@ -145,64 +142,41 @@ windowcontrols
 }
 
 windowcontrols
-  button:not(.suggested-action):not(.destructive-action).minimize:hover {
-  background-color: #595c74;
-}
-
+  button:not(.suggested-action):not(.destructive-action).minimize:hover,
 windowcontrols
-  button:not(.suggested-action):not(.destructive-action).minimize:active {
-  background-color: #6b6d83;
-}
+  button:not(.suggested-action):not(.destructive-action).maximize:hover,
 windowcontrols
-  button:not(.suggested-action):not(.destructive-action).maximize:hover {
-  background-color: #595c74;
-}
-
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).maximize:active {
-  background-color: #6b6d83;
-}
-
-windowcontrols
-  button.close:not(.suggested-action):not(.destructive-action):hover {
-  background-color: #e6e9ef;
-  color: #4c4f69;
-}
-
-windowcontrols
-  button.close:not(.suggested-action):not(.destructive-action):active {
-  background-color: #ccd0da;
-  color: #4c4f69;
-}
-
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).minimize:backdrop:hover {
-  background-color: #595c74;
-}
-
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).minimize:backdrop:active {
-  background-color: #6b6d83;
-}
+  button:not(.suggested-action):not(.destructive-action).minimize:backdrop:hover,
 windowcontrols
   button:not(.suggested-action):not(.destructive-action).maximize:backdrop:hover {
   background-color: #595c74;
 }
 
 windowcontrols
+  button:not(.suggested-action):not(.destructive-action).minimize:active,
+windowcontrols
+  button:not(.suggested-action):not(.destructive-action).maximize:active,
+windowcontrols
+  button:not(.suggested-action):not(.destructive-action).minimize:backdrop:active,
+windowcontrols
   button:not(.suggested-action):not(.destructive-action).maximize:backdrop:active {
   background-color: #6b6d83;
 }
 
 windowcontrols
+  button.close:not(.suggested-action):not(.destructive-action):hover,
+windowcontrols
   button:not(.suggested-action):not(.destructive-action).close:backdrop:hover {
-  background-color: #e6e9ef;
-  color: #4c4f69;
+  background-color: #04a5e5;
+  color: #1e1e2e;
 }
+
+windowcontrols
+  button.close:not(.suggested-action):not(.destructive-action):active,
 windowcontrols
   button:not(.suggested-action):not(.destructive-action).close:backdrop:active {
-  background-color: #ccd0da;
-  color: #4c4f69;
+  background-color: #7287fd;
+  color: #1e1e2e;
 }
 
 gridview > child:selected,
@@ -220,8 +194,9 @@ calendar > grid > label.today,
 filechooser stack.view scrolledwindow treeview.view:selected,
 stacksidebar row:selected,
 .navigation-sidebar > row:selected {
-  color: #eff1f5;
-  background-color: #5c5f77;
+  color: #7287fd;
+  font-weight: 500;
+  background-color: #363a4f;
 }
 
 textview text selection:focus,
@@ -231,11 +206,6 @@ entry > text > selection,
 calendar > grid > label.today:selected {
   color: rgba(0, 0, 0, 0.87);
   background-color: #eff1f5;
-}
-
-listview,
-list {
-  outline: 2px solid alpha(currentColor, 0.06);
 }
 
 list.frame {
@@ -292,7 +262,7 @@ popover.menu.background > contents {
   background-color: #eff1f5;
   background-clip: border-box;
   border-radius: 12px;
-  border: 2px solid #6c6f85;
+  border: 2px solid #5c5f77;
 }
 
 popover.menu.background separator {
@@ -327,7 +297,7 @@ popover.menu modelbutton {
 
 popover.menu modelbutton:hover {
   transition: none;
-  background-color: #6c6f85;
+  background-color: #5c5f77;
   color: #eff1f5;
 }
 
@@ -355,12 +325,12 @@ popover.background > contents {
   padding: 6px;
   background-color: #eff1f5;
   border-radius: 12px;
-  border: 2px solid #6c6f85;
+  border: 2px solid #5c5f77;
 }
 
 popover.background:backdrop > arrow,
 popover.background:backdrop > contents {
-  border: 2px solid #6c6f85;
+  border: 2px solid #5c5f77;
 }
 
 popover.background > contents > list,
@@ -432,7 +402,7 @@ magnifier {
 
 switch {
   transition: all 75ms cubic-bezier(0, 0, 0.2, 1);
-  margin: 6px 0;
+  margin: 12px 0;
   padding: 0;
   border: 2px solid rgba(0, 0, 0, 0.6);
   border-radius: 9999px;
@@ -443,8 +413,8 @@ switch {
 }
 
 switch:checked {
-  background-color: #6c6f85;
-  border-color: #6c6f85;
+  background-color: #5c5f77;
+  border-color: #5c5f77;
 }
 
 switch:disabled {

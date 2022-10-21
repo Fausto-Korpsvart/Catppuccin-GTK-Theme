@@ -11,25 +11,25 @@ define variables for them in _colors.scss */
 /* Catppuccin Mocha Borderless Legacy Buttons Theme */
 
 /* The main accent color and the matching text value */
-@define-color accent_bg_color #F5E0DC;
-@define-color accent_fg_color #1E1E2E;
-@define-color accent_color @accent_bg_color;
+@define-color accent_color #89b4fa;
+@define-color accent_bg_color shade(#89b4fa, 0.5);
+@define-color accent_fg_color #cdd6f4;
 
 /* Destructive-action buttons */
-@define-color destructive_bg_color #F28FAD;
-@define-color destructive_fg_color #d9e0ee;
-@define-color destructive_color #E8A2AF;
+@define-color destructive_color #f38ba8;
+@define-color destructive_bg_color shade(#f38ba8, 0.5);
+@define-color destructive_fg_color #cdd6f4;
 
 /* Levelbars, entries, labels and infobars. These don't need text colors */
-@define-color success_bg_color #ABE9B3;
-@define-color success_fg_color #d9e0ee;
-@define-color success_color #B5E8E0;
-@define-color warning_bg_color #F8BD96;
-@define-color warning_fg_color #302D41;
-@define-color warning_color #FAE3B0;
-@define-color error_bg_color #F28FAD;
-@define-color error_fg_color #d9e0ee;
-@define-color error_color #E8A2AF;
+@define-color success_color #a6e3a1;
+@define-color success_bg_color shade(#a6e3a1, 0.5);
+@define-color success_fg_color #cdd6f4;
+@define-color warning_color #fab387;
+@define-color warning_bg_color shade(#fab387, 0.5);
+@define-color warning_fg_color #cdd6f4;
+@define-color error_color #f38ba8;
+@define-color error_bg_color shade(#f38ba8, 0.5);
+@define-color error_fg_color #cdd6f4;
 
 /* Window */
 @define-color window_bg_color #1e1e2e;
@@ -47,7 +47,7 @@ define variables for them in _colors.scss */
 @define-color headerbar_shade_color rgba(0, 0, 0, 0.36);
 
 /* Cards, boxed lists */
-@define-color card_bg_color rgba(217, 224, 238, 0.05);
+@define-color card_bg_color rgba(205, 214, 244, 0.05);
 @define-color card_fg_color #d9e0ee;
 @define-color card_shade_color rgba(0, 0, 0, 0.36);
 
@@ -146,63 +146,40 @@ windowcontrols
 }
 
 windowcontrols
-  button:not(.suggested-action):not(.destructive-action).minimize:hover {
-  background-color: #2c2d3d;
-}
-
+  button:not(.suggested-action):not(.destructive-action).minimize:hover,
 windowcontrols
-  button:not(.suggested-action):not(.destructive-action).minimize:active {
-  background-color: #3f4153;
-}
+  button:not(.suggested-action):not(.destructive-action).maximize:hover,
 windowcontrols
-  button:not(.suggested-action):not(.destructive-action).maximize:hover {
-  background-color: #2c2d3d;
-}
-
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).maximize:active {
-  background-color: #3f4153;
-}
-
-windowcontrols
-  button.close:not(.suggested-action):not(.destructive-action):hover {
-  background-color: #f5e0dc;
-  color: #1e1e2e;
-}
-
-windowcontrols
-  button.close:not(.suggested-action):not(.destructive-action):active {
-  background-color: #fab387;
-  color: #1e1e2e;
-}
-
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).minimize:backdrop:hover {
-  background-color: #2c2d3d;
-}
-
-windowcontrols
-  button:not(.suggested-action):not(.destructive-action).minimize:backdrop:active {
-  background-color: #3f4153;
-}
+  button:not(.suggested-action):not(.destructive-action).minimize:backdrop:hover,
 windowcontrols
   button:not(.suggested-action):not(.destructive-action).maximize:backdrop:hover {
   background-color: #2c2d3d;
 }
 
 windowcontrols
+  button:not(.suggested-action):not(.destructive-action).minimize:active,
+windowcontrols
+  button:not(.suggested-action):not(.destructive-action).maximize:active,
+windowcontrols
+  button:not(.suggested-action):not(.destructive-action).minimize:backdrop:active,
+windowcontrols
   button:not(.suggested-action):not(.destructive-action).maximize:backdrop:active {
   background-color: #3f4153;
 }
 
 windowcontrols
+  button.close:not(.suggested-action):not(.destructive-action):hover,
+windowcontrols
   button:not(.suggested-action):not(.destructive-action).close:backdrop:hover {
-  background-color: #f5e0dc;
+  background-color: #89B4Fa;
   color: #1e1e2e;
 }
+
+windowcontrols
+  button.close:not(.suggested-action):not(.destructive-action):active,
 windowcontrols
   button:not(.suggested-action):not(.destructive-action).close:backdrop:active {
-  background-color: #fab387;
+  background-color: #cba6f7;
   color: #1e1e2e;
 }
 
@@ -221,8 +198,9 @@ calendar > grid > label.today,
 filechooser stack.view scrolledwindow treeview.view:selected,
 stacksidebar row:selected,
 .navigation-sidebar > row:selected {
-  color: #f5e0dc;
-  background-color: rgba(245, 224, 220, 0.2);
+  color: #cba6f7;
+  font-weight: 500;
+  background-color: rgba(205, 214, 244, 0.2);
 }
 
 textview text selection:focus,
@@ -232,6 +210,10 @@ entry > text > selection,
 calendar > grid > label.today:selected {
   color: rgba(0, 0, 0, 0.87);
   background-color: #f5e0dc;
+}
+
+list.frame {
+  border-radius: 12px;
 }
 
 .monospace {
@@ -408,7 +390,7 @@ magnifier {
 }
 switch {
   transition: all 75ms cubic-bezier(0, 0, 0.2, 1);
-  margin: 6px 0;
+  margin: 12px 0;
   padding: 0;
   border: 1px solid rgba(205, 214, 244, 0.7);
   border-radius: 9999px;

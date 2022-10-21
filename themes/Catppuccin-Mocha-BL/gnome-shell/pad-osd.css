@@ -1,18 +1,18 @@
 .Leader {
   stroke-width: 0.5 !important;
-  stroke: #1e1e2e;
+  stroke: #45475a;
   fill: none !important;
 }
 
 .Button {
   stroke-width: 0.25;
-  stroke: #f5e0dc;
-  fill: #f5e0dc;
+  stroke: #cdd6f4;
+  fill: #cdd6f4;
 }
 
 .Ring {
   stroke-width: 0.5 !important;
-  stroke: #1e1e2e !important;
+  stroke: #45475a !important;
   fill: none !important;
 }
 
@@ -26,6 +26,6 @@
 .TouchStrip,
 .TouchRing {
   stroke-width: 0.1 !important;
-  stroke: #f5e0dc !important;
-  fill: #1e1e2e !important;
+  stroke: #cdd6f4 !important;
+  fill: #45475a !important;
 }
