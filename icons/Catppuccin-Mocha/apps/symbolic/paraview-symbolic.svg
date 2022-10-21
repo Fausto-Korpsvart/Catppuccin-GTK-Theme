@@ -2,9 +2,9 @@
  <switch>
   <g>
    <g>
-    <path fill="#FAB387" d="M 3.658 0.5 L 6.384 0.5 L 3.226 15.5 L 0.5 15.5 L 3.658 0.5 Z"/>
-    <path fill="#FAB387" d="M 8.216 0.5 L 10.942 0.5 L 7.784 15.5 L 5.058 15.5 L 8.216 0.5 Z"/>
-    <path fill="#FAB387" d="M 12.774 0.5 L 15.5 0.5 L 12.342 15.5 L 9.616 15.5 L 12.774 0.5 Z"/>
+    <path fill="#CBA6F7" d="M 3.658 0.5 L 6.384 0.5 L 3.226 15.5 L 0.5 15.5 L 3.658 0.5 Z"/>
+    <path fill="#CBA6F7" d="M 8.216 0.5 L 10.942 0.5 L 7.784 15.5 L 5.058 15.5 L 8.216 0.5 Z"/>
+    <path fill="#CBA6F7" d="M 12.774 0.5 L 15.5 0.5 L 12.342 15.5 L 9.616 15.5 L 12.774 0.5 Z"/>
    </g>
   </g>
   <foreignObject requiredExtensions="http://ns.gravit.io/">

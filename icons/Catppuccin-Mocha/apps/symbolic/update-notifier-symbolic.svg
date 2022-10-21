@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation:isolate" width="16" height="16" viewBox="0 0 16 16">
  <switch>
   <g>
-   <path fill="#FAB387" d="M 13.52 7.411 L 10.471 7.411 L 10.471 0 L 5.53 0 L 5.53 7.411 L 2.48 7.411 L 8 16 L 13.52 7.411 Z"/>
+   <path fill="#CBA6F7" d="M 13.52 7.411 L 10.471 7.411 L 10.471 0 L 5.53 0 L 5.53 7.411 L 2.48 7.411 L 8 16 L 13.52 7.411 Z"/>
   </g>
   <foreignObject requiredExtensions="http://ns.gravit.io/">
    <gravitDesigner:gravitElementRef xmlns:gravitDesigner="http://ns.gravit.io/" xlink:href="#jwqzptfazOdQjk9PyMCvVVaJUbgadTgZ"/>

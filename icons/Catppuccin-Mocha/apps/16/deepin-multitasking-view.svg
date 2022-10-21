@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" style="isolation:isolate" width="16" height="16" viewBox="0 0 16 16">
  <defs>
   <style id="current-color-scheme" type="text/css">
-   .ColorScheme-Text { color:#FAB387; } .ColorScheme-Highlight { color:#5294e2; }
+   .ColorScheme-Text { color:#CBA6F7; } .ColorScheme-Highlight { color:#5294e2; }
   </style>
   <linearGradient id="arrongin" x1="0%" x2="0%" y1="0%" y2="100%">
    <stop offset="0%" style="stop-color:#dd9b44; stop-opacity:1"/>
@@ -51,15 +51,15 @@
   <rect style="fill:currentColor" class="ColorScheme-Text" width="4.625" height="3.594" x="17.09" y="-.09" transform="matrix(1,0,0,1,0,0)"/>
   <g>
    <g>
-    <path fill="none" stroke="#FAB387" stroke-linecap="square" stroke-miterlimit="3" d="M 1.125 1.531 L 7.125 1.531 L 7.125 7.094 L 1.125 7.094 L 1.125 1.531 Z" vector-effect="non-scaling-stroke"/>
+    <path fill="none" stroke="#CBA6F7" stroke-linecap="square" stroke-miterlimit="3" d="M 1.125 1.531 L 7.125 1.531 L 7.125 7.094 L 1.125 7.094 L 1.125 1.531 Z" vector-effect="non-scaling-stroke"/>
     <rect style="fill:currentColor" class="ColorScheme-Text" width="6.063" height="1.063" x="1.03" y="1.63" transform="matrix(1,0,0,1,0,0)"/>
    </g>
    <g>
-    <path fill="none" stroke="#FAB387" stroke-linecap="square" stroke-miterlimit="3" d="M 8.969 3.25 L 14.969 3.25 L 14.969 7.75 L 8.969 7.75 L 8.969 3.25 Z" vector-effect="non-scaling-stroke"/>
+    <path fill="none" stroke="#CBA6F7" stroke-linecap="square" stroke-miterlimit="3" d="M 8.969 3.25 L 14.969 3.25 L 14.969 7.75 L 8.969 7.75 L 8.969 3.25 Z" vector-effect="non-scaling-stroke"/>
     <rect style="fill:currentColor" class="ColorScheme-Text" width="6.063" height=".987" x="8.88" y="3.33" transform="matrix(1,0,0,1,0,0)"/>
    </g>
    <g>
-    <path fill="none" stroke="#FAB387" stroke-linecap="square" stroke-miterlimit="3" d="M 2.888 9.344 L 11.687 9.344 L 11.687 14.906 L 2.888 14.906 L 2.888 9.344 Z" vector-effect="non-scaling-stroke"/>
+    <path fill="none" stroke="#CBA6F7" stroke-linecap="square" stroke-miterlimit="3" d="M 2.888 9.344 L 11.687 9.344 L 11.687 14.906 L 2.888 14.906 L 2.888 9.344 Z" vector-effect="non-scaling-stroke"/>
     <rect style="fill:currentColor" class="ColorScheme-Text" width="8.892" height="1.375" x="2.75" y="9.44" transform="matrix(1,0,0,1,0,0)"/>
    </g>
   </g>

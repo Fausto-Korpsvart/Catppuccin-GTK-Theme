@@ -5,7 +5,7 @@
   </clipPath>
  </defs>
  <g clip-path="url(#a)">
-  <path fill="#4c4f69" d="M165.685 11.947c74.055 0 84.639 10.557 84.639 84.544v59.251c0 73.986-10.584 84.543-84.639 84.543h-75.37c-74.055 0-84.639-10.557-84.639-84.543V96.491c0-73.987 10.584-84.544 84.639-84.544z" filter="url(#b)"/>
+  <path fill="#363a4f" d="M165.685 11.947c74.055 0 84.639 10.557 84.639 84.544v59.251c0 73.986-10.584 84.543-84.639 84.543h-75.37c-74.055 0-84.639-10.557-84.639-84.543V96.491c0-73.987 10.584-84.544 84.639-84.544z" filter="url(#b)"/>
   <defs>
    <filter id="b" width="4" height="4" x="-2" y="-2" color-interpolation-filters="sRGB" filterUnits="objectBoundingBox">
     <feGaussianBlur in="SourceGraphic" stdDeviation="4.294"/>

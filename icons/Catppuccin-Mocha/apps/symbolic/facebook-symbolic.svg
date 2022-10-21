@@ -7,7 +7,7 @@
  <switch>
   <g clip-path="url(#_clipPath_uCxQoiCEJXqqDR1edXyItR4TL6xrea0S)">
    <rect style="fill:#000000" fill-opacity="0" width="16" height="16"/>
-   <path fill="#FAB387" class="cls-2" d="M 9.242 16 L 9.242 8.711 L 11.7 8.711 L 12.066 5.86 L 9.242 5.86 L 9.242 4.042 C 9.242 3.218 9.471 2.657 10.653 2.657 L 12.15 2.657 L 12.15 0.111 C 11.421 0.035 10.688 -0.002 9.955 0 C 7.784 0 6.297 1.326 6.297 3.76 L 6.297 5.854 L 3.85 5.854 L 3.85 8.711 L 6.297 8.711 L 6.297 16 L 9.242 16 Z"/>
+   <path fill="#CBA6F7" class="cls-2" d="M 9.242 16 L 9.242 8.711 L 11.7 8.711 L 12.066 5.86 L 9.242 5.86 L 9.242 4.042 C 9.242 3.218 9.471 2.657 10.653 2.657 L 12.15 2.657 L 12.15 0.111 C 11.421 0.035 10.688 -0.002 9.955 0 C 7.784 0 6.297 1.326 6.297 3.76 L 6.297 5.854 L 3.85 5.854 L 3.85 8.711 L 6.297 8.711 L 6.297 16 L 9.242 16 Z"/>
   </g>
   <foreignObject requiredExtensions="http://ns.gravit.io/">
    <gravitDesigner:gravitElementRef xmlns:gravitDesigner="http://ns.gravit.io/" xlink:href="#1brP6vIb30lpOYyLY09dbxNSmsWa3YdQ"/>

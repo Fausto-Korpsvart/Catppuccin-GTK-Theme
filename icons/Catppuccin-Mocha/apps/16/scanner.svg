@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" version="1.1">
  <defs>
   <style id="current-color-scheme" type="text/css">
-   .ColorScheme-Text { color:#FAB387; } .ColorScheme-Highlight { color:#5294e2; }
+   .ColorScheme-Text { color:#CBA6F7; } .ColorScheme-Highlight { color:#5294e2; }
   </style>
   <linearGradient id="arrongin" x1="0%" x2="0%" y1="0%" y2="100%">
    <stop offset="0%" style="stop-color:#dd9b44; stop-opacity:1"/>
@@ -47,7 +47,7 @@
    <feBlend in2="BackgroundImage" mode="darken"/>
   </filter>
  </defs>
- <g style="filter:url(#filter7554);enable-background:new;fill:#FAB387" transform="translate(-324.86451,154.86049)">
+ <g style="filter:url(#filter7554);enable-background:new;fill:#CBA6F7" transform="translate(-324.86451,154.86049)">
   <path d="m 327.86851,-153.86049 c 0,0 -0.99902,-0.003 -1,1 l -0.004,3.99609 h -2 l 9e-5,1 h 16 l -9e-5,-1 h -2 l 0.004,-3.99609 c 9.8e-4,-1.00336 -1,-1 -1,-1 z m -0.004,0.99609 h 10 v 4 h -10 z m -0.99609,7 v 5.00391 c 0,0 0,1 1,1 h 10 c 1,0 1,-1 1,-1 v -5.00391 h -1.00391 v 5 h -10 v -5 z" style="fill:currentColor" class="ColorScheme-Text"/>
  </g>
 </svg>

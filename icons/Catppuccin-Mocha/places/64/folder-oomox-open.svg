@@ -6,7 +6,7 @@
  </defs>
  <g clip-path="url(#a)">
   <path fill="none" d="M0 0h256v256H0z"/>
-  <path fill="#74C7EC" d="M53.705 21c-36.315 0-40.038 2.055-40.038 38.371v92.167h230V79.563c0-36.316-3.724-42.102-40.039-42.102h-89.336L97.864 21H53.705z"/>
+  <path fill="#CBA6F7" d="M53.705 21c-36.315 0-40.038 2.055-40.038 38.371v92.167h230V79.563c0-36.316-3.724-42.102-40.039-42.102h-89.336L97.864 21H53.705z"/>
   <defs>
    <filter id="b" width="223" height="130.333" x="17.33" y="43.67" filterUnits="userSpaceOnUse">
     <feGaussianBlur xmlns="http://www.w3.org/2000/svg" in="SourceGraphic" stdDeviation="4.294"/>

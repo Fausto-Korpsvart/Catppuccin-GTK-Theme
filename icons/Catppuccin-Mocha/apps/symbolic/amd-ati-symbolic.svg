@@ -5,7 +5,7 @@
   </clipPath>
  </defs>
  <g clip-path="url(#_clipPath_gLom8vjzv3d9jCtlIOxrRdMQPCPwMgzw)">
-  <rect fill="#FAB387" width="4.625" height="3.594" x="16.34" y=".34" transform="matrix(1,0,0,1,0,0)"/>
-  <path fill="#FAB387" d="M 1 1 L 5.083 5.083 L 1 9.167 L 1 15 L 6.833 15 L 10.917 10.917 L 15 15 L 15 1 M 5.083 5.083 L 10.917 5.083 L 10.917 10.914 L 5.083 10.917"/>
+  <rect fill="#CBA6F7" width="4.625" height="3.594" x="16.34" y=".34" transform="matrix(1,0,0,1,0,0)"/>
+  <path fill="#CBA6F7" d="M 1 1 L 5.083 5.083 L 1 9.167 L 1 15 L 6.833 15 L 10.917 10.917 L 15 15 L 15 1 M 5.083 5.083 L 10.917 5.083 L 10.917 10.914 L 5.083 10.917"/>
  </g>
 </svg>
