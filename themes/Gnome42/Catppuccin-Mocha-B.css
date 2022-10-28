@@ -102,6 +102,7 @@ window.csd.tiled-right,
 window.csd.tiled-bottom,
 window.csd.tiled-left {
   border-radius: 0;
+  outline-width: 0;
 }
 
 windowcontrols {
@@ -258,15 +259,6 @@ popover.menu box.circular-buttons button.circular.image-button.model {
 
 popover.menu box.circular-buttons button.circular.image-button.model:focus {
   background-color: alpha(currentColor, 0.06);
-}
-
-popover.menu > arrow,
-popover.menu.background > contents {
-  padding: 6px;
-  background-color: #313244;
-  background-clip: border-box;
-  border-radius: 12px;
-  border: 2px solid #f5e0dc;
 }
 
 popover.menu.background separator {
