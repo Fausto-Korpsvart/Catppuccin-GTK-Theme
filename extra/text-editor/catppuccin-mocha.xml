@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<style-scheme id="catppuccin-mocha" name="Catppuccin Mocha" version="1.0">
+  <author>korpsvart</author>
+  <description>Catppuccin Mocha theme for Gnome Text Editor</description>
+
+  <!-- Colors -->
+  <color name="rosewater"                  value="#F5E0DC" />
+  <color name="flamingo"                   value="#F2CDCD" />
+  <color name="pink"                       value="#F5C2E7" />
+  <color name="mauve"                      value="#CBA6F7" />
+  <color name="red"                        value="#F38BA8" />
+  <color name="maroon"                     value="#EBA0AC" />
+  <color name="peach"                      value="#FAB387" />
+  <color name="orange"                     value="#E0Af68" />
+  <color name="yellow"                     value="#F9E2AF" />
+  <color name="green"                      value="#A6E3A1" />
+  <color name="teal"                       value="#94E2D5" />
+  <color name="sky"                        value="#89DCEB" />
+  <color name="saphire"                    value="#74C7EC" />
+  <color name="blue"                       value="#89B4FA" />
+  <color name="lavender"                   value="#B4BEFE" />
+  <color name="base"                       value="#1E1E2E" />
+  <color name="mantle"                     value="#181825" />
+  <color name="crust"                      value="#11111B" />
+  <color name="text"                       value="#CDD6F4" />
+  <color name="subtext1"                   value="#BAC2DE" />
+  <color name="subtext0"                   value="#A6ADC8" />
+  <color name="overlay2"                   value="#9399B2" />
+  <color name="overlay1"                   value="#7F849C" />
+  <color name="overlay0"                   value="#6C7086" />
+  <color name="surface2"                   value="#585B70" />
+  <color name="surface1"                   value="#45475A" />
+  <color name="surface0"                   value="#313244" />
+
+  <!-- Global Settings -->
+  <style name="text"                       background="base" foreground="text"/>
+  <style name="selection"                  background="surface0" foreground="flamingo"/>
+  <style name="cursor"                     background="surface0" foreground="mauve" bold="true"/>
+  <style name="current-line"               background="surface0"/>
+  <style name="current-line-number"        background="surface0" foreground="peach"/>
+  <style name="line-numbers"               background="mantle" foreground="overlay0"/>
+  <style name="draw-spaces"                foreground="surface1"/>
+  <style name="background-pattern"         background="crust"/>
+  <style name="map-overlay"                background="overlay0"/>
+
+  <!-- Bracket Matching -->
+  <style name="bracket-match"              background="peach" foreground="crust" bold="true" />
+  <style name="bracket-mismatch"           background="red" bold="true" />
+
+  <!-- Search Matching -->
+  <style name="search-match"               background="peach" foreground="crust" bold="true" />
+  <style name="quick-highlight-match"      background="mauve"/>
+
+  <!-- Search Shadow -->
+  <style name="search-shadow"              background="#rgba(0,0,0,0.4)"/>
+
+  <!-- Spellchecker Matching -->
+  <style name="misspelled-match"           foreground="crust" background="lavender"/>
+
+  <!-- Comments -->
+  <style name="def:comment"                foreground="subtext1" italic="true" />
+  <style name="def:shebang"                foreground="subtext1" italic="true" />
+  <style name="def:doc-comment-element"    foreground="crust" bold="true" />
+
+  <!-- Diagnostics Underlining -->
+  <style name="diagnostician::deprecated"  underline="error" underline-color="overlay2"/>
+  <style name="diagnostician::unused"      underline="error" underline-color="overlay0"/>
+  <style name="diagnostician::error"       underline="error" underline-color="red"/>
+  <style name="diagnostician::note"        underline="error" underline-color="blue"/>
+  <style name="diagnostician::warning"     underline="error" underline-color="orange"/>
+
+  <!-- Constants and Variables-->
+  <style name="def:constant"               foreground="red" />
+  <style name="def:string"                 foreground="green" />
+  <style name="def:special-char"           foreground="red" />
+  <style name="def:special-constant"       foreground="peach" bold="true" />
+  <style name="def:boolean"                foreground="pink" />
+  <style name="def:number"                 foreground="pink" />
+  <style name="def:floating-point"         foreground="pink" />
+  <style name="def:keyword"                foreground="peach" bold="true" />
+  <style name="def:builtin"                foreground="peach" bold="true" />
+  <style name="def:variable"               foreground="red" />
+
+  <!-- Identifiers -->
+  <style name="def:identifier"             foreground="red" italic="true"/>
+
+  <!-- Statements -->
+  <style name="def:statement"              foreground="peach" bold="true" />
+
+  <!-- Types -->
+  <style name="def:type"                   foreground="mauve" bold="true" />
+
+  <!-- Markup -->
+  <style name="def:emphasis"               italic="true"/>
+  <style name="def:strong-emphasis"        foreground="text" bold="true"/>
+  <style name="def:inline-code"            foreground="saphire"/>
+  <style name="def:insertion"              underline="single"/>
+  <style name="def:deletion"               strikethrough="true"/>
+  <style name="def:link-text"              foreground="blue"/>
+  <style name="def:link-symbol"            foreground="sky" bold="true"/>
+  <style name="def:link-destination"       italic="true" underline="true"/>
+  <style name="def:heading"                foreground="green" bold="true"/>
+  <style name="def:thematic-break"         foreground="green" bold="true"/>
+  <style name="def:preformatted-section"   foreground="saphire"/>
+  <style name="def:list-marker"            foreground="text" bold="true"/>
+
+  <!-- Others -->
+  <style name="def:error"                  foreground="rosewater" background="maroon" bold="true" />
+  <style name="def:warning"                foreground="flamingo" background="orange" bold="true" />
+  <style name="def:note"                   foreground="yellow" bold="true" />
+  <style name="def:net-address-in-comment" foreground="blue" italic="false" underline="true" />
+  <style name="def:preprocessor"           foreground="subtext1" />
+  <style name="def:function"               foreground="rosewater" underline="true" />
+
+  <!-- Unknown? -->
+  <style name="def:specials"                background="red" />
+
+  <!-- Language specific -->
+  <style name="c:comment"                   foreground="subtext1"/>
+  <style name="c:preprocessor"              foreground="saphire" bold="false"/>
+  <style name="c:boolean"                   foreground="mauve"/>
+  <style name="c:keyword"                   foreground="mauvej" bold="true"/>
+  <style name="c:string"                    foreground="green"/>
+  <style name="c:included-file"             foreground="orange"/>
+  <style name="c:storage-class"             foreground="orange" bold="true"/>
+  <style name="c:type"                      foreground="teal" bold="true"/>
+  <style name="c:macro-name"                foreground="overlay2" bold="false"/>
+  <style name="c:enum-name"                 foreground="red" bold="false"/>
+
+  <style name="diff:added-line"             foreground="green"/>
+  <style name="diff:removed-line"           foreground="pink"/>
+  <style name="diff:changed-line"           foreground="blue"/>
+  <style name="diff:diff-file"              foreground="teal" bold="true"/>
+  <style name="diff:location"               foreground="green"/>
+  <style name="diff:special-case"           foreground="lavender" bold="true"/>
+
+  <!-- GTK Doc -->
+  <style name="gtk-doc:function-name"       bold="true"/>
+  <style name="gtk-doc:function"            bold="true"/>
+  <style name="gtk-doc:parameter"           bold="true"/>
+  <style name="gtk-doc:constant"            bold="true"/>
+  <style name="gtk-doc:type"                bold="true"/>
+  <style name="gtk-doc:since"               bold="true"/>
+  <style name="gtk-doc:return"              bold="true"/>
+  <style name="gtk-doc:deprecated"          bold="true"/>
+  <style name="gtk-doc:signal-name"         bold="true"/>
+  <style name="gtk-doc:property-name"       bold="true"/>
+
+  <style name="gutter:added-line"           foreground="teal"/>
+  <style name="gutter:changed-line"         foreground="yellow"/>
+  <style name="gutter:removed-line"         foreground="maroon"/>
+
+  <style name="js:built-in-constructor"     foreground="pink"/>
+  <style name="js:keyword"                  foreground="saphire"/>
+  <style name="js:string"                   foreground="green"/>
+  <style name="js:template-literal"         foreground="green"/>
+  <style name="js:built-in-function"        foreground="pink"/>
+  <style name="js:built-in-method"          foreground="pink"/>
+
+  <style name="latex:command"               foreground="teal" bold="true"/>
+  <style name="latex:include"               use-style="def:preprocessor"/>
+
+  <style name="xml:comment"                 foreground="overlay0"/>
+  <style name="xml:attribute-name"          foreground="#orange" bold="false"/>
+  <style name="xml:attribute-value"         foreground="green"/>
+  <style name="xml:tag-match"               background="#rgba(114,159,207,.20)"/>
+
+  <!-- C Styles -->
+  <style name="c:preprocessor"              map-to="def:special-char" />
+
+  <!-- Diff Styles -->
+  <style name="diff:ignore"                 foreground="text" />
+
+  <!-- Ruby Styles -->
+  <style name="ruby:module-handler"         foreground="peach" />
+  <style name="ruby:symbol"                 foreground="pink" />
+  <style name="ruby:regex"                  foreground="orange" />
+
+  <!-- SH Styles -->
+  <style name="sh:others"                   map-to="text" />
+
+  <!-- XML Styles -->
+  <style name="xml:attribute-name"          foreground="sky" />
+  <style name="xml:element-name"            foreground="red" />
+
+  <!-- Symbol-tree xml-pack coloring -->
+  <style name="symboltree::label"           foreground="crust" background="#D5E7FC"/>
+  <style name="symboltree::id"              foreground="crust" background="#D9E7BD"/>
+  <style name="symboltree::style-class"     foreground="crust" background="#DFCD9B"/>
+  <style name="symboltree::type"            foreground="crust" background="#F4DAC3"/>
+  <style name="symboltree::parent"          foreground="crust" background="#DEBECF"/>
+  <style name="symboltree::class"           foreground="crust" background="#FFEF98"/>
+  <style name="symboltree::attribute"       foreground="crust" background="#F0E68C"/>
+
+</style-scheme>
