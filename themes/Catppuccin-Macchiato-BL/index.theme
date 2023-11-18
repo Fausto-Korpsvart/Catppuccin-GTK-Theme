@@ -1,12 +1,12 @@
 [Desktop Entry]
 Type=X-GNOME-Metatheme
-Name=Catppuccin-Macchiato
+Name=Catppuccin-Macchiato-BL
 Comment=An Flat Gtk+ theme based on Elegant Design
 Encoding=UTF-8
 
 [X-GNOME-Metatheme]
-GtkTheme=Catppuccin-Macchiato
-MetacityTheme=Catppuccin-Macchiato
+GtkTheme=Catppuccin-Macchiato-BL
+MetacityTheme=Catppuccin-Macchiato-BL
 IconTheme=Catppuccin-Macchiato
 CursorTheme=Catppuccin-cursors
 ButtonLayout=close,minimize,maximize:menu
