@@ -1,12 +1,12 @@
 [Desktop Entry]
 Type=X-GNOME-Metatheme
-Name=Catppuccin-Mocha
+Name=Catppuccin-Frappe-BL-LB
 Comment=An Flat Gtk+ theme based on Elegant Design
 Encoding=UTF-8
 
 [X-GNOME-Metatheme]
-GtkTheme=Catppuccin-Mocha
-MetacityTheme=Catppuccin-Mocha
-IconTheme=Catppuccin-Mocha
+GtkTheme=Catppuccin-Frappe-BL-LB
+MetacityTheme=Catppuccin-Frappe-BL-LB
+IconTheme=Catppuccin-Frappe
 CursorTheme=Catppuccin-cursors
 ButtonLayout=close,minimize,maximize:menu

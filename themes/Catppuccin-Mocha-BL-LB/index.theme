@@ -1,12 +1,12 @@
 [Desktop Entry]
 Type=X-GNOME-Metatheme
-Name=Tokyonight-Dark
+Name=Catppuccin-Mocha-BL-LB
 Comment=An Flat Gtk+ theme based on Elegant Design
 Encoding=UTF-8
 
 [X-GNOME-Metatheme]
-GtkTheme=Tokyonight-Dark
-MetacityTheme=Tokyonight-Dark
-IconTheme=Tokyonight-Dark
-CursorTheme=Tokyonight-cursors
+GtkTheme=Catppuccin-Mocha-BL-LB
+MetacityTheme=Catppuccin-Mocha-BL-LB
+IconTheme=Catppuccin-Mocha
+CursorTheme=Catppuccin-cursors
 ButtonLayout=close,minimize,maximize:menu
