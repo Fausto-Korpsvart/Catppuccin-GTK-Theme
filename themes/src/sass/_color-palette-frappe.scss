@@ -1,0 +1,73 @@
+// Catppuccin Frappe Theme Color Palette
+
+// Red
+$red-light: #d20f39;
+$red-dark: #f38ba8;
+
+// Pink
+$pink-light: #ea76cb;
+$pink-dark: #f5c2e7;
+
+// Purple
+$purple-light: #8839ef;
+$purple-dark: #cba6f7;
+
+// Blue
+$blue-light: #1e66f5;
+$blue-dark: #89b4fa;
+
+// Teal
+$teal-light: #179299;
+$teal-dark: #94e2d5;
+
+// Cyan
+$cyan-light: #209fb5;
+$cyan-dark: #74c7ec;
+
+// Green
+$green-light: #40a02b;
+$green-dark: #a6e3a1;
+
+// Yellow
+$yellow-light: #df8e1d;
+$yellow-dark: #f9e2af;
+
+// Orange
+$orange-light: #fe640b;
+$orange-dark: #fab387;
+
+// Grey
+$grey-050: #eff1f5;
+$grey-100: #e6e9ef;
+$grey-150: #dce0e8;
+$grey-200: #ccd0da;
+$grey-250: #bcc0cc;
+$grey-300: #bac2de;
+$grey-350: #a6adc8;
+$grey-400: #9399b2;
+$grey-450: #7f849c;
+$grey-500: #6c7086;
+$grey-550: #585b70;
+$grey-600: #414559;
+$grey-650: #363a4f;
+$grey-700: #313244;
+$grey-750: #292c3c;
+$grey-800: #232634;
+$grey-850: #1e1e2e;
+$grey-900: #181825;
+$grey-950: #11111b;
+
+// White
+$white: #eff1f5;
+
+// Black
+$black: #303446;
+
+// Theme
+$default-light: $purple-light;
+$default-dark: $purple-dark;
+
+// Button
+$button-close: if($topbar == 'light', #d20f39, #f38ba8);
+$button-max: if($topbar == 'light', #40a02b, #a6e3a1);
+$button-min: if($topbar == 'light', #fe640b, #fab387);
