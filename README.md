@@ -110,10 +110,10 @@ Run the following commands in the terminal:
 -u, --uninstall         Uninstall/Remove installed themes or links
 
 --tweaks                Specify versions for tweaks
-                        1. [frappe|macchiato]    Frappe|Macchiato| ColorSchemes version
-                        2. black                 Blackness color version
-                        3. float                 Floating gnome-shell panel style
-                        4. outline               Windows with 2px outline style
+                        1. [frappe|macchiato]  Frappe|Macciato| ColorSchemes version
+                        2. black               Blackness color version
+                        3. float               Floating gnome-shell panel style
+                        4. outline             Windows with 2px outline style
 
 -h, --help              Show help
 ```
@@ -126,10 +126,10 @@ This is just to clarify doubts about the abbreviations of the Themes, as many fo
 
 | Abbreviation example | Explanation of abbreviations                                   |
 | -------------------- | -------------------------------------------------------------- |
-| Theme-Name-B         | Theme with `Border` decoration                                 |
+| Theme-Name-B-MB      | Theme with `Border` decoration and `macOS Buttons` in Windows  |
 | Theme-Name-B-LB      | Theme with `Border` decoration and `Legacy Buttons` in Windows |
 | Theme-Name-B-GS      | Theme with `Border` decoration for `Gnome Shell`               |
-| Theme-Name-BL        | Theme `Borderless` decoration                                  |
+| Theme-Name-BL-MB     | Theme `Borderless` decoration and `macOS Buttons` in Windows   |
 | Theme-Name-BL-LB     | Theme `Borderless` decoration and `Legacy Buttons` in Windows  |
 | Theme-Name-BL-GS     | Theme `Borderless` decoration for `Gnome Shell`                |
 
