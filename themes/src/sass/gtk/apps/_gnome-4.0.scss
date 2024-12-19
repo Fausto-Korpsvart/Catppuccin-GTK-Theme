@@ -2014,3 +2014,13 @@ list.music-list {
 notebook scrolledwindow treeview.treeview-spacing {
 	background-color: $background;
 }
+
+//
+// Fractal
+//
+.account-switcher-row label {
+	color: $text;
+}
+.account-switcher-row label.dim-label {
+	color: $text-secondary;
+}
