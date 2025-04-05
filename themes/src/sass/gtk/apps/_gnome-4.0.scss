@@ -1,7 +1,6 @@
 //
 // Nautilus
 //
-
 .nautilus-window {
 	&.view {
 		background-color: $background;
@@ -50,10 +49,16 @@
 
 	.nautilus-grid-view,
 	.nautilus-list-view {
+		/* @extend %content_style; */
 		@extend %nautilus_content_style;
 
 		.view {
 			background-color: transparent;
+		}
+
+		row.activatable > cell {
+			padding: 0px;
+			margin: 0px;
 		}
 
 		scrolledwindow {
@@ -71,8 +76,8 @@
 		}
 
 		gridview.view {
-			margin: 6px;
-			padding: 6px;
+			margin: 10px 5px;
+			padding: 10px 5px;
 		}
 	}
 
@@ -146,7 +151,7 @@
 		margin: $space-size;
 		border-style: none;
 		border-radius: $modal-radius;
-		background-color: $background;
+		background-color: rgba($base, 0.95);
 		color: $primary;
 		box-shadow: $shadow-z3;
 
@@ -210,7 +215,7 @@
 }
 
 #NautilusPathBar {
-	background-color: if($variant == 'light', rgba($base, 0.4), $fill);
+	background-color: if($variant == 'light', rgba($base_alt, 0.5), $titlebar-fill);
 	border-radius: $corner-radius;
 	margin: $space-size 0;
 }

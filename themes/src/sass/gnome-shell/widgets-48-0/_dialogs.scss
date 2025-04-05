@@ -5,24 +5,20 @@
 	border-radius: $modal_radius;
 	border: none;
 	box-shadow: inset 0 0.5px highlight($popover);
-
-	@if $float == 'true' {
-		border: 2px solid $indicator;
-	}
 }
 
 %last_dialog_button {
-	color: on($primary);
 	background-color: $primary;
+	color: if($variant == 'dark', $black, $white);
 
 	&:hover {
-		color: on($primary);
 		background-color: lighten($primary, 9%);
+		color: if($variant == 'dark', $black, $white);
 	}
 
 	&:active {
-		color: on($primary);
 		background-color: darken($primary, 5%);
+		color: if($variant == 'dark', $black, $white);
 	}
 
 	&:insensitive {
@@ -39,6 +35,7 @@
 .modal-dialog {
 	color: $text-secondary;
 	padding: $base_padding * 2;
+	margin: 0;
 	@extend %theme_dialogs;
 
 	&-button,
@@ -73,8 +70,8 @@
 	}
 
 	.modal-dialog-content-box {
-		margin: $base_padding * 5 $base_padding * 7;
-		spacing: $base_padding * 5;
+		margin: $base_padding;
+		spacing: $base_padding;
 		max-width: 28em;
 	}
 }
