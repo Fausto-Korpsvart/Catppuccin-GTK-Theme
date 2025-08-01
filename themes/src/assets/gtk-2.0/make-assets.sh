@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-for theme in '' '-Purple' '-Pink' '-Red' '-Orange' '-Yellow' '-Green' '-Blue' '-Grey'; do
+for theme in '' '-Rosewater' '-Flamingo' '-Pink' '-Red' '-Maroon' '-Mauve' '-Lavender' '-Blue' '-Sapphire' '-Sky' '-Teal' '-Green' '-Yellow' '-Peach' '-Grey'; do
     for color in '' '-Dark'; do
         for type in '' '-Frappe' '-Macchiato'; do
             if [[ "$color" == '' ]]; then
@@ -8,17 +8,11 @@ for theme in '' '-Purple' '-Pink' '-Red' '-Orange' '-Yellow' '-Green' '-Blue' '-
                     '')
                         theme_color='#27a1b9'
                         ;;
-                    -Purple)
-                        theme_color='#9d7cd8'
-                        ;;
                     -Pink)
                         theme_color='#ff007c'
                         ;;
                     -Red)
                         theme_color='#f7768e'
-                        ;;
-                    -Orange)
-                        theme_color='#ff9e64'
                         ;;
                     -Yellow)
                         theme_color='#e0af68'
@@ -32,6 +26,34 @@ for theme in '' '-Purple' '-Pink' '-Red' '-Orange' '-Yellow' '-Green' '-Blue' '-
                     -Grey)
                         theme_color='#1a1b26'
                         ;;
+                    -Rosewater)
+                        theme_color='#f5e0dc'
+                        ;;
+                    -Flamingo)
+                        theme_color='#f2cdcd'
+                        ;;
+                    -Maroon)
+                        theme_color='#eba0ac'
+                        ;;
+                    -Mauve)
+                        theme_color='#cba6f7'
+                        ;;
+                    -Lavender)
+                        theme_color='#b4befe'
+                        ;;
+                    -Sapphire)
+                        theme_color='#74c7ec'
+                        ;;
+                    -Sky)
+                        theme_color='#89dceb'
+                        ;;
+                    -Teal)
+                        theme_color='#94e2d5'
+                        ;;
+                    -Peach)
+                        theme_color='#fab387'
+                        ;;
+
                 esac
 
                 if [[ "$type" == '-Frappe' ]]; then
@@ -41,17 +63,11 @@ for theme in '' '-Purple' '-Pink' '-Red' '-Orange' '-Yellow' '-Green' '-Blue' '-
                         '')
                             theme_color='#29a4bd'
                             ;;
-                        -Purple)
-                            theme_color='#9d7cd8'
-                            ;;
                         -Pink)
                             theme_color='#ff007c'
                             ;;
                         -Red)
                             theme_color='#f7768e'
-                            ;;
-                        -Orange)
-                            theme_color='#ff9e64'
                             ;;
                         -Yellow)
                             theme_color='#e0af68'
@@ -65,6 +81,34 @@ for theme in '' '-Purple' '-Pink' '-Red' '-Orange' '-Yellow' '-Green' '-Blue' '-
                         -Grey)
                             theme_color='#24283b'
                             ;;
+                        -Rosewater)
+                            theme_color='#f2cdcd'
+                            ;;
+                        -Flamingo)
+                            theme_color='#eebebe'
+                            ;;
+                        -Maroon)
+                            theme_color='#ea999c'
+                            ;;
+                        -Mauve)
+                            theme_color='#ca9ee6'
+                            ;;
+                        -Lavender)
+                            theme_color='#babbf1'
+                            ;;
+                        -Sapphire)
+                            theme_color='#85c1dc'
+                            ;;
+                        -Sky)
+                            theme_color='#99d1db'
+                            ;;
+                        -Teal)
+                            theme_color='#81c8be'
+                            ;;
+                        -Peach)
+                            theme_color='#ef9f76'
+                            ;;
+
                     esac
                 fi
 
@@ -75,17 +119,11 @@ for theme in '' '-Purple' '-Pink' '-Red' '-Orange' '-Yellow' '-Green' '-Blue' '-
                         '')
                             theme_color='#589ed7'
                             ;;
-                        -Purple)
-                            theme_color='#c099ff'
-                            ;;
                         -Pink)
                             theme_color='#fca7ea'
                             ;;
                         -Red)
                             theme_color='#ff757f'
-                            ;;
-                        -Orange)
-                            theme_color='#ff966c'
                             ;;
                         -Yellow)
                             theme_color='#ffc777'
@@ -99,6 +137,34 @@ for theme in '' '-Purple' '-Pink' '-Red' '-Orange' '-Yellow' '-Green' '-Blue' '-
                         -Grey)
                             theme_color='#222436'
                             ;;
+                        -Rosewater)
+                            theme_color='#f4dbd6'
+                            ;;
+                        -Flamingo)
+                            theme_color='#f0c6c6'
+                            ;;
+                        -Maroon)
+                            theme_color='#ee99a0'
+                            ;;
+                        -Mauve)
+                            theme_color='#c6a0f6'
+                            ;;
+                        -Lavender)
+                            theme_color='#b7bdf8'
+                            ;;
+                        -Sapphire)
+                            theme_color='#7dc4e4'
+                            ;;
+                        -Sky)
+                            theme_color='#91d7e3'
+                            ;;
+                        -Teal)
+                            theme_color='#8bd5ca'
+                            ;;
+                        -Peach)
+                            theme_color='#f5a97f'
+                            ;;
+
                     esac
                 fi
             else
@@ -106,17 +172,11 @@ for theme in '' '-Purple' '-Pink' '-Red' '-Orange' '-Yellow' '-Green' '-Blue' '-
                     '')
                         theme_color='#006a83'
                         ;;
-                    -Purple)
-                        theme_color='#7847bd'
-                        ;;
                     -Pink)
                         theme_color='#d20065'
                         ;;
                     -Red)
                         theme_color='#f52a65'
-                        ;;
-                    -Orange)
-                        theme_color='#b15c00'
                         ;;
                     -Yellow)
                         theme_color='#8c6c3e'
@@ -130,6 +190,34 @@ for theme in '' '-Purple' '-Pink' '-Red' '-Orange' '-Yellow' '-Green' '-Blue' '-
                     -Grey)
                         theme_color='#c0caf5'
                         ;;
+                    -Rosewater)
+                        theme_color='#f2d5cf'
+                        ;;
+                    -Flamingo)
+                        theme_color='#f0bfc0'
+                        ;;
+                    -Maroon)
+                        theme_color='#d27e88'
+                        ;;
+                    -Mauve)
+                        theme_color='#a084ca'
+                        ;;
+                    -Lavender)
+                        theme_color='#7c83d2'
+                        ;;
+                    -Sapphire)
+                        theme_color='#4aa5d4'
+                        ;;
+                    -Sky)
+                        theme_color='#5db4c0'
+                        ;;
+                    -Teal)
+                        theme_color='#5fb3a1'
+                        ;;
+                    -Peach)
+                        theme_color='#b15c00'
+                        ;;
+
                 esac
 
                 if [[ "$type" == '-Frappe' ]]; then
@@ -139,17 +227,11 @@ for theme in '' '-Purple' '-Pink' '-Red' '-Orange' '-Yellow' '-Green' '-Blue' '-
                         '')
                             theme_color='#006a83'
                             ;;
-                        -Purple)
-                            theme_color='#7847bd'
-                            ;;
                         -Pink)
                             theme_color='#d20065'
                             ;;
                         -Red)
                             theme_color='#f52a65'
-                            ;;
-                        -Orange)
-                            theme_color='#b15c00'
                             ;;
                         -Yellow)
                             theme_color='#8c6c3e'
@@ -163,6 +245,34 @@ for theme in '' '-Purple' '-Pink' '-Red' '-Orange' '-Yellow' '-Green' '-Blue' '-
                         -Grey)
                             theme_color='#c0caf5'
                             ;;
+                        -Rosewater)
+                            theme_color='#f2cdcd'
+                            ;;
+                        -Flamingo)
+                            theme_color='#eebebe'
+                            ;;
+                        -Maroon)
+                            theme_color='#ea999c'
+                            ;;
+                        -Mauve)
+                            theme_color='#ca9ee6'
+                            ;;
+                        -Lavender)
+                            theme_color='#babbf1'
+                            ;;
+                        -Sapphire)
+                            theme_color='#85c1dc'
+                            ;;
+                        -Sky)
+                            theme_color='#99d1db'
+                            ;;
+                        -Teal)
+                            theme_color='#81c8be'
+                            ;;
+                        -Peach)
+                            theme_color='#ef9f76'
+                            ;;
+
                     esac
                 fi
 
@@ -173,17 +283,11 @@ for theme in '' '-Purple' '-Pink' '-Red' '-Orange' '-Yellow' '-Green' '-Blue' '-
                         '')
                             theme_color='#006a83'
                             ;;
-                        -Purple)
-                            theme_color='#7847bd'
-                            ;;
                         -Pink)
                             theme_color='#d20065'
                             ;;
                         -Red)
                             theme_color='#f52a65'
-                            ;;
-                        -Orange)
-                            theme_color='#b15c00'
                             ;;
                         -Yellow)
                             theme_color='#8c6c3e'
@@ -197,6 +301,34 @@ for theme in '' '-Purple' '-Pink' '-Red' '-Orange' '-Yellow' '-Green' '-Blue' '-
                         -Grey)
                             theme_color='#c8d3f5'
                             ;;
+                        -Rosewater)
+                            theme_color='#f4dbd6'
+                            ;;
+                        -Flamingo)
+                            theme_color='#f0c6c6'
+                            ;;
+                        -Maroon)
+                            theme_color='#ee99a0'
+                            ;;
+                        -Mauve)
+                            theme_color='#c6a0f6'
+                            ;;
+                        -Lavender)
+                            theme_color='#b7bdf8'
+                            ;;
+                        -Sapphire)
+                            theme_color='#7dc4e4'
+                            ;;
+                        -Sky)
+                            theme_color='#91d7e3'
+                            ;;
+                        -Teal)
+                            theme_color='#8bd5ca'
+                            ;;
+                        -Peach)
+                            theme_color='#f5a97f'
+                            ;;
+
                     esac
                 fi
             fi

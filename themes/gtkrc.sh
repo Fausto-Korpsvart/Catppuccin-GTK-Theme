@@ -14,194 +14,124 @@ make_gtkrc() {
 	local THEME_DIR="${1}/${2}${3}${4}${5}${6}"
 
 	if [[ "${color}" != '-Dark' ]]; then
-		case "$theme" in
-		'')
-			theme_color='#3c84f7'
-			;;
-		-Purple)
-			theme_color='#AB47BC'
-			;;
-		-Pink)
-			theme_color='#EC407A'
-			;;
-		-Red)
-			theme_color='#E53935'
-			;;
-		-Orange)
-			theme_color='#F57C00'
-			;;
-		-Yellow)
-			theme_color='#FBC02D'
-			;;
-		-Green)
-			theme_color='#4CAF50'
-			;;
-		-Teal)
-			theme_color='#009688'
-			;;
-		-Grey)
-			theme_color='#464646'
-			;;
-		esac
-
-		if [[ "$ctype" == '-Frappe' ]]; then
-			case "$theme" in
-			'')
-				theme_color='#5e81ac'
-				;;
-			-Purple)
-				theme_color='#b57daa'
-				;;
-			-Pink)
-				theme_color='#cd7092'
-				;;
-			-Red)
-				theme_color='#c35b65'
-				;;
-			-Orange)
-				theme_color='#d0846c'
-				;;
-			-Yellow)
-				theme_color='#e4b558'
-				;;
-			-Green)
-				theme_color='#82ac5d'
-				;;
-			-Teal)
-				theme_color='#83b9b8'
-				;;
-			-Grey)
-				theme_color='#3a4150'
-				;;
-			esac
-		fi
-
-		if [[ "$ctype" == '-Macchiato' ]]; then
-			case "$theme" in
-			'')
-				theme_color='#a679ec'
-				;;
-			-Purple)
-				theme_color='#a679ec'
-				;;
-			-Pink)
-				theme_color='#f04cab'
-				;;
-			-Red)
-				theme_color='#f44d4d'
-				;;
-			-Orange)
-				theme_color='#f8a854'
-				;;
-			-Yellow)
-				theme_color='#e8f467'
-				;;
-			-Green)
-				theme_color='#4be772'
-				;;
-			-Teal)
-				theme_color='#20eed9'
-				;;
-			-Grey)
-				theme_color='#3c3f51'
-				;;
-			esac
-		fi
+	    # Mocha (default flavor)
+	    case "$theme" in
+	        '')          theme_color='#89b4fa' ;; # Default: Blue
+	        -Rosewater) theme_color='#f5e0dc' ;;
+	        -Flamingo)  theme_color='#f2cdcd' ;;
+	        -Pink)      theme_color='#f5c2e7' ;;
+	        -Mauve)     theme_color='#cba6f7' ;;
+	        -Red)       theme_color='#f38ba8' ;;
+	        -Maroon)    theme_color='#eba0ac' ;;
+	        -Peach)     theme_color='#fab387' ;;
+	        -Yellow)    theme_color='#f9e2af' ;;
+	        -Green)     theme_color='#a6e3a1' ;;
+	        -Teal)      theme_color='#94e2d5' ;;
+	        -Sky)       theme_color='#89dceb' ;;
+	        -Sapphire)  theme_color='#74c7ec' ;;
+	        -Blue)      theme_color='#89b4fa' ;;
+	        -Lavender)  theme_color='#b4befe' ;;
+	    esac
+	
+	    if [[ "$ctype" == '-Frappe' ]]; then
+	        case "$theme" in
+	            '')          theme_color='#8caaee' ;; # Default: Blue
+	            -Rosewater) theme_color='#f2d5cf' ;;
+	            -Flamingo)  theme_color='#eebebe' ;;
+	            -Pink)      theme_color='#f4b8e4' ;;
+	            -Mauve)     theme_color='#ca9ee6' ;;
+	            -Red)       theme_color='#e78284' ;;
+	            -Maroon)    theme_color='#ea999c' ;;
+	            -Peach)     theme_color='#ef9f76' ;;
+	            -Yellow)    theme_color='#e5c890' ;;
+	            -Green)     theme_color='#a6d189' ;;
+	            -Teal)      theme_color='#81c8be' ;;
+	            -Sky)       theme_color='#99d1db' ;;
+	            -Sapphire)  theme_color='#85c1dc' ;;
+	            -Blue)      theme_color='#8caaee' ;;
+	            -Lavender)  theme_color='#babbf1' ;;
+	        esac
+	    fi
+	
+	    if [[ "$ctype" == '-Macchiato' ]]; then
+	        case "$theme" in
+	            '')          theme_color='#8aadf4' ;; # Default: Blue
+	            -Rosewater) theme_color='#f4dbd6' ;;
+	            -Flamingo)  theme_color='#f0c6c6' ;;
+	            -Pink)      theme_color='#f5bde6' ;;
+	            -Mauve)     theme_color='#c6a0f6' ;;
+	            -Red)       theme_color='#ed8796' ;;
+	            -Maroon)    theme_color='#ee99a0' ;;
+	            -Peach)     theme_color='#f5a97f' ;;
+	            -Yellow)    theme_color='#eed49f' ;;
+	            -Green)     theme_color='#a6da95' ;;
+	            -Teal)      theme_color='#8bd5ca' ;;
+	            -Sky)       theme_color='#91d7e3' ;;
+	            -Sapphire)  theme_color='#7dc4e4' ;;
+	            -Blue)      theme_color='#8aadf4' ;;
+	            -Lavender)  theme_color='#b7bdf8' ;;
+	        esac
+	    fi
 	else
-		case "$theme" in
-		'')
-			theme_color='#5b9bf8'
-			;;
-		-Purple)
-			theme_color='#BA68C8'
-			;;
-		-Pink)
-			theme_color='#F06292'
-			;;
-		-Red)
-			theme_color='#F44336'
-			;;
-		-Orange)
-			theme_color='#FB8C00'
-			;;
-		-Yellow)
-			theme_color='#FFD600'
-			;;
-		-Green)
-			theme_color='#66BB6A'
-			;;
-		-Teal)
-			theme_color='#4DB6AC'
-			;;
-		-Grey)
-			theme_color='#DDDDDD'
-			;;
-		esac
-
-		if [[ "$ctype" == '-Frappe' ]]; then
-			case "$theme" in
-			'')
-				theme_color='#89a3c2'
-				;;
-			-Purple)
-				theme_color='#c89dbf'
-				;;
-			-Pink)
-				theme_color='#dc98b1'
-				;;
-			-Red)
-				theme_color='#d4878f'
-				;;
-			-Orange)
-				theme_color='#dca493'
-				;;
-			-Yellow)
-				theme_color='#eac985'
-				;;
-			-Green)
-				theme_color='#a0c082'
-				;;
-			-Teal)
-				theme_color='#83b9b8'
-				;;
-			-Grey)
-				theme_color='#d9dce3'
-				;;
-			esac
-		fi
-
-		if [[ "$ctype" == '-Macchiato' ]]; then
-			case "$theme" in
-			'')
-				theme_color='#bd93f9'
-				;;
-			-Purple)
-				theme_color='#bd93f9'
-				;;
-			-Pink)
-				theme_color='#ff79c6'
-				;;
-			-Red)
-				theme_color='#ff5555'
-				;;
-			-Orange)
-				theme_color='#ffb86c'
-				;;
-			-Yellow)
-				theme_color='#f1fa8c'
-				;;
-			-Green)
-				theme_color='#50fa7b'
-				;;
-			-Teal)
-				theme_color='#50fae9'
-				;;
-			-Grey)
-				theme_color='#d9dae3'
-				;;
-			esac
-		fi
+	    # Light theme (Latte, Frappé, Macchiato)
+	    if [[ "$ctype" == '-Frappe' ]]; then
+	        case "$theme" in
+	            '')          theme_color='#8caaee' ;; # Default: Blue
+	            -Rosewater) theme_color='#f2d5cf' ;;
+	            -Flamingo)  theme_color='#eebebe' ;;
+	            -Pink)      theme_color='#f4b8e4' ;;
+	            -Mauve)     theme_color='#ca9ee6' ;;
+	            -Red)       theme_color='#e78284' ;;
+	            -Maroon)    theme_color='#ea999c' ;;
+	            -Peach)     theme_color='#ef9f76' ;;
+	            -Yellow)    theme_color='#e5c890' ;;
+	            -Green)     theme_color='#a6d189' ;;
+	            -Teal)      theme_color='#81c8be' ;;
+	            -Sky)       theme_color='#99d1db' ;;
+	            -Sapphire)  theme_color='#85c1dc' ;;
+	            -Blue)      theme_color='#8caaee' ;;
+	            -Lavender)  theme_color='#babbf1' ;;
+	        esac
+	    elif [[ "$ctype" == '-Macchiato' ]]; then
+	        case "$theme" in
+	            '')          theme_color='#8aadf4' ;; # Default: Blue
+	            -Rosewater) theme_color='#f4dbd6' ;;
+	            -Flamingo)  theme_color='#f0c6c6' ;;
+	            -Pink)      theme_color='#f5bde6' ;;
+	            -Mauve)     theme_color='#c6a0f6' ;;
+	            -Red)       theme_color='#ed8796' ;;
+	            -Maroon)    theme_color='#ee99a0' ;;
+	            -Peach)     theme_color='#f5a97f' ;;
+	            -Yellow)    theme_color='#eed49f' ;;
+	            -Green)     theme_color='#a6da95' ;;
+	            -Teal)      theme_color='#8bd5ca' ;;
+	            -Sky)       theme_color='#91d7e3' ;;
+	            -Sapphire)  theme_color='#7dc4e4' ;;
+	            -Blue)      theme_color='#8aadf4' ;;
+	            -Lavender)  theme_color='#b7bdf8' ;;
+	        esac
+	    else
+	        # Latte (default light flavor)
+	        case "$theme" in
+	            '')          theme_color='#1e66f5' ;; # Default: Blue
+	            -Rosewater) theme_color='#dc8a78' ;;
+	            -Flamingo)  theme_color='#dd7878' ;;
+	            -Pink)      theme_color='#ea76cb' ;;
+	            -Mauve)     theme_color='#8839ef' ;;
+	            -Red)       theme_color='#d20f39' ;;
+	            -Maroon)    theme_color='#e64553' ;;
+	            -Peach)     theme_color='#fe640b' ;;
+	            -Yellow)    theme_color='#df8e1d' ;;
+	            -Green)     theme_color='#40a02b' ;;
+	            -Teal)      theme_color='#179299' ;;
+	            -Sky)       theme_color='#04a5e5' ;;
+	            -Sapphire)  theme_color='#209fb5' ;;
+	            -Blue)      theme_color='#1e66f5' ;;
+	            -Lavender)  theme_color='#7287fd' ;;
+	        esac
+	    fi
 	fi
+
 
 	if [[ "$blackness" == 'true' ]]; then
 		case "$ctype" in

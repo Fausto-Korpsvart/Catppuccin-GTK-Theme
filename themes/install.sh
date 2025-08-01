@@ -22,7 +22,7 @@ fi
 SASSC_OPT="-M -t expanded"
 
 THEME_NAME=Catppuccin
-THEME_VARIANTS=('' '-Purple' '-Pink' '-Red' '-Orange' '-Yellow' '-Green' '-Teal' '-Grey')
+THEME_VARIANTS=('' '-Rosewater' '-Flamingo' '-Pink' '-Mauve' '-Red' '-Maroon' '-Peach' '-Yellow' '-Green' '-Teal' '-Sky' '-Sapphire' '-Blue' '-Lavender' '-Grey')
 COLOR_VARIANTS=('-Light' '-Dark')
 SIZE_VARIANTS=('' '-Compact')
 
@@ -245,50 +245,78 @@ while [[ $# -gt 0 ]]; do
 		shift
 		for variant in "$@"; do
 			case "$variant" in
-			default)
+			    default)
 				themes+=("${THEME_VARIANTS[0]}")
 				shift
 				;;
-			purple)
+			    rosewater)
 				themes+=("${THEME_VARIANTS[1]}")
 				shift
 				;;
-			pink)
+			    flamingo)
 				themes+=("${THEME_VARIANTS[2]}")
 				shift
 				;;
-			red)
+			    pink)
 				themes+=("${THEME_VARIANTS[3]}")
 				shift
 				;;
-			orange)
+			    mauve)
 				themes+=("${THEME_VARIANTS[4]}")
 				shift
 				;;
-			yellow)
+			    red)
 				themes+=("${THEME_VARIANTS[5]}")
 				shift
 				;;
-			green)
+			    maroon)
 				themes+=("${THEME_VARIANTS[6]}")
 				shift
 				;;
-			teal)
+			    peach)
 				themes+=("${THEME_VARIANTS[7]}")
 				shift
 				;;
-			grey)
+			    yellow)
 				themes+=("${THEME_VARIANTS[8]}")
 				shift
 				;;
-			all)
+			    green)
+				themes+=("${THEME_VARIANTS[9]}")
+				shift
+				;;
+			    teal)
+				themes+=("${THEME_VARIANTS[10]}")
+				shift
+				;;
+			    sky)
+				themes+=("${THEME_VARIANTS[11]}")
+				shift
+				;;
+			    sapphire)
+				themes+=("${THEME_VARIANTS[12]}")
+				shift
+				;;
+			    blue)
+				themes+=("${THEME_VARIANTS[13]}")
+				shift
+				;;
+			    lavender)
+				themes+=("${THEME_VARIANTS[14]}")
+				shift
+				;;
+			    grey)
+				themes+=("${THEME_VARIANTS[15]}")
+				shift
+				;;
+			    all)
 				themes+=("${THEME_VARIANTS[@]}")
 				shift
 				;;
-			-*)
+			    -*)
 				break
 				;;
-			*)
+			    *)
 				echo "ERROR: Unrecognized theme variant '$1'."
 				echo "Try '$0 --help' for more information."
 				exit 1
@@ -466,30 +494,51 @@ gnome_shell_version() {
 theme_color() {
 	if [[ "$theme" != '' ]]; then
 		case "$theme" in
-		-Purple)
-			theme_color='purple'
-			;;
-		-Pink)
-			theme_color='pink'
-			;;
-		-Red)
-			theme_color='red'
-			;;
-		-Orange)
-			theme_color='orange'
-			;;
-		-Yellow)
-			theme_color='yellow'
-			;;
-		-Green)
-			theme_color='green'
-			;;
-		-Teal)
-			theme_color='teal'
-			;;
-		-Grey)
-			theme_color='grey'
-			;;
+		    -Rosewater)
+		        theme_color='rosewater'
+		        ;;
+		    -Flamingo)
+		        theme_color='flamingo'
+		        ;;
+		    -Pink)
+		        theme_color='pink'
+		        ;;
+		    -Mauve)
+		        theme_color='mauve'
+		        ;;
+		    -Red)
+		        theme_color='red'
+		        ;;
+		    -Maroon)
+		        theme_color='maroon'
+		        ;;
+		    -Peach)
+		        theme_color='peach'
+		        ;;
+		    -Yellow)
+		        theme_color='yellow'
+		        ;;
+		    -Green)
+		        theme_color='green'
+		        ;;
+		    -Teal)
+		        theme_color='teal'
+		        ;;
+		    -Sky)
+		        theme_color='sky'
+		        ;;
+		    -Sapphire)
+		        theme_color='sapphire'
+		        ;;
+		    -Blue)
+		        theme_color='blue'
+		        ;;
+		    -Lavender)
+		        theme_color='lavender'
+		        ;;
+		    -Grey)
+		        theme_color='grey'
+		        ;;
 		esac
 		tweaks_temp
 		sed -i "/\$theme:/s/default/${theme_color}/" "${SRC_DIR}/sass/_tweaks-temp.scss"
