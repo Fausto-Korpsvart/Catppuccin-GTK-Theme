@@ -36,7 +36,7 @@ for color in '' '-Dark'; do
 	done
 done
 
-for theme in '' '-Purple' '-Pink' '-Red' '-Orange' '-Yellow' '-Green' '-Teal' '-Grey'; do
+for theme in '' '-Blue' '-Flamingo' '-Grey' '-Green' '-Lavender' '-Maroon' '-Mauve' '-Peach' '-Pink' '-Red' '-Rosewater' '-Sapphire' '-Sky' '-Teal' '-Yellow'; do
 	for color in '' '-Dark'; do
 		for type in '' '-Frappe' '-Macchiato'; do
 			ASSETS_DIR="assets${theme}${color}${type}"
@@ -67,7 +67,7 @@ for theme in '' '-Purple' '-Pink' '-Red' '-Orange' '-Yellow' '-Green' '-Teal' '-
 	done
 done
 
-for theme in '' '-Purple' '-Pink' '-Red' '-Orange' '-Yellow' '-Green' '-Teal' '-Grey'; do
+for theme in '' '-Blue' '-Flamingo' '-Grey' '-Green' '-Lavender' '-Maroon' '-Mauve' '-Peach' '-Pink' '-Red' '-Rosewater' '-Sapphire' '-Sky' '-Teal' '-Yellow'; do
 	for color in '' '-Dark'; do
 		for type in '' '-Frappe' '-Macchiato'; do
 			if [[ "${theme}" == '' && "${type}" == '' ]]; then

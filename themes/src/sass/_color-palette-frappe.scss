@@ -1,40 +1,60 @@
 // Catppuccin Frappe Theme Color Palette
 
-// Red
-$red-light: #d20f39;
-$red-dark: #f38ba8;
-
-// Pink
-$pink-light: #ea76cb;
-$pink-dark: #f5c2e7;
-
-// Purple
-$purple-light: #8839ef;
-$purple-dark: #cba6f7;
-
 // Blue
 $blue-light: #1e66f5;
-$blue-dark: #89b4fa;
+$blue-dark: #8caaee;
 
-// Teal
-$teal-light: #179299;
-$teal-dark: #94e2d5;
-
-// Cyan
-$cyan-light: #209fb5;
-$cyan-dark: #74c7ec;
+// Flamingo
+$flamingo-light: #dd7878;
+$flamingo-dark: #eebebe;
 
 // Green
 $green-light: #40a02b;
-$green-dark: #a6e3a1;
+$green-dark: #a6d189;
+
+// Lavender
+$lavender-light: #7287fd;
+$lavender-dark: #babbf1;
+
+// Maroon
+$maroon-light: #e64553;
+$maroon-dark: #ea999c;
+
+// Mauve
+$mauve-light: #8839ef;
+$mauve-dark: #ca9ee6;
+
+// Peach
+$peach-light: #fe640b;
+$peach-dark: #ef9f76;
+
+// Pink
+$pink-light: #ea76cb;
+$pink-dark: #f4b8e4;
+
+// Red
+$red-light: #d20f39;
+$red-dark: #e78284;
+
+// Rosewater
+$rosewater-light: #dc8a78;
+$rosewater-dark: #f2d5cf;
+
+// Sapphire
+$sapphire-light: #209fb5;
+$sapphire-dark: #85c1dc;
+
+// Sky
+$sky-light: #04a5e5;
+$sky-dark: #99d1db;
+
+// Teal
+$teal-light: #179299;
+$teal-dark: #81c8be;
 
 // Yellow
 $yellow-light: #df8e1d;
-$yellow-dark: #f9e2af;
-
-// Orange
-$orange-light: #fe640b;
-$orange-dark: #fab387;
+$yellow-dark: #e5c890;
 
 // Grey
 $grey-050: #eff1f5;
@@ -64,8 +84,8 @@ $white: #eff1f5;
 $black: #303446;
 
 // Theme
-$default-light: $blue-light;
-$default-dark: $blue-dark;
+$default-light: #006a83;
+$default-dark: #27a1b9;
 
 // Button
 $button-close: if($topbar == 'light', #d20f39, #f38ba8);

@@ -25,8 +25,10 @@
 %sidebar_style {
 	background-color: if($variant == 'light', $grey-200, $grey-900);
 
-	@if $colorscheme == 'solarized' {
-		background-color: if($variant == 'light', $grey-250, $grey-800);
+	@if $colorscheme == 'frappe' {
+		background-color: if($variant == 'light', $grey-200, $grey-750);
+	} @else if $colorscheme == 'macchiato' {
+		background-color: if($variant == 'light', $grey-200, $grey-800);
 	}
 
 	color: on($background);
