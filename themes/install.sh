@@ -250,7 +250,7 @@ while [[ $# -gt 0 ]]; do
 				shift
 				;;
 			    blue)
-				themes+=("${THEME_VARIANTS[13]}")
+				themes+=("${THEME_VARIANTS[1]}")
 				shift
 				;;
 			    flamingo)
@@ -258,15 +258,15 @@ while [[ $# -gt 0 ]]; do
 				shift
 				;;
 			    green)
-				themes+=("${THEME_VARIANTS[9]}")
+				themes+=("${THEME_VARIANTS[3]}")
 				shift
 				;;
 			    grey)
-				themes+=("${THEME_VARIANTS[15]}")
+				themes+=("${THEME_VARIANTS[4]}")
 				shift
 				;;
 			    lavender)
-				themes+=("${THEME_VARIANTS[14]}")
+				themes+=("${THEME_VARIANTS[5]}")
 				shift
 				;;
 			    maroon)
@@ -274,23 +274,23 @@ while [[ $# -gt 0 ]]; do
 				shift
 				;;
 			    mauve)
-				themes+=("${THEME_VARIANTS[4]}")
-				shift
-				;;
-			    peach)
 				themes+=("${THEME_VARIANTS[7]}")
 				shift
 				;;
+			    peach)
+				themes+=("${THEME_VARIANTS[8]}")
+				shift
+				;;
 			    pink)
-				themes+=("${THEME_VARIANTS[3]}")
+				themes+=("${THEME_VARIANTS[9]}")
 				shift
 				;;
 			    red)
-				themes+=("${THEME_VARIANTS[5]}")
+				themes+=("${THEME_VARIANTS[10]}")
 				shift
 				;;
 			    rosewater)
-				themes+=("${THEME_VARIANTS[1]}")
+				themes+=("${THEME_VARIANTS[11]}")
 				shift
 				;;
 			    sapphire)
@@ -298,15 +298,15 @@ while [[ $# -gt 0 ]]; do
 				shift
 				;;
 			    sky)
-				themes+=("${THEME_VARIANTS[11]}")
+				themes+=("${THEME_VARIANTS[13]}")
 				shift
 				;;
 			    teal)
-				themes+=("${THEME_VARIANTS[10]}")
+				themes+=("${THEME_VARIANTS[14]}")
 				shift
 				;;
 			    yellow)
-				themes+=("${THEME_VARIANTS[8]}")
+				themes+=("${THEME_VARIANTS[15]}")
 				shift
 				;;
 			    all)
