@@ -11,6 +11,7 @@ ROOT_UID=0
 DEST_DIR=
 
 ctype=
+window=
 
 # Destination directory
 if [ "$UID" -eq "$ROOT_UID" ]; then
@@ -87,6 +88,7 @@ install() {
 	local color="${4}"
 	local size="${5}"
 	local ctype="${6}"
+  	local window="${7}"
 
 	[[ "${color}" == '-Light' ]] && local ELSE_LIGHT="${color}"
 	[[ "${color}" == '-Dark' ]] && local ELSE_DARK="${color}"
@@ -180,11 +182,11 @@ install() {
 	sed -i "s/button_offset=6/button_offset=12/"                                         "${THEME_DIR}-xhdpi/xfwm4/themerc"
 
 	# Plank Themes
-	mkdir -p                                                							 "${THEME_DIR}/plank"
+	mkdir -p                                                                             "${THEME_DIR}/plank"
 	if [[ "$color" == '-Light' ]]; then
-		cp -r "${SRC_DIR}/main/plank/theme-Light${ctype}/"* 							 "${THEME_DIR}/plank"
+		cp -r "${SRC_DIR}/main/plank/theme-Light${ctype}/"*                              "${THEME_DIR}/plank"
 	else
-		cp -r "${SRC_DIR}/main/plank/theme-Dark${ctype}/"*  							 "${THEME_DIR}/plank"
+		cp -r "${SRC_DIR}/main/plank/theme-Dark${ctype}/"*                               "${THEME_DIR}/plank"
 	fi
 }
 
@@ -246,81 +248,81 @@ while [[ $# -gt 0 ]]; do
 		for variant in "$@"; do
 			case "$variant" in
 			    default)
-				themes+=("${THEME_VARIANTS[0]}")
-				shift
-				;;
+					themes+=("${THEME_VARIANTS[0]}")
+					shift
+					;;
 			    blue)
-				themes+=("${THEME_VARIANTS[13]}")
-				shift
-				;;
+					themes+=("${THEME_VARIANTS[1]}")
+					shift
+					;;
 			    flamingo)
-				themes+=("${THEME_VARIANTS[2]}")
-				shift
-				;;
+					themes+=("${THEME_VARIANTS[2]}")
+					shift
+					;;
 			    green)
-				themes+=("${THEME_VARIANTS[9]}")
-				shift
-				;;
+					themes+=("${THEME_VARIANTS[3]}")
+					shift
+					;;
 			    grey)
-				themes+=("${THEME_VARIANTS[15]}")
-				shift
-				;;
+					themes+=("${THEME_VARIANTS[4]}")
+					shift
+					;;
 			    lavender)
-				themes+=("${THEME_VARIANTS[14]}")
-				shift
-				;;
+					themes+=("${THEME_VARIANTS[5]}")
+					shift
+					;;
 			    maroon)
-				themes+=("${THEME_VARIANTS[6]}")
-				shift
-				;;
+					themes+=("${THEME_VARIANTS[6]}")
+					shift
+					;;
 			    mauve)
-				themes+=("${THEME_VARIANTS[4]}")
-				shift
-				;;
+					themes+=("${THEME_VARIANTS[7]}")
+					shift
+					;;
 			    peach)
-				themes+=("${THEME_VARIANTS[7]}")
-				shift
-				;;
+					themes+=("${THEME_VARIANTS[8]}")
+					shift
+					;;
 			    pink)
-				themes+=("${THEME_VARIANTS[3]}")
-				shift
-				;;
+					themes+=("${THEME_VARIANTS[9]}")
+					shift
+					;;
 			    red)
-				themes+=("${THEME_VARIANTS[5]}")
-				shift
-				;;
+					themes+=("${THEME_VARIANTS[10]}")
+					shift
+					;;
 			    rosewater)
-				themes+=("${THEME_VARIANTS[1]}")
-				shift
-				;;
+					themes+=("${THEME_VARIANTS[11]}")
+					shift
+					;;
 			    sapphire)
-				themes+=("${THEME_VARIANTS[12]}")
-				shift
-				;;
+					themes+=("${THEME_VARIANTS[12]}")
+					shift
+					;;
 			    sky)
-				themes+=("${THEME_VARIANTS[11]}")
-				shift
-				;;
+					themes+=("${THEME_VARIANTS[13]}")
+					shift
+					;;
 			    teal)
-				themes+=("${THEME_VARIANTS[10]}")
-				shift
-				;;
+					themes+=("${THEME_VARIANTS[14]}")
+					shift
+					;;
 			    yellow)
-				themes+=("${THEME_VARIANTS[8]}")
-				shift
-				;;
+					themes+=("${THEME_VARIANTS[15]}")
+					shift
+					;;
 			    all)
-				themes+=("${THEME_VARIANTS[@]}")
-				shift
-				;;
+					themes+=("${THEME_VARIANTS[@]}")
+					shift
+					;;
 			    -*)
-				break
-				;;
+					break
+					;;
 			    *)
-				echo "ERROR: Unrecognized theme variant '$1'."
-				echo "Try '$0 --help' for more information."
-				exit 1
-				;;
+					echo "ERROR: Unrecognized theme variant '$1'."
+					echo "Try '$0 --help' for more information."
+					exit 1
+					;;
 			esac
 		done
 		;;
@@ -617,8 +619,8 @@ install_theme() {
 	for theme in "${themes[@]}"; do
 		for color in "${colors[@]}"; do
 			for size in "${sizes[@]}"; do
-				install "${dest:-$DEST_DIR}" "${name:-$THEME_NAME}" "$theme" "$color" "$size" "$ctype"
-				make_gtkrc "${dest:-$DEST_DIR}" "${name:-$THEME_NAME}" "$theme" "$color" "$size" "$ctype"
+				install "${dest:-$DEST_DIR}" "${_name:-$THEME_NAME}" "$theme" "$color" "$size" "$ctype" "$window"
+				make_gtkrc "${dest:-$DEST_DIR}" "${_name:-$THEME_NAME}" "$theme" "$color" "$size" "$ctype" "$window"
 			done
 		done
 	done
