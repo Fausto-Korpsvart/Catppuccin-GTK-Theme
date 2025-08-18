@@ -59,7 +59,7 @@ sudo apt install gtk2-engines-murrine
 
 ## 🔨 Applying the Theme
 
-- For **GTK3**, apply themes from **Gnome Tweaks** or **Refine**
+- For **GTK3**, apply themes from **Gnome Tweaks**, **Refine** or **Tuner**
 - For GTK4 applications it is only necessary to have moved the `assets`, `gtk.css` and `gtk-dark.css` files to the `~/.config/gtk-4.0` path,
   and if you notice that the theme has not been applied, just close and reopen the application.
 
@@ -102,7 +102,7 @@ Run the following command in the terminal for a general installation
 > The `./install.sh` allows some specific options like:
 
 ```sh
-./install.sh --tweaks macchiato macos outline float -t green -l
+./install.sh --tweaks macchiato macos outline float -t mauve -l
 ```
 
 > To customise the name of the theme, you can use the `-n` parameter, e.g.
@@ -121,7 +121,7 @@ Run the following command in the terminal for a general installation
 
 -n, --name NAME         Specify theme name (Default: Catppuccin)
 
--t, --theme VARIANT...  Specify theme accent color variant(s) [default|purple|pink|red|orange|yellow|green|teal|grey|all] (Default: blue)
+-t, --theme VARIANT...  Specify theme accent color variant(s) [default|blue|flamingo|green|grey|lavender|maroon|mauve|peach|pink|red|rosewater|sapphire|sky|teal|yellow|all] (Default: blue)
 
 -c, --color VARIANT...  Specify color variant(s) [light|dark] (Default: All variants)
 
