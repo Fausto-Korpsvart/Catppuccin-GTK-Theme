@@ -23,12 +23,12 @@
 
 // Sidebar & Scrollbar
 %sidebar_style {
-	background-color: if($variant == 'light', $grey-200, $grey-900);
+	background-color: if($variant == 'light', $grey-100, $grey-900);
 
 	@if $colorscheme == 'frappe' {
-		background-color: if($variant == 'light', $grey-200, $grey-750);
+		background-color: if($variant == 'light', $grey-100, $grey-750);
 	} @else if $colorscheme == 'macchiato' {
-		background-color: if($variant == 'light', $grey-200, $grey-800);
+		background-color: if($variant == 'light', $grey-100, $grey-800);
 	}
 
 	color: on($background);
@@ -288,7 +288,7 @@ avatar {
 		color: $text-secondary;
 		box-shadow: none;
 		outline: none;
-		background-color: if($variant == 'light', $grey-250, $fill);
+		background-color: if($variant == 'light', $grey-100, $fill);
 		color: $text;
 	}
 
