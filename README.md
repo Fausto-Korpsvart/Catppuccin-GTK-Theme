@@ -10,7 +10,7 @@
 </p>
 
 A GTK theme based on the colours of [Catppuccin Community](https://github.com/catppuccin) great theme: [Catppuccin for Neovim](https://github.com/catppuccin)<br>
-the [VinceLiuice's](https://github.com/vinceliuice) awesome: [Magnetic GTK theme](https://github.com/vinceliuice/Magnetic-gtk-theme), and the creativity of [Gusbemacbe's](https://github.com/gusbemacbe): [Suru Plus Icon Theme](https://github.com/gusbemacbe/suru-plus).
+the [VinceLiuice's](https://github.com/vinceliuice) Awesome GTK Themes and the creativity of [Gusbemacbe's](https://github.com/gusbemacbe): [Suru Plus Icon Theme](https://github.com/gusbemacbe/suru-plus).
 
 ![Catppuccin](https://raw.githubusercontent.com/Fausto-Korpsvart/Catppuccin-GTK-Theme/main/extra/screenshots/Catppuccin.png)
 
