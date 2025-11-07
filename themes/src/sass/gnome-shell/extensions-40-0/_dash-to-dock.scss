@@ -99,10 +99,10 @@
 			$variant == 'light',
 			rgba($white, 0.45),
 			rgba($black, 0.85)
-		);
+		) !important;
 
 		@if $float == 'true' {
-			border: 2px solid $primary;
+			border: 2px solid $primary !important;
 		}
 	}
 
