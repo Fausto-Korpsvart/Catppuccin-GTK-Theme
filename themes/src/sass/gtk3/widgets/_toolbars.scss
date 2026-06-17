@@ -1,0 +1,128 @@
+/************
+ * Toolbars *
+ ************/
+toolbar {
+	-gtkwidget-window-dragging: true;
+	padding: 2px 3px;
+	background-color: $background;
+
+	// box:not(.linked) button { @extend %button-flat; }
+
+	// on OSD
+	.osd & {
+		background-color: transparent;
+	}
+
+	// stand-alone OSD toolbars
+	@at-root %toolbar_osd,
+		&.osd {
+		transition: $transition-shadow;
+		padding: $space-size;
+		border-radius: $window-radius;
+		box-shadow:
+			$shadow-z4,
+			inset 0 1px highlight($surface);
+		background-color: $surface;
+
+		&:backdrop {
+			box-shadow:
+				$shadow-z2,
+				inset 0 1px highlight($surface);
+		}
+
+		&.left,
+		&.right,
+		&.top,
+		&.bottom {
+			border-radius: 0;
+		} // positional classes for `attached` osd toolbars
+
+		&.bottom {
+			box-shadow: none;
+			background-color: transparent;
+			background-image: linear-gradient(
+				to bottom,
+				transparent,
+				rgba(black, 0.1) 30%,
+				rgba(black, 0.2) 50%,
+				rgba(black, 0.4)
+			);
+		}
+	}
+
+	// toolbar separators
+	&.horizontal > separator {
+		margin: 2px;
+	}
+	&.vertical > separator {
+		margin: 2px;
+	}
+
+	&:not(.inline-toolbar):not(.osd) {
+		scale,
+		entry,
+		spinbutton,
+		button {
+			margin: 2px 1px;
+		}
+
+		.linked entry,
+		.linked spinbutton,
+		.linked button {
+			&:not(:first-child) {
+				margin-left: 0;
+			}
+			&:not(:last-child) {
+				margin-right: 0;
+			}
+		}
+
+		spinbutton {
+			entry,
+			button {
+				margin: 0;
+			}
+		}
+
+		switch {
+			margin: 2px + $space-size 2px;
+		}
+	}
+}
+
+.toolbar {
+	background-color: $base-alt;
+
+	frame & {
+		border-top: 1px solid $border-color;
+	}
+}
+
+// searchbar, location-bar & inline-toolbar
+.inline-toolbar {
+	padding: $space-size;
+	border-style: solid;
+	border-width: 0 1px 1px;
+	border-color: $border-color;
+	background-color: $base-alt;
+
+	.frame & {
+		border-width: 1px 0 0;
+		background-color: transparent;
+	}
+}
+
+searchbar > revealer > box,
+.location-bar {
+	padding: $space-size;
+	border-style: solid;
+	border-width: 0 0 1px;
+	border-color: $divider;
+	background-color: $background;
+	background-clip: border-box;
+}
+
+searchbar > revealer > box {
+	// workaround: undo the GtkContainer:border-width and use CSS padding instead
+	margin: -6px;
+}

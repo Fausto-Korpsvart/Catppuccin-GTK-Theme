@@ -3,7 +3,8 @@ $topbar: 'light';
 
 @import '../../sass/variables';
 @import '../../sass/colors';
-@import '../../sass/gtk/drawing-3.0';
-@import '../../sass/gtk/common-3.0';
-@import '../../sass/gtk/apps-3.0';
-@import '../../sass/gtk/colors-public';
+@import '../../sass/gtk3/drawing';
+@import '../../sass/gtk3/widgets';
+@import '../../sass/gtk3/common';
+@import '../../sass/gtk3/apps';
+@import '../../sass/colors-public';

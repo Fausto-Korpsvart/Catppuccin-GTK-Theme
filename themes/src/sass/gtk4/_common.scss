@@ -1,0 +1,135 @@
+/***************
+ * Base States *
+ ***************/
+
+:root {
+	--window-radius: #{$modal-radius + 6};
+
+	-gtk-icon-palette:
+		success var(--success-color),
+		warning var(--warning-color),
+		error var(--error-color),
+		accent var(--accent-color);
+}
+
+.background {
+	background-color: $background;
+	color: $text;
+}
+
+#desktopwindow.background {
+	background-color: transparent;
+}
+
+dnd {
+	color: on($background);
+}
+
+.normal-icons {
+	-gtk-icon-size: 16px;
+}
+
+.large-icons {
+	-gtk-icon-size: 32px;
+
+	.aboutdialog & {
+		-gtk-icon-size: 128px;
+	}
+}
+
+:not(decoration):not(window):drop(active) {
+	// FIXME needs to be done widget by widget, this wildcard should really die
+	caret-color: $primary;
+}
+
+%osd {
+	color: on($base);
+	background-color: $base;
+	background-clip: padding-box;
+	border-radius: $corner-radius;
+	border: none;
+	box-shadow:
+		$shadow-z4,
+		inset 0 1px highlight($surface);
+}
+
+.osd {
+	@extend %osd;
+	padding: $space-size;
+	margin: $space-size;
+
+	&.circular {
+		border-radius: $circular-radius;
+	}
+}
+
+/*************
+ * App Icons *
+ *************/
+// Outline for low res icons
+.lowres-icon {
+	-gtk-icon-shadow: 0 1px 2px rgba(black, 0.1);
+}
+
+// Drapshadow for large icons
+.icon-dropshadow {
+	-gtk-icon-shadow:
+		0 1px 12px rgba(black, 0.05),
+		0 1px 6px rgba(black, 0.1);
+}
+
+@keyframes needs-attention {
+	from {
+		background-image: radial-gradient(
+			farthest-side,
+			$primary 0%,
+			transparentize($primary, 1) 0%
+		);
+	}
+	to {
+		background-image: radial-gradient(
+			farthest-side,
+			$primary 95%,
+			transparentize($primary, 1)
+		);
+	}
+}
+
+%needs-attention {
+	animation: needs-attention $ripple-fade-in-duration $ease-out forwards;
+	background-repeat: no-repeat;
+	background-position: right 3px;
+	background-size: 6px 6px;
+
+	&:dir(rtl) {
+		background-position: left 3px;
+	}
+}
+
+spinner:disabled,
+arrow:disabled,
+scrollbar:disabled,
+check:disabled,
+radio:disabled,
+treeview.expander:disabled {
+	-gtk-icon-filter: opacity(0.5);
+}
+
+//
+// Global Placeholders
+//
+
+// catch all extend :)
+%selected_items {
+	background-color: $overlay-selected;
+}
+
+%selected_items_color {
+	color: $primary;
+	background-color: rgba($primary, 0.2);
+}
+
+%selected_items_primary {
+	color: on($primary);
+	background-color: $primary;
+}

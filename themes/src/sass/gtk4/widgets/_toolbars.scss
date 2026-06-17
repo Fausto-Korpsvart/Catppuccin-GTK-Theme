@@ -1,0 +1,167 @@
+/************
+ * Toolbars *
+ ************/
+
+.toolbar {
+	padding: $space-size;
+	// background-color: if($variant == "light", #eff1f5, #262636);
+	//
+	// @if $colorscheme == "frappe" {
+	//   background-color: if($variant == "light", #eff1f5, #383c4d);
+	// } @else if $colorscheme == "macchiato" {
+	//   background-color: if($variant == "light", #eff1f5, #2c2f41);
+	// }
+
+	border-spacing: $space-size;
+
+	button {
+		@extend %button-flat;
+	}
+
+	.linked button {
+		@extend %button-basic;
+	}
+
+	// on OSD
+	.osd & {
+		background-color: transparent;
+	}
+
+	// stand-alone OSD toolbars
+	@at-root %toolbar_osd,
+		&.osd {
+		transition: $transition-shadow;
+		padding: $space-size;
+		border-radius: $corner-radius + $space-size;
+		box-shadow:
+			$shadow-z4,
+			inset 0 1px highlight($surface);
+		background-color: $surface;
+		color: $text;
+
+		&:backdrop {
+			box-shadow:
+				$shadow-z2,
+				inset 0 1px highlight($surface);
+		}
+
+		&.left,
+		&.right,
+		&.top,
+		&.bottom {
+			border-radius: 0;
+		} // positional classes for `attached` osd toolbars
+
+		&.bottom {
+			box-shadow: none;
+			background-color: transparent;
+			background-image: linear-gradient(
+				to bottom,
+				transparent,
+				rgba(black, 0.1) 30%,
+				rgba(black, 0.2) 50%,
+				rgba(black, 0.4)
+			);
+		}
+	}
+
+	// toolbar separators
+	&.horizontal > separator {
+		margin: 2px;
+	}
+	&.vertical > separator {
+		margin: 2px;
+	}
+
+	// add vertical margins to common widgets on toolbars to avoid them spanning
+	// the whole height
+	entry,
+	spinbutton,
+	splitbutton,
+	separator:not(.sidebar),
+	button,
+	menubutton,
+	scalebutton {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	// Reset margins for buttons inside menubutton
+	menubutton > button,
+	splitbutton > button,
+	splitbutton > menubutton,
+	scalebutton > button {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	switch {
+		margin-top: 4px;
+		margin-bottom: 4px;
+	}
+
+	spinbutton {
+		entry,
+		button {
+			margin: 0;
+		}
+	}
+
+	// Reset styles for popovers
+	popover {
+		&.menu separator:not(.sidebar) {
+			margin-top: $space-size;
+			margin-bottom: $space-size;
+		}
+	}
+}
+
+/****************
+ * GtkSearchBar *
+ ****************/
+
+searchbar > revealer > box {
+	padding: $space-size;
+	border-spacing: 0;
+	border-style: solid;
+	border-width: 0 0 1px;
+	border-color: $divider;
+	background-color: $background;
+	background-clip: border-box;
+	box-shadow: none;
+
+	entry,
+	button,
+	menubutton {
+		margin: 0;
+	}
+}
+
+/****************
+ * GtkActionBar *
+ ****************/
+
+actionbar {
+	box-shadow: none;
+
+	> revealer > box {
+		padding: $space-size;
+		border-spacing: $space-size;
+		box-shadow: none;
+		// background-color: $base;
+		background-color: if($variant == 'light', rgba($white, 0.4), $fill);
+		background-clip: border-box;
+		border: none;
+		color: $text;
+
+		button,
+		entry,
+		menubutton,
+		menubutton > button,
+		splitbutton,
+		splitbutton > button,
+		spinbutton {
+			margin: 0;
+		}
+	}
+}

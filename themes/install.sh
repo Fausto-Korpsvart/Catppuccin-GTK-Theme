@@ -1,678 +1,322 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 
-set -Eeo pipefail
+# Catppuccin GTK Theme: Installer Orchestrator
+# Coordinates the installation and uninstallation of the theme variants.
+# Author: @fkorpsvart | License: GPL-3.0
 
+set -euo pipefail
+set -o errtrace
+
+# --- Directory Definitions ---
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 SRC_DIR="${REPO_DIR}/src"
+LIB_DIR="${REPO_DIR}/lib"
 
-source "${REPO_DIR}/gtkrc.sh"
+# --- Load Library Modules ---
+source "${LIB_DIR}/config.sh"                 # Global configuration and defaults
+source "${LIB_DIR}/utils.sh"                  # Logging, UI utilities, and system detection
+source "${LIB_DIR}/gtkrc.sh"                  # GTK2 configuration builder
+source "${LIB_DIR}/tweaks.sh"                 # SASS tweaks manager
+source "${LIB_DIR}/parser.sh"                 # CLI arguments parser
+source "${LIB_DIR}/uninstall.sh"              # Theme removal functions
+source "${LIB_DIR}/installers/gnome_shell.sh" # GNOME Shell installer
+source "${LIB_DIR}/installers/gtk.sh"         # GTK2/3/4 installer
+source "${LIB_DIR}/installers/desktop_env.sh" # Cinnamon, Metacity, XFWM4 installer
 
-ROOT_UID=0
-DEST_DIR=
+# --- Trap Handlers ---
+trap cleanup EXIT
+trap 'shell_error_handler $LINENO "$BASH_COMMAND"' ERR
 
-ctype=
-window=
+# Deploys a single theme variant configuration to the destination.
+# Args:
+#   1: dest       - Base destination path
+#   2: name       - Theme name prefix
+#   3: theme      - Accent variant suffix
+#   4: color      - Color scheme suffix (-Light/-Dark)
+#   5: size       - Window control size suffix (-Compact)
+#   6: ctype      - Background tweak suffix (-Frappé/-Macchiato)
+#   7: window     - Button layout suffix (-Macos)
+#   8: tweaks_tag - Active tweaks tag combination
+install_theme_variant() {
+    local dest="${1}"
+    local name="${2}"
+    local theme="${3}"
+    local color="${4}"
+    local size="${5}"
+    local ctype="${6}"
+    local window="${7}"
+    local tweaks_tag="${8:-}"
 
-# Destination directory
-if [ "$UID" -eq "$ROOT_UID" ]; then
-	DEST_DIR="/usr/share/themes"
-else
-	DEST_DIR="$HOME/.themes"
-fi
+    local ELSE_DARK=""
+    [[ "${color}" == "-Dark" ]] && ELSE_DARK="${color}"
 
-SASSC_OPT="-M -t expanded"
+    local THEME_DIR="${dest}/${name}${ctype}${theme}${color}${size}${tweaks_tag}"
 
-THEME_NAME=Catppuccin
-THEME_VARIANTS=('' '-Blue' '-Flamingo' '-Green' '-Grey' '-Lavender' '-Maroon' '-Mauve' '-Peach' '-Pink' '-Red' '-Rosewater' '-Sapphire' '-Sky' '-Teal' '-Yellow')
-COLOR_VARIANTS=('-Light' '-Dark')
-SIZE_VARIANTS=('' '-Compact')
+    apply_theme_tweaks "silent"
 
-if [[ "$(command -v gnome-shell)" ]]; then
-	echo && gnome-shell --version && echo
-	SHELL_VERSION="$(gnome-shell --version | cut -d ' ' -f 3 | cut -d . -f -1)"
-	if [[ "${SHELL_VERSION:-}" -ge "48" ]]; then
-		GS_VERSION="48-0"
-	elif [[ "${SHELL_VERSION:-}" -ge "47" ]]; then
-		GS_VERSION="47-0"
-	elif [[ "${SHELL_VERSION:-}" -ge "46" ]]; then
-		GS_VERSION="46-0"
-	elif [[ "${SHELL_VERSION:-}" -ge "44" ]]; then
-		GS_VERSION="44-0"
-	elif [[ "${SHELL_VERSION:-}" -ge "42" ]]; then
-		GS_VERSION="42-0"
-	elif [[ "${SHELL_VERSION:-}" -ge "40" ]]; then
-		GS_VERSION="40-0"
-	else
-		GS_VERSION="3-28"
-	fi
-else
-	echo "'gnome-shell' not found, using styles for last gnome-shell version available."
-	GS_VERSION="48-0"
-fi
+    if [[ -d "${THEME_DIR}" ]]; then
+        run_safe rm -rf "${THEME_DIR}"
+    fi
 
-usage() {
-	cat <<EOF
-Usage: $0 [OPTION]...
+    local display_dir=$(get_display_path "${THEME_DIR}")
 
-OPTIONS:
-  -d, --dest DIR          Specify destination directory (Default: $DEST_DIR)
+    log_debug "Installing variant to: ${display_dir}"
+    run_safe mkdir -p "${THEME_DIR}"
 
-  -n, --name NAME         Specify theme name (Default: $THEME_NAME)
+    # Generate the index.theme file for desktop environments.
+    if [[ "${DRY_RUN:-}" != "true" ]]; then
+        cat <<EOF >> "${THEME_DIR}/index.theme"
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=${name}${ctype}${theme}${color}${size}
+Comment=A Flat Gtk+ theme based on Elegant Design
+Encoding=UTF-8
 
-  -t, --theme VARIANT     Specify theme color variant(s) [default|purple|pink|red|orange|yellow|green|teal|grey|all] (Default: blue)
-
-  -c, --color VARIANT     Specify color variant(s) [light|dark] (Default: All variants))
-
-  -s, --size VARIANT      Specify size variant [standard|compact] (Default: standard variant)
-
-  -l, --libadwaita        Link installed gtk-4.0 theme to config folder for all libadwaita app use this theme
-
-  -r, --remove,
-  -u, --uninstall         Uninstall/Remove installed themes or links
-
-  --tweaks                Specify versions for tweaks
-                          1. [frappe|macchiato]	Frappe|Macchiato| ColorSchemes version
-                          2. black      		Blackness color version
-                          3. float      		Floating gnome-shell panel style
-                          4. outline    		Windows with 2px outline style
-                          5. macos 				Macos style windows button
-
-  -h, --help              Show help
+[X-GNOME-Metatheme]
+GtkTheme=${name}${ctype}${theme}${color}${size}
+MetacityTheme=${name}${ctype}${theme}${color}${size}
+IconTheme=Tela-circle${ELSE_DARK:-}
+CursorTheme=${name}-cursors
+ButtonLayout=close,minimize,maximize:menu
 EOF
+    else
+        log_debug "${COLOR_GRAY}[SIMULATION SKIP]${COLOR_RESET} Generating index.theme in ${THEME_DIR}/index.theme"
+    fi
+
+    # Delegate to component-specific installers
+    install_gnome_shell "${THEME_DIR}" "${color}" "${theme}" "${ctype}"
+    install_gtk         "${THEME_DIR}" "${color}" "${theme}" "${ctype}"
+    install_desktop_env "${THEME_DIR}" "${color}" "${theme}" "${ctype}" "${window}"
 }
 
-install() {
-	local dest="${1}"
-	local name="${2}"
-	local theme="${3}"
-	local color="${4}"
-	local size="${5}"
-	local ctype="${6}"
-  	local window="${7}"
+# Iterates and installs all selected variants.
+run_installation() {
+    local total_variants=$((${#themes[@]} * ${#colors[@]} * ${#sizes[@]}))
+    local current_variant=0
 
-	[[ "${color}" == '-Light' ]] && local ELSE_LIGHT="${color}"
-	[[ "${color}" == '-Dark' ]] && local ELSE_DARK="${color}"
+    for theme in "${themes[@]}"; do
+        for color in "${colors[@]}"; do
+            for size in "${sizes[@]}"; do
+                GLOBAL_TOTAL_STEPS=$STEPS_PER_VARIANT
+                GLOBAL_CURRENT_STEP=0
+                current_variant=$((current_variant + 1))
 
-	local THEME_DIR="${1}/${2}${3}${4}${5}${6}"
+                local color_label="Light Version"
+                local color_icon="${COLOR_WARN}${COLOR_RESET}"
+                if [[ "${color}" == "-Dark" ]]; then
+                    color_label="Dark Version"
+                    color_icon="${COLOR_VIOLET}${COLOR_RESET}"
+                fi
+                log_info "${color_icon} ${color_label}"
 
-	[[ -d "${THEME_DIR}" ]] && rm -rf "${THEME_DIR}"
+                install_theme_variant "${dest:-$DEST_DIR}" "${name:-$THEME_NAME}" "$theme" "$color" "$size" "$ctype" "$window" "$tweaks_tag"
+                make_gtkrc            "${dest:-$DEST_DIR}" "${name:-$THEME_NAME}" "$theme" "$color" "$size" "$ctype" "$window" "$tweaks_tag"
 
-	echo "Installing '${THEME_DIR}'..."
+                progress_bar "${GLOBAL_TOTAL_STEPS}" "${GLOBAL_TOTAL_STEPS}" "Finalising variant..."
+                log_success "Done: ${name:-$THEME_NAME}${ctype}${theme}${color}${size}${tweaks_tag}"
 
-	theme_tweaks
+                if [[ $current_variant -lt $total_variants ]]; then
+                    log_info ""
+                else
+                    echo
+                fi
+            done
+        done
+    done
 
-	mkdir -p "${THEME_DIR}"
+    if [[ "${BATCH_MODE:-}" == "true" ]]; then
+        log_info "Batch mode detected: skipping interactive menu."
+        MENU_RESULT=1
+    else
+        MENU_NOTE="You will manually apply the theme as explained in the documentation"
+        interactive_menu "Do you want to apply Vague?" "Yes : Automatic installation" "No  : Manual installation"
+    fi
 
-	# Index Theme File
-	echo "Type=X-GNOME-Metatheme" >>                            						 "${THEME_DIR}/index.theme"
-	echo "[Desktop Entry]" >>                                   						 "${THEME_DIR}/index.theme"
-	echo "Name=${2}${3}${4}${5}${6}" >>                         						 "${THEME_DIR}/index.theme"
-	echo "Comment=An Flat Gtk+ theme based on Elegant Design" >>						 "${THEME_DIR}/index.theme"
-	echo "Encoding=UTF-8" >>                                    						 "${THEME_DIR}/index.theme"
-	echo "" >>                                                  						 "${THEME_DIR}/index.theme"
-	echo "[X-GNOME-Metatheme]" >>                               						 "${THEME_DIR}/index.theme"
-	echo "GtkTheme=${2}${3}${4}${5}${6}" >>                     						 "${THEME_DIR}/index.theme"
-	echo "MetacityTheme=${2}${3}${4}${5}${6}" >>                						 "${THEME_DIR}/index.theme"
-	echo "IconTheme=Tela-circle${ELSE_DARK:-}" >>               						 "${THEME_DIR}/index.theme"
-	echo "CursorTheme=${2}-cursors" >>                          						 "${THEME_DIR}/index.theme"
-	echo "ButtonLayout=close,minimize,maximize:menu" >>         						 "${THEME_DIR}/index.theme"
+    if [[ $MENU_RESULT -eq 0 ]]; then
+        # Reset MENU_NOTE since it's not needed for the next menu
+        MENU_NOTE=""
+        interactive_menu "Which variant do you want to apply?" "Light : Set all themes to Light" "Dark  : Set all themes to Dark"
 
-	# Gnome Shell Themes
-	mkdir -p                                                                			 "${THEME_DIR}/gnome-shell"
-	cp -r "${SRC_DIR}/main/gnome-shell/pad-osd.css"                         			 "${THEME_DIR}/gnome-shell"
-	sassc $SASSC_OPT "${SRC_DIR}/main/gnome-shell/gnome-shell${color}.scss" 			 "${THEME_DIR}/gnome-shell/gnome-shell.css"
+        local apply_color="-Dark"
+        [[ $MENU_RESULT -eq 0 ]] && apply_color="-Light"
 
-	cp -r "${SRC_DIR}/assets/gnome-shell/common-assets"               					 "${THEME_DIR}/gnome-shell/assets"
-	cp -r "${SRC_DIR}/assets/gnome-shell/assets${ELSE_DARK:-}/"*.svg  					 "${THEME_DIR}/gnome-shell/assets"
-	cp -r "${SRC_DIR}/assets/gnome-shell/theme${theme}${ctype}/"*.svg 					 "${THEME_DIR}/gnome-shell/assets"
+        log_header "Session Integration"
 
-	cd "${THEME_DIR}/gnome-shell"
-	ln -s assets/no-events.svg no-events.svg
-	ln -s assets/process-working.svg process-working.svg
-	ln -s assets/no-notifications.svg no-notifications.svg
+        apply_theme_settings "${name:-$THEME_NAME}" "$theme" "$apply_color" "$size" "$ctype" "$tweaks_tag"
 
-	# GTK2 Themes
-	mkdir -p                                                                      		 "${THEME_DIR}/gtk-2.0"
-	# cp -r "${SRC_DIR}/main/gtk-2.0/gtkrc${theme}${ELSE_DARK:-}${ctype}" 				 "${THEME_DIR}/gtk-2.0/gtkrc"
-	cp -r "${SRC_DIR}/main/gtk-2.0/common/"*'.rc'                                 		 "${THEME_DIR}/gtk-2.0"
-	cp -r "${SRC_DIR}/assets/gtk-2.0/assets-common${ELSE_DARK:-}"                 		 "${THEME_DIR}/gtk-2.0/assets"
-	cp -r "${SRC_DIR}/assets/gtk-2.0/assets${theme}${ELSE_DARK:-}${ctype}/"*"png" 		 "${THEME_DIR}/gtk-2.0/assets"
+        if [[ "${libadwaita:-}" == 'true' ]]; then
+            uninstall_link
+            link_libadwaita "${dest:-$DEST_DIR}" "${name:-$THEME_NAME}" "$theme" "$apply_color" "$size" "$ctype" "$tweaks_tag"
+        fi
 
-	# GTK3 Themes
-	mkdir -p                                                                             "${THEME_DIR}/gtk-3.0"
-    cp -r "${SRC_DIR}/assets/gtk/assets${theme}${ctype}"                                 "${THEME_DIR}/gtk-3.0/assets"
-	cp -r "${SRC_DIR}/assets/gtk/scalable"                                               "${THEME_DIR}/gtk-3.0/assets"
-	cp -r "${SRC_DIR}/assets/gtk/thumbnails/thumbnail${theme}${ctype}${ELSE_DARK:-}.png" "${THEME_DIR}/gtk-3.0/thumbnail.png"
-	sassc $SASSC_OPT "${SRC_DIR}/main/gtk-3.0/gtk${color}.scss"                          "${THEME_DIR}/gtk-3.0/gtk.css"
-	sassc $SASSC_OPT "${SRC_DIR}/main/gtk-3.0/gtk-Dark.scss"                             "${THEME_DIR}/gtk-3.0/gtk-dark.css"
+        log_success "Integration of ${name:-$THEME_NAME}${ctype}${theme}${apply_color}${size}${tweaks_tag} Theme"
 
-	# GTK4 Themes
-	mkdir -p                                                                             "${THEME_DIR}/gtk-4.0"
-	cp -r "${SRC_DIR}/assets/gtk/scalable"                                               "${THEME_DIR}/gtk-4.0/assets"
-	cp -r "${SRC_DIR}/assets/gtk/thumbnails/thumbnail${theme}${ctype}${ELSE_DARK:-}.png" "${THEME_DIR}/gtk-4.0/thumbnail.png"
-	sassc $SASSC_OPT "${SRC_DIR}/main/gtk-4.0/gtk${color}.scss"                          "${THEME_DIR}/gtk-4.0/gtk.css"
-	sassc $SASSC_OPT "${SRC_DIR}/main/gtk-4.0/gtk-Dark.scss"                             "${THEME_DIR}/gtk-4.0/gtk-dark.css"
+        # Store details for post-install summary.
+        APPLIED_THEME="${name:-$THEME_NAME}${ctype}${theme}${apply_color}${size}${tweaks_tag}"
+        if [[ "$apply_color" == "-Dark" ]]; then
+            APPLIED_SCHEME="Dark Mode"
+        else
+            APPLIED_SCHEME="Light Mode"
+        fi
+    else
+        log_info "Skipping automatic theme application."
+    fi
 
-	# Cinnamon Themes
-	mkdir -p                                                                             "${THEME_DIR}/cinnamon"
-	cp -r "${SRC_DIR}/assets/cinnamon/common-assets"                                     "${THEME_DIR}/cinnamon/assets"
-	cp -r "${SRC_DIR}/assets/cinnamon/assets${ELSE_DARK:-}/"*'.svg'                      "${THEME_DIR}/cinnamon/assets"
-	cp -r "${SRC_DIR}/assets/cinnamon/theme${theme}${ctype}/"*'.svg'                     "${THEME_DIR}/cinnamon/assets"
-	sassc $SASSC_OPT "${SRC_DIR}/main/cinnamon/cinnamon${color}.scss"                    "${THEME_DIR}/cinnamon/cinnamon.css"
-	cp -r "${SRC_DIR}/assets/cinnamon/thumbnails/thumbnail${theme}${ctype}${color}.png"  "${THEME_DIR}/cinnamon/thumbnail.png"
-
-	# Metacity Themes
-	mkdir -p                                                         					 "${THEME_DIR}/metacity-1"
-	cp -r "${SRC_DIR}/main/metacity-1/metacity-theme-3${window}${color}.xml"             "${THEME_DIR}/metacity-1/metacity-theme-3.xml"
-	cp -r "${SRC_DIR}/assets/metacity-1/assets${window}"                                 "${THEME_DIR}/metacity-1/assets"
-	cp -r "${SRC_DIR}/assets/metacity-1/thumbnail${ELSE_DARK:-}.png"                     "${THEME_DIR}/metacity-1/thumbnail.png"
-	cd "${THEME_DIR}/metacity-1" && ln -s metacity-theme-3.xml metacity-theme-1.xml && ln -s metacity-theme-3.xml metacity-theme-2.xml
-
-	# XFWM4 Themes
-	mkdir -p                                                                             "${THEME_DIR}/xfwm4"
-	cp -r "${SRC_DIR}/assets/xfwm4/assets${ELSE_LIGHT:-}${ctype}${window}/"*.png         "${THEME_DIR}/xfwm4"
-	cp -r "${SRC_DIR}/main/xfwm4/themerc${ELSE_LIGHT:-}"                                 "${THEME_DIR}/xfwm4/themerc"
-	mkdir -p                                                                             "${THEME_DIR}-hdpi/xfwm4"
-	cp -r "${SRC_DIR}/assets/xfwm4/assets${ELSE_LIGHT:-}${ctype}${window}-hdpi/"*.png    "${THEME_DIR}-hdpi/xfwm4"
-	cp -r "${SRC_DIR}/main/xfwm4/themerc${ELSE_LIGHT:-}"                                 "${THEME_DIR}-hdpi/xfwm4/themerc"
-	sed -i "s/button_offset=6/button_offset=9/"                                          "${THEME_DIR}-hdpi/xfwm4/themerc"
-	mkdir -p                                                                             "${THEME_DIR}-xhdpi/xfwm4"
-	cp -r "${SRC_DIR}/assets/xfwm4/assets${ELSE_LIGHT:-}${ctype}${window}-xhdpi/"*.png   "${THEME_DIR}-xhdpi/xfwm4"
-	cp -r "${SRC_DIR}/main/xfwm4/themerc${ELSE_LIGHT:-}"                                 "${THEME_DIR}-xhdpi/xfwm4/themerc"
-	sed -i "s/button_offset=6/button_offset=12/"                                         "${THEME_DIR}-xhdpi/xfwm4/themerc"
-
-	# Plank Themes
-	mkdir -p                                                                             "${THEME_DIR}/plank"
-	if [[ "$color" == '-Light' ]]; then
-		cp -r "${SRC_DIR}/main/plank/theme-Light${ctype}/"*                              "${THEME_DIR}/plank"
-	else
-		cp -r "${SRC_DIR}/main/plank/theme-Dark${ctype}/"*                               "${THEME_DIR}/plank"
-	fi
+    # XFCE adjustments (transparency and panel reload)
+    if has_command xfce4-popup-whiskermen; then
+        run_safe sed -i "s|.*menu-opacity=.*|menu-opacity=0|" "$HOME/.config/xfce4/panel/whiskermenu"*".rc"
+    fi
+    if pgrep xfce4-session &>/dev/null; then
+        run_safe xfce4-panel -r
+    fi
 }
 
-themes=()
-colors=()
-sizes=()
-lcolors=()
+# Applies the theme configurations to the active desktop environment session.
+# Args:
+#   1: name       - Theme name prefix
+#   2: theme      - Accent variant suffix
+#   3: color      - Color scheme suffix
+#   4: size       - Size suffix
+#   5: ctype      - Background scheme suffix
+#   6: tweaks_tag - Tweaks tag suffix
+apply_theme_settings() {
+    local name="${1}"
+    local theme="${2}"
+    local color="${3}"
+    local size="${4}"
+    local ctype="${5}"
+    local tweaks_tag="${6:-}"
 
-while [[ $# -gt 0 ]]; do
-	case "${1}" in
-	-d | --dest)
-		dest="${2}"
-		if [[ ! -d "${dest}" ]]; then
-			echo "Destination directory does not exist. Let's make a new one..."
-			mkdir -p ${dest}
-		fi
-		shift 2
-		;;
-	-n | --name)
-		name="${2}"
-		shift 2
-		;;
-	-r | --remove | -u | --uninstall)
-		uninstall="true"
-		shift
-		;;
-	-l | --libadwaita)
-		libadwaita="true"
-		shift
-		;;
-	-c | --color)
-		shift
-		for color in "${@}"; do
-			case "${color}" in
-			light)
-				colors+=("${COLOR_VARIANTS[0]}")
-				lcolors+=("${COLOR_VARIANTS[0]}")
-				shift
-				;;
-			dark)
-				colors+=("${COLOR_VARIANTS[1]}")
-				lcolors+=("${COLOR_VARIANTS[1]}")
-				shift
-				;;
-			-* | --*)
-				break
-				;;
-			*)
-				echo "ERROR: Unrecognized color variant '$1'."
-				echo "Try '$0 --help' for more information."
-				exit 1
-				;;
-			esac
-		done
-		;;
-	-t | --theme)
-		accent='true'
-		shift
-		for variant in "$@"; do
-			case "$variant" in
-			    default)
-					themes+=("${THEME_VARIANTS[0]}")
-					shift
-					;;
-			    blue)
-					themes+=("${THEME_VARIANTS[1]}")
-					shift
-					;;
-			    flamingo)
-					themes+=("${THEME_VARIANTS[2]}")
-					shift
-					;;
-			    green)
-					themes+=("${THEME_VARIANTS[3]}")
-					shift
-					;;
-			    grey)
-					themes+=("${THEME_VARIANTS[4]}")
-					shift
-					;;
-			    lavender)
-					themes+=("${THEME_VARIANTS[5]}")
-					shift
-					;;
-			    maroon)
-					themes+=("${THEME_VARIANTS[6]}")
-					shift
-					;;
-			    mauve)
-					themes+=("${THEME_VARIANTS[7]}")
-					shift
-					;;
-			    peach)
-					themes+=("${THEME_VARIANTS[8]}")
-					shift
-					;;
-			    pink)
-					themes+=("${THEME_VARIANTS[9]}")
-					shift
-					;;
-			    red)
-					themes+=("${THEME_VARIANTS[10]}")
-					shift
-					;;
-			    rosewater)
-					themes+=("${THEME_VARIANTS[11]}")
-					shift
-					;;
-			    sapphire)
-					themes+=("${THEME_VARIANTS[12]}")
-					shift
-					;;
-			    sky)
-					themes+=("${THEME_VARIANTS[13]}")
-					shift
-					;;
-			    teal)
-					themes+=("${THEME_VARIANTS[14]}")
-					shift
-					;;
-			    yellow)
-					themes+=("${THEME_VARIANTS[15]}")
-					shift
-					;;
-			    all)
-					themes+=("${THEME_VARIANTS[@]}")
-					shift
-					;;
-			    -*)
-					break
-					;;
-			    *)
-					echo "ERROR: Unrecognized theme variant '$1'."
-					echo "Try '$0 --help' for more information."
-					exit 1
-					;;
-			esac
-		done
-		;;
-	-s | --size)
-		shift
-		for variant in "$@"; do
-			case "$variant" in
-			standard)
-				sizes+=("${SIZE_VARIANTS[0]}")
-				shift
-				;;
-			compact)
-				sizes+=("${SIZE_VARIANTS[1]}")
-				compact='true'
-				shift
-				;;
-			-*)
-				break
-				;;
-			*)
-				echo "ERROR: Unrecognized size variant '${1:-}'."
-				echo "Try '$0 --help' for more information."
-				exit 1
-				;;
-			esac
-		done
-		;;
-	--tweaks)
-		shift
-		for variant in $@; do
-			case "$variant" in
-			macchiato)
-				macchiato="true"
-				ctype="-Macchiato"
-				echo -e "Macchiato ColorScheme version! ..."
-				shift
-				;;
-			frappe)
-				frappe="true"
-				ctype="-Frappe"
-				echo -e "Frappe ColorScheme version! ..."
-				shift
-				;;
-			black)
-				blackness="true"
-				echo -e "Blackness version! ..."
-				shift
-				;;
-			float)
-				float="true"
-				echo -e "Install Floating Gnome-Shell Panel version! ..."
-				shift
-				;;
-			outline)
-				outline="true"
-				echo -e "Install 2px windows outline version! ..."
-				shift
-				;;
-			macos)
-				macos="true"
-				window="-Macos"
-				echo -e "Macos window button version! ..."
-				shift
-				;;
-			-*)
-				break
-				;;
-			*)
-				echo "ERROR: Unrecognized tweaks variant '$1'."
-				echo "Try '$0 --help' for more information."
-				exit 1
-				;;
-			esac
-		done
-		;;
-	-h | --help)
-		usage
-		exit 0
-		;;
-	*)
-		echo "ERROR: Unrecognized installation option '$1'."
-		echo "Try '$0 --help' for more information."
-		exit 1
-		;;
-	esac
-done
+    local THEME_FULL_NAME="${name}${ctype}${theme}${color}${size}${tweaks_tag}"
+    local display_dest=$(echo "${dest:-$DEST_DIR}" | sed "s|^$HOME|~|")
 
-if [[ "${#themes[@]}" -eq 0 ]]; then
-	themes=("${THEME_VARIANTS[0]}")
-fi
+    local scheme_label="Dark Mode"
+    [[ "${color}" != '-Dark' ]] && scheme_label="Light Mode"
 
-if [[ "${#colors[@]}" -eq 0 ]]; then
-	colors=("${COLOR_VARIANTS[@]}")
-fi
+    # Print colorscheme setting line
+    printf "\r\033[K│ %-27s : '%s'\n" "Setting colorscheme to mode" "${scheme_label}"
 
-if [[ "${#lcolors[@]}" -eq 0 ]]; then
-	lcolors=("${COLOR_VARIANTS[1]}")
-fi
+    # 1. Apply color scheme preference (GNOME / Cinnamon / general)
+    if has_command gsettings; then
+        if gsettings list-schemas | grep -q "org.gnome.desktop.interface"; then
+            if [[ "${color}" == '-Dark' ]]; then
+                run_safe gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
+            else
+                run_safe gsettings set org.gnome.desktop.interface color-scheme "default"
+            fi
+        fi
+    fi
 
-if [[ "${#sizes[@]}" -eq 0 ]]; then
-	sizes=("${SIZE_VARIANTS[0]}")
-fi
+    # 2. Apply DE-specific settings
+    local is_gnome=false
+    local is_cinnamon=false
+    local is_mate=false
+    local is_xfce=false
 
-#  Check command avalibility
-function has_command() {
-	command -v $1 >/dev/null
+    # Check via XDG_CURRENT_DESKTOP or available schemas/commands
+    local desktop="${XDG_CURRENT_DESKTOP:-}"
+    desktop="${desktop,,}"
+
+    if [[ "${desktop}" == *"cinnamon"* ]] || (has_command gsettings && gsettings list-schemas | grep -q "org.cinnamon.desktop.interface"); then
+        is_cinnamon=true
+    elif [[ "${desktop}" == *"mate"* ]] || (has_command gsettings && gsettings list-schemas | grep -q "org.mate.interface"); then
+        is_mate=true
+    elif [[ "${desktop}" == *"xfce"* ]] || has_command xfconf-query; then
+        is_xfce=true
+    else
+        is_gnome=true # Default fallback to GNOME
+    fi
+
+    if [[ "${is_gnome}" == "true" ]]; then
+        # GNOME Session Integration
+        printf "\r\033[K│ %-27s : '%s'\n" "Setting Shell theme to path" "${display_dest}/${THEME_FULL_NAME}/gnome-shell"
+        if has_command gsettings; then
+            if gsettings list-schemas | grep -q "org.gnome.shell.extensions.user-theme"; then
+                run_safe gsettings set org.gnome.shell.extensions.user-theme name ""
+                sleep 0.2
+                run_safe gsettings set org.gnome.shell.extensions.user-theme name "${THEME_FULL_NAME}"
+            elif has_command dconf; then
+                run_safe dconf write /org/gnome/shell/extensions/user-theme/name "''"
+                sleep 0.2
+                run_safe dconf write /org/gnome/shell/extensions/user-theme/name "'${THEME_FULL_NAME}'"
+            fi
+            run_safe gsettings set org.gnome.desktop.interface gtk-theme "${THEME_FULL_NAME}"
+        fi
+    elif [[ "${is_cinnamon}" == "true" ]]; then
+        # Cinnamon Session Integration
+        printf "\r\033[K│ %-27s : '%s'\n" "Setting Shell theme to path" "${display_dest}/${THEME_FULL_NAME}/cinnamon"
+        if has_command gsettings; then
+            run_safe gsettings set org.cinnamon.desktop.interface gtk-theme "${THEME_FULL_NAME}"
+            run_safe gsettings set org.cinnamon.theme name "${THEME_FULL_NAME}"
+            run_safe gsettings set org.cinnamon.desktop.wm.preferences theme "${THEME_FULL_NAME}"
+        fi
+    elif [[ "${is_mate}" == "true" ]]; then
+        # MATE Session Integration
+        printf "\r\033[K│ %-27s : '%s'\n" "Setting Marco theme to path" "${display_dest}/${THEME_FULL_NAME}/metacity-1"
+        if has_command gsettings; then
+            run_safe gsettings set org.mate.interface gtk-theme "${THEME_FULL_NAME}"
+            run_safe gsettings set org.mate.Marco.general theme "${THEME_FULL_NAME}"
+        fi
+    elif [[ "${is_xfce}" == "true" ]]; then
+        # XFCE Session Integration
+        printf "\r\033[K│ %-27s : '%s'\n" "Setting XFWM4 theme to path" "${display_dest}/${THEME_FULL_NAME}/xfwm4"
+        if has_command xfconf-query; then
+            run_safe xfconf-query -c xsettings -p /Net/ThemeName -s "${THEME_FULL_NAME}"
+            run_safe xfconf-query -c xfwm4 -p /general/theme -s "${THEME_FULL_NAME}"
+        fi
+    fi
+
+    # Print GTK-3 and GTK-4 lines
+    printf "\r\033[K│ %-27s : '%s'\n" "Setting GTK-3 theme to path" "${display_dest}/${THEME_FULL_NAME}/gtk-3.0"
+    printf "\r\033[K│ %-27s : '%s'\n" "Setting GTK-4 theme to path" "${display_dest}/${THEME_FULL_NAME}/gtk-4.0"
 }
 
-#  Install needed packages
-install_package() {
-	if ! has_command sassc; then
-		echo sassc needs to be installed to generate the css.
-		if has_command zypper; then
-			sudo zypper in sassc
-		elif has_command apt-get; then
-			sudo apt-get install sassc
-		elif has_command dnf; then
-			sudo dnf install sassc
-		elif has_command dnf; then
-			sudo dnf install sassc
-		elif has_command pacman; then
-			sudo pacman -S --noconfirm sassc
-		fi
-	fi
+# Main execution entry point.
+main() {
+    parse_args "$@"
+    print_banner
+
+    if [[ "${uninstall:-}" == 'true' ]]; then
+        log_header "UNINSTALLATION"
+        if [[ "${libadwaita:-}" == 'true' ]]; then
+            log_info "Uninstalling ~/.config/gtk-4.0 links..."
+            uninstall_link
+        else
+            uninstall_themes && uninstall_link
+        fi
+    else
+        log_header "System Verification"
+        install_package
+        detect_gs_version
+        detect_gtk_versions
+        log_debug "Detected Shell v${SHELL_FULL_VERSION}"
+        log_debug "Detected GTK-3 v${GTK3_VERSION}"
+        log_debug "Detected GTK-4 v${GTK4_VERSION}"
+
+        apply_theme_tweaks
+
+        log_header "Compilation & Installations"
+        log_info "Compiling SASS sources..."
+        PROGRESS_ICON="󰣖"
+        for i in {1..10}; do
+            progress_bar $((i * 10)) 100 "Compiling..."
+            sleep 0.05
+        done
+        echo
+        log_info ""
+
+        STEPS_PER_VARIANT=13
+
+        if [[ "${DRY_RUN:-}" != "true" ]]; then
+            log_debug "Patching SASS sources..."
+            patch_gnome_shell_sass
+        fi
+
+        run_installation
+        print_summary
+    fi
 }
 
-tweaks_temp() {
-	cp -rf "${SRC_DIR}/sass/_tweaks.scss" "${SRC_DIR}/sass/_tweaks-temp.scss"
-}
-
-compact_size() {
-	sed -i "/\$compact:/s/false/true/" "${SRC_DIR}/sass/_tweaks-temp.scss"
-}
-
-macchiato_color() {
-	sed -i "/\@import/s/color-palette-default/color-palette-macchiato/" "${SRC_DIR}/sass/_tweaks-temp.scss"
-	sed -i "/\$colorscheme:/s/default/macchiato/" "${SRC_DIR}/sass/_tweaks-temp.scss"
-}
-
-frappe_color() {
-	sed -i "/\@import/s/color-palette-default/color-palette-frappe/" "${SRC_DIR}/sass/_tweaks-temp.scss"
-	sed -i "/\$colorscheme:/s/default/frappe/" "${SRC_DIR}/sass/_tweaks-temp.scss"
-}
-
-blackness_color() {
-	sed -i "/\$blackness:/s/false/true/" "${SRC_DIR}/sass/_tweaks-temp.scss"
-}
-
-float_panel() {
-	sed -i "/\$float:/s/false/true/" "${SRC_DIR}/sass/_tweaks-temp.scss"
-}
-
-outline_style() {
-	sed -i "/\$outline:/s/false/true/" "${SRC_DIR}/sass/_tweaks-temp.scss"
-}
-
-macos_winbutton() {
-	sed -i "/\$window_button:/s/normal/mac/" ${SRC_DIR}/sass/_tweaks-temp.scss
-}
-
-gnome_shell_version() {
-	cp -rf "${SRC_DIR}/sass/gnome-shell/_common.scss" "${SRC_DIR}/sass/gnome-shell/_common-temp.scss"
-
-	sed -i "/\widgets/s/40-0/${GS_VERSION}/" "${SRC_DIR}/sass/gnome-shell/_common-temp.scss"
-
-	if [[ "${GS_VERSION}" == '3-28' ]]; then
-		sed -i "/\extensions/s/40-0/${GS_VERSION}/" "${SRC_DIR}/sass/gnome-shell/_common-temp.scss"
-	fi
-}
-
-theme_color() {
-	if [[ "$theme" != '' ]]; then
-		case "$theme" in
-		    -Blue)
-		        theme_color='blue'
-		        ;;
-		    -Flamingo)
-		        theme_color='flamingo'
-		        ;;
-		    -Green)
-		        theme_color='green'
-		        ;;
-		    -Grey)
-		        theme_color='grey'
-		        ;;
-		    -Lavender)
-		        theme_color='lavender'
-		        ;;
-		    -Maroon)
-		        theme_color='maroon'
-		        ;;
-		    -Mauve)
-		        theme_color='mauve'
-		        ;;
-		    -Peach)
-		        theme_color='peach'
-		        ;;
-		    -Pink)
-		        theme_color='pink'
-		        ;;
-		    -Red)
-		        theme_color='red'
-		        ;;
-		    -Rosewater)
-		        theme_color='rosewater'
-		        ;;
-		    -Sapphire)
-		        theme_color='sapphire'
-		        ;;
-		    -Sky)
-		        theme_color='sky'
-		        ;;
-		    -Teal)
-		        theme_color='teal'
-		        ;;
-		    -Yellow)
-		        theme_color='yellow'
-		        ;;
-		esac
-		tweaks_temp
-		sed -i "/\$theme:/s/default/${theme_color}/" "${SRC_DIR}/sass/_tweaks-temp.scss"
-	fi
-}
-
-theme_tweaks() {
-	if [[ "$accent" = "true" ]]; then
-		theme_color
-	fi
-
-	if [[ "$compact" = "true" ]]; then
-		compact_size
-	fi
-
-	if [[ "$macchiato" = "true" ]]; then
-		macchiato_color
-	fi
-
-	if [[ "$frappe" = "true" ]]; then
-		frappe_color
-	fi
-
-	if [[ "$blackness" = "true" ]]; then
-		blackness_color
-	fi
-
-	if [[ "$float" = "true" ]]; then
-		float_panel
-	fi
-
-	if [[ "$outline" = "true" ]]; then
-		outline_style
-	fi
-
-	if [[ "$macos" = "true" ]]; then
-		macos_winbutton
-	fi
-}
-
-uninstall_link() {
-	rm -rf "${HOME}/.config/gtk-4.0/"{assets,windows-assets,gtk.css,gtk-dark.css}
-}
-
-link_libadwaita() {
-	local dest="${1}"
-	local name="${2}"
-	local theme="${3}"
-	local color="${4}"
-	local size="${5}"
-	local ctype="${6}"
-
-	local THEME_DIR="${1}/${2}${3}${4}${5}${6}"
-
-	rm -rf "${HOME}/.config/gtk-4.0/"{assets,gtk.css,gtk-dark.css}
-
-	echo -e "\nLink '$THEME_DIR/gtk-4.0' to '${HOME}/.config/gtk-4.0' for libadwaita..."
-
-	mkdir -p "${HOME}/.config/gtk-4.0"
-	ln -sf "${THEME_DIR}/gtk-4.0/assets" "${HOME}/.config/gtk-4.0/assets"
-	ln -sf "${THEME_DIR}/gtk-4.0/gtk.css" "${HOME}/.config/gtk-4.0/gtk.css"
-	ln -sf "${THEME_DIR}/gtk-4.0/gtk-dark.css" "${HOME}/.config/gtk-4.0/gtk-dark.css"
-}
-
-link_theme() {
-	for theme in "${themes[@]}"; do
-		for color in "${lcolors[@]}"; do
-			for size in "${sizes[@]}"; do
-				link_libadwaita "${dest:-$DEST_DIR}" "${name:-$THEME_NAME}" "$theme" "$color" "$size" "$ctype"
-			done
-		done
-	done
-}
-
-install_theme() {
-	for theme in "${themes[@]}"; do
-		for color in "${colors[@]}"; do
-			for size in "${sizes[@]}"; do
-				install "${dest:-$DEST_DIR}" "${name:-$THEME_NAME}" "$theme" "$color" "$size" "$ctype" "$window"
-				make_gtkrc "${dest:-$DEST_DIR}" "${name:-$THEME_NAME}" "$theme" "$color" "$size" "$ctype" "$window"
-			done
-		done
-	done
-
-	if has_command xfce4-popup-whiskermen; then
-		sed -i "s|.*menu-opacity=.*|menu-opacity=0|" "$HOME/.config/xfce4/panel/whiskermenu"*".rc"
-	fi
-
-	if (pgrep xfce4-session &>/dev/null); then
-		xfce4-panel -r
-	fi
-}
-
-uninstall() {
-	local dest="${1}"
-	local name="${2}"
-	local theme="${3}"
-	local color="${4}"
-	local size="${5}"
-	local ctype="${6}"
-
-	local THEME_DIR="${1}/${2}${3}${4}${5}${6}"
-
-	if [[ -d "${THEME_DIR}" ]]; then
-		echo -e "Uninstall ${THEME_DIR}... "
-		rm -rf "${THEME_DIR}"
-	fi
-}
-
-uninstall_theme() {
-	for theme in "${themes[@]}"; do
-		for color in "${colors[@]}"; do
-			for size in "${sizes[@]}"; do
-				uninstall "${dest:-$DEST_DIR}" "${name:-$THEME_NAME}" "$theme" "$color" "$size" "$ctype"
-			done
-		done
-	done
-}
-
-if [[ "$uninstall" == 'true' ]]; then
-	if [[ "$libadwaita" == 'true' ]]; then
-		echo -e "\nUninstall ${HOME}/.config/gtk-4.0 links ..."
-		uninstall_link
-	else
-		echo && uninstall_theme && uninstall_link
-	fi
-else
-	install_package && tweaks_temp && gnome_shell_version && install_theme
-	if [[ "$libadwaita" == 'true' ]]; then
-		uninstall_link && link_theme
-	fi
-fi
+main "$@"
 
 echo
-echo Done.

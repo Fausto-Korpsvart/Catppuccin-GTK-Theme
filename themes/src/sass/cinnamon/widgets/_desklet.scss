@@ -1,0 +1,106 @@
+// Desklets
+.desklet {
+	color: on($tooltip);
+
+	&:highlight {
+		background-color: transparentize($error, 0.5);
+	}
+
+	&-with-borders {
+		color: on($tooltip);
+		background-color: $tooltip;
+		padding: 12px;
+		padding-bottom: 16px;
+
+		&:highlight {
+			background-color: transparentize($error, 0.5);
+		}
+	}
+
+	&-with-borders-and-header {
+		color: on($tooltip);
+		background-color: $tooltip;
+		border-radius: 6px;
+		border-radius-topleft: 0;
+		border-radius-topright: 0;
+		padding: 12px;
+		padding-bottom: 17px;
+
+		&:highlight {
+			background-color: transparentize($error, 0.5);
+		}
+	}
+	&-header {
+		color: on($tooltip);
+		background-color: $tooltip;
+		border-radius: 0;
+		border-radius-topleft: 6px;
+		border-radius-topright: 6px;
+		font-size: 1em;
+		padding: 12px;
+		padding-bottom: 6px;
+	}
+	&-drag-placeholder {
+		border: 2px solid $primary;
+		background-color: transparentize($primary, 0.7);
+	}
+}
+
+// About Dialog (applet.js and desklet.js)
+.about {
+	&-content {
+		width: 550px;
+		height: 250px;
+		spacing: 8px;
+		padding-bottom: 10px;
+	}
+	&-title {
+		font-size: 2em;
+		font-weight: bold;
+	}
+	&-uuid {
+		font-size: 10px;
+		color: #888;
+	}
+	&-icon {
+		padding-right: 20px;
+		padding-bottom: 14px;
+	}
+	&-scrollBox {
+		border: 1px solid $divider;
+		border-radius: $corner-radius;
+		background-color: $base;
+		padding: 4px;
+		padding-right: 0;
+		border-radius: 0;
+
+		&-innerBox {
+			padding: 1.2em;
+			spacing: 1.2em;
+		}
+	}
+	&-description {
+		padding-top: 4px;
+		padding-bottom: 16px;
+	}
+	&-version {
+		padding-left: 7px;
+		font-size: 10px;
+		color: #888;
+	}
+}
+
+.photoframe-box {
+	color: on($tooltip);
+	background-color: $tooltip;
+	padding: 12px;
+	padding-bottom: 16px;
+}
+
+// Xkcd Desklet
+.xkcd-box {
+	padding: 6px;
+	border: 0px;
+	background-color: rgba(0, 0, 0, 0);
+	border-radius: 0px;
+}

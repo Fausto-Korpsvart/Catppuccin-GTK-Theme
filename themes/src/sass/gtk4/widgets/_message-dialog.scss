@@ -1,0 +1,103 @@
+/********************
+ * GtkMessageDialog *
+ ********************/
+
+window.dialog.message {
+	// Message Dialog styling
+	&.background {
+		background-color: if($variant == 'light', $surface, $black);
+	}
+
+	box.dialog-vbox.vertical {
+		margin-top: $space-size;
+
+		> box > box > box > label.title {
+			font-weight: 800;
+			font-size: 15pt;
+		}
+	}
+
+	.titlebar {
+		min-height: $small-size;
+		border-style: none;
+		background-color: if($variant == 'light', $surface, $black);
+		color: $text;
+
+		&:backdrop {
+			background-color: if($variant == 'light', $surface, $black);
+			color: $text-secondary;
+		}
+	}
+
+	.dialog-action-area {
+		padding: $space-size * 3;
+		border-spacing: $space-size * 3;
+
+		> button {
+			border: none;
+			@extend %button-flat;
+			@extend %dialog_action_button;
+
+			&:not(.suggested-action):not(.destructive-action) {
+				border-radius: $modal_radius;
+				background-color: $fill;
+
+				&:hover {
+					@include button(flat-hover);
+				}
+
+				&:active {
+					@include button(active);
+				}
+			}
+
+			&.suggested-action,
+			&.destructive-action {
+				border-radius: $modal_radius;
+				background-color: darken($destructive, 10%);
+				color: on($destructive);
+			}
+		}
+	}
+}
+
+/********************
+ * AdwMessageDialog *
+ ********************/
+
+window.messagedialog {
+	background-color: $surface;
+	color: $text;
+	padding: $space-size;
+
+	.message-area {
+		padding: 24px 30px;
+		border-spacing: 10px;
+	}
+
+	.response-area {
+		border-spacing: $space-size;
+
+		button {
+			@extend %button-flat;
+			@extend %dialog_action_button;
+
+			&.suggested {
+				background-color: darken($suggested, 8%);
+				color: on($suggested);
+				/* color: $primary; */
+			}
+
+			&.destructive {
+				background-color: darken($destructive, 10%);
+				color: on($destructive);
+				/* color: $destructive; */
+			}
+		}
+
+		separator {
+			background: none;
+			margin: $space-size / 2;
+		}
+	}
+}

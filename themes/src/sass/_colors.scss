@@ -130,18 +130,18 @@
 }
 
 @function background($type) {
-	@if ($type == 'a') { @return $white; }
+	@if ($type == 'a') { @return $grey-050; }
 	@if ($type == 'b') { @return $grey-100; }
 	@if ($type == 'c') { @return $grey-150; }
 	@if ($type == 'd') { @return $grey-200; }
 
 	@if ($blackness == 'true') {
-		@if ($type == 'e') { @return $grey-950; } // #000000
-		@if ($type == 'f') { @return $grey-900; } // #010101
-		@if ($type == 'g') { @return $grey-800; } // #020202
-		@if ($type == 'h') { @return $grey-850; } // #11111b
+		@if ($type == 'e') { @return #000000; }
+		@if ($type == 'f') { @return #000000; }
+		@if ($type == 'g') { @return $grey-950; }
+		@if ($type == 'h') { @return $grey-900; }
 	} @else {
-        @if ($type == 'e') { @return $grey-950; }
+    @if ($type == 'e') { @return $grey-950; }
 		@if ($type == 'f') { @return $black; }
 		@if ($type == 'g') { @return $grey-750; }
 		@if ($type == 'h') { @return $grey-700; }
@@ -164,14 +164,14 @@ $drop_target_color:                     $peach-dark;
 $indicator:                             if($variant == 'dark', mix($primary, background(b), 0%), mix($primary, background(f), 0%));
 $titlebar-indicator:                    if($variant == 'dark', currentColor, $primary);
 $inverse-indicator:                     mix($primary, $white, 0%);
-$applet-primary:                        if($theme == 'grey' and variant == 'light' and $topbar == 'dark', $grey-200, $primary);
+$applet-primary:                        if($theme == 'grey' and $variant == 'light' and $topbar == 'dark', $grey-200, $primary);
 
-$background:                            if($variant == 'light', background(a), background(f));
-$surface:                               if($variant == 'light', background(b), background(g));
-$base:                                  if($variant == 'light', background(c), background(h));
+$background:                            if($variant == 'light', background(b), background(f));
+$surface:                               if($variant == 'light', background(c), background(g));
+$base:                                  if($variant == 'light', background(c), background(g));
 $base-alt:                              if($variant == 'light', background(d), background(h));
 $card:                                  if($variant == 'light', background(b), background(h));
-$menu:                                  if($variant == 'light', $grey-150, $grey-800);
+$menu:                                  if($variant == 'light', background(a), background(g));
 
 $tooltip:                               if($variant == 'dark', rgba(darken(background(f), 3%), 0.9), rgba(darken(background(h), 3%), 0.9));
 $osd:                                   mix($primary, background(f), 0%);
@@ -192,19 +192,19 @@ $entry:                                 if($variant == 'dark', on($background, s
 $chromium-tabs:                         if($variant == 'light', $grey-150, $grey-700);
 
 $link:                                  mix($blue-dark, $teal-dark, 50%);
-$link-visited:                          if($variant == 'light', $mauve-dark, $mauve-light);
+$link-visited:                          if($variant == 'light', $mauve-light, $mauve-dark);
 
-$warning:                               if($variant == 'light', $yellow-dark, $yellow-light);
-$error:                                 if($variant == 'light', $red-dark, $red-light);
-$success:                               if($variant == 'light', $green-dark, $green-light);
+$warning:                               if($variant == 'light', $yellow-light, $yellow-dark);
+$error:                                 if($variant == 'light', $red-light, $red-dark);
+$success:                               if($variant == 'light', $green-light, $green-dark);
 
-$suggested:                             if($variant == 'light', $blue-dark, $blue-light);
+$suggested:                             if($variant == 'light', $blue-light, $blue-dark);
 $destructive:                           $error;
 
 $assets-color:                          $primary;
 
 $frame:                                 if($variant == 'light', rgba($black, 0.12), rgba($black, 0.20));
-$border:                                if($variant == 'light', rgba($black, 0.12), rgba($white, 0.12));
+$border-color:                          if($variant == 'light', rgba($black, 0.12), rgba($white, 0.12));
 $window-border:                         if($variant == 'light', rgba($black, 0.12), rgba($black, 0.75));
 $solid-border:                          if($variant == 'light', mix(black, $base, 12%), mix(white, $base, 12%));
 $border-alt:                            rgba($black, 0.16); // darker border color for Chrome and Firefox
@@ -246,11 +246,10 @@ $panel-track-disabled:                  on($panel, track-disabled);
 $panel-divider:                         on($panel, divider);
 $panel-fill:                            on($panel, fill);
 
-
 // Titlebutton colors
-$titlebutton-close:                      $button-close;
-$titlebutton-max:                        $button-max;
-$titlebutton-min:                        $button-min;
+$titlebutton-close:                     $button-close;
+$titlebutton-max:                       $button-max;
+$titlebutton-min:                       $button-min;
 
 $accent-color:                          if($variant == 'light', $default-light, $default-dark);
 

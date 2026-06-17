@@ -1,0 +1,235 @@
+/****************
+ * Text Entries *
+ ****************/
+
+%entry-on-indicator {
+	background-color: on($indicator, fill);
+	color: on($indicator);
+
+	&:focus {
+		color: on($indicator);
+	}
+
+	&:drop(active) {
+		color: on($indicator);
+	}
+
+	&:disabled {
+		background-color: on($indicator, fill);
+		color: on($indicator, disabled);
+	}
+
+	image {
+		color: on($indicator, secondary);
+
+		&:disabled {
+			color: on($indicator, disabled);
+		}
+	}
+
+	&:hover image,
+	&:focus image {
+		color: on($indicator);
+	}
+}
+
+%entry,
+entry {
+	%entry_basic,
+	& {
+		min-height: $medium-size;
+		padding: 0 8px;
+		border-radius: $corner-radius;
+		caret-color: currentColor; // this shouldn't be needed.
+
+		@include entry(normal);
+
+		&:focus {
+			@include entry(checked);
+		}
+
+		&:drop(active) {
+			@include entry(hover);
+		}
+
+		&:disabled {
+			@include entry(disabled);
+		}
+
+		&.flat {
+			min-height: 0;
+			padding: 2px;
+			border-radius: 0;
+			background-color: transparent;
+		}
+
+		image {
+			// icons inside the entry
+			color: $text-secondary;
+
+			&:hover,
+			&:active {
+				color: $text;
+			}
+
+			&:disabled {
+				color: $text-disabled;
+			}
+
+			&.left {
+				margin-left: ($medium-size - 16px) / 2 - 8px;
+				margin-right: 6px;
+			}
+
+			&.right {
+				margin-left: 6px;
+				margin-right: ($medium-size - 16px) / 2 - 8px;
+			}
+		}
+
+		undershoot {
+			&.left {
+				@include undershoot(left);
+			}
+
+			&.right {
+				@include undershoot(right);
+			}
+		}
+
+		selection {
+			@extend %selected_items_primary;
+		}
+
+		// entry error and warning style
+		@each $e_type, $e_color in (error, $error), (warning, $warning) {
+			&.#{$e_type} {
+				@include entry(normal, $e_color);
+
+				&:focus {
+					@include entry(checked, $e_color);
+				}
+
+				&:disabled {
+					@include entry(disabled, $e_color);
+				}
+			}
+		}
+
+		// .osd & {
+		// }
+	}
+
+	progress {
+		margin: 2px -8px;
+		border-bottom: 2px solid $primary;
+		background-color: transparent;
+	}
+
+	// linked entries
+	.linked:not(.vertical) > & {
+		@extend %linked;
+	}
+
+	// Vertically linked entries
+	.linked.vertical > & {
+		@extend %linked-vertical;
+	}
+}
+
+%entry_raised {
+	border-radius: $corner-radius;
+
+	@include entry(raised-normal);
+
+	&:focus {
+		@include entry(raised-focus);
+	}
+
+	&:drop(active) {
+		@include entry(raised-hover);
+	}
+
+	&:disabled {
+		@include entry(raised-disabled);
+	}
+
+	// entry error and warning style
+	@each $e_type, $e_color in (error, $error), (warning, $warning) {
+		&.#{$e_type} {
+			@include entry(raised-normal, $e_color);
+
+			&:focus {
+				@include entry(raised-focus, $e_color);
+			}
+
+			&:disabled {
+				@include entry(raised-disabled, $e_color);
+			}
+
+			image {
+				color: on($e_color, secondary);
+
+				&:hover,
+				&:active {
+					color: on($e_color);
+				}
+
+				&:disabled {
+					color: on($e_color, disabled);
+				}
+			}
+		}
+	}
+}
+
+treeview entry {
+	&.flat,
+	& {
+		background-color: $base;
+
+		&,
+		&:focus {
+			border-image: none;
+			box-shadow: none;
+		}
+	}
+}
+
+.entry-tag {
+	margin: 2px;
+	border-radius: $circular-radius;
+	box-shadow: none;
+	background-color: $track-disabled;
+	color: $text;
+
+	&:hover {
+		background-image: image($overlay-hover);
+	}
+
+	// side margins: compensate the entry padding with a negative margin
+	// then the negative margin itself
+	:dir(ltr) & {
+		margin-left: 4px;
+		margin-right: 0;
+		padding-left: 12px;
+		padding-right: 8px;
+	}
+
+	:dir(rtl) & {
+		margin-left: 0;
+		margin-right: 4px;
+		padding-left: 8px;
+		padding-right: 12px;
+	}
+
+	// seems any sizing doesn't work
+	&.button {
+		box-shadow: none;
+		background-color: transparent;
+
+		&:not(:hover):not(:active) {
+			color: $text-secondary;
+		}
+	}
+}

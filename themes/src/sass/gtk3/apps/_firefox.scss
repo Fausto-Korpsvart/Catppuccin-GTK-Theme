@@ -1,0 +1,135 @@
+/***********
+ * Firefox *
+ ***********/
+#MozillaGtkWidget {
+	decoration {
+		border: none;
+	}
+
+	> widget {
+		// For popover, entry in toolbar, etc.
+		text {
+			background-color: $background;
+		}
+
+		// For selection, active tab indicator, etc.
+		text:selected {
+			// Use traditional selection style as workaround
+			background-color: $primary;
+			color: on($primary);
+		}
+
+		// For separators in bookmark toolbar
+		> separator {
+			color: $solid-border;
+		}
+
+		// avoid black border
+		> scrollbar {
+			background-clip: border-box;
+		}
+
+		// Emphasize toolbar's border-bottom
+		> frame > border {
+			border-color: $solid-border;
+		}
+
+		> entry,
+		> button > button {
+			border: 1px solid $solid-border;
+			border-radius: $corner-radius;
+			box-shadow: none;
+
+			&:disabled {
+				border-color: $track-disabled;
+			}
+		}
+
+		> entry {
+			min-height: 32px - 2px;
+			background-color: $base;
+
+			&:focus {
+				border-color: $primary;
+				box-shadow: inset 0 0 0 1px $primary;
+			}
+
+			&:disabled {
+				background-color: $base-alt;
+			}
+		}
+
+		> button > button {
+			padding: 4px 8px;
+			background-size: auto;
+
+			&:hover {
+				box-shadow: inset 0 0 0 9999px $overlay-hover;
+			}
+
+			&:active {
+				background-image: image($overlay-active);
+			}
+		}
+
+		// use 16px assets for hard-coded sizing
+		> checkbutton > check {
+			@extend %small_check;
+		}
+
+		> radiobutton > radio {
+			@extend %small_radio;
+		}
+
+		> checkbutton > check,
+		> radiobutton > radio {
+			margin: 0;
+			padding: 0;
+		}
+
+		// make check/radio visible regardless of whether the background is bright or dark
+		> checkbutton > check:not(:checked):not(:indeterminate),
+		> radiobutton > radio:not(:checked):not(:indeterminate) {
+			color: $grey-600;
+
+			&:hover,
+			&:active {
+				color: $grey-500;
+			}
+
+			&:disabled {
+				color: rgba($grey-600, 0.5);
+			}
+		}
+	}
+
+	// remove ugly border around the menus
+	menu {
+		border: none;
+	}
+}
+
+// for backward compatibility
+#MozillaGtkWidget {
+	> widget {
+		> menubar {
+			color: $titlebar-text-secondary;
+
+			&:hover {
+				color: $titlebar-text;
+			}
+
+			&:disabled {
+				color: $titlebar-text-secondary-disabled;
+			}
+		}
+
+		> frame {
+			color: $solid-border;
+		}
+	}
+
+	menu > separator {
+		color: $solid-border;
+	}
+}

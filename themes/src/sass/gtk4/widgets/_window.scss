@@ -1,0 +1,81 @@
+/**********************
+ * Window Decorations *
+ **********************/
+
+window {
+	border: none;
+
+	&.csd {
+		border-radius: $window-radius;
+		margin: 0;
+		transition: none;
+
+		outline-offset: -1px;
+		outline: 1px solid highlight($window-border);
+		box-shadow:
+			$shadow-z16,
+			0 0 36px transparent;
+
+		@if $border == 'true' {
+			outline: 2px solid $primary;
+			box-shadow:
+				$shadow-z16,
+				0 0 36px transparent;
+		}
+
+		&:backdrop {
+			// the transparent shadow here is to enforce that the shadow extents don't
+			// change when we go to backdrop, to prevent jumping windows.
+			// The biggest shadow should be in the same order then in the active state
+			// or the jumping will happen during the transition.
+			outline-offset: -1px;
+			outline: 1px solid highlight($window-border);
+			box-shadow:
+				$shadow-z16,
+				0 0 36px transparent;
+			transition: $transition-shadow;
+
+			@if $border == 'true' {
+				outline: 2px solid $primary;
+				box-shadow:
+					$shadow-z16,
+					0 0 36px transparent;
+			}
+		}
+
+		&.maximized,
+		&.fullscreen,
+		&.tiled,
+		&.tiled-top,
+		&.tiled-right,
+		&.tiled-bottom,
+		&.tiled-left {
+			border-radius: 0;
+			transition: none;
+		}
+
+		&.maximized,
+		&.fullscreen {
+			box-shadow: none;
+			outline: none;
+		}
+	}
+
+	&.solid-csd {
+		margin: 0;
+		padding: 2px;
+		border-radius: 0;
+		background-color: $titlebar;
+		border: 1px solid $solid-border;
+
+		&:backdrop {
+			background-color: $titlebar-backdrop;
+		}
+	}
+
+	// server-side decorations as used by mutter
+	&.ssd {
+		// just doing borders, wm draws actual shadows
+		box-shadow: 0 0 0 1px $border-color;
+	}
+}

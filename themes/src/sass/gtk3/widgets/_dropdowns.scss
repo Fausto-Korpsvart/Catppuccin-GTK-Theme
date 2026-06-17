@@ -1,0 +1,68 @@
+/*************
+ * dropdowns *
+ *************/
+
+dropdown {
+	button.toggle {
+		border-radius: 0 $modal-radius $modal-radius 0;
+	}
+
+	> button > box {
+		border-radius: 0 $modal-radius $modal-radius 0;
+		// border-spacing: $space-size;
+
+		> stack > row.activatable {
+			&:hover,
+			&:active {
+				background: none;
+			}
+		}
+	}
+
+	arrow {
+		-gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
+		min-height: 16px;
+		min-width: 16px;
+	}
+
+	&:drop(active) {
+		// FIXME: untested
+		box-shadow: none;
+
+		button.combo {
+			color: $drop_target_color;
+			box-shadow: inset 0 0 0 2px $drop_target_color;
+		}
+	}
+
+	popover.menu {
+		padding: $space-size 0 0;
+
+		listview > row {
+			min-width: 0;
+			padding: $space-size;
+
+			&:selected {
+				color: $text;
+				background-color: $overlay-selected;
+			}
+		}
+
+		// dropdowns with searchboxes on top
+		.dropdown-searchbar {
+			padding: $space-size;
+
+			+ scrolledwindow:not(.undershoot-top) {
+				@include undershoot(top);
+			}
+		}
+	}
+}
+
+/**************
+ * ComboBoxes *
+ **************/
+
+combobox {
+	@extend dropdown;
+}

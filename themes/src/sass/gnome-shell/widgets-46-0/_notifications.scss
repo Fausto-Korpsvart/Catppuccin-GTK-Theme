@@ -10,22 +10,33 @@ $notification_banner_width: 34em;
 	margin: 20px;
 	border-radius: $base_radius;
 	color: $text-secondary;
-	background-color: $popover;
+	background-color: $menu;
 	border: none;
 	text-shadow: none;
 	box-shadow: 0 3px 5px rgba(0, 0, 0, 0.25);
 	border-radius: $menu_radius;
 
-	@if $float == 'true' {
+	@if $blackness == 'true' {
+		background-color: if($variant == 'light', #eff1f5, #0a0a0a);
+	}
+
+	@if $float == 'true' and $panel_border == 'true' {
 		border: 2px solid $primary;
+	} @else {
+		border: 1px solid $window-border;
+		box-shadow: inset 0 0 0 1px highlight($popover);
 	}
 
 	&:hover,
 	&:active {
-		color: $text;
-		background-color: $popover;
+		color: $primary;
+		background-color: $menu;
 		box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
 		margin: 20px;
+
+		@if $blackness == 'true' {
+			background-color: if($variant == 'light', #eff1f5, #0a0a0a);
+		}
 	}
 
 	&:focus {
@@ -38,7 +49,7 @@ $notification_banner_width: 34em;
 	background-color: transparent;
 	padding-top: 0;
 	border: none;
-	border-top: 1px solid $border;
+	border-top: 1px solid $border-color;
 	spacing: 0;
 }
 

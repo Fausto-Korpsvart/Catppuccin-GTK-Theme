@@ -1,0 +1,27 @@
+changelog:
+  exclude:
+    labels:
+      - skip-changelog
+  categories:
+    - title: '🚀 New Features & Ecosytem'
+      labels:
+        - feat
+        - feature
+        - icons
+    - title: '🐛 Bug Fixes'
+      labels:
+        - fix
+        - bug
+    - title: '🎨 UI & Aesthetic Adjustments'
+      labels:
+        - style
+        - ui
+    - title: '📝 Documentation Changes'
+      labels:
+        - docs
+        - documentation
+    - title: '🧰 Maintenance & CI Pipeline'
+      labels:
+        - chore
+        - ci
+        - refactor

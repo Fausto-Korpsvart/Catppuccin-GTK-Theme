@@ -1,5 +1,8 @@
 @import '../tweaks-temp';
 
+// Gnome Shell version
+$gnome_version: 'default' !default;
+
 // Function to convert px values to em
 @function to_em($input, $base: 16px) {
 	// multiplied and divided by 1000 to make up for round() shortcoming
@@ -29,9 +32,9 @@ $large_scalable_icon_size: $scalable_icon_size * 2;
 
 // radiuses
 $circular_radius: 9999px;
-$base_radius: 12px;
-$icon_radius: 16px;
-$window_radius: 20px;
+$base_radius: $roundness * 1px;
+$icon_radius: ($roundness + 4) * 1px;
+$window_radius: ($roundness + 8) * 1px;
 $menu_radius: $base_radius + $base_padding;
 $modal_radius: $menu_radius;
 

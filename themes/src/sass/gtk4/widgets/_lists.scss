@@ -1,0 +1,580 @@
+/*********
+ * Lists *
+ *********/
+
+%circular_list {
+	border-radius: $corner-radius + 1px;
+	box-shadow: none;
+	border: 1px solid $border-color;
+	background-color: if($variant == 'light', $grey-050, $fill);
+}
+
+%circular_row {
+	border-radius: 0;
+
+	&:first-child {
+		border-top-left-radius: $corner-radius;
+		border-top-right-radius: $corner-radius;
+	}
+
+	&:last-child {
+		border-bottom-left-radius: $corner-radius;
+		border-bottom-right-radius: $corner-radius;
+	}
+
+	&:only-child {
+		border-radius: $corner-radius;
+	}
+
+	&:not(:last-child) {
+		border-bottom: 1px solid $border-color;
+	}
+
+	&:focus {
+		box-shadow: none;
+	}
+}
+
+listview,
+list {
+	// background-color: if($variant == 'light', rgba($base, 0.4), $fill);
+	background-color: $fill;
+	background-clip: padding-box;
+	border-color: $border-color;
+
+	> row {
+		padding: $space-size;
+		background-clip: padding-box;
+	}
+
+	> row.expander {
+		padding: 0px;
+	}
+	> row.expander .row-header {
+		padding: 2px;
+	}
+
+	&.horizontal row.separator:not(:last-child),
+	&.separators.horizontal > row:not(.separator):not(:last-child) {
+		border-left: 1px solid $border-color;
+	}
+
+	&:not(.horizontal) row.separator:not(:last-child),
+	&.separators:not(.horizontal) > row:not(.separator):not(:last-child) {
+		border-bottom: 1px solid $border-color;
+	}
+}
+
+list.frame {
+	border-radius: $corner-radius;
+}
+
+listview.view {
+	color: $text;
+	background-color: transparent;
+
+	popover.menu & {
+		padding: 0;
+		border-radius: $corner-radius;
+
+		> row {
+			margin-left: 0;
+			margin-right: 0;
+			border-radius: $corner-radius;
+		}
+	}
+}
+
+row {
+	color: $text-secondary;
+	background-clip: padding-box;
+
+	@at-root %row_activatable,
+		&.activatable {
+		transition:
+			$transition,
+			background-size $ripple-fade-out-duration $ease-out,
+			background-image $ripple-fade-out-opacity-duration $ease-out,
+			font-weight 0;
+		outline: none;
+		box-shadow: none;
+		background-color: transparent;
+		background-image: radial-gradient(circle, transparent 10%, transparent 0%);
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: 1000% 1000%;
+
+		&:focus {
+			color: $text;
+			background-color: transparent;
+			box-shadow: none;
+			outline: none;
+		}
+
+		&:hover,
+		&.has-open-popup {
+			color: $text;
+			background-color: $overlay-normal;
+			box-shadow: none;
+		}
+
+		&:active {
+			transition:
+				$transition,
+				background-size 0ms,
+				background-image 0ms,
+				font-weight 0ms;
+			animation: ripple $ripple-fade-in-duration $ease-out forwards;
+			background-image: radial-gradient(
+				circle,
+				$overlay-normal 10%,
+				transparent 0%
+			);
+			background-size: 0% 0%;
+			background-color: $overlay-normal;
+			color: $text;
+			box-shadow: none;
+		}
+
+		&:selected {
+			background-color: $overlay-selected;
+
+			&:hover {
+				background-color: $overlay-hover;
+			}
+		}
+	}
+
+	button &.activatable {
+		&:focus,
+		&:hover,
+		&:active {
+			box-shadow: none;
+			background: none;
+		}
+	}
+
+	button:checked &.activatable {
+		color: on($primary);
+	}
+
+	&:selected {
+		background-color: $overlay-selected;
+		color: $text;
+		box-shadow: none;
+
+		&:hover {
+			background-color: $overlay-hover;
+		}
+
+		&:focus,
+		&:focus-visible:focus-within {
+			outline: none;
+			background-color: $overlay-focus;
+
+			&:hover {
+				background-color: $overlay-focus-hover;
+			}
+		}
+
+		button image,
+		button label {
+			color: inherit;
+		}
+
+		&:disabled {
+			color: $text-disabled;
+		}
+	}
+}
+
+/*******************************************************
+ * Rich Lists                                          *
+ * Large list usually containing lots of widgets       *
+ * https://gitlab.gnome.org/GNOME/gtk/-/issues/3073    *
+ *******************************************************/
+
+.rich-list {
+	/* rich lists usually containing other widgets than just labels/text */
+	& > row {
+		padding: $space-size * 1.5 $space-size * 2;
+		min-height: 32px; /* should be tall even when only containing a label */
+
+		&:last-child {
+			border-bottom: none;
+		}
+
+		& > box {
+			border-spacing: $space-size * 2;
+		}
+	}
+}
+
+/****************
+ * AdwActionRow *
+ ****************/
+
+row {
+	label.subtitle {
+		font-size: smaller;
+		@extend .dim-label;
+	}
+
+	> box.header {
+		margin-left: $space-size * 2;
+		margin-right: $space-size * 2;
+		border-spacing: $space-size;
+		min-height: 50px;
+
+		> .icon:disabled {
+			filter: opacity(0.45);
+		}
+
+		> box.title {
+			margin-top: $space-size;
+			margin-bottom: $space-size;
+			border-spacing: $space-size / 2;
+			padding: 0;
+
+			// Specificity bump for header bar
+			&,
+			> .title,
+			> .subtitle {
+				padding: 0;
+				font-weight: inherit;
+			}
+		}
+
+		> .prefixes,
+		> .suffixes {
+			border-spacing: $space-size;
+		}
+
+		> .icon,
+		> .prefixes {
+			&:dir(ltr) {
+				margin-right: $space-size;
+			}
+			&:dir(rtl) {
+				margin-left: $space-size;
+			}
+		}
+	}
+
+	&.property > box.header > box.title > {
+		.title {
+			font-weight: 400;
+			font-size: 9pt;
+
+			&-heading {
+				font-weight: 700;
+				font-size: 9pt;
+			}
+
+			@extend .dim-label;
+		}
+
+		.subtitle {
+			font-size: inherit;
+			opacity: 1;
+		}
+	}
+}
+
+/******************************
+ * AdwEntryRow and AdwSpinRow *
+ ******************************/
+
+row.entry {
+	&:not(:selected).activatable.focused:hover,
+	&:not(:selected).activatable.focused:active {
+		background-color: transparent;
+	}
+
+	&:disabled {
+		text {
+			opacity: 0.45;
+		}
+
+		.dim-label,
+		.subtitle {
+			opacity: 1;
+		}
+	}
+
+	.edit-icon,
+	.indicator {
+		min-width: 24px;
+		min-height: 24px;
+		padding: 5px;
+	}
+
+	.edit-icon:disabled {
+		opacity: 0.5;
+	}
+
+	.indicator {
+		opacity: 0.65;
+	}
+
+	&.monospace {
+		font-family: inherit;
+
+		text {
+			font-family: monospace;
+		}
+	}
+}
+
+row.spin {
+	&:not(:selected).activatable.focused:hover,
+	&:not(:selected).activatable.focused:active {
+		background-color: transparent;
+	}
+
+	spinbutton {
+		background: none;
+		border-spacing: $space-size;
+		box-shadow: none;
+
+		&,
+		&:focus {
+			outline: none;
+		}
+
+		> button.image-button.up:not(.flat):not(.raised):not(.suggested-action):not(
+				.destructive-action
+			):not(.opaque):last-child,
+		> button.image-button.down:not(.flat):not(.raised):not(
+				.suggested-action
+			):not(.destructive-action):not(.opaque) {
+			&,
+			&:dir(ltr):last-child,
+			&:dir(rtl):first-child {
+				@extend %button-basic;
+				@extend %circular-button;
+				min-width: 30px;
+				min-height: 30px;
+				margin: 10px 2px;
+				border: none;
+			}
+		}
+	}
+
+	&:disabled spinbutton {
+		> button.image-button.up:not(.flat):not(.raised):not(.suggested-action):not(
+				.destructive-action
+			):not(.opaque):last-child,
+		> button.image-button.down:not(.flat):not(.raised):not(
+				.suggested-action
+			):not(.destructive-action):not(.opaque) {
+			&,
+			&:dir(ltr):last-child,
+			&:dir(rtl):first-child {
+				&:disabled {
+					filter: none;
+				}
+			}
+		}
+	}
+}
+
+row.entry,
+row.spin {
+	&:not(:selected).activatable.focused:hover,
+	&:not(:selected).activatable.focused:active {
+		background-color: transparent;
+	}
+
+	@each $e_type, $e_color in (error, $error), (warning, $warning),
+		(success, $success)
+	{
+		&.#{$e_type} {
+			@include entry($e_color);
+
+			text {
+				> selection:focus-within {
+					background-color: gtkalpha($e_color, 0.2);
+				}
+
+				> cursor-handle > contents {
+					background-color: currentColor;
+				}
+			}
+
+			.dim-label,
+			.subtitle {
+				opacity: 1;
+			}
+
+			.suggested-action {
+				background-color: $e_color;
+				color: on($e_color);
+			}
+		}
+	}
+}
+
+/***************
+ * AdwComboRow *
+ ***************/
+
+row.combo {
+	image.dropdown-arrow:disabled {
+		filter: opacity(0.45);
+	}
+
+	listview.inline {
+		background: none;
+		border: none;
+		box-shadow: none;
+		color: inherit;
+
+		&,
+		&:disabled {
+			background: none;
+			color: inherit;
+		}
+	}
+
+	popover > contents {
+		min-width: 120px;
+
+		.combo-searchbar {
+			margin: 6px;
+
+			+ scrolledwindow {
+				@include undershoot(top, $border-color);
+			}
+		}
+	}
+}
+
+/******************
+ * AdwExpanderRow *
+ ******************/
+
+@mixin margin-start($margin) {
+	&:dir(ltr) {
+		margin-left: $margin;
+	}
+
+	&:dir(rtl) {
+		margin-right: $margin;
+	}
+}
+
+%boxed_list_row {
+	border-bottom: 1px solid $border-color;
+
+	&:not(:selected).activatable {
+		&:hover {
+			background-color: $overlay-hover;
+		}
+
+		&:active {
+			background-color: $overlay-active;
+		}
+
+		&.has-open-popup {
+			background-color: gtkalpha(currentColor, 0.03);
+		}
+	}
+}
+
+row.expander {
+	// Drop transparent background on expander rows to let nested rows handle it,
+	// avoiding double highlights.
+	background: none;
+	padding: 0px;
+
+	> box > list {
+		background: none;
+		color: inherit;
+	}
+
+	list.nested {
+		color: inherit;
+	}
+
+	list.nested > row {
+		@extend %boxed_list_row;
+	}
+
+	// AdwExpanderRow arrow rotation
+	image.expander-row-arrow {
+		@extend .dim-label;
+
+		transition: -gtk-icon-transform 200ms $ease-out;
+		@include margin-start($space-size);
+
+		&:dir(ltr) {
+			-gtk-icon-transform: rotate(0.5turn);
+		}
+
+		&:dir(rtl) {
+			-gtk-icon-transform: rotate(-0.5turn);
+		}
+
+		&:disabled {
+			filter: opacity(0.45);
+		}
+	}
+
+	&:checked image.expander-row-arrow {
+		-gtk-icon-transform: rotate(0turn);
+		opacity: 1;
+
+		&:not(:disabled) {
+			color: $primary;
+		}
+	}
+
+	.osd &:checked image.expander-row-arrow:not(:disabled) {
+		color: inherit;
+	}
+}
+
+/*****************
+ * Boxed Lists *
+ *****************/
+
+// Deprecated: use .boxed-list instead
+list.content,
+list.boxed-list {
+	@extend %circular_list;
+
+	> row {
+		// Regular rows and expander header rows background
+		&,
+		&.expander row.header {
+			@extend %boxed_list_row;
+		}
+
+		&.expander {
+			border: none;
+		}
+
+		// Rounded top
+		&:first-child {
+			&,
+			&.expander row.header {
+				border-top-left-radius: $corner-radius;
+				border-top-right-radius: $corner-radius;
+			}
+		}
+
+		// Rounded bottom
+		&:last-child {
+			&,
+			&.expander:not(:checked),
+			&.expander:not(:checked) row.header,
+			&.expander:checked list.nested,
+			&.expander:checked list.nested > row:last-child {
+				border-bottom-left-radius: $corner-radius;
+				border-bottom-right-radius: $corner-radius;
+				border-bottom-width: 0;
+			}
+		}
+	}
+}

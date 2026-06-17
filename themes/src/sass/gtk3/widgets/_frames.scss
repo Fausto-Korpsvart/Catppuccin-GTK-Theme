@@ -1,0 +1,91 @@
+%frame {
+	margin: 0;
+	padding: 0;
+	border: 1px solid $divider;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+.frame {
+	@extend %frame;
+
+	&.view {
+		border-radius: $corner-radius;
+	}
+
+	&.flat {
+		border-style: none;
+	}
+}
+
+frame {
+	& > border {
+		@extend %frame;
+	}
+
+	&.flat > border,
+	& > border.flat,
+	statusbar & > border {
+		border: none;
+	} // for backward compatibility
+}
+
+actionbar > revealer > box {
+	margin: $space-size 0 0 0;
+	padding: $space-size;
+	border: none;
+	color: $text;
+	background-color: $background;
+	border-radius: 0 0 $corner-radius $corner-radius;
+
+	button {
+		border-radius: $corner-radius - $space-size;
+
+		&:not(.suggested-action):not(.destructive-action):not(.combo) {
+			@extend %button-on-indicator;
+		}
+
+		&.combo:only-child {
+			border-radius: $corner-radius - $space-size;
+			color: $text;
+			background-color: if($variant == 'light', rgba($base, 0.4), $fill);
+
+			&:hover,
+			&:active {
+				color: $primary;
+			}
+
+			&:disabled {
+				color: $primary;
+			}
+		}
+	}
+
+	stackswitcher {
+		background-color: on($indicator, fill);
+
+		&.linked:not(.vertical)
+			> button:not(.suggested-action):not(.destructive-action) {
+			color: on($indicator, secondary);
+
+			&:hover,
+			&:active {
+				color: on($indicator);
+			}
+
+			&:checked {
+				background-color: $base;
+				color: $text;
+
+				&:hover {
+					background-color: $base-alt;
+				}
+			}
+		}
+	}
+
+	check,
+	radio {
+		@extend %check-and-radio-on-indicator;
+	}
+}

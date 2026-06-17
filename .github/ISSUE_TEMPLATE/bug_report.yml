@@ -1,0 +1,123 @@
+name: Bug Report
+description: Report a visual or functional issue with the Catppuccin GTK Theme
+title: '[BUG]: '
+labels: ['bug', 'triage']
+assignees: 'korpsvart'
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Thank you for taking the time to report a bug!
+        Please fill out this form with as much detail as possible to help us reproduce and fix the issue quickly.
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+      placeholder: e.g., In GTK4 applications, button hover states ignore the accent color from the mocha variant and use a default system blue instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: Steps to reproduce the behavior.
+      placeholder: |
+        1. Apply the theme variant (e.g., Catppuccin-Frappe-Flamingo-Dark)
+        2. Open a GTK3 or GTK4 application (e.g., Nautilus, Settings)
+        3. Interact with affected elements (buttons, menus, etc.)
+        4. Observe the incorrect or missing style
+    validations:
+      required: true
+  - type: input
+    id: distro
+    attributes:
+      label: Linux Distribution & Version
+      placeholder: e.g., Arch Linux / Fedora 44 / Ubuntu 26.04
+    validations:
+      required: true
+  - type: dropdown
+    id: desktop-env
+    attributes:
+      label: Desktop Environment
+      options:
+        - GNOME
+        - Cinnamon
+        - XFCE
+        - MATE
+        - Budgie
+        - Other / Window Manager
+    validations:
+      required: true
+  - type: dropdown
+    id: display-server
+    attributes:
+      label: Display Server
+      options:
+        - Wayland
+        - X11
+        - Both / Not Sure
+    validations:
+      required: true
+  - type: input
+    id: gtk-version
+    attributes:
+      label: GTK Version
+      placeholder: e.g., GTK 3.24.41 / GTK 4.14.2
+    validations:
+      required: false
+  - type: input
+    id: theme-variant
+    attributes:
+      label: Affected Theme Variant(s)
+      placeholder: e.g., Catppuccin-Macchiato-Mauve-Light
+    validations:
+      required: true
+  - type: dropdown
+    id: install-method
+    attributes:
+      label: Installation Method
+      options:
+        - Script (install.sh)
+        - Manual (git clone / release zip)
+        - Package Manager (AUR, Flatpak, etc.)
+    validations:
+      required: true
+  - type: textarea
+    id: expected-actual
+    attributes:
+      label: Expected vs Actual Behavior
+      description: Explain how the UI should look or behave according to Catppuccin’s design vs what actually happens.
+      placeholder: |
+        Expected: The button hover background should use the accent color (e.g., Mauve).
+        Actual: The hover state uses the default system gray/blue instead.
+    validations:
+      required: true
+  - type: textarea
+    id: logs-screenshots
+    attributes:
+      label: Logs or Screenshots
+      description: Drag and drop screenshots, or paste terminal logs/GTK warning outputs here.
+      placeholder: |
+        Gtk-WARNING **: Theme parsing error: gtk.css:87:20: Not a valid color name
+    validations:
+      required: false
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: Please confirm the following before submitting.
+      options:
+        - label: I have verified that I am using the latest version of the theme.
+          required: true
+        - label: I have searched for existing issues and confirmed this is not a duplicate.
+          required: true
+        - label: The problem persists without any third-party GTK configuration overrides.
+          required: true
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Any other context, potential fixes, or custom code proposals.
+    validations:
+      required: false

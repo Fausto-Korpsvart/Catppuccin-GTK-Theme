@@ -1,0 +1,107 @@
+/*****************
+ * GtkSpinButton *
+ *****************/
+
+spinbutton {
+	border-radius: $modal-radius;
+	padding: 0;
+	border-spacing: 0;
+	@include entry(normal);
+
+	&:focus-within {
+		@include entry(checked);
+	}
+
+	&:disabled {
+		@include entry(disabled);
+	}
+
+	> text {
+		border-image: none;
+		border-radius: 0;
+		box-shadow: none;
+		background-color: transparent;
+		margin: 0;
+
+		> selection {
+			@extend %selected_items_primary;
+		}
+	}
+
+	> button {
+		@extend %button-flat-simple;
+		@extend %small-button;
+		border: none;
+
+		// Remove unwanted focus indicator
+		&:focus:not(:hover):not(:active):not(:disabled) {
+			box-shadow: none;
+		}
+	}
+
+	&:not(.vertical) {
+		// in this horizontal configuration, the whole spinbutton
+		// behaves as the entry, so we extend the entry styling
+		// and nuke the style on the internal entry
+
+		> text {
+			min-width: $large-size - 16px;
+			// reset all the other props since the spinbutton node is styled here
+			padding-left: $space-size * 2;
+		}
+
+		> button {
+			padding: 0;
+			margin: $space-size;
+
+			&.up:dir(ltr),
+			&.down:dir(rtl) {
+				margin-left: $space-size / 2;
+			}
+
+			&.up:dir(rtl),
+			&.down:dir(ltr) {
+				margin-right: $space-size / 2;
+			}
+		}
+	}
+
+	cell.activatable &:not(.vertical) {
+		margin: $space-size / 2 0;
+
+		> button {
+			margin: 0;
+			padding: 0;
+			min-height: $small-size;
+			border-radius: 0;
+
+			&:last-child {
+				border-radius: 0 $corner-radius $corner-radius 0;
+			}
+
+			&.up:dir(ltr),
+			&.down:dir(rtl) {
+				margin-left: 0;
+			}
+
+			&.up:dir(rtl),
+			&.down:dir(ltr) {
+				margin-right: 0;
+			}
+		}
+	}
+
+	// Vertical
+	&.vertical {
+		> text {
+			min-height: $medium-size;
+			min-width: $large-size - $space-size;
+			padding: 0;
+		}
+
+		> button {
+			padding: 0;
+			margin: $space-size ($large-size - $space-size - $small-size) / 2;
+		}
+	}
+}

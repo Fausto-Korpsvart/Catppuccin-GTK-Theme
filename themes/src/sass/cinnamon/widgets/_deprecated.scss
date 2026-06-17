@@ -1,0 +1,186 @@
+// OLD MENU - Used by some of the menu spices
+.menu {
+	&-favorites-box {
+		margin: auto;
+		margin-bottom: $space-size;
+		padding: $space-size;
+		transition-duration: 300;
+		background-color: rgba($text, 0.05);
+		border: none;
+		border-radius: $menuitem-radius;
+	}
+
+	&-favorites-button {
+		padding: $space-size * 1.5;
+		border: none;
+		border-radius: $menuitem-radius / 2;
+
+		&:hover {
+			background-color: rgba($text, 0.1);
+		}
+	}
+
+	&-places {
+		&-box {
+			margin: auto;
+			padding: $space-size * 1.5;
+			border: 1px solid rgba(0, 0, 0, 0);
+		}
+
+		&-button {
+			padding: $space-size * 1.5;
+		}
+	}
+
+	&-categories-box {
+		padding: $space-size * 1.5 $space-size * 5;
+	}
+
+	&-applications-inner-box,
+	&-applications-outer-box {
+		padding: $space-size * 1.5 $space-size * 1.5 0 $space-size * 1.5;
+	}
+
+	&-application-button {
+		padding: $space-size;
+		border-radius: $menuitem-radius;
+		border: none;
+
+		// This style is used in menu application buttons for applications which were newly installed
+		&:highlighted {
+			font-weight: bold;
+		}
+
+		&-selected {
+			@include button(hover);
+			padding: $space-size;
+			border-radius: $menuitem-radius;
+			border: none;
+
+			&:highlighted {
+				font-weight: bold;
+			}
+		}
+
+		&-label:ltr {
+			padding-left: $space-size;
+		}
+		&-label:rtl {
+			padding-right: $space-size;
+		}
+	}
+
+	StScrollView.menu-application-button {
+		// extracted submenu container
+		padding: $space-size / 2 0;
+		border-radius: $menuitem-radius;
+		background-color: $sub_menu_bg;
+		color: on($sub_menu_bg);
+
+		.popup-menu-item {
+			padding: 0;
+			spacing: 0;
+			margin: 0 $space-size / 2;
+			border-radius: $menuitem-radius;
+			color: on($sub_menu_bg);
+
+			&:ltr {
+				padding-left: $space-size;
+			}
+			&:rtl {
+				padding-right: $space-size;
+			}
+
+			&:active {
+				border-image: none; // image independent
+				background-color: on($sub_menu_bg, divider);
+				color: on($sub_menu_bg);
+			}
+
+			StIcon {
+				min-width: 22px;
+			} // indentation
+
+			StLabel {
+				&:ltr {
+					padding: $space-size 0 $space-size $space-size;
+				}
+				&:rtl {
+					padding: $space-size $space-size $space-size 0;
+				}
+			}
+		}
+	}
+
+	&-category-button {
+		padding: $space-size;
+		border-radius: $menuitem-radius;
+
+		&-selected {
+			padding: $space-size;
+		}
+
+		&-hover,
+		&-selected {
+			@include button(flat-hover);
+			border-radius: $menuitem-radius;
+		}
+
+		&-greyed {
+			padding: $space-size;
+			color: $text-disabled;
+		}
+
+		&-label:ltr {
+			padding-left: $space-size;
+		}
+		&-label:rtl {
+			padding-right: $space-size;
+		}
+	}
+
+	// Name and description of the currently hovered item in the menu
+	// This appears on the bottom right hand corner of the menu
+	&-selected-app-box {
+		padding-right: 30px;
+		padding-left: 28px;
+		text-align: right;
+		height: 30px;
+
+		&:rtl {
+			padding-top: 10px;
+			height: 30px;
+		}
+	}
+
+	&-selected-app-title {
+		font-weight: bold;
+	}
+
+	&-selected-app-description {
+		max-width: 150px;
+		margin-bottom: $space-size;
+	}
+
+	&-search-box:ltr {
+		padding-left: 30px;
+	}
+	&-search-box-rtl {
+		padding-right: 30px;
+	}
+}
+
+#menu-search-entry {
+	width: 250px;
+	height: 15px;
+	font-weight: normal;
+	caret-color: $text;
+	border-radius: $menuitem-radius;
+
+	@extend %entry;
+}
+
+.menu-search-entry-icon {
+	icon-size: 1em;
+	color: $text;
+}

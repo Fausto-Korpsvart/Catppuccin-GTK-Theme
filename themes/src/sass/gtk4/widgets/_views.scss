@@ -1,0 +1,86 @@
+%view,
+.view {
+	background-color: $fill;
+	color: $text;
+
+	// &:selected:hover { box-shadow: inset 0 0 0 9999px rgba($primary, 0.08); }
+
+	&:disabled {
+		color: $text-disabled;
+	}
+
+	&:selected {
+		color: $text;
+		@extend %selected_items;
+	}
+}
+
+textview {
+	// FIXME: we need to override background-color to ensure text rendering
+
+	text {
+		background-color: $fill;
+		selection {
+			&:focus,
+			& {
+				@extend %selected_items_primary;
+			}
+		}
+	}
+
+	border {
+		background-color: $base-alt;
+		color: $text-secondary; // FIXME: not working
+	}
+}
+
+rubberband {
+	border: 1px solid $primary;
+	background-color: rgba($primary, 0.3);
+}
+
+flowbox {
+	> rubberband {
+		@extend rubberband;
+	}
+
+	> flowboxchild {
+		padding: 4px;
+		border-radius: $corner-radius;
+
+		&:selected {
+			@extend %selected_items_color;
+		}
+	}
+}
+
+.content-view .tile {
+	&:selected {
+		background-color: transparent;
+	}
+}
+
+gridview {
+	border-radius: $menu-radius;
+
+	> rubberband {
+		@extend rubberband;
+	}
+
+	> child {
+		padding: $space-size / 2;
+		margin: $space-size / 2;
+
+		&:selected {
+			outline-color: $overlay-selected;
+
+			@extend %selected_items;
+		}
+	}
+}
+
+coverflow cover {
+	color: $text;
+	background-color: $base;
+	border: 1px solid black;
+}

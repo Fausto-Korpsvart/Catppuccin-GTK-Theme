@@ -1,0 +1,28 @@
+expander {
+	title > arrow {
+		transition: all $duration $ease-out;
+		min-width: 16px;
+		min-height: 16px;
+		-gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
+		-gtk-icon-transform: rotate(-90deg);
+
+		&:dir(rtl) {
+			-gtk-icon-transform: rotate(90deg);
+		}
+
+		&:checked {
+			-gtk-icon-transform: unset;
+		}
+
+		color: $text-secondary;
+
+		&:hover,
+		&:active {
+			color: $text;
+		}
+
+		&:disabled {
+			color: $text-secondary-disabled;
+		}
+	}
+}

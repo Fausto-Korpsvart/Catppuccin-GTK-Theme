@@ -1,0 +1,166 @@
+//
+// Chrome
+//
+
+%mac_window_button {
+	min-height: 16px;
+	min-width: 16px;
+	padding: 0;
+	margin: 16px 0;
+	color: transparent;
+
+	&.close {
+		background-color: $titlebutton-close;
+
+		&:hover {
+			background-color: $titlebutton-close;
+			color: gtkmix($white, $titlebutton-max, 75%);
+		}
+
+		&:active {
+			background-color: $titlebutton-close;
+			color: gtkmix($white, $titlebutton-max, 75%);
+		}
+
+		&:backdrop {
+			color: transparent;
+		}
+	}
+
+	&.minimize {
+		background-color: $titlebutton-min;
+
+		&:hover {
+			background-color: $titlebutton-min;
+			color: gtkmix($white, $titlebutton-max, 75%);
+		}
+
+		&:active {
+			background-color: $titlebutton-min;
+			color: gtkmix($white, $titlebutton-max, 75%);
+		}
+
+		&:backdrop {
+			color: transparent;
+		}
+	}
+
+	&.maximize {
+		background-color: $titlebutton-max;
+
+		&:hover {
+			background-color: $titlebutton-max;
+			color: gtkmix($white, $titlebutton-max, 75%);
+		}
+
+		&:active {
+			background-color: $titlebutton-max;
+			color: gtkmix($white, $titlebutton-max, 75%);
+		}
+
+		&:backdrop {
+			color: transparent;
+		}
+	}
+}
+
+%normal_window_button {
+	min-height: 16px;
+	min-width: 16px;
+	padding: 0;
+	margin: 16px 0;
+
+	&.minimize,
+	&.maximize,
+	&.close {
+		color: $text-secondary;
+		background-color: gtkalpha(currentColor, 0.1);
+
+		> image {
+			padding: 2px;
+			color: gtkalpha(currentColor, 0.5);
+		}
+
+		&:hover {
+			background-color: gtkalpha(currentColor, 0.15);
+			> image {
+				color: $text-secondary;
+			}
+		}
+
+		&:active {
+			background-color: gtkalpha(currentColor, 0.2);
+			> image {
+				color: $text-secondary;
+			}
+		}
+
+		&:backdrop {
+			background-color: gtkalpha(currentColor, 0.1);
+			color: $text-secondary;
+
+			&:hover {
+				background-color: gtkalpha(currentColor, 0.15);
+				color: $text-secondary;
+			}
+		}
+	}
+}
+
+%chrome_title_buttons {
+	min-height: 16px;
+	min-width: 16px;
+	padding: 2.5px;
+	margin: 16px -20px 16px 22px;
+}
+
+window.background.chromium {
+	box-shadow:
+		$shadow-z16,
+		0 0 36px transparent,
+		0 0 0 1px rgba($border-color, 0.15);
+
+	@if $border == 'true' {
+		box-shadow:
+			$shadow-z16,
+			0 0 0 2px $primary,
+			0 0 36px transparent;
+	}
+
+	&:backdrop {
+		box-shadow:
+			$shadow-z16,
+			0 0 36px transparent,
+			0 0 0 1px rgba($border-color, 0.15);
+		transition: $transition-shadow;
+
+		@if $border == 'true' {
+			box-shadow:
+				$shadow-z16,
+				0 0 0 2px $border-color,
+				0 0 36px transparent;
+		}
+	}
+
+	headerbar.header-bar.titlebar {
+		background-color: $titlebar;
+		color: $text;
+		border-radius: $window-radius 0 0;
+
+		&:backdrop {
+			box-shadow: none;
+			background-color: $titlebar-backdrop;
+			color: $titlebar-text-disabled;
+		}
+
+		button.titlebutton {
+			@if $window_button == 'mac' {
+				@extend %mac_window_button;
+				@extend %chrome_title_buttons;
+			} @else {
+				@extend %normal_window_button;
+				@extend %chrome_title_buttons;
+			}
+		}
+	}
+}

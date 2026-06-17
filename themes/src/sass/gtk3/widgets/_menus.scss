@@ -1,0 +1,183 @@
+/*********
+ * Menus *
+ *********/
+menubar,
+.menubar {
+	-gtkwidget-window-dragging: true;
+	padding: 0;
+	background-color: $titlebar;
+	color: $titlebar-text;
+	box-shadow: inset 0 -1px $border-color;
+
+	&:backdrop {
+		color: $titlebar-text-secondary;
+		background-color: $titlebar-backdrop;
+	}
+
+	.csd & {
+		transition: $transition;
+	}
+
+	> menuitem {
+		transition: none;
+		min-height: 20px;
+		padding: $space-size / 2 + 1px $space-size + 2px;
+		color: $titlebar-text-secondary;
+		border-radius: $corner-radius;
+
+		&:hover {
+			// Seems like it :hover even with keyboard focus
+			transition: none;
+			background-color: $overlay-checked;
+			color: $titlebar-text;
+		}
+
+		&:backdrop {
+			color: $titlebar-text-disabled;
+		}
+
+		&:disabled {
+			color: $titlebar-text-secondary-disabled;
+		}
+
+		label:disabled {
+			color: inherit;
+		} // to inherit the above color
+
+		// > window.background.csd.popup > decoration,
+		// > window.background.csd.popup > menu {
+		//   border-radius: 0 0 $menu-radius $menu-radius;
+		// }
+
+		> window.popup.background > menu {
+			menuitem {
+				transition: none;
+			}
+		}
+	}
+}
+
+// Needed to make the border-radius of menus work
+// otherwise the background bleeds out of the menu edges
+.background.popup {
+	background-color: transparent;
+}
+
+// .menu,
+// .context-menu,
+menu {
+	margin: $space-size; // See https://bugzilla.gnome.org/show_bug.cgi?id=591258
+	padding: $space-size;
+	background-color: $menu;
+	background-clip: border-box;
+	border-radius: $menu-radius;
+
+	.csd & {
+		border: none;
+		box-shadow: inset 0 0 0 1px highlight($surface);
+	}
+
+	@if $border == 'true' {
+		border: 2px solid $primary;
+	}
+
+	menuitem {
+		transition: background-color $duration $ease-out;
+		min-height: 20px;
+		min-width: 40px;
+		padding: ($menuitem-size - 20px) / 2 $space-size + 2px;
+		color: $text;
+		font: initial;
+		text-shadow: none;
+		border-radius: $corner-radius;
+
+		&:hover {
+			background-color: $overlay-hover;
+		}
+
+		&:active {
+			background-color: $overlay-active;
+		}
+
+		&:disabled {
+			color: $text-disabled;
+		}
+
+		accelerator {
+			color: $text-secondary;
+		}
+
+		&:disabled accelerator {
+			color: $text-secondary-disabled;
+		}
+
+		// submenu indicators
+		arrow {
+			min-height: 16px;
+			min-width: 16px;
+
+			&:dir(ltr) {
+				-gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
+				margin-left: 8px;
+			}
+
+			&:dir(rtl) {
+				-gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl');
+				margin-right: 8px;
+			}
+		}
+
+		// avoids labels color being overridden, see
+		// https://bugzilla.gnome.org/show_bug.cgi?id=767058
+		label {
+			&:dir(rtl),
+			&:dir(ltr) {
+				color: inherit;
+			}
+		}
+	}
+
+	.view:selected {
+		background-color: mix($text, $surface, 10%);
+	}
+
+	// overflow arrows
+	> arrow {
+		min-height: 16px;
+		min-width: 16px;
+		padding: 4px;
+		background-color: $surface;
+		color: $text-secondary;
+
+		&.top {
+			margin-top: 0;
+			// border-bottom: 1px solid $divider;
+			border-radius: $corner-radius;
+			-gtk-icon-source: -gtk-icontheme('pan-up-symbolic');
+		}
+
+		&.bottom {
+			margin-top: 8px;
+			margin-bottom: -12px;
+			// border-top: 1px solid $divider;
+			border-radius: $corner-radius;
+			-gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
+		}
+
+		&:hover {
+			background-image: image($overlay-hover);
+			color: $text;
+		}
+
+		&:disabled {
+			border-color: transparent;
+			background-color: transparent;
+			color: transparent;
+			// color: $text-secondary-disabled;
+		}
+	}
+
+	separator {
+		margin: 4px 0;
+	}
+}

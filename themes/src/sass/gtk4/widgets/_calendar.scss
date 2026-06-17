@@ -1,0 +1,65 @@
+/************
+ * Calendar *
+ ************/
+
+calendar {
+	padding: 0;
+	border: 1px solid $divider;
+	border-radius: $corner-radius;
+	color: $text;
+
+	&:disabled {
+		color: $text-disabled;
+	}
+
+	&:selected {
+		@extend %selected_items;
+
+		border-radius: $corner-radius;
+	}
+
+	> header {
+		padding: $space-size / 2;
+		border-bottom: 1px solid $divider;
+
+		> button {
+			min-height: $small-size;
+
+			@extend %button-flat-simple;
+		}
+	}
+
+	> grid {
+		margin: $space-size / 2;
+
+		> label {
+			border-radius: $corner-radius;
+			margin: 0;
+		}
+
+		> label.today {
+			@extend %selected_items_color;
+
+			&:selected {
+				box-shadow: none;
+				@extend %selected_items_primary;
+			}
+		}
+
+		> label:focus {
+			outline-style: none;
+		}
+
+		> label.day-number {
+			padding: $space-size;
+
+			&:selected {
+				@extend %selected_items;
+			}
+		}
+
+		> label.day-number.other-month {
+			color: gtkalpha(currentColor, 0.3);
+		}
+	}
+}

@@ -1,0 +1,76 @@
+/*********
+ * Emoji *
+ *********/
+
+popover.emoji-picker {
+	padding: 0;
+
+	> contents {
+		padding: 0;
+	}
+}
+
+.emoji-searchbar {
+	padding: $space-size;
+	border-spacing: $space-size;
+	border-bottom: 1px solid $divider;
+	background: none;
+
+	entry {
+		text {
+			background: none;
+			box-shadow: none;
+		}
+	}
+}
+
+.emoji-toolbar {
+	padding: 0;
+	border-spacing: $space-size / 2;
+	border-top: 1px solid $divider;
+	background: none;
+}
+
+button.emoji-section {
+	margin: 0;
+	padding: $space-size;
+	border-radius: $corner-radius;
+
+	&:checked {
+		color: $primary;
+	}
+}
+
+popover.emoji-picker emoji {
+	font-size: x-large;
+	padding: $space-size;
+	transition: $transition;
+	border-radius: $corner-radius;
+
+	&:focus,
+	&:hover {
+		background: $overlay-hover;
+	}
+}
+
+emoji-completion-row {
+	min-height: $menuitem-size;
+	padding: 0 $space-size * 2;
+
+	> box {
+		border-spacing: $space-size;
+		padding: 2px $space-size;
+	}
+
+	&:focus,
+	&:hover,
+	emoji:hover,
+	emoji:focus {
+		background-color: $overlay-hover;
+		color: $text;
+	}
+}
+
+popover.entry-completion > contents {
+	padding: 0;
+}

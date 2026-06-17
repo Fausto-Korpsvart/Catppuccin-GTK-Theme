@@ -1,0 +1,125 @@
+colorswatch {
+	// This widget is made of two boxes one on top of the other, the lower box is colorswatch {} the other one
+	// is colorswatch overlay {}, colorswatch has the programmatically set background, so most of the style is
+	// applied to the overlay box.
+
+	// base color corners rounding
+	// to avoid the artifacts caused by rounded corner anti-aliasing the base color
+	// sports a bigger radius.
+	// nth-child is needed by the custom color strip.
+
+	&.top {
+		border-top-left-radius: $corner-radius;
+		border-top-right-radius: $corner-radius;
+
+		overlay {
+			border-top-left-radius: $corner-radius;
+			border-top-right-radius: $corner-radius;
+		}
+	}
+
+	&.bottom {
+		border-bottom-left-radius: $corner-radius;
+		border-bottom-right-radius: $corner-radius;
+
+		overlay {
+			border-bottom-left-radius: $corner-radius;
+			border-bottom-right-radius: $corner-radius;
+		}
+	}
+
+	&.left,
+	&:first-child:not(.top) {
+		border-top-left-radius: $corner-radius;
+		border-bottom-left-radius: $corner-radius;
+
+		overlay {
+			border-top-left-radius: $corner-radius;
+			border-bottom-left-radius: $corner-radius;
+		}
+	}
+
+	&.right,
+	&:last-child:not(.bottom) {
+		border-top-right-radius: $corner-radius;
+		border-bottom-right-radius: $corner-radius;
+
+		overlay {
+			border-top-right-radius: $corner-radius;
+			border-bottom-right-radius: $corner-radius;
+		}
+	}
+
+	&.dark {
+		color: on(dark);
+	}
+
+	&.light {
+		color: on(light);
+	}
+
+	overlay {
+		transition: $transition-shadow;
+
+		&:hover {
+			box-shadow: 0 0 0 2px $primary;
+		}
+	}
+
+	&#add-color-button {
+		border-radius: $corner-radius 0 0 $corner-radius;
+
+		&:only-child {
+			border-radius: $corner-radius;
+		}
+
+		overlay {
+			background-color: $fill;
+
+			&:hover {
+				background-color: $divider;
+				box-shadow: none;
+			}
+
+			&:active {
+				background-color: $track;
+			}
+		}
+	}
+
+	&:disabled {
+		opacity: 0.5;
+
+		overlay {
+			box-shadow: none;
+		}
+	}
+
+	&#editor-color-sample {
+		border-radius: $menu-radius;
+
+		overlay {
+			border-radius: $menu-radius;
+		}
+
+		overlay:hover {
+			box-shadow: $shadow-z1;
+		}
+	}
+}
+
+// colorscale popup
+colorchooser .popover.osd {
+	transition: $transition-shadow;
+	border-radius: $corner-radius;
+	box-shadow:
+		$shadow-z4,
+		inset 0 1px highlight($surface);
+	background-color: $surface;
+
+	&:backdrop {
+		box-shadow:
+			$shadow-z2,
+			inset 0 1px highlight($surface);
+	}
+}

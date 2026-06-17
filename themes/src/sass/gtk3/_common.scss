@@ -1,0 +1,375 @@
+/***************
+ * Base States *
+ ***************/
+
+* {
+	background-clip: padding-box;
+
+	-gtktoolbutton-icon-spacing: 4;
+	-gtktextview-error-underline-color: $error;
+
+	-gtkscrolledwindow-scrollbar-spacing: 0;
+	-gtktoolitemgroup-expander-size: 11;
+
+	-gtkwidget-text-handle-width: 20;
+	-gtkwidget-text-handle-height: 20;
+
+	-gtkdialog-button-spacing: 6;
+	-gtkdialog-action-area-border: 4;
+	-gtkdialog-content-area-border: 4;
+
+	// We use the outline properties to signal the focus properties
+	// to the adwaita engine: using real CSS properties is faster,
+	// and we don't use any outlines for now.
+
+	outline-style: solid;
+	outline-width: 0;
+	outline-color: gtkalpha(currentColor, 0.15);
+	outline-offset: -4px;
+
+	-gtk-outline-radius: $corner-radius;
+	-gtk-secondary-caret-color: $primary;
+}
+
+.background {
+	background-color: $background;
+	color: $text;
+
+	&.csd {
+		// Set csd windows botttom border radius
+		border-radius: 0 0 $window-radius $window-radius;
+	}
+
+	&.maximized,
+	&.solid-csd {
+		// No radius when windows maximized
+		border-radius: 0;
+	}
+}
+
+*:disabled {
+	-gtk-icon-effect: dim;
+}
+
+.gtkstyle-fallback {
+	background-color: $titlebar;
+	color: $titlebar-text;
+
+	&:hover {
+		background-color: darken($titlebar, 5%);
+		color: $titlebar-text;
+	}
+
+	&:active {
+		background-color: darken($titlebar, 10%);
+		color: $titlebar-text;
+	}
+
+	&:disabled {
+		background-color: $titlebar-backdrop;
+		color: $titlebar-text-disabled;
+	}
+
+	&:selected {
+		background-color: $primary;
+		color: on($primary);
+	}
+}
+
+.view {
+	background-color: $base;
+	color: $text;
+
+	&:hover {
+		box-shadow: inset 0 0 0 9999px $overlay-hover;
+	}
+
+	&:disabled {
+		color: $text-disabled;
+	}
+
+	&:selected {
+		@extend %selected_items_primary;
+
+		&:hover {
+			box-shadow: none;
+		}
+	}
+
+	.background.csd &:selected {
+		@extend %selected_items;
+	}
+}
+
+widget.view {
+	// border-radius: $corner-radius;
+
+	&:selected {
+		@extend %selected_items_primary;
+	}
+}
+
+window.background.csd > stack.view {
+	border-radius: 0 0 $window-radius $window-radius;
+}
+
+textview {
+	// FIXME: we need to override background-color to ensure text rendering
+
+	text {
+		background-color: $base;
+
+		selection {
+			&:focus,
+			& {
+				@extend %selected_items_primary;
+			}
+		}
+	}
+
+	border {
+		background-color: $base-alt;
+		color: $text-secondary; // FIXME: not working
+	}
+}
+
+iconview {
+	&:hover,
+	&:selected {
+		border-radius: $corner-radius;
+	}
+}
+
+%rubberband,
+.rubberband,
+rubberband {
+	// border-radius: 3px;
+	border: 1px solid $primary;
+	background-color: rgba($primary, 0.3);
+}
+
+flowbox {
+	rubberband {
+		@extend %rubberband;
+	}
+
+	flowboxchild {
+		padding: $space-size / 2;
+		border-radius: $corner-radius;
+		color: $text;
+
+		&:selected {
+			@extend %selected_items_color;
+		}
+
+		button.osd.remove-button {
+			min-height: 28px;
+			min-width: 28px;
+			padding: 0;
+			margin: $space-size;
+		}
+	}
+}
+
+.content-view .tile {
+	&:selected {
+		background-color: transparent;
+	}
+}
+
+label {
+	caret-color: currentColor; // this shouldn't be needed.
+
+	&.separator {
+		color: $text-secondary;
+	}
+
+	selection {
+		@extend %selected_items_color;
+	}
+
+	&:disabled {
+		color: $text-disabled;
+
+		// selection { color: $text-disabled; }
+
+		headerbar &,
+		tab &,
+		button & {
+			color: inherit;
+		}
+	}
+
+	&.osd {
+		border-radius: $corner-radius;
+		background-color: $tooltip;
+		color: on($tooltip);
+	}
+}
+
+.dim-label {
+	color: $text-secondary;
+}
+
+assistant {
+	.sidebar {
+		padding: 4px 0;
+		// background-color: $base;
+		// border-top: 1px solid $divider;
+	}
+
+	// &.csd .sidebar { border-top-style: none; }
+
+	.sidebar label {
+		min-height: $medium-size;
+		padding: 0 12px;
+		color: $text-disabled;
+		font-weight: 500;
+
+		&.highlight {
+			color: $text;
+		}
+	}
+}
+
+:not(decoration):not(window):drop(active) {
+	// FIXME needs to be done widget by widget, this wildcard should really die
+	caret-color: $primary;
+}
+
+// %osd, .osd { opacity: 0.9; }
+
+/****************
+ * Placeholders *
+ ****************/
+
+%selected_items {
+	color: $text;
+	background-color: $overlay-checked;
+}
+
+%selected_items_color {
+	color: $primary;
+	background-color: rgba($primary, 0.2);
+}
+
+%selected_items_primary {
+	color: on($primary);
+	background-color: $primary;
+}
+
+%selected_items_indicator {
+	color: on($indicator);
+	background-color: $indicator;
+}
+
+%linked {
+	border-radius: 0;
+
+	&:first-child {
+		border-top-left-radius: $corner-radius;
+		border-bottom-left-radius: $corner-radius;
+	}
+
+	&:last-child {
+		border-top-right-radius: $corner-radius;
+		border-bottom-right-radius: $corner-radius;
+	}
+
+	&:only-child {
+		border-radius: $corner-radius;
+	}
+}
+
+%linked-vertical {
+	border-radius: 0;
+
+	&:first-child {
+		border-top-left-radius: $corner-radius;
+		border-top-right-radius: $corner-radius;
+	}
+
+	&:last-child {
+		border-bottom-left-radius: $corner-radius;
+		border-bottom-right-radius: $corner-radius;
+	}
+
+	&:only-child {
+		border-radius: $corner-radius;
+	}
+}
+
+%rubberband {
+	border: 1px solid $primary;
+	background-color: rgba($primary, 0.2);
+}
+
+%needs-attention {
+	animation: needs-attention $ripple-fade-in-duration $ease-out forwards;
+	background-repeat: no-repeat;
+	background-position: right 3px;
+	background-size: 6px 6px;
+
+	&:dir(rtl) {
+		background-position: left 3px;
+	}
+}
+
+%hide_separators {
+	-gtkseparator-horizontal-separator-height: 0;
+	-gtkseparator-vertical-separator-width: 0;
+	border-style: none;
+	background-color: transparent;
+	background-image: none;
+	min-width: 0;
+	min-height: 0;
+}
+
+%button-basic {
+	@include button(normal);
+
+	&:focus,
+	&:checked:focus {
+		@include button(focus);
+	}
+
+	&:hover {
+		@include button(hover);
+	}
+
+	&:active {
+		@include button(active);
+	}
+
+	&:disabled {
+		@include button(disabled);
+	}
+
+	&:checked {
+		@include button(checked);
+	}
+
+	&:checked:hover {
+		@include button(checked-hover);
+	}
+
+	&:checked:disabled {
+		@include button(checked-disabled);
+	}
+}
+
+%circular-button {
+	// The Bloody Circul Button
+	border-radius: $circular-radius;
+
+	label {
+		padding: 0;
+	}
+}
+
+%small-button {
+	min-height: $small-size;
+	min-width: $small-size;
+	padding: 0;
+	border-radius: $circular-radius;
+}

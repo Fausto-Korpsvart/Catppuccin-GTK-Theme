@@ -1,0 +1,120 @@
+/************
+ * Popovers *
+ ************/
+popover.background {
+	padding: 0;
+	background-color: $menu;
+	border-radius: $menu-radius;
+	box-shadow:
+		0 3px 6px 0 rgba(black, 0.15),
+		0 0 0 1px if($variant== 'light', rgba(black, 0.03), rgba(black, 0.65));
+	transition: $transition-shadow;
+
+	&,
+	.csd & {
+		@if $border == 'false' {
+			border: 1px
+				solid
+				if($variant== 'light', gtkalpha(black, 0.2), gtkmix(white, $menu, 8%));
+		} @else {
+			border: 2px solid $primary;
+		}
+	}
+
+	> stack {
+		margin: 0;
+	} // remove extra padding from menu style popovers
+
+	> toolbar {
+		margin: 0;
+	}
+
+	> list,
+	> .view,
+	> toolbar {
+		border-style: none;
+		box-shadow: none;
+		background-color: transparent;
+	}
+
+	> scrolledwindow > viewport.frame > list {
+		background-color: transparent;
+		padding: $space-size;
+
+		> row {
+			border-radius: $menuitem-radius;
+			padding: $space-size;
+		}
+	}
+
+	// FIXME: Use the popover color instead of transparent as a workaround for .view
+	.view:not(:selected),
+	toolbar {
+		background-color: $menu;
+	}
+
+	button,
+	entry,
+	combobox {
+		border-radius: $menuitem-radius;
+	}
+
+	.linked > button:not(.radio) {
+		border-radius: $menuitem-radius;
+
+		&:first-child {
+			border-radius: $menuitem-radius;
+		}
+		&:last-child {
+			border-radius: $menuitem-radius;
+		}
+		&:only-child {
+			border-radius: $menuitem-radius;
+		}
+	}
+
+	&.menu button,
+	button.model {
+		@extend %button-flat;
+
+		min-height: 32px;
+		padding: 0 8px;
+		border-radius: $menuitem-radius;
+
+		// &:checked { color: $primary; }
+	}
+
+	separator {
+		margin: $space-size / 2 0;
+		background-color: transparent;
+	}
+
+	list separator {
+		margin: 0;
+	}
+}
+
+// menu buttons
+modelbutton.flat,
+.menuitem.button.flat {
+	min-height: $menuitem-size;
+	padding: 0 8px;
+	border-radius: $menuitem-radius;
+	color: $text;
+
+	@extend %button-flat-simple;
+
+	&:selected {
+		@extend %selected_items;
+	}
+}
+
+modelbutton.flat arrow {
+	&.left {
+		-gtk-icon-source: -gtk-icontheme('pan-start-symbolic');
+	}
+
+	&.right {
+		-gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
+	}
+}

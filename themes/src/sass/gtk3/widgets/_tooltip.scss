@@ -1,0 +1,28 @@
+tooltip {
+	&.background {
+		// background-color needs to be set this way otherwise it gets drawn twice
+		// see https://bugzilla.gnome.org/show_bug.cgi?id=736155 for details.
+		background-color: $tooltip;
+		color: on($tooltip);
+		border-radius: $corner-radius;
+	}
+
+	&.background.csd {
+		border-radius: $corner-radius;
+		box-shadow: $shadow-z3;
+	}
+
+	// padding: 4px; /* not working */
+	box-shadow: none; // otherwise it gets inherited by windowframe.csd
+
+	// FIXME: we need a border or tooltips vanish on black background.
+	decoration {
+		background-color: transparent;
+	}
+
+	> box {
+		margin: -6px; // Remove hard-coded 6px margin
+		min-height: 24px;
+		padding: 4px 8px;
+	}
+}

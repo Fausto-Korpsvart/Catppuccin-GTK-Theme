@@ -1,0 +1,84 @@
+/****************
+ * File chooser *
+ ****************/
+
+filechooser {
+	paned {
+		> separator {
+			background: $border-color;
+		}
+	}
+
+	.dialog-action-box {
+		border: none;
+	}
+
+	#pathbarbox {
+		border: none;
+		background-color: transparent;
+
+		> stack > box > button {
+			// The new folder button
+			@extend %button-flat;
+			@extend %circular-button;
+		}
+	}
+
+	stack.view {
+		frame > border {
+			border: none;
+		}
+	}
+}
+
+filechooserbutton > button > box {
+	border-spacing: $space-size;
+}
+
+filechooserbutton:drop(active) {
+	box-shadow: none;
+	border-color: transparent;
+}
+
+filechooser child.activatable filelistcell.dim-label {
+	color: $text-secondary;
+}
+
+// dim the sidebar icons, see bug #786613 for details on this oddity
+placessidebar {
+	background-color: transparent;
+
+	> viewport.frame {
+		border-style: none;
+	}
+
+	> scrolledwindow {
+		@extend %sidebar_style;
+
+		> scrollbar {
+			@extend %sidebar_scrollbar;
+			@extend %round_scrollbar;
+		}
+	}
+
+	list.navigation-sidebar {
+		@extend %sidebar_list;
+	}
+}
+
+placesview {
+	.server-list-button > image {
+		transition: 200ms $ease-out;
+		-gtk-icon-transform: rotate(0turn);
+	}
+
+	.server-list-button:checked > image {
+		transition: 200ms $ease-out;
+		-gtk-icon-transform: rotate(-0.5turn);
+	}
+
+	// this selects the "connect to server" label
+	> actionbar > revealer > box > label {
+		border-spacing: $space-size;
+	}
+}

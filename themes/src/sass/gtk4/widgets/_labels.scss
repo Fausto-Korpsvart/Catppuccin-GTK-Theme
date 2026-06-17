@@ -1,0 +1,114 @@
+/**********
+ * Labels *
+ **********/
+
+label {
+	&.separator {
+		color: $text-secondary;
+	}
+
+	> selection {
+		@extend %selected_items_primary;
+	}
+
+	&:disabled {
+		opacity: 1;
+		color: $text-disabled;
+
+		// selection { color: $text-disabled; }
+
+		headerbar &,
+		tab &,
+		button & {
+			color: inherit;
+			opacity: 1;
+		}
+	}
+
+	&.osd {
+		border-radius: $corner-radius;
+		background-color: $tooltip;
+		color: on($tooltip);
+	}
+}
+
+%dim-label,
+.dim-label {
+	color: $text-secondary;
+	opacity: 1;
+}
+
+.accent {
+	color: $primary;
+}
+
+.success {
+	color: $success;
+}
+
+.warning {
+	color: $warning;
+}
+
+.error {
+	color: $error;
+}
+
+/**********************
+ * General Typography *
+ **********************/
+
+.large-title {
+	font-weight: 300;
+	font-size: 24pt;
+}
+
+.title {
+	&-1 {
+		font-weight: 800;
+		font-size: 20pt;
+	}
+
+	&-2 {
+		font-weight: 800;
+		font-size: 15pt;
+	}
+
+	&-3 {
+		font-weight: 700;
+		font-size: 15pt;
+	}
+
+	&-4 {
+		font-weight: 700;
+		font-size: 13pt;
+	}
+}
+
+.heading {
+	font-weight: 700;
+	font-size: 11pt;
+}
+
+.body {
+	font-weight: 400;
+	font-size: 11pt;
+}
+
+.caption {
+	font-weight: 400;
+	font-size: 9pt;
+
+	&-heading {
+		font-weight: 700;
+		font-size: 9pt;
+	}
+}
+
+/*******************
+ * Editable Labels *
+ *******************/
+
+editablelabel > stack > text {
+	@include entry(normal);
+}

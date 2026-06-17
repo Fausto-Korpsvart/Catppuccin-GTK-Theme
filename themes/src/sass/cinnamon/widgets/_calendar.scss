@@ -1,0 +1,281 @@
+// Calendar
+
+//calendar-background allows the date applet calendar to be themed separately from other applet menus*/
+.calendar-main-box {
+	margin: 0 0.8em;
+}
+
+.calendar {
+	// padding: $space-size $space-size * 2;
+	spacing-rows: 0px;
+	spacing-columns: 0px;
+}
+
+.calendar-today-home-button,
+.calendar-today-home-button-enabled {
+	margin: $space-size 0;
+	padding: $space-size;
+	@extend %flat_button;
+}
+
+.calendar-today-day-label {
+	font-size: 1.75em;
+	color: $text-secondary;
+	font-weight: bold;
+	text-align: center;
+	padding-bottom: 0.1em;
+}
+
+.calendar-today-date-label {
+	font-size: 1.1em;
+	color: $text-disabled;
+	font-weight: bold;
+	text-align: center;
+}
+
+.calendar-month-label {
+	color: $text;
+	font-weight: bold;
+	padding-bottom: 8px;
+	padding-top: 8px;
+}
+
+.calendar-change-month-back,
+.calendar-change-month-forward {
+	width: 2.4em;
+	height: 2.4em;
+	margin: 2px 0;
+	padding: 0;
+	border-radius: $circular-radius;
+
+	&:focus,
+	&:hover {
+		background-color: rgba($text, 0.1);
+	}
+	&:active {
+		background-color: rgba($text, 0.25);
+	}
+}
+
+//arrow back
+.calendar-change-month-back {
+	background-image: url('#{$asset_path}/calendar-arrow-left.svg');
+
+	&:rtl {
+		background-image: url('#{$asset_path}/calendar-arrow-right.svg');
+	}
+}
+
+//arrow forward
+.calendar-change-month-forward {
+	background-image: url('#{$asset_path}/calendar-arrow-right.svg');
+
+	&:rtl {
+		background-image: url('#{$asset_path}/calendar-arrow-left.svg');
+	}
+}
+
+.datemenu-date-label {
+	padding: 0.4em 1.75em;
+	font-weight: normal;
+	text-align: center;
+	font-size: 14px;
+	color: $text;
+	border-radius: $menuitem-radius;
+}
+
+.calendar-day-base {
+	text-align: center;
+	width: 2.4em;
+	height: 2.4em;
+	padding: 0;
+	margin: 2px;
+	border-radius: $circular-radius;
+
+	&:hover {
+		background-color: $fill;
+	}
+
+	&:active {
+		background-color: $divider;
+	}
+}
+
+.calendar-day-heading {
+	color: $text-secondary;
+	margin-top: 1em;
+}
+
+.calendar-day {
+	border-width: 0;
+	color: $text-secondary;
+}
+
+.calendar-day-top {
+	border-top-width: 0;
+}
+
+.calendar-day-left {
+	border-left-width: 0;
+}
+
+.calendar-nonwork-day {
+	color: $text;
+	background-color: transparent;
+	font-weight: bold;
+}
+
+.calendar-today,
+.calendar-today:active,
+.calendar-today:focus,
+.calendar-today:hover {
+	font-weight: bold;
+	color: on($primary);
+	background-color: $primary;
+	border-width: 0;
+}
+
+.calendar-other-month-day {
+	color: $text-secondary;
+	opacity: 1;
+}
+
+.calendar-week-number {
+	width: 2.4em;
+	height: 2.4em;
+	margin: 0;
+	color: $track;
+	font-weight: bold;
+	background-color: transparent;
+	border-radius: $circular-radius;
+
+	StLabel {
+		padding: 0;
+		margin-top: 3px;
+	}
+}
+
+.calendar-events-main-box {
+	height: 300px;
+	margin: $space-size + 2px 0.8em 0 0;
+	padding: $space-size + 2px;
+	min-width: 350px;
+	border: none;
+	border-radius: $menuitem-radius;
+	background-gradient-direction: vertical;
+	background-gradient-start: $fill;
+	background-gradient-end: $fill;
+	color: $text-secondary;
+}
+
+.calendar-events-no-events-button {
+	margin: $space-size 0;
+	padding: $space-size;
+	border-radius: $menuitem-radius;
+
+	&:hover {
+		background-gradient-direction: vertical;
+		background-gradient-start: $fill;
+		background-gradient-end: $fill;
+		box-shadow: none;
+	}
+}
+
+.calendar-events-no-events-icon {
+	color: $text-disabled;
+}
+
+.calendar-events-no-events-label {
+	font-size: 1.1em;
+	color: $text-disabled;
+	font-weight: bold;
+	text-align: center;
+	margin-top: $space-size * 1.5;
+}
+
+.calendar-events-date-label {
+	padding: $space-size / 2 0 $space-size * 2 $space-size / 2;
+	font-size: 1.1em;
+	color: $text-secondary;
+	font-weight: bold;
+	text-align: center;
+}
+
+.calendar-events-event-container {
+	padding: 2px;
+}
+
+.calendar-events-main-box .separator {
+	-margin-horizontal: 1em;
+	-gradient-height: 1px;
+	-gradient-start: $border-color;
+	-gradient-end: $border-color;
+}
+
+.calendar-event-button {
+	margin: $space-size 0 $space-size 0;
+	border-radius: $menuitem-radius;
+
+	&:hover {
+		background-gradient-direction: vertical;
+		background-gradient-start: $fill;
+		background-gradient-end: $fill;
+		box-shadow: none;
+	}
+}
+
+.calendar-event-color-strip {
+	width: 4px;
+	border-radius: 4px 0 0 4px;
+}
+
+.calendar-event-row-content {
+	margin: $space-size;
+}
+
+.calendar-event-time-past {
+	color: $text-secondary-disabled;
+	font-weight: bold;
+	text-align: left;
+	margin-bottom: 0.6em;
+}
+
+.calendar-event-time-present {
+	font-weight: bold;
+	text-align: left;
+	margin-bottom: 0.6em;
+}
+
+.calendar-event-time-present:all-day {
+	color: rgba($success, 0.6);
+}
+
+.calendar-event-time-future {
+	text-align: left;
+	margin-bottom: 0.6em;
+}
+
+.calendar-event-countdown {
+	color: $text-disabled;
+	font-weight: bold;
+	text-align: right;
+	margin-bottom: 0.6em;
+}
+
+.calendar-event-countdown:soon {
+	color: $white;
+}
+
+.calendar-event-countdown:imminent {
+	color: rgba($warning, 0.6);
+}
+
+.calendar-event-countdown:current {
+	color: rgba($success, 0.6);
+}
+
+.calendar-event-summary {
+	color: $text-disabled;
+	text-align: left;
+	width: 200px;
+}

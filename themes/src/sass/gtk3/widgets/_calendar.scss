@@ -1,0 +1,34 @@
+calendar {
+	padding: 1px;
+	border: 1px solid $divider;
+	color: $text;
+
+	&:disabled {
+		color: $text-disabled;
+	}
+
+	&:selected {
+		@extend %selected_items;
+
+		border-radius: $corner-radius + 1px;
+	}
+
+	&.header {
+		border-style: none none solid;
+		border-color: $divider;
+		border-radius: 0;
+	}
+
+	&.button {
+		@extend %button-flat-simple;
+	}
+
+	&.highlight {
+		color: $text-secondary;
+		font-weight: 500;
+	}
+
+	&:indeterminate {
+		color: $text-secondary-disabled;
+	}
+}

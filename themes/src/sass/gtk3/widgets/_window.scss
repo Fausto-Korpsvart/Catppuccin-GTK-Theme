@@ -1,0 +1,313 @@
+decoration {
+	transition: none;
+	border-radius: $window-radius $window-radius 0 0;
+	margin: 10px;
+
+	@if $border == 'true' {
+		box-shadow:
+			0 0 0 2px $primary,
+			$shadow-z16;
+	} @else {
+		box-shadow:
+			0 0 0 1px $window-border,
+			$shadow-z16;
+
+		@if $variant == 'dark' {
+			.background.csd & {
+				border: 1px solid highlight($background);
+				background-clip: border-box;
+				background-color: $background;
+			}
+		}
+	}
+
+	&:backdrop {
+		transition: $transition-shadow;
+		margin: 10px;
+
+		@if $border == 'true' {
+			box-shadow:
+				0 0 0 2px $primary,
+				$shadow-z16;
+		} @else {
+			box-shadow:
+				0 0 0 1px $window-border,
+				$shadow-z16;
+		}
+	}
+
+	.tiled &,
+	.tiled-top &,
+	.tiled-right &,
+	.tiled-bottom &,
+	.tiled-left & {
+		border-radius: 0;
+	}
+
+	.maximized &,
+	.fullscreen & {
+		border-radius: 0;
+		box-shadow: none;
+	}
+
+	.popup & {
+		box-shadow: none;
+		border: none;
+	}
+
+	// server-side decorations as used by mutter
+	.ssd & {
+		@if $border == 'true' {
+			border: none;
+			border-radius: $window-radius $window-radius 0 0;
+			box-shadow:
+				0 0 0 2px $primary,
+				0 3px 3px rgba(0, 0, 0, 0.16);
+		} @else {
+			box-shadow: 0 0 0 1px $window-border;
+		}
+
+		&:backdrop {
+			@if $border == 'true' {
+				border: none;
+				border-radius: $window-radius $window-radius 0 0;
+
+				box-shadow:
+					0 0 0 2px if($variant == 'light', $grey-450, $grey-750),
+					0 3px 3px rgba(0, 0, 0, 0.16);
+			} @else {
+				box-shadow: 0 0 0 1px $window-border;
+			}
+		}
+	}
+
+	.metacity & {
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+		border: none;
+	}
+
+	.csd.popup & {
+		border-radius: $menu-radius;
+		border: none;
+		margin: 20px;
+
+		@if $border == 'true' {
+			box-shadow:
+				0 0 0 2px $primary,
+				$shadow-z4;
+		} @else {
+			box-shadow:
+				0 0 0 1px $window-border,
+				$shadow-z5;
+		}
+	}
+
+	tooltip.csd & {
+		border-radius: $corner-radius;
+		box-shadow: none;
+		border: none;
+	}
+
+	messagedialog.background.csd & {
+		border-radius: $window-radius;
+
+		@if $variant == 'dark' {
+			border: 1px solid highlight($surface);
+			background-color: $surface;
+			background-clip: border-box;
+		}
+	}
+
+	.solid-csd & {
+		margin: 0;
+		padding: 2px;
+		border-radius: 0;
+		box-shadow: none;
+		background-color: $titlebar;
+		border: 1px solid $solid-border;
+
+		&:backdrop {
+			background-color: $titlebar-backdrop;
+		}
+	}
+}
+
+// Windows button
+
+%mac_window_button {
+	min-height: 16px;
+	min-width: 16px;
+	padding: 0;
+	margin: 0 $space-size - 6px;
+
+	&.minimize,
+	&.maximize,
+	&.close {
+		color: transparent;
+
+		image {
+			padding: 0;
+		}
+
+		&:hover {
+			box-shadow: none;
+		}
+
+		&:active {
+			box-shadow: inset 0 0 0 9999px
+				rgba(black, if($topbar == 'dark', 0.25, 0.12));
+		}
+
+		&:hover,
+		&:active {
+			color: $white;
+			font-weight: bold;
+		}
+
+		&:backdrop {
+			background-color: $titlebar-track;
+
+			&:hover,
+			&:active {
+				color: $titlebar-text-disabled;
+			}
+		}
+	}
+
+	&.minimize {
+		// Window minimize button
+		background-color: $titlebutton-min;
+
+		&:active {
+			background-color: mix($titlebar-text, $titlebutton-min, 25%);
+		}
+	}
+
+	&.maximize {
+		// Window maximize button
+		background-color: $titlebutton-max;
+
+		&:active {
+			background-color: mix($titlebar-text, $titlebutton-max, 25%);
+		}
+	}
+
+	&.close {
+		// Window close button
+		background-color: $titlebutton-close;
+
+		&:active {
+			background-color: mix($titlebar-text, $titlebutton-close, 25%);
+		}
+	}
+}
+
+%normal_window_button {
+	min-height: 16px;
+	min-width: 16px;
+	/* min-height: 22px; */
+	/* min-width: 22px; */
+	padding: 0;
+	margin: 0 $space-size - 6px;
+
+	&.minimize,
+	&.maximize,
+	&.close {
+		background-color: if($topbar == 'light', $grey-250, $titlebar-divider);
+		color: $titlebar-text-secondary;
+
+		image {
+			padding: 0;
+			background: none;
+			box-shadow: none;
+		}
+
+		&:hover {
+			color: $titlebar-text;
+			background-color: gtkalpha(currentColor, 0.15);
+			box-shadow:
+				0 1px 3px rgba(black, 0.1),
+				inset 0 1px highlight($titlebar);
+		}
+
+		&:active {
+			color: $titlebar-text;
+			background-color: gtkalpha(currentColor, 0.2);
+		}
+
+		&:backdrop {
+			color: transparent;
+
+			&:hover {
+				color: $titlebar-text;
+				// background-color: gtkalpha(currentColor, 0.15);
+			}
+		}
+	}
+}
+
+%firefox_window_button {
+	&.minimize,
+	&.maximize,
+	&.close {
+		background-repeat: no-repeat;
+		background-size: 16px 16px;
+		background-position: center;
+
+		&,
+		&:hover,
+		&:active {
+			box-shadow: none;
+			color: transparent;
+			animation: none;
+			transition: $transition;
+		}
+	}
+
+	&.minimize {
+		// Window minimize button
+		&:hover,
+		&:active {
+			background-image: url('assets/scalable/minimize.svg');
+		}
+	}
+
+	&.maximize {
+		// Window maximize button
+		&:hover,
+		&:active {
+			background-image: url('assets/scalable/maximize.svg');
+		}
+	}
+
+	&.close {
+		// Window close button
+		&:hover,
+		&:active {
+			background-image: url('assets/scalable/close.svg');
+		}
+	}
+}
+
+button.titlebutton:not(.suggested-action):not(.destructive-action) {
+	@extend %circular-button;
+
+	@if $window_button == 'mac' {
+		@extend %mac_window_button;
+		.background.csd headerbar.titlebar.default-decoration & {
+			@extend %firefox_window_button;
+		}
+
+		.background.csd.maximized headerbar.titlebar.default-decoration &.maximize,
+		.background.csd.fullscreen headerbar.titlebar.default-decoration &.maximize,
+		.background.csd.tiled headerbar.titlebar.default-decoration &.maximize {
+			&:hover,
+			&:active {
+				background-image: url('assets/scalable/unmaximize.svg');
+			}
+		}
+	} @else {
+		@extend %normal_window_button;
+	}
+}

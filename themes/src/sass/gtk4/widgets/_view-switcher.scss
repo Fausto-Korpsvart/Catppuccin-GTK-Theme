@@ -1,0 +1,219 @@
+/****************
+ * ViewSwitcher *
+ ****************/
+
+viewswitcher {
+	min-height: 0;
+	padding: $space-size / 2;
+	// margin: $space-size 0;
+	border-radius: $modal-radius + $space-size / 2;
+	background-color: $fill;
+	border: none;
+
+	// NOTE: butons styles are defined in %titlebar-button on _header-bar
+
+	&.wide {
+		margin-top: $space-size;
+		margin-bottom: $space-size;
+
+		button.toggle {
+			margin: 0;
+			border-radius: $modal-radius;
+		}
+	}
+
+	&.narrow button.toggle {
+		border-radius: 0;
+		margin: 0;
+
+		&:focus-within,
+		&:focus {
+			box-shadow: none;
+		}
+	}
+
+	button.toggle {
+		font-weight: bold;
+		padding: 0;
+
+		> stack > box {
+			&.narrow {
+				font-size: 0.75rem;
+				padding-top: $space-size;
+				padding-bottom: $space-size - 2px;
+				border-spacing: $space-size - 2px;
+
+				> stack > label {
+					padding-left: $space-size;
+					padding-right: $space-size;
+				}
+			}
+
+			&.wide {
+				padding: 2px $space-size * 2;
+				border-spacing: $space-size;
+			}
+		}
+	}
+}
+
+/****************
+ * Stackswitcher *
+ ****************/
+
+stackswitcher {
+	min-height: 0;
+	padding: $space-size / 2;
+	// margin: $space-size 0;
+	border-radius: $modal-radius + $space-size / 2;
+	background-color: $fill;
+	border: none;
+
+	&.linked:not(.vertical)
+		> button:not(.suggested-action):not(.destructive-action) {
+		margin: 0 2px;
+		background-color: transparent;
+		border-radius: $modal-radius;
+		padding: ($medium-size - 24px - $space-size) / 2 ($medium-size - 16px) / 2;
+
+		&.text-button {
+			min-width: 100px;
+		}
+
+		&:focus:not(:hover):not(:checked) {
+			box-shadow: none;
+		}
+
+		&:hover {
+			background-color: $primary;
+			color: on($primary);
+		}
+
+		&:active {
+			@include button(active);
+		}
+
+		&:checked {
+			transition:
+				$transition,
+				border-image $ripple-fade-in-duration $ease-out,
+				background-size 0ms,
+				background-image 0ms,
+				background-color 0ms;
+			background-color: $primary;
+			color: on($titlebar-indicator);
+			font-weight: bold;
+			box-shadow: 0 1px 3px rgba(black, 0.1);
+		}
+	}
+
+	button.text-button {
+		min-width: 100px;
+	} // FIXME aggregate with buttons
+
+	button.circular,
+	button.text-button.circular {
+		// FIXME aggregate with buttons
+		min-width: $medium-size;
+		min-height: $medium-size;
+		padding: 0;
+	}
+}
+
+/**********************
+ * AdwViewSwitcherBar *
+ **********************/
+
+viewswitcherbar actionbar > revealer > box {
+	padding: 0;
+
+	viewswitcher.narrow button.toggle {
+		border-radius: $corner-radius;
+		margin: $space-size / 2 0;
+
+		> stack > box {
+			&.narrow {
+				padding-top: $space-size / 2 + 2px;
+				padding-bottom: $space-size / 2 - 2px;
+				border-spacing: 0;
+			}
+		}
+	}
+}
+
+/************************
+ * AdwViewSwitcherTitle *
+ ************************/
+
+viewswitchertitle {
+	margin-top: 0;
+	margin-bottom: 0;
+
+	viewswitcher {
+		margin-left: $space-size * 2;
+		margin-right: $space-size * 2;
+
+		&.narrow {
+			margin-top: 0;
+			margin-bottom: 0;
+
+			button.toggle {
+				> stack > box {
+					&.narrow {
+						padding-top: 0;
+						padding-bottom: 0;
+						border-spacing: 0;
+					}
+				}
+			}
+		}
+
+		&.wide {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+	}
+
+	windowtitle {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+}
+
+/*******************
+ * AdwIndicatorBin *
+ *******************/
+
+indicatorbin {
+	> indicator,
+	> mask {
+		min-width: $space-size;
+		min-height: $space-size;
+		border-radius: $circular-radius;
+	}
+
+	> indicator {
+		margin: 1px;
+		background-color: gtkalpha(currentColor, 0.4);
+
+		> label {
+			font-size: 0.6rem;
+			font-weight: bold;
+			padding: 1px 4px;
+			color: $white;
+		}
+	}
+
+	> mask {
+		padding: 1px;
+		background: black;
+	}
+
+	&.needs-attention > indicator {
+		background-color: $primary;
+
+		> label {
+			color: on($primary);
+		}
+	}
+}

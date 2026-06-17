@@ -1,0 +1,48 @@
+%dialog_action_button {
+	border-radius: $modal-radius;
+	min-height: $menuitem-size;
+	padding: $space-size $space-size * 2;
+	margin: 0;
+	border: none;
+}
+
+/****************
+ * Print dialog *
+*****************/
+
+window.dialog.print {
+	drawing {
+		color: $text;
+		background: none;
+		border: none;
+		padding: 0;
+
+		paper {
+			padding: 0;
+			border: 1px solid $divider;
+			background-color: $base;
+			color: $text;
+		}
+	}
+
+	.dialog-action-box {
+		margin: 12px;
+	}
+}
+
+/******************
+ * GtkAboutDialog *
+ ******************/
+
+window.aboutdialog {
+	&.background.csd {
+		scrolledwindow.frame {
+			&,
+			> viewport.view,
+			> textview.view,
+			> textview.view > text {
+				border-radius: $corner-radius;
+			}
+		}
+	}
+}

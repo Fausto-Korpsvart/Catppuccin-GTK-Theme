@@ -4,13 +4,13 @@
 	background-color: $popover;
 	border-radius: $modal_radius;
 	border: none;
-	box-shadow: inset 0 0.5px highlight($popover);
 
-	@if $float == 'false' {
-		border: 1px solid $window-border;
-		box-shadow: inset 0 0 0 1px highlight($popover);
-	} @else {
-		border: 2px solid $primary;
+	@if $float == 'true' {
+		box-shadow: inset 0 0.5px highlight($popover);
+
+		@if $panel_border == 'true' {
+			border: 2px solid $indicator;
+		}
 	}
 }
 
@@ -232,7 +232,7 @@
 
 		// styled similar to switcher-popup
 		.audio-selection-device {
-			border: 1px solid $border;
+			border: 1px solid $border-color;
 			border-radius: $base_radius;
 			&:hover,
 			&:focus {

@@ -1,0 +1,182 @@
+$appmenu_small_padding: 5px;
+$appmenu_padding: 10px;
+$appmenu_large_padding: 15px;
+
+%appmenu_button {
+	padding: $space-size;
+	spacing: $space-size;
+	border-radius: $menu-radius;
+}
+
+.appmenu {
+	// this can be used to color the entire menu background but we aren't using it here
+	&-background {
+		// using this to override the default padding on menus so widgets can span edge
+		// to edge. The side effect is that some of our internal container widgets
+		// will need to have a border-radius added to them or the corners will poke out
+		// the edges of the menu.
+		.popup-menu-content {
+			padding: 0;
+		}
+	}
+
+	&-main-box {
+		background-color: if($variant == 'light', $background, $black);
+		border-radius: $menu-radius;
+		spacing: $appmenu_padding;
+	}
+
+	&-right-box {
+		spacing: $appmenu_small_padding;
+		padding: $appmenu_padding $appmenu_padding;
+	}
+
+	&-categories-applications-box {
+		spacing: $appmenu_large_padding;
+
+		&:top {
+			// Extra padding at the top of the categories/apps
+			// when the search box is at the bottom
+			padding-top: $appmenu_small_padding;
+		}
+	}
+
+	&-applications-box {
+		// Extra gap between the highlighted app and the scroll handle
+		padding-right: $appmenu_small_padding;
+	}
+
+	&-search-box {
+		spacing: $appmenu_padding;
+	}
+
+	&-sidebar {
+		padding: $appmenu_padding 0px;
+		background-color: $base;
+		border-radius: $menu-radius 0 0 $menu-radius;
+		border-right-width: 1px;
+		border-color: $base;
+
+		&-user-box {
+		}
+
+		.appmenu-system-button {
+			border-radius: $menu-radius;
+			background-color: lighten($base, 10%);
+			&-lock:hover {
+				background-color: lighten($primary, 15%);
+				color: on($primary);
+			}
+			&-logout:hover {
+				background-color: lighten($primary, 15%);
+				color: on($primary);
+			}
+			&-shutdown {
+				background-color: $destructive;
+				color: on($primary);
+			}
+			&-shutdown:hover {
+				background-color: lighten($destructive, 5%);
+				color: $black;
+			}
+		}
+	}
+
+	&-system-box {
+		spacing: $appmenu_padding;
+	}
+
+	&-sidebar-button {
+		@extend %appmenu_button;
+
+		padding: 3px $space-size 3px $space-size;
+		margin: 0 $appmenu_padding 0 $appmenu_padding;
+
+		&:hover {
+			background-color: $primary;
+			color: if($variant == 'light', $white, $black);
+			border-color: $surface;
+		}
+	}
+
+	&-system-button {
+		padding: $space-size * 1.4;
+		border: 1px solid $base;
+		border-radius: $menu-radius;
+		background-color: lighten($base, 10%);
+		&-shutdown {
+			background-color: $destructive;
+		}
+		&-lock:hover {
+			background-color: lighten($base, 15%);
+		}
+		&-logout:hover {
+			background-color: lighten($base, 15%);
+		}
+		&-shutdown:hover {
+			background-color: $destructive;
+		}
+	}
+
+	&-application-button {
+		@extend %appmenu_button;
+
+		&-label {
+			padding: 0;
+		}
+		&-description {
+			color: on($primary);
+		}
+
+		&:highlighted {
+			font-weight: bold;
+		}
+
+		&-selected {
+			@extend %appmenu_button;
+			background-color: $primary;
+			color: on($primary);
+
+			&:highlighted {
+				font-weight: bold;
+			}
+		}
+	}
+
+	&-category-button {
+		@extend %appmenu_button;
+
+		&-label {
+			padding: 0;
+		}
+
+		&:hover {
+			background-color: $surface;
+		}
+
+		&-selected {
+			@extend %appmenu_button;
+
+			background-color: $primary;
+			color: if($variant == 'light', $white, $black);
+		}
+
+		&-greyed {
+			@extend %appmenu_button;
+			color: $text-secondary;
+			font-style: italic;
+
+			StIcon {
+				opacity: 0.5;
+			}
+		}
+	}
+
+	// &-search-entry-icon {
+	//   icon-size: $scalable_icon_size;
+	// }
+}
+
+#appmenu-search-entry {
+	@extend %entry;
+}

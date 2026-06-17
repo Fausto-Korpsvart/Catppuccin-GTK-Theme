@@ -1,0 +1,19 @@
+separator {
+	min-width: 0;
+	min-height: 0;
+	background-color: transparent;
+
+	//  &.vertical {
+	//    margin: 12px 0;
+	//  }
+
+	//  &.horizontal {
+	//    margin: 0 12px;
+	//  }
+}
+
+%hide_separators {
+	min-width: 0;
+	min-height: 0;
+	background-color: transparent;
+}

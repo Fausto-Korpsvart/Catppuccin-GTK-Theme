@@ -1,0 +1,42 @@
+/************
+ * Pathbars *
+ ************/
+%pathbar_button,
+.path-bar.linked:not(.vertical) > button {
+	padding-left: ($medium-size - 24px) / 2;
+	padding-right: ($medium-size - 24px) / 2;
+	border-radius: $corner-radius / 2;
+	margin-left: 1px;
+	margin-right: 1px;
+	background-color: $overlay-focus;
+
+	&:disabled {
+		background-color: $overlay-normal;
+	}
+
+	&:first-child {
+		border-top-left-radius: $corner-radius;
+		border-bottom-left-radius: $corner-radius;
+	}
+
+	&:last-child {
+		border-top-right-radius: $corner-radius;
+		border-bottom-right-radius: $corner-radius;
+	}
+
+	&:checked {
+		background-color: $overlay-focus-hover;
+		color: $text;
+	}
+
+	label,
+	image {
+		margin-left: $space-size / 2;
+		margin-right: $space-size / 2;
+	}
+
+	&.slider-button {
+		padding-left: ($small-size - 16px) / 2;
+		padding-right: ($small-size - 16px) / 2;
+	}
+}

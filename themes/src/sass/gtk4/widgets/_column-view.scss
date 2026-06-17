@@ -1,0 +1,108 @@
+columnview {
+	// FIXME: box-shadow, background-color and background-image are not available here.
+	&:drop(active) {
+		box-shadow: none;
+
+		&.after {
+			border-top-style: none;
+		}
+
+		&.before {
+			border-bottom-style: none;
+		}
+	}
+
+	> header {
+		> button {
+			// @extend %row_activatable;
+
+			padding: 3px 6px;
+			border-style: none solid solid none;
+			border-width: 0 1px 0 0;
+			border-color: transparent;
+			border-radius: $modal-radius;
+			background-clip: border-box;
+
+			box-shadow: none;
+			line-height: 100%;
+			border-left: 8px solid transparent;
+			margin: 10px 0 0 0;
+
+			&:not(:focus):not(:hover):not(:active) {
+				color: $text-secondary;
+			}
+
+			&,
+			&:disabled {
+				background-color: transparent;
+			}
+
+			&:last-child {
+				border-right-style: none;
+			}
+		}
+	}
+
+	button.dnd,
+	header.button.dnd {
+		// for treeview-like derive widgets
+		padding: 2px 6px;
+		border-style: none solid solid;
+		border-width: 1px;
+		border-color: $divider;
+		border-radius: 0;
+		box-shadow: none;
+		background-color: $base;
+		background-clip: border-box;
+		color: $primary;
+	}
+
+	acceleditor > label {
+		background-color: $primary;
+	} // see tests/testaccel to test
+	// move padding to child cells
+	> listview > row {
+		padding: 0;
+
+		// align horizontal sizing with header buttons
+		> cell {
+			padding: $space-size + 2px $space-size;
+
+			&:not(:first-child) {
+				border-left: 1px solid transparent;
+			}
+		}
+	}
+
+	// make column separators visible when :show-column-separators is true
+	&.column-separators > listview > row > cell {
+		border-left-color: $border-color;
+	}
+
+	// shrink vertically for .data-table
+	&.data-table > listview > row > cell {
+		padding-top: 2px;
+		padding-bottom: 2px;
+	}
+}
+
+treeexpander {
+	border-spacing: $space-size;
+}
+
+columnview {
+	row:not(:selected) cell editablelabel {
+		&:not(.editing):focus-within {
+			outline: 2px solid $overlay-selected;
+		}
+
+		&.editing:focus-within {
+			outline: 2px solid $primary;
+		}
+
+		&.editing text selection {
+			color: on($primary);
+			background-color: $primary;
+		}
+	}
+}

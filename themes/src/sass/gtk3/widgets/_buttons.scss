@@ -1,0 +1,408 @@
+/***********
+ * Buttons *
+ ***********/
+// stuff for .needs-attention
+@keyframes needs-attention {
+	from {
+		background-image: -gtk-gradient(
+			radial,
+			center center,
+			0,
+			center center,
+			0.001,
+			to($primary),
+			to(transparent)
+		);
+	}
+
+	to {
+		background-image: -gtk-gradient(
+			radial,
+			center center,
+			0,
+			center center,
+			0.5,
+			to($primary),
+			to(transparent)
+		);
+	}
+}
+
+%button-on-dark {
+	color: on(dark, secondary);
+
+	&:focus,
+	&:hover,
+	&:active,
+	&:checked {
+		color: on(dark);
+	}
+	&:disabled {
+		color: on(dark, secondary-disabled);
+	}
+	&:checked:disabled {
+		color: on(dark, disabled);
+	}
+}
+
+%button-on-indicator {
+	background-color: $base;
+	color: $text;
+
+	&:checked,
+	&:checked:hover {
+		background-color: on($indicator);
+		color: $indicator;
+	}
+}
+
+%flat-button-on-indicator {
+	color: on($indicator, secondary);
+
+	&:hover,
+	&:active,
+	&:focus {
+		color: on($indicator);
+	}
+
+	&:checked,
+	&:checked:hover {
+		background-color: on($indicator);
+		color: $indicator;
+	}
+
+	&:disabled {
+		color: on($indicator, secondary-disabled);
+	}
+}
+
+%button-basic {
+	@include button(normal);
+
+	&:focus,
+	&:checked:focus {
+		@include button(focus);
+	}
+
+	&:hover {
+		@include button(hover);
+	}
+
+	&:active {
+		@include button(active);
+	}
+
+	&:disabled {
+		@include button(disabled);
+	}
+
+	&:checked {
+		@include button(checked);
+	}
+
+	&:checked:hover {
+		@include button(checked-hover);
+	}
+
+	&:checked:disabled {
+		@include button(checked-disabled);
+	}
+}
+
+%circular-button {
+	// The Bloody Circul Button
+	border-radius: $circular-radius;
+
+	label {
+		padding: 0;
+	}
+}
+
+%small-button {
+	min-height: $small-size;
+	min-width: $small-size;
+	padding: 0;
+	border-radius: $circular-radius;
+}
+
+button {
+	min-height: 24px;
+	min-width: 16px;
+	padding: ($medium-size - 24px) / 2 ($medium-size - 16px) / 2;
+	border-radius: $corner-radius;
+	font-weight: 500;
+	@extend %button-basic;
+
+	&:drop(active) {
+		@include button(hover);
+	}
+
+	@at-root %button-flat,
+		&.flat {
+		@at-root %button-flat-simple,
+			& {
+			@include button(flat-normal);
+
+			&:focus {
+				@include button(flat-focus);
+			}
+
+			&:hover {
+				@include button(flat-hover);
+			}
+
+			&:active {
+				@include button(flat-active);
+			}
+
+			&:disabled {
+				@include button(flat-disabled);
+			}
+		}
+
+		&:checked,
+		&:checked:hover {
+			@include button(flat-checked);
+		}
+
+		&:checked:disabled {
+			@include button(flat-checked-disabled);
+		}
+	}
+
+	&.text-button {
+		min-width: 32px;
+		padding-left: $space-size * 2 + 4px;
+		padding-right: $space-size * 2 + 4px;
+	}
+
+	&.image-button {
+		min-width: 24px;
+		padding: ($medium-size - 24px) / 2;
+	}
+
+	// NOTE: Some image-only buttons use this as well
+	&.text-button.image-button {
+		min-width: 24px;
+		padding: ($medium-size - 24px) / 2;
+		border-radius: $corner-radius;
+
+		label {
+			&:first-child {
+				margin-left: 16px - ($medium-size - 24px) / 2;
+			}
+
+			&:last-child {
+				margin-right: 16px - ($medium-size - 24px) / 2;
+			}
+		}
+
+		&.flat label {
+			&:first-child {
+				margin-left: 12px - ($medium-size - 24px) / 2;
+			}
+
+			&:last-child {
+				margin-right: 12px - ($medium-size - 24px) / 2;
+			}
+		}
+
+		image:not(:only-child) {
+			margin: 0 (24px - 16px) / 2;
+		}
+	}
+
+	.linked:not(.vertical) > & {
+		@extend %linked;
+
+		// &:focus { box-shadow: none; }
+	}
+
+	.linked.vertical > & {
+		@extend %linked-vertical;
+
+		// &:focus { box-shadow: none; }
+	}
+
+	.linked:not(.vertical) > &.flat,
+	.linked.vertical > &.flat {
+		&:not(:only-child) {
+			// specificity bump
+			border-radius: $corner-radius;
+
+			// &.image-button:not(.text-button) { border-radius: $circular-radius; }
+		}
+
+		// &:focus { box-shadow: inset 0 0 0 9999px $overlay-focus; }
+	}
+
+	// big standalone buttons like in Documents pager
+	&.osd {
+		min-width: $small-size;
+		min-width: $small-size;
+		padding: ($medium-size - 24px) / 2;
+		background-color: $osd;
+		color: on($osd);
+
+		&:focus {
+			box-shadow: none;
+		}
+
+		&:hover {
+			background-color: mix($white, $osd, 15%);
+			color: on($osd);
+		}
+
+		&:active {
+			background-color: mix($white, $osd, 25%);
+			color: on($osd);
+		}
+
+		&:disabled {
+			opacity: 0;
+		}
+
+		&.image-button,
+		&.circular {
+			padding: ($large-size - 24px) / 2;
+
+			> image {
+				padding: 0;
+			}
+		}
+	}
+
+	// overlay / OSD style
+	// .osd & { }
+
+	// Suggested and Destructive Action buttons
+	@each $b_type, $b_color in (suggested-action, $suggested),
+		(destructive-action, $destructive)
+	{
+		&.#{$b_type} {
+			background-color: $b_color;
+			color: on($b_color);
+			box-shadow: none;
+
+			&:disabled {
+				@include button(disabled);
+			}
+
+			&:hover {
+				box-shadow:
+					inset 0 0 0 9999px transparent,
+					0 2px (4px * 0.6) -1px rgba($b_color, 0.2),
+					0 4px (5px * 0.6) 0 rgba($b_color, 0.14),
+					0 1px (10px * 0.6) 0 rgba($b_color, 0.12);
+			}
+
+			&:checked {
+				background-color: mix(on($b_color), $b_color, percentage(0.3));
+			}
+
+			&:checked:hover {
+				box-shadow:
+					inset 0 0 0 9999px transparent,
+					0 3px 3px -3px rgba($b_color, 0.3),
+					0 2px 3px -1px rgba($b_color, 0.24),
+					0 2px 5px 0 rgba($b_color, 0.12);
+			}
+
+			&:focus {
+				box-shadow: 0 0 0 2px rgba($b_color, 0.35);
+			}
+
+			&.flat {
+				background-color: transparent;
+				color: $b_color;
+
+				&:disabled {
+					@include button(flat-disabled);
+				}
+
+				&:checked {
+					background-color: rgba($b_color, 0.3);
+				}
+			}
+		}
+	}
+
+	.stack-switcher > & {
+		// to position the needs attention dot, padding is added to the button
+		// child, a label needs just lateral padding while an icon needs vertical
+		// padding added too.
+
+		> label {
+			margin: 0 -6px;
+			padding: 0 6px;
+		}
+
+		> image {
+			margin: -3px -6px;
+			padding: 3px 6px;
+		}
+
+		&.needs-attention {
+			> label,
+			> image {
+				@extend %needs-attention;
+			}
+
+			&:checked {
+				> label,
+				> image {
+					animation: none;
+					background-image: none;
+				}
+			}
+		}
+	}
+
+	// hide separators
+	&.font,
+	&.file {
+		separator {
+			@extend %hide_separators;
+		}
+	}
+
+	// &.font { > box > box > label { font-weight: bold; }}
+
+	// inline-toolbar buttons
+	.inline-toolbar & {
+		// @extend %button-flat;
+
+		&:not(.text-button) {
+			@extend %circular-button;
+		}
+	}
+
+	.primary-toolbar & {
+		-gtk-icon-shadow: none;
+	} // tango icons don't need shadows
+
+	&.close,
+	&.circular {
+		@extend %circular-button;
+		min-width: $medium-size;
+		min-height: $medium-size;
+		padding: 0;
+	}
+}
+
+%needs-attention {
+	animation: needs-attention $ripple-fade-in-duration $ease-out forwards;
+	background-repeat: no-repeat;
+	background-position: right 3px;
+	background-size: 6px 6px;
+
+	&:dir(rtl) {
+		background-position: left 3px;
+	}
+}
+
+button.color {
+	min-height: $small-size;
+	min-width: $small-size;
+	padding: $space-size;
+}

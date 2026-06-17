@@ -1,0 +1,38 @@
+//
+// Gnome Tweaks
+//
+
+#TweakPreferencesPage.tweak-group label.subtitle {
+	color: $text-secondary-disabled;
+}
+
+#TweakPreferencesPage label.dim-label {
+	color: $text-secondary-disabled;
+}
+
+.tweak-titlebar-left {
+	@extend %sidebar_style;
+
+	&:backdrop {
+		@extend %sidebar_style;
+	}
+}
+
+.tweak-titlebar-right {
+	background-color: $background;
+
+	&:backdrop {
+		background-color: $background;
+	}
+}
+
+leaflet.unfolded {
+	> box > scrolledwindow {
+		@extend %sidebar_style;
+
+		> scrollbar {
+			@extend %sidebar_scrollbar;
+			@extend %round_scrollbar;
+		}
+	}
+}

@@ -1,0 +1,135 @@
+// Panel
+#panel {
+	font-weight: bold;
+	height: $medium-size;
+	width: $medium-size + $space-size;
+
+	&:highlight {
+		border-image: none;
+		background-color: transparentize($error, 0.5);
+	}
+
+	&Left {
+		spacing: 4px;
+
+		&:dnd {
+			background-gradient-direction: vertical;
+			background-gradient-start: rgba($error, 0.35);
+			background-gradient-end: rgba($error, 0.35);
+		}
+
+		&:ltr {
+			padding-right: 4px;
+		}
+		&:rtl {
+			padding-left: 4px;
+		}
+
+		&.vertical {
+			padding: 0;
+
+			&:ltr {
+				padding-right: 0px;
+			}
+			&:rtl {
+				padding-left: 0px;
+			}
+		}
+	}
+
+	&Right {
+		&:dnd {
+			background-gradient-direction: vertical;
+			background-gradient-start: rgba($suggested, 0.35);
+			background-gradient-end: rgba($suggested, 0.35);
+		}
+
+		&:ltr {
+			padding-left: $space-size;
+			spacing: 0px;
+		}
+		&:rtl {
+			padding-right: $space-size;
+			spacing: 0px;
+		}
+
+		&.vertical {
+			padding: 0;
+
+			&:ltr {
+				padding-right: 0px;
+			}
+			&:rtl {
+				padding-left: 0px;
+			}
+		}
+	}
+
+	&Center {
+		spacing: 4px;
+
+		&:dnd {
+			background-gradient-direction: vertical;
+			background-gradient-start: rgba($success, 0.35);
+			background-gradient-end: rgba($success, 0.35);
+		}
+	}
+}
+
+.panel {
+	&-top,
+	&-bottom,
+	&-left,
+	&-right {
+		color: $panel_fg;
+		font-size: 1em;
+		padding: 0px;
+		background-color: $panel_bg;
+		box-shadow:
+			0 0 5px rgba(#000, 0.5),
+			0 0 16px rgba(#000, 0.24);
+
+		.panel-button,
+		.panel-status-button {
+			&:hover {
+				color: $text;
+				background-color: $fill;
+			}
+
+			&:active {
+				color: $text;
+				background-color: $divider;
+			}
+		}
+	}
+
+	&-dummy {
+		background-color: transparentize($error, 0.5);
+
+		&:entered {
+			background-color: transparentize($error, 0.4);
+		}
+	}
+
+	&-status-button {
+		border-width: 0;
+		-natural-hpadding: 3px;
+		-minimum-hpadding: 3px;
+		font-weight: bold;
+		height: 22px;
+		color: $panel_fg;
+	}
+
+	&-button {
+		-natural-hpadding: 6px;
+		-minimum-hpadding: 2px;
+		font-weight: bold;
+		transition-duration: 100ms;
+		color: $panel_fg;
+	}
+}
+
+.system-status-icon {
+	icon-size: 16px;
+	padding: 0 1px;
+}

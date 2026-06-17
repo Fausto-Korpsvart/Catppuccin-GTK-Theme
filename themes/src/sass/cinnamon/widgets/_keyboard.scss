@@ -1,0 +1,52 @@
+// On-Screen Keyboard
+#keyboard {
+	background-color: $tooltip;
+	border-width: 0;
+	border-top-width: 1px;
+	border-color: transparentize(black, 0.6);
+}
+
+.keyboard-layout {
+	spacing: 10px;
+	padding: 10px;
+}
+
+.keyboard-row {
+	spacing: 15px;
+}
+
+.keyboard-key {
+	min-height: 2em;
+	min-width: 2em;
+	font-size: 14pt;
+	font-weight: bold;
+	border-radius: $corner-radius;
+	box-shadow: none;
+
+	@include button(osd);
+
+	&:hover {
+		@include button(osd-hover);
+	}
+	&:active,
+	&:checked {
+		@include button(osd-active);
+	}
+
+	&:grayed {
+		@include button(osd-insensitive);
+	}
+}
+
+.keyboard-subkeys {
+	//long press on a key popup
+	color: on($tooltip);
+	padding: 5px;
+	-arrow-border-radius: $corner-radius;
+	-arrow-background-color: $tooltip;
+	-arrow-border-width: 1px;
+	-arrow-border-color: transparentize(black, 0.6);
+	-arrow-base: 20px;
+	-arrow-rise: 10px;
+	-boxpointer-gap: 5px;
+}

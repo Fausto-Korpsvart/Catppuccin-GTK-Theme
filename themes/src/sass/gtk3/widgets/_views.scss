@@ -1,0 +1,189 @@
+/**************
+ * Tree Views *
+ **************/
+treeview.view {
+	@at-root * {
+		-gtktreeview-horizontal-separator: 4;
+		-gtktreeview-grid-line-width: 1;
+		-gtktreeview-grid-line-pattern: '';
+		-gtktreeview-tree-line-width: 1;
+		-gtktreeview-tree-line-pattern: '';
+		-gtktreeview-expander-size: 16;
+	}
+
+	border-left-color: $divider; // this is actually the tree lines color,
+	border-top-color: $divider; // while this is the grid lines color, better then nothing
+
+	.csd
+		&:not(:selected):not(:hover):not(.progressbar):not(.expander):not(
+			.trough
+		):not(.separator) {
+		background-color: transparent;
+	}
+
+	rubberband {
+		@extend rubberband;
+	} // to avoid borders being overridden by the previously set props
+
+	&:selected {
+		@extend %selected_items_indicator;
+	}
+
+	&.separator {
+		min-height: $space-size;
+		color: $divider;
+	}
+
+	// FIXME: box-shadow, background-color and background-image are not available here.
+	&:drop(active) {
+		border-style: solid none;
+		border-width: 9999px;
+		border-color: $overlay-hover;
+
+		&.after {
+			border-top-style: none;
+		}
+
+		&.before {
+			border-bottom-style: none;
+		}
+	}
+
+	&.expander {
+		color: $text-secondary;
+		-gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
+		-gtk-icon-transform: rotate(-90deg);
+
+		&:dir(rtl) {
+			-gtk-icon-transform: rotate(90deg);
+		}
+
+		&:checked {
+			-gtk-icon-transform: unset;
+		}
+
+		&:hover,
+		&:active {
+			color: $text;
+		}
+
+		&:disabled {
+			color: $text-secondary-disabled;
+		}
+
+		&:selected {
+			color: on($indicator, secondary);
+
+			&:hover,
+			&:active {
+				color: on($indicator);
+			}
+
+			&:disabled {
+				color: on($indicator, secondary-disabled);
+			}
+		}
+	}
+
+	&.progressbar {
+		// progress bar in treeviews
+		border: none;
+		box-shadow: none;
+		background-color: $primary;
+		background-image: none;
+		border-radius: $circular-radius;
+		color: on($primary);
+
+		&:selected,
+		&:selected:hover,
+		&:selected:focus {
+			box-shadow: none;
+			background-color: mix($text, $primary, 15%);
+			color: on($primary);
+
+			&:backdrop {
+				color: on($primary);
+			}
+		}
+
+		&:backdrop,
+		&:selected:backdrop {
+			background-color: $track;
+		}
+	}
+
+	&.trough {
+		// progress bar trough in treeviews
+		border: none;
+		box-shadow: none;
+		background-color: $track-disabled;
+		background-image: none;
+		border-radius: $circular-radius;
+		padding: 0;
+		margin: 0;
+
+		&:selected,
+		&:selected:hover,
+		&:selected:focus {
+			box-shadow: none;
+			background-color: $track-disabled;
+		}
+
+		&:backdrop,
+		&:selected:backdrop {
+			background-color: $divider;
+		}
+	}
+
+	header {
+		button {
+			@extend %row_activatable;
+			padding: 2px $space-size;
+			border: none;
+			border-right: 1px solid transparent;
+			border-color: $divider;
+			border-radius: 0;
+			background-clip: border-box;
+			border-image: linear-gradient(
+					to bottom,
+					transparent 20%,
+					$divider 20%,
+					$divider 80%,
+					transparent 80%
+				)
+				0 1 0 0 / 0 1px 0 0 stretch;
+
+			&:not(:focus):not(:hover):not(:active) {
+				color: $text-secondary;
+			}
+
+			&,
+			&:disabled {
+				background-color: $base;
+			}
+
+			&:last-child {
+				border-right: none;
+				border-image: none;
+			}
+		}
+	}
+
+	button.dnd,
+	header.button.dnd {
+		// for treeview-like derive widgets
+		padding: 2px 6px;
+		border-style: none solid solid;
+		border-width: 1px;
+		border-color: $divider;
+		border-radius: 0;
+		box-shadow: none;
+		background-color: $base;
+		background-clip: border-box;
+		color: $primary;
+	}
+
+	acceleditor > label {
+		background-color: $primary;
+	} // see tests/testaccel to test
+}

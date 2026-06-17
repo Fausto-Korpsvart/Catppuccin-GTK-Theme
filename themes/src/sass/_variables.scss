@@ -2,6 +2,8 @@
 
 $asset-suffix: if($variant == 'dark', '-dark', '');
 
+$panel-opacity: 0.85 !default;
+
 // Sizes
 $space-size: if($compact == 'false', 6px, 4px);
 $small-size: if($compact == 'false', 24px, 22px);
@@ -13,24 +15,24 @@ $menuitem-size: if($compact == 'false', 28px, 24px);
 $root-font-size: if($compact == 'false', 14px, 13px);
 
 // Radiuses
-$window-radius: 12px;
-$modal-radius: 9px;
-$corner-radius: 12px;
+$window-radius: $roundness * 1px;
+$modal-radius: ($roundness - 3) * 1px;
+$corner-radius: $roundness * 1px;
 $menu-radius: $corner-radius;
 $menuitem-radius: $menu-radius;
 $circular-radius: 9999px;
 
 // Durations
-$duration: 75ms;
-$ripple-fade-in-duration: 225ms;
-$ripple-fade-out-duration: 300ms;
-$ripple-fade-out-opacity-duration: 1200ms;
+$duration: 120ms;
+$ripple-fade-in-duration: 100ms;
+$ripple-fade-out-duration: 150ms;
+$ripple-fade-out-opacity-duration: 200ms;
 
 // Timing functions
-$ease: cubic-bezier(0.4, 0, 0.2, 1);
-$ease-out: cubic-bezier(0, 0, 0.2, 1);
-$ease-in: cubic-bezier(0.4, 0, 1, 1);
-$ease-in-out: cubic-bezier(0.4, 0, 0.6, 1);
+$ease: cubic-bezier(0.25, 1, 0.5, 1);
+$ease-out: cubic-bezier(0.15, 1, 0.3, 1);
+$ease-in: cubic-bezier(0.3, 0, 0.8, 0.15);
+$ease-in-out: cubic-bezier(0.45, 0, 0.15, 1);
 
 // Transition shorthands
 $transition: all $duration $ease-out;
@@ -38,34 +40,34 @@ $transition-shadow: box-shadow $duration $ease-out;
 
 // Shadows
 $shadow-z1:
-	0 2px 3px -2px rgba(black, 0.3),
-	0 1px 2px -1px rgba(black, 0.24),
-	0 1px 2px -1px rgba(black, 0.17);
+	0 1px 2px rgba(black, 0.04),
+	0 1px 1px rgba(black, 0.04);
 $shadow-z2:
-	0 3px 2px -3px rgba(black, 0.2),
-	0 2px 2px -1px rgba(black, 0.24),
-	0 1px 3px 0 rgba(black, 0.12);
+	0 2px 4px rgba(black, 0.06),
+	0 1px 2px rgba(black, 0.04);
 $shadow-z3:
-	0 3px 2px -2px rgba(black, 0.05),
-	0 2px 3px -1px rgba(black, 0.06),
-	0 1px 4px 0 rgba(black, 0.05);
+	0 4px 10px rgba(black, 0.08),
+	0 1px 4px rgba(black, 0.06),
+	inset 0 0 0 0.5px rgba(black, 0.05);
 $shadow-z4:
-	0 2px 3px -1px rgba(black, 0.15),
-	0 4px 3px 0 rgba(black, 0.18),
-	0 1px 6px 0 rgba(black, 0.12);
+	0 6px 12px rgba(black, 0.16),
+	0 3px 6px rgba(black, 0.12),
+	0 1px 3px rgba(black, 0.08),
+	inset 0 0 0 0.5px rgba(black, 0.1);
 $shadow-z5:
-	0 2px 3px -1px rgba(black, 0.05),
-	0 4px 6px 0 rgba(black, 0.06),
-	0 1px 10px 0 rgba(black, 0.05);
+	0 4px 6px rgba(black, 0.16),
+	0 2px 4px rgba(black, 0.12),
+	inset 0 0 0 0.5px rgba(black, 0.12);
 $shadow-z6:
-	0 2px 3px -1px rgba(black, 0.1),
-	0 4px 6px 0 rgba(black, 0.12),
-	0 1px 10px 0 rgba(black, 0.1);
+	0 16px 34px rgba(black, 0.2),
+	0 4px 14px rgba(black, 0.12),
+	inset 0 0 0 0.5px rgba(black, 0.15);
 $shadow-z12:
-	0 7px 5px -4px rgba(black, 0.2),
-	0 12px 10px 2px rgba(black, 0.14),
-	0 5px 13px 4px rgba(black, 0.12);
+	0 20px 50px rgba(black, 0.28),
+	0 6px 20px rgba(black, 0.16),
+	inset 0 0 0 0.5px rgba(black, 0.15);
 $shadow-z16:
-	0 8px 6px -5px rgba(black, 0.2),
-	0 16px 15px 2px rgba(black, 0.14),
-	0 6px 18px 5px rgba(black, 0.12);
+	0 6px 10px rgba(black, 0.22),
+	0 3px 6px rgba(black, 0.18),
+	0 1px 3px rgba(black, 0.12),
+	inset 0 0 0 0.5px rgba(black, 0.15);

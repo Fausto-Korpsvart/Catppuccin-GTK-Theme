@@ -1,0 +1,787 @@
+/***********
+ * Buttons *
+ ***********/
+
+%button-on-dark {
+	color: on(dark, secondary);
+
+	&:focus,
+	&:hover,
+	&:active,
+	&:checked {
+		color: on(dark);
+	}
+	&:disabled {
+		color: on(dark, secondary-disabled);
+	}
+	&:checked:disabled {
+		color: on(dark, disabled);
+	}
+}
+
+%button-basic {
+	@include button(normal);
+
+	&:focus {
+		@include button(focus);
+	}
+
+	&:hover {
+		@include button(hover);
+		-gtk-icon-filter: brightness(1.2);
+	}
+
+	&.keyboard-activating,
+	&:active {
+		@include button(active);
+	}
+
+	&:disabled {
+		@include button(disabled);
+	}
+
+	&:checked {
+		@include button(checked);
+	}
+
+	&:checked:hover {
+		@include button(checked-hover);
+	}
+
+	&:checked:disabled {
+		@include button(checked-disabled);
+	}
+}
+
+%button-flat-simple {
+	@include button(flat-normal);
+
+	&:focus:not(:hover):not(:active) {
+		@include button(flat-focus);
+	}
+
+	&:hover {
+		@include button(flat-hover);
+	}
+
+	&:active {
+		@include button(flat-active);
+	}
+
+	&:disabled {
+		@include button(flat-disabled);
+	}
+}
+
+%button-flat {
+	@include button(flat-normal);
+
+	// &:focus:not(:hover):not(:active) {
+	// 	@include button(flat-focus);
+	// }
+
+	&:hover {
+		@include button(flat-hover);
+	}
+
+	&:active {
+		@include button(flat-active);
+	}
+
+	&:disabled {
+		@include button(flat-disabled);
+	}
+
+	&:checked,
+	&:checked:hover {
+		@include button(flat-checked);
+	}
+
+	&:checked:disabled {
+		@include button(flat-checked-disabled);
+	}
+}
+
+%opaque_button {
+	box-shadow: none;
+
+	.osd &:focus:focus-visible {
+		outline-color: rgba($white, 0.15);
+	}
+
+	&:hover {
+		background-image: image(gtkalpha(currentColor, 0.1));
+	}
+
+	&.keyboard-activating,
+	&:active {
+		background-image: image(transparentize(black, 0.8));
+	}
+
+	&:checked {
+		background-image: image(transparentize(black, 0.85));
+
+		&:hover {
+			background-image: image(transparentize(black, 0.95));
+		}
+
+		&.keyboard-activating,
+		&:active {
+			background-image: image(transparentize(black, 0.7));
+		}
+	}
+}
+
+%small-button {
+	min-height: $small-size;
+	min-width: $small-size;
+	padding: 0;
+	border-radius: $circular-radius;
+}
+
+button {
+	min-height: 24px;
+	min-width: 16px;
+	padding: ($medium-size - 24px) / 2 ($medium-size - 16px) / 2;
+	padding: 5px 10px;
+	border-radius: $modal-radius;
+	font-weight: 500;
+	@extend %button-basic;
+
+	&:drop(active) {
+		@include button(hover);
+	}
+
+	&.flat {
+		@extend %button-flat;
+	}
+
+	separator {
+		margin: 4px 1px;
+	}
+
+	&.opaque {
+		@extend %opaque_button;
+
+		background-color: mix($background, $text, 80%);
+		color: $text;
+	}
+
+	&.text-button {
+		min-width: 32px;
+		padding-left: $space-size * 2 + 4px;
+		padding-right: $space-size * 2 + 4px;
+	}
+
+	&.image-button {
+		min-width: 24px;
+		padding: ($medium-size - 24px) / 2;
+
+		// @extend %circular-button;
+	}
+
+	// NOTE: Some image-only buttons use this as well
+	&.text-button.image-button,
+	&.image-text-button {
+		min-width: 24px;
+		padding: ($medium-size - 24px) / 2;
+		border-radius: $corner-radius;
+
+		> box,
+		> box > box {
+			border-spacing: $space-size - 2px;
+
+			> label {
+				padding-left: 2px;
+				padding-right: 2px;
+			}
+		}
+
+		label {
+			&:first-child {
+				margin-left: 16px - ($medium-size - 24px) / 2;
+			}
+
+			&:last-child {
+				margin-right: 16px - ($medium-size - 24px) / 2;
+			}
+		}
+
+		&.flat label {
+			&:first-child {
+				margin-left: 12px - ($medium-size - 24px) / 2;
+			}
+
+			&:last-child {
+				margin-right: 12px - ($medium-size - 24px) / 2;
+			}
+		}
+
+		image:not(:only-child) {
+			margin: 0 (24px - 16px) / 2;
+		}
+	}
+
+	&.arrow-button {
+		padding-left: $space-size * 1.5;
+		padding-right: $space-size * 1.5;
+
+		> box {
+			border-spacing: $space-size - 2px;
+		}
+
+		&.text-button {
+			padding-left: $space-size * 2 + 4px;
+			padding-right: $space-size * 2 + 4px;
+
+			> box {
+				border-spacing: $space-size;
+			}
+		}
+	}
+
+	@at-root %pill-button,
+		&.pill {
+		padding: $space-size * 1.5 $space-size * 5;
+		border-radius: $circular-radius;
+	}
+
+	&.card {
+		background-color: $card;
+		background-clip: padding-box;
+		font-weight: inherit;
+		border: 1px solid $border-color;
+		background-clip: border-box;
+
+		&:hover {
+			background-image: none;
+			@include button(hover);
+		}
+
+		&.keyboard-activating,
+		&:active {
+			background-image: none;
+			@include button(active);
+		}
+
+		&:checked {
+			background-image: none;
+			@include button(checked);
+			border-color: $primary;
+
+			&:hover {
+				background-image: none;
+				@include button(checked-hover);
+			}
+
+			&:disabled {
+				@include button(checked-disabled);
+			}
+
+			&.keyboard-activating,
+			&:active {
+				background-image: none;
+			}
+
+			&.has-open-popup {
+				background-image: none;
+			}
+		}
+
+		&:drop(active) {
+			color: $drop_target_color;
+			box-shadow: inset 0 0 0 1px $drop_target_color;
+		}
+	}
+
+	.linked:not(.vertical) > &:focus,
+	.linked.vertical > &:focus {
+		box-shadow: none;
+		outline: none;
+	}
+
+	.linked:not(.vertical) > &,
+	.linked:not(.vertical) > &.image-button {
+		@extend %linked;
+	}
+
+	.linked.vertical > &,
+	.linked.vertical > &.image-button {
+		@extend %linked-vertical;
+	}
+
+	.linked:not(.vertical) > &.flat,
+	.linked.vertical > &.flat {
+		&:not(:only-child) {
+			// specificity bump
+			background-color: $overlay-normal;
+		}
+
+		&:focus {
+			box-shadow: none;
+			outline: none;
+		}
+	}
+
+	.linked:not(.vertical) > menubutton > & {
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+	}
+
+	// big standalone buttons like in Documents pager
+	&.osd {
+		min-height: 24px;
+		min-width: 24px;
+		padding: ($medium-size - 24px) / 2;
+		box-shadow: none;
+		background-color: rgba(black, 0.35);
+		color: $white;
+		margin: 0;
+
+		> image {
+			padding: 0;
+		}
+
+		&.remove-button {
+			padding: 0;
+		}
+
+		&:focus {
+			outline-color: transparent;
+		}
+
+		&:hover {
+			background-color: rgba(black, 0.45);
+			color: $white;
+		}
+
+		&:active {
+			background-color: rgba(black, 0.65);
+			color: $white;
+		}
+
+		&:disabled {
+			background-color: rgba(black, 0.15);
+			color: rgba($white, 0.35);
+		}
+
+		// &.image-button { padding: ($large-size - 24px) / 2; }
+	}
+
+	// Suggested and Destructive Action buttons
+	@each $b_type, $b_color in (suggested-action, $suggested),
+		(destructive-action, $destructive)
+	{
+		&.#{$b_type} {
+			background-color: $b_color;
+			color: on($b_color);
+			box-shadow: none;
+
+			&:disabled {
+				@include button(disabled);
+			}
+
+			&:hover {
+				background-color: mix(on($b_color), $b_color, percentage(0.3));
+				color: on($b_color);
+			}
+
+			&:checked {
+				background-color: mix(on($b_color), $b_color, percentage(0.3));
+			}
+
+			&:checked:hover {
+				box-shadow:
+					inset 0 0 0 9999px transparent,
+					0 3px 3px -3px rgba(black, 0.15),
+					0 2px 3px -1px rgba(black, 0.12),
+					0 2px 5px 0 rgba(black, 0.06);
+			}
+
+			&:focus {
+				box-shadow: 0 0 0 2px rgba($b_color, 0.35);
+			}
+
+			&.flat {
+				background-color: transparent;
+				color: $b_color;
+
+				&:disabled {
+					@include button(flat-disabled);
+				}
+
+				&:checked {
+					background-color: rgba($b_color, 0.3);
+				}
+			}
+		}
+	}
+
+	stackswitcher > & {
+		// to position the needs attention dot, padding is added to the button
+		// child, a label needs just lateral padding while an icon needs vertical
+		// padding added too.
+
+		> label {
+			margin: 0 -6px;
+			padding: 0 6px;
+		}
+
+		> image {
+			margin: -3px -6px;
+			padding: 3px 6px;
+		}
+
+		&.needs-attention {
+			> label,
+			> image {
+				@extend %needs-attention;
+			}
+
+			&:checked {
+				> label,
+				> image {
+					animation: none;
+					background-image: none;
+				}
+			}
+		}
+	}
+
+	// hide separators
+	&.font,
+	&.file {
+		separator {
+			@extend %hide_separators;
+		}
+
+		> box {
+			border-spacing: $space-size;
+		}
+		> box > box > label {
+			font-weight: bold;
+		}
+	}
+
+	@at-root %circular-button,
+		&.close,
+		&.circular {
+		// The Bloody Circul Button
+		border-radius: $circular-radius;
+
+		label {
+			padding: 0;
+		}
+	}
+}
+
+menubutton {
+	&.osd {
+		background: none;
+		color: inherit;
+	}
+
+	&.circular > button {
+		@extend %circular-button;
+	}
+	&.flat > button {
+		@extend %button-flat;
+	}
+	&.pill > button {
+		@extend %pill-button;
+	}
+
+	&.suggested-action {
+		background-color: $suggested;
+		color: $white;
+	}
+
+	&.destructive-action {
+		background-color: $destructive;
+		color: $white;
+	}
+
+	&.opaque {
+		background-color: mix($background, $text, 80%);
+		color: $text;
+	}
+
+	&.suggested-action,
+	&.destructive-action,
+	&.opaque {
+		border-radius: $corner-radius;
+
+		&.circular,
+		&.pill {
+			border-radius: $circular-radius;
+		}
+
+		> button {
+			@extend %button-flat;
+
+			&,
+			&:checked {
+				background-color: transparent;
+				color: inherit;
+			}
+		}
+	}
+
+	&.image-button > button {
+		min-width: 24px;
+		padding-left: $space-size;
+		padding-right: $space-size;
+	}
+
+	arrow {
+		min-height: 16px;
+		min-width: 16px;
+		&.none {
+			-gtk-icon-source: -gtk-icontheme('open-menu-symbolic');
+		}
+		&.down {
+			-gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
+		}
+		&.up {
+			-gtk-icon-source: -gtk-icontheme('pan-up-symbolic');
+		}
+		&.left {
+			-gtk-icon-source: -gtk-icontheme('pan-start-symbolic');
+		}
+		&.right {
+			-gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
+		}
+	}
+}
+
+splitbutton {
+	border-radius: $corner-radius;
+
+	&,
+	& > separator {
+		transition: $transition;
+		transition-property: background;
+	}
+
+	> separator {
+		margin-top: $space-size;
+		margin-bottom: $space-size;
+		background: none;
+	}
+
+	> menubutton > button {
+		padding: ($medium-size - 24px) / 2 ($medium-size - 16px) / 2;
+	}
+
+	// Since the inner button doesn't have any style classes on it,
+	// we have to add them manually
+	&.image-button > button {
+		min-width: 24px;
+		padding-left: $space-size;
+		padding-right: $space-size;
+	}
+
+	&.text-button.image-button > button,
+	&.image-text-button > button {
+		padding-left: $space-size * 1.5;
+		padding-right: $space-size * 1.5;
+
+		> box {
+			border-spacing: $space-size;
+		}
+	}
+
+	// Reimplementing linked so we don't blow up css
+	> button:dir(ltr),
+	> menubutton > button:dir(rtl) {
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+		margin-right: -1px;
+	}
+
+	> button:dir(rtl),
+	> menubutton > button:dir(ltr) {
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+		margin-left: -1px;
+	}
+
+	@at-root %flat_split_button,
+		&.flat {
+		> separator {
+			background: $border-color;
+		}
+
+		&:hover,
+		&:active,
+		&:checked {
+			background: gtkalpha(currentColor, 0.07);
+
+			> separator {
+				background: none;
+			}
+		}
+
+		&:focus-within:focus-visible > separator {
+			background: none;
+		}
+
+		> button,
+		> menubutton > button {
+			@extend %button-flat-simple;
+
+			border-radius: $corner-radius;
+		}
+	}
+
+	&.suggested-action {
+		background-color: $suggested;
+		color: $white;
+	}
+
+	&.destructive-action {
+		background-color: $destructive;
+		color: $white;
+	}
+
+	&.opaque {
+		background-color: mix($background, $text, 80%);
+		color: $text;
+	}
+
+	&.suggested-action,
+	&.destructive-action,
+	&.opaque {
+		> button,
+		> menubutton > button {
+			@extend %button-flat;
+
+			&,
+			&:checked {
+				color: inherit;
+				background-color: transparent;
+			}
+		}
+
+		> menubutton > button {
+			&:dir(ltr) {
+				box-shadow: inset 1px 0 $border-color;
+			}
+			&:dir(rtl) {
+				box-shadow: inset -1px 0 $border-color;
+			}
+		}
+	}
+
+	> menubutton > button > arrow.none {
+		-gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
+	}
+}
+
+buttoncontent {
+	border-spacing: $space-size;
+
+	> label {
+		font-weight: bold;
+
+		&:dir(ltr) {
+			padding-right: 2px;
+		}
+		&:dir(rtl) {
+			padding-left: 2px;
+		}
+	}
+
+	.arrow-button > box > &,
+	splitbutton > button > & {
+		> label {
+			&:dir(ltr) {
+				padding-right: 0;
+			}
+			&:dir(rtl) {
+				padding-left: 0;
+			}
+		}
+	}
+}
+
+%needs-attention {
+	animation: needs-attention $ripple-fade-in-duration $ease-out forwards;
+	background-repeat: no-repeat;
+	background-position: right 3px;
+	background-size: 6px 6px;
+
+	&:dir(rtl) {
+		background-position: left 3px;
+	}
+}
+
+%linked {
+	border-radius: 0;
+
+	&:first-child {
+		border-top-left-radius: $corner-radius;
+		border-bottom-left-radius: $corner-radius;
+	}
+
+	&:last-child {
+		border-top-right-radius: $corner-radius;
+		border-bottom-right-radius: $corner-radius;
+	}
+
+	&:only-child {
+		border-radius: $corner-radius;
+	}
+}
+
+%linked-vertical {
+	border-radius: 0;
+
+	&:first-child {
+		border-top-left-radius: $corner-radius;
+		border-top-right-radius: $corner-radius;
+	}
+
+	&:last-child {
+		border-bottom-left-radius: $corner-radius;
+		border-bottom-right-radius: $corner-radius;
+	}
+
+	&:only-child {
+		border-radius: $corner-radius;
+	}
+}
+
+button.color {
+	min-height: $small-size;
+	min-width: $small-size;
+	padding: $space-size;
+
+	// colorswatch:only-child {
+	//   &, overlay { border-radius: 0; }
+	// }
+}
+
+%list_button,
+list > row button.image-button:not(.flat) {
+	background-color: transparent;
+	box-shadow: none;
+	border: none;
+	&:hover {
+		@include button(hover);
+	}
+	&:active,
+	&:checked {
+		@include button(active);
+	}
+
+	@each $b_type, $b_color in (suggested-action, $suggested),
+		(destructive-action, $destructive)
+	{
+		&.#{$b_type} {
+			// allow colored buttons in lists #3643
+			background-color: $b_color;
+			color: on($b_color);
+		}
+	}
+}

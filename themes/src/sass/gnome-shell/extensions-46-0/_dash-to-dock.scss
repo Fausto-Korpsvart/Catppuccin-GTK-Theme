@@ -1,3 +1,10 @@
+$dashtodock_background: if($variant == 'light', rgba($white, 0.65), $panel);
+$dashtodock_hover_icons: if(
+	$variant == 'light',
+	inset 0 0 100px 10px rgba($black, 0.35),
+	inset 0 0 100px 10px rgba($primary, 0.35)
+);
+
 // Scrollview style
 .bottom #dashtodockDashScrollview,
 .top #dashtodockDashScrollview {
@@ -10,7 +17,7 @@
 }
 
 #dashtodockContainer {
-	background: transparent;
+	background-color: transparent;
 
 	.number-overlay {
 		min-width: 1.2em;
@@ -27,7 +34,7 @@
 		color: $text;
 		background-color: $primary;
 		box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.25);
-		border-radius: $circular-radius;
+		border-radius: $circular_radius;
 		margin: 2px 3px 5px;
 		padding: 0.2em 0.4em;
 		font-weight: bold;
@@ -54,7 +61,7 @@
 			#dash {
 				margin: 0 !important;
 				margin-top: 0 !important;
-				padding: 0 !important;
+				padding: 4px !important;
 
 				.dash-background {
 					margin: 0 !important;
@@ -86,20 +93,21 @@
 	&.right {
 		#dash {
 			margin-top: 0 !important;
-			padding: $dash_padding !important;
+			padding: 4px !important; // Absolute minimal padding
 
 			#dashtodockDashContainer {
-				padding: $dash_padding - $dash_spacing 0 !important;
+				padding: 2px 0 !important;
 			}
 		}
 
 		.show-apps,
 		.overview-tile {
-			padding: $dash_spacing $base_padding !important;
+			padding: 2px !important; // Minimal breathing room
 		}
 
 		.dash-background {
 			margin-bottom: 0 !important;
+			padding: 4px 2px !important; // Narrow background
 		}
 
 		&.shrink {
@@ -116,7 +124,7 @@
 			.show-apps,
 			.overview-tile {
 				margin: 0 !important;
-				padding: 0 !important;
+				padding: 4px !important;
 			}
 		}
 
@@ -124,7 +132,7 @@
 		&.straight-corner {
 			#dash {
 				#dashtodockDashContainer {
-					padding: 0 !important;
+					padding: 4px !important;
 
 					#dashtodockDashScrollview:first-child {
 						padding-top: 0 !important;
@@ -160,13 +168,13 @@
 				}
 
 				.dash-background {
-					padding: 0 !important;
+					padding: 4px !important;
 				}
 
 				.show-apps,
 				.overview-tile {
 					margin: 0 !important;
-					padding: 0 !important;
+					padding: 4px !important;
 				}
 			}
 
@@ -183,17 +191,17 @@
 	&.top,
 	&.bottom {
 		.dash-background {
-			padding: $dash_padding ($dash_padding - $dash_spacing) !important;
+			padding: 2px $base_padding !important;
 		}
 
 		.show-apps,
 		.overview-tile {
-			margin: 0 $dash_spacing !important;
+			margin: 0 !important;
 			padding-bottom: $dash_edge_offset !important;
 
 			.overview-icon {
-				padding: $base_padding !important;
-				spacing: $base_padding !important;
+				padding: 2px 0 !important;
+				spacing: 2px 0 !important;
 			}
 		}
 
@@ -213,7 +221,7 @@
 		&.straight-corner {
 			#dash {
 				#dashtodockDashContainer {
-					padding: 0 !important;
+					padding: 4px !important;
 
 					#dashtodockDashScrollview:first-child {
 						padding-left: 0 !important;
@@ -239,13 +247,13 @@
 
 			&.shrink {
 				.dash-background {
-					padding: 0 !important;
+					padding: 4px !important;
 				}
 
 				.show-apps,
 				.overview-tile {
 					margin: 0 !important;
-					padding: 0 !important;
+					padding: 4px !important;
 				}
 
 				#dash {
@@ -272,26 +280,49 @@
 
 	#dash {
 		.dash-background {
-			background-color: $panel;
+			background-color: $dashtodock_background;
+
+			@if $float == 'true' and $panel_border == 'true' {
+				border: 2px solid $primary;
+				box-shadow: none !important;
+			}
 		}
 
-		.overview-tile,
-		.show-apps {
+		.show-apps,
+		.overview-tile {
 			.overview-icon {
-				color: $panel-text;
+				color: on($osd);
+				padding: 4px !important;
 			}
 
 			&:focus .overview-icon {
 				background-color: $panel-fill;
+				box-shadow: $dashtodock_hover_icons;
 			}
 			&:hover .overview-icon {
 				background-color: $panel-divider;
+				box-shadow: $dashtodock_hover_icons;
 			}
 			&:active .overview-icon {
 				background-color: $panel-track;
+				box-shadow: $dashtodock_hover_icons;
 			}
 			&:checked .overview-icon {
 				background-color: $panel-divider;
+				box-shadow: $dashtodock_hover_icons;
+			}
+		}
+
+		// Icon replacement for show-apps
+		.show-apps {
+			.show-apps-icon {
+				-st-icon-source: none !important;
+				color: transparent !important;
+				background-image: url('assets/view-app-grid.svg');
+				background-size: contain;
+				background-position: center;
+				background-repeat: no-repeat;
+				padding: 2px !important; // More padding for dock balance
 			}
 		}
 
@@ -320,28 +351,47 @@
 		// overview-mode #1
 		background: none;
 
-		.overview-tile,
-		.show-apps {
+		.show-apps,
+		.overview-tile {
 			.overview-icon {
-				color: on($osd);
+				color: on($osd, secondary);
 			}
 
 			&:focus .overview-icon {
 				background-color: on($osd, fill);
+				box-shadow: $dashtodock_hover_icons;
 			}
 			&:hover .overview-icon {
 				background-color: on($osd, divider);
+				box-shadow: $dashtodock_hover_icons;
 			}
 			&:active .overview-icon {
 				background-color: on($osd, track);
+				box-shadow: $dashtodock_hover_icons;
 			}
 			&:checked .overview-icon {
 				background-color: on($osd, divider);
+				box-shadow: $dashtodock_hover_icons;
 			}
 		}
 
+		// Icon replacement for show-apps in overview
+		.show-apps {
+			.show-apps-icon {
+				-st-icon-source: none !important;
+				color: transparent !important;
+				background-image: url('assets/view-app-grid.svg');
+				background-size: contain;
+				background-position: center;
+				background-repeat: no-repeat;
+				padding: 2px !important; // More padding for dock balance
+			}
+		}
+
+		// Dash to Dock background on overview
 		.dash-background {
-			background-color: on($osd, divider);
+			// background-color: on($osd, divider);
+			background-color: $dashtodock_background;
 		}
 
 		.app-grid-running-dot {

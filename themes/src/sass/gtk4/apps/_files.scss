@@ -1,0 +1,255 @@
+// Files/Nautilus
+
+%nautilus_sidebar_style {
+	background-color: $background;
+	color: on($background);
+	border-radius: 0;
+
+	.dim-label {
+		color: on($indicator, disabled);
+	}
+}
+
+%nautilus_content_style {
+	background-color: $fill;
+	border-radius: $corner-radius;
+	margin: 0 $space-size $space-size $space-size;
+}
+
+.nautilus-window {
+	&.view {
+		background-color: $background;
+	}
+
+	@if $files_legacy == 'false' {
+		.sidebar-pane,
+		.content-pane {
+			background-color: $background;
+			color: $text;
+
+			&:backdrop {
+				background-color: $background;
+				transition: none;
+			}
+		}
+
+		.sidebar-pane {
+			&:dir(ltr),
+			&.end:dir(rtl) {
+				&,
+				banner > revealer > widget {
+					box-shadow: none;
+					border-right: none;
+				}
+			}
+		}
+	}
+
+	placessidebar {
+		> scrolledwindow {
+			@if $files_legacy == 'false' {
+				@extend %nautilus_sidebar_style;
+			}
+		}
+	}
+
+	placesview {
+		label {
+			color: $text-secondary;
+		}
+	}
+
+	.nautilus-grid-view,
+	.nautilus-list-view {
+		@if $files_legacy == 'false' {
+			@extend %nautilus_content_style;
+		}
+
+		.view {
+			background-color: transparent;
+		}
+
+		listview.view {
+			> row.activatable {
+				> cell {
+					padding: 2px 0;
+
+					> widget#NautilusViewCell {
+						padding: $space-size / 2 $space-size * 1.5;
+					}
+				}
+
+				&:nth-child(odd):not(:disabled) {
+					background-image: image(gtkalpha(currentColor, 0.03));
+				}
+			}
+		}
+
+		// gridview.view {
+		// 	margin: 10px 0px;
+		// 	padding: 5px 0px;
+		// }
+	}
+
+	.floating-bar {
+		min-height: 32px;
+		padding: 0;
+		margin: $space-size;
+		border-style: none;
+		border-radius: $modal-radius;
+		background-color: rgba($base, 0.95);
+		color: $primary;
+		box-shadow: $shadow-z3;
+
+		button {
+			margin: (32px - $small-size) / 2;
+			color: on($primary);
+
+			@extend %small-button;
+		}
+	}
+
+	banner > revealer > widget {
+		background-color: rgba($base, 0.4);
+		color: on($base);
+		border-radius: $modal-radius;
+		margin: $modal-radius;
+
+		button {
+			background-color: rgba($primary, 0.3);
+			color: on($primary);
+			&:hover {
+				background-color: rgba($primary, 0.6);
+			}
+		}
+	}
+}
+
+#NautilusQueryEditor {
+	// search entry
+	> menubutton > button.image-button {
+		min-width: 24px;
+		min-height: 24px;
+		padding: $space-size / 2;
+		margin-right: $space-size / 2 - 8px;
+
+		&:checked image {
+			color: on($indicator);
+		}
+	}
+
+	> text,
+	> box,
+	> menubutton {
+		margin: $space-size / 2 0;
+	}
+}
+
+#NautilusQueryEditorTag {
+	background-color: $divider;
+
+	> button.image-button {
+		margin: 0;
+		padding: 0;
+	}
+}
+
+// Nautilus Path Bar
+// windowhandle stack,
+// .nautilus-pathbar .nautilus-path-button {
+// 	padding: 0px $space-size * 2;
+// 	margin: 0px;
+// }
+
+#NautilusPathBar,
+.nautilus-pathbar,
+box > button {
+	background-color: $titlebar-fill;
+	border-radius: $corner-radius;
+	margin: $space-size 0;
+}
+
+#NautilusPathButton,
+.nautilus-path-button {
+	margin: 0 $space-size / 2;
+	border-radius: $corner-radius;
+	@extend %button-flat;
+
+	&.current-dir {
+		color: $primary;
+
+		&:hover,
+		&:active {
+			background: none;
+			box-shadow: none;
+		}
+	}
+
+	&:first-child {
+		margin-left: 0;
+	}
+}
+
+#NautilusViewCell {
+	clamp box {
+		margin: 0;
+		border-spacing: 0;
+	}
+}
+
+#NautilusFileChooser,
+.nautilus-file-chooser gridview.view {
+	background-color: transparent;
+}
+
+#NautilusFileChooser,
+.nautilus-file-chooser,
+columnview.view,
+row.activatable > cell {
+	background-color: transparent;
+
+	listview.view {
+		> row.activatable {
+			> cell {
+				padding: 2px 0;
+
+				> widget#NautilusViewCell {
+					padding: $space-size / 2 $space-size * 1.5;
+				}
+			}
+
+			&:nth-child(odd):not(:disabled) {
+				background-image: image(gtkalpha(currentColor, 0.03));
+			}
+		}
+	}
+}
+
+#NautilusProgressIndicator popover label {
+	color: $text-secondary;
+}
+
+#NautilusProgressIndicator popover image {
+	color: $text-secondary;
+}
+
+// Nautilus Progress Indicator
+windowhandle box.vertical box.toolbar {
+	background-color: $background;
+	border: none;
+	outline: none;
+}
+windowhandle box.toolbar menubutton button.toggle {
+	background-color: $background;
+	border: none;
+	outline: none;
+}
+
+window.dialog {
+	> box > stack > box > box {
+		> notebook.frame {
+			border-width: 0 0 0 1px;
+			border-radius: 0;
+		}
+	}
+}

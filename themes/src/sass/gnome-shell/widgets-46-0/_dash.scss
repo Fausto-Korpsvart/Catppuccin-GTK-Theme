@@ -1,17 +1,12 @@
 /* Dash */
 
 // uses system colors
-// $dash_background_color: on($osd, divider);
-$dash_background_color: if(
-	$variant == 'light',
-	rgba($white, 0.35),
-	rgba($base, 0.65)
-);
+$dash_background_color: on($osd, divider);
 
 $dash_placeholder_size: 32px;
 $dash_padding: $base_padding * 2;
 $dash_edge_offset: $base_margin * 4;
-$dash_border_radius: 23px;
+$dash_border_radius: $base_radius + $base_padding;
 $dash_spacing: $base_margin * 0.5;
 
 // container for the dash
@@ -54,7 +49,7 @@ $dash_spacing: $base_margin * 0.5;
 			padding-bottom: $dash_edge_offset; // align with other items
 
 			.overview-icon {
-				border-radius: $icon_radius;
+				border-radius: 16px;
 				padding: $base_margin;
 				spacing: $base_margin;
 				text-align: center;
@@ -68,13 +63,27 @@ $dash_spacing: $base_margin * 0.5;
 			}
 			&:hover .overview-icon {
 				background-color: rgba($white, 0.15);
-				box-shadow: inset 0 0 0 1px rgba($white, 0.15);
+				box-shadow: inset 0 0 0 1px rgba($white, 0.25);
 			}
 			&:active .overview-icon {
 				background-color: on($osd, track);
 			}
 			&:checked .overview-icon {
 				background-color: on($osd, divider);
+			}
+		}
+
+		// Surgical icon replacement for show-apps
+		.show-apps {
+			.show-apps-icon {
+				-st-icon-source: none !important;
+				color: transparent !important;
+				background-image: url('assets/view-app-grid.svg');
+				background-size: contain;
+				background-position: center;
+				background-repeat: no-repeat;
+				padding: 0px 5px !important;
+				// margin: 0 !important;
 			}
 		}
 

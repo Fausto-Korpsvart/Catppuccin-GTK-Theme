@@ -1,0 +1,142 @@
+$list-row: if($variant == 'light', $grey-100, $fill);
+
+%circular_list {
+	border-radius: $corner-radius + 1px;
+	box-shadow: none;
+	border: 1px solid $divider;
+	background-color: if($variant == 'light', rgba($base, 0.4), $fill);
+
+	> separator {
+		background: none;
+		min-height: 0;
+	}
+}
+
+%circular_row {
+	border-radius: 0;
+
+	&:not(:first-child) {
+		border-top: 1px solid $border-color;
+	}
+
+	&:first-child {
+		border-top-left-radius: $corner-radius;
+		border-top-right-radius: $corner-radius;
+	}
+
+	&:last-child {
+		// Not use ?
+		border-bottom-left-radius: $corner-radius;
+		border-bottom-right-radius: $corner-radius;
+	}
+
+	&:only-child {
+		border-radius: $corner-radius;
+	}
+
+	&:focus {
+		box-shadow: inset 0 0 0 1000px $overlay-normal;
+	}
+}
+
+list {
+	border-color: $divider;
+	background-color: if($variant == 'light', rgba($base, 0.4), $fill);
+
+	row {
+		padding: $space-size;
+		background-clip: padding-box;
+	}
+
+	&.content:not(.conversation-listbox) {
+		@extend %circular_list;
+
+		> row {
+			@extend %circular_row;
+		}
+	}
+
+	&.navigation-sidebar {
+		padding: $space-size / 2;
+
+		> row {
+			border-radius: $corner-radius;
+		}
+	}
+
+	paned scrolledwindow > viewport.frame > & {
+		background-color: transparent;
+	}
+}
+
+row {
+	@at-root %row_activatable,
+		&.activatable {
+		transition:
+			$transition,
+			background-size $ripple-fade-out-duration $ease-out,
+			background-image $ripple-fade-out-opacity-duration $ease-out;
+		outline: none;
+		box-shadow: inset 0 0 0 9999px transparent;
+		background-image: radial-gradient(circle, transparent 10%, transparent 0%);
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: 1000% 1000%;
+
+		&:focus {
+			box-shadow: inset 0 0 0 9999px $overlay-normal;
+		}
+
+		&:hover {
+			transition:
+				$transition,
+				box-shadow 0ms,
+				background-size $ripple-fade-out-duration $ease-out,
+				background-image $ripple-fade-out-opacity-duration $ease-out;
+			box-shadow: inset 0 0 0 9999px $overlay-normal;
+		}
+
+		&.has-open-popup,
+		// this is for indicathing which row generated a popover see https://bugzilla.gnome.org/show_bug.cgi?id=754411
+		&:active {
+			transition:
+				$transition,
+				background-size 0ms,
+				background-image 0ms;
+			animation: ripple $ripple-fade-in-duration $ease-out forwards;
+			box-shadow: inset 0 0 0 9999px $overlay-normal;
+			background-image: radial-gradient(
+				circle,
+				$overlay-normal 10%,
+				transparent 0%
+			);
+			background-size: 0% 0%;
+		}
+
+		button.circular {
+			@extend %button-flat-simple;
+		}
+	}
+
+	&:selected {
+		color: inherit; // for overlays
+		background-color: $overlay-selected;
+
+		image,
+		label {
+			color: $text;
+		}
+
+		button image,
+		button label {
+			color: inherit;
+		}
+
+		&:disabled {
+			image,
+			label {
+				color: $text-disabled;
+			}
+		}
+	}
+}

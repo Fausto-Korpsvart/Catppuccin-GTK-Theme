@@ -1,0 +1,128 @@
+/**************
+ * Scrollbars *
+ **************/
+$_scrollbar_bg_color: if(
+	$variant == 'light',
+	darken($background, 1%),
+	lighten($background, 1%)
+);
+
+scrollbar {
+	$_slider_min_length: 40px;
+
+	// disable steppers
+	@at-root * {
+		-gtkscrollbar-has-backward-stepper: false;
+		-gtkscrollbar-has-forward-stepper: false;
+	}
+
+	background-color: transparent;
+	transition: 300ms $ease-out;
+
+	&,
+	button {
+		border: none;
+		min-width: 0;
+		min-height: 0;
+		padding: 0;
+		border-radius: 0;
+		background-color: transparent;
+	}
+
+	&.vertical button {
+		&.down {
+			-gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
+		}
+		&.up {
+			-gtk-icon-source: -gtk-icontheme('pan-up-symbolic');
+		}
+	}
+
+	&.horizontal button {
+		&.down {
+			-gtk-icon-source: -gtk-icontheme('pan-right-symbolic');
+		}
+		&.up {
+			-gtk-icon-source: -gtk-icontheme('pan-left-symbolic');
+		}
+	}
+
+	// slider
+	slider {
+		min-width: $space-size;
+		min-height: $space-size;
+		margin: 0;
+		border: none;
+		border-radius: $space-size * 2;
+		background-clip: padding-box;
+		box-shadow: none;
+		outline: none;
+		transition: all 200ms linear;
+		background-color: $text-disabled;
+
+		&:hover {
+			background-color: $text-secondary-disabled;
+		}
+
+		&:active {
+			background-color: $text-secondary;
+		}
+
+		&:disabled {
+			background-color: $text-secondary-disabled;
+		}
+	}
+
+	&.fine-tune {
+		slider {
+			min-width: $space-size - 2px;
+			min-height: $space-size - 2px;
+		}
+
+		&.horizontal slider {
+			border-width: 5px 4px;
+		}
+		&.vertical slider {
+			border-width: 4px 5px;
+		}
+	}
+
+	&.overlay-indicator {
+		trough {
+			background-color: $divider;
+			border-radius: $circular_radius;
+			margin: $space-size;
+		}
+
+		&:not(.dragging):not(.hovering) {
+			opacity: 0.5;
+
+			slider {
+				margin: 0;
+				min-width: $space-size - 2px;
+				min-height: $space-size - 2px;
+				border: none;
+			}
+
+			&.horizontal slider {
+				min-width: $_slider_min_length;
+			}
+
+			&.vertical slider {
+				min-height: $_slider_min_length;
+			}
+		}
+
+		&.dragging,
+		&.hovering {
+			opacity: 1;
+		}
+	}
+
+	&.horizontal slider {
+		min-width: $_slider_min_length;
+	}
+	&.vertical slider {
+		min-height: $_slider_min_length;
+	}
+}

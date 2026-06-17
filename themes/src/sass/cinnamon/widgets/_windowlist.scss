@@ -1,0 +1,268 @@
+// Grouped window list (grouped-window-list@cinnamon.org) // >= 4.0
+.grouped-window-list {
+	&-thumbnail-label {
+		padding-left: 4px;
+	}
+
+	&-thumbnail-alert {
+		background-color: rgba($error, 0.5);
+	}
+
+	&-thumbnail-menu {
+		padding: $space-size;
+		margin: $space-size;
+		background-color: $popover;
+		border-radius: $menu-radius;
+		background-clip: border-box;
+		box-shadow: 0 5px 12px rgba(black, 0.35);
+
+		@if $border == 'false' and $variant == 'dark' {
+			border: 1px solid highlight($popover);
+			background-clip: border-box;
+		} @else {
+			border: 2px solid $primary;
+		}
+
+		.item-box {
+			padding: $space-size;
+			border-radius: $menuitem-radius;
+			spacing: $space-size;
+			margin: 1px;
+
+			&:outlined {
+				background-color: rgba($text, 0.1);
+			}
+
+			&:hover {
+				background-color: rgba($text, 0.15);
+			}
+		}
+
+		.thumbnail {
+			width: 256px;
+		}
+
+		.separator {
+			width: 1px;
+			background-color: $divider;
+		}
+	}
+
+	&-number-label {
+		z-index: 120;
+		text-shadow: none;
+		color: on($primary);
+		padding: 0;
+	}
+
+	&-button-label {
+		padding-left: 2px;
+	}
+
+	&-badge {
+		border-radius: 256px;
+		background-color: $primary;
+	}
+
+	&-item-box {
+		font-weight: normal;
+		transition-duration: 100ms;
+		border: none;
+		margin: 0;
+		color: rgba($panel_fg, 0.6);
+		border-radius: 0;
+		spacing: $space-size;
+		border-bottom: 2px solid transparent;
+
+		&.top,
+		&.bottom {
+			padding: 0 2px;
+		}
+
+		&:hover {
+			color: $panel_fg;
+			background-gradient-direction: none;
+			background-color: rgba($panel_fg, 0.15);
+		}
+
+		&:active {
+			color: $panel_fg;
+			background-gradient-direction: none;
+			background-color: transparent;
+			border-color: on($panel_bg, track);
+
+			&:hover {
+				background-color: rgba($panel_fg, 0.15);
+			}
+		}
+
+		&:focus {
+			color: $panel_fg;
+			background-gradient-direction: none;
+			background-color: rgba($panel_fg, 0.2);
+			border-color: $applet-primary;
+
+			&:hover {
+				background-color: rgba($panel_fg, 0.3);
+			}
+		}
+
+		.progress {
+			background-gradient-direction: vertical;
+			background-gradient-start: $success;
+			background-gradient-end: $success;
+			border-radius: $corner-radius;
+			box-shadow: none;
+		}
+	}
+
+	&-item-demands-attention {
+		background-gradient-start: $warning;
+		background-gradient-end: $warning;
+	}
+}
+
+// classic window list
+// Window list (windowList.js)
+
+.window-list {
+	&-box {
+		spacing: 2px;
+
+		.panel-bottom &,
+		.panel-top & {
+			&:ltr {
+				padding: 0 0 0 8px;
+			}
+			&:rtl {
+				padding: 0 8px 0 0;
+			}
+		}
+
+		&.vertical {
+			padding: 6px 0 0 0;
+
+			#appMenuIcon {
+				padding-top: 2px;
+			}
+		}
+
+		&:highlight {
+			background-color: rgba($error, 0.5);
+		}
+	}
+
+	&-item-label {
+		font-weight: normal;
+		width: 15em;
+		min-width: 5px;
+	}
+
+	&-item-box {
+		font-weight: normal;
+		background-image: none;
+		transition-duration: 100ms;
+		color: rgba($panel_fg, 0.9);
+		border-radius: 0;
+
+		.panel-bottom & StLabel {
+			padding-left: $space-size;
+		}
+		.panel-top & StLabel {
+			padding-left: $space-size;
+		}
+		.panel-left & StLabel {
+			padding-top: $space-size;
+		}
+		.panel-right & StLabel {
+			padding-top: $space-size;
+		}
+
+		@each $position in (top), (bottom), (left), (right) {
+			.panel-#{$position} & {
+				border-#{$position}: 2px solid transparent;
+				StIcon,
+				StBin,
+				#appMenuIcon {
+					padding: 2px;
+					padding-#{$position}: 0;
+				}
+			}
+		}
+
+		&:hover {
+			color: $panel_fg;
+			background-gradient-direction: none;
+			background-color: rgba($panel_fg, 0.15);
+		}
+
+		&:active,
+		&:checked,
+		&:running {
+			color: $panel_fg;
+			background-gradient-direction: none;
+			background-color: rgba($panel_fg, 0.25);
+			border-color: on($panel_bg, track);
+
+			&:hover {
+				background-color: rgba($panel_fg, 0.3);
+			}
+		}
+
+		&:focus {
+			color: $panel_fg;
+			background-gradient-direction: none;
+			background-image: radial-gradient(
+				5px 5px 45deg,
+				circle cover,
+				$panel_fg 0%,
+				$panel_fg 100%
+			);
+			border-color: $applet-primary;
+			background-color: rgba($panel_fg, 0.2);
+
+			&:hover {
+				background-color: rgba($panel_fg, 0.3);
+			}
+
+			@each $position in (top), (bottom), (left), (right) {
+				.panel-#{$position} & {
+					background-position: #{$position} center;
+				}
+			}
+		}
+
+		&.right,
+		&.left {
+			padding-left: 0px;
+			padding-right: 0px;
+		}
+
+		.progress {
+			background-gradient-direction: vertical;
+			background-gradient-start: $success;
+			background-gradient-end: $success;
+			border-radius: $corner-radius;
+			box-shadow: none;
+		}
+	}
+
+	&-item-demands-attention {
+		background-gradient-start: $warning;
+		background-gradient-end: $warning;
+	}
+
+	// >= 3.6.7
+	&-preview {
+		// thumbnail popup windows = .switcher-list
+		padding: $space-size; // = .switcher-list - .item-box
+		spacing: $space-size; // = .switcher-list-item-container
+		border: none;
+		background-color: $base;
+		border-radius: $corner-radius;
+		color: $text;
+		box-shadow:
+			0 3px 5px rgba(#000, 0.35),
+			0 3px 12px rgba(#000, 0.16);
+	}
+}

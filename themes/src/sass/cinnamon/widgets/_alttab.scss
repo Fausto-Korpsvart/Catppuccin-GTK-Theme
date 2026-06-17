@@ -1,0 +1,78 @@
+// Alt Tab
+#altTabPopup {
+	padding: 8px;
+	spacing: 16px;
+}
+
+.switcher-list {
+	color: $text;
+	background-color: $popover;
+	border: none;
+	border-radius: $corner-radius;
+	padding: 20px;
+
+	> StBoxLayout {
+		padding: 4px;
+	}
+
+	&-item-container {
+		spacing: 8px;
+	}
+
+	.item-box {
+		padding: 8px;
+		border-radius: $corner-radius;
+
+		&:outlined {
+			padding: 8px;
+			border: 1px solid $primary;
+		}
+
+		&:selected {
+			color: on($primary);
+			background-color: $primary;
+			border: 0px solid $primary;
+		}
+	}
+
+	.thumbnail {
+		width: 256px;
+	}
+
+	.thumbnail-box {
+		padding: 2px;
+		spacing: 4px;
+	}
+	.separator {
+		width: 1px;
+		background: rgba(255, 255, 255, 0.2);
+	}
+}
+
+.switcher-arrow {
+	border-color: rgba(0, 0, 0, 0);
+	color: on($tooltip);
+
+	&:highlighted {
+		border-color: rgba(0, 0, 0, 0);
+		color: $panel_fg;
+	}
+}
+
+//.switcher-preview-backdrop { background-color: rgba(25,25,25,0.95); }
+
+.thumbnail-scroll-gradient-left {
+	background-color: rgba(0, 0, 0, 0);
+	border-radius: 24px;
+	border-radius-topright: 0px;
+	border-radius-bottomright: 0px;
+	width: 60px;
+}
+
+.thumbnail-scroll-gradient-right {
+	background-color: rgba(0, 0, 0, 0);
+	border-radius: 24px;
+	border-radius-topleft: 0px;
+	border-radius-bottomleft: 0px;
+	width: 60px;
+}

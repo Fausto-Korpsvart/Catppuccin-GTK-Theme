@@ -1,5 +1,9 @@
 // Catppuccin Macchiato Theme Color Palette
 
+// Accent
+$accent-light: #006a83;
+$accent-dark: #589ed7;
+
 // Blue
 $blue-light: #1e66f5;
 $blue-dark: #8aadf4;
@@ -84,10 +88,10 @@ $white: #eff1f5;
 $black: #24273a;
 
 // Theme
-$default-light: #006a83;
-$default-dark: #27a1b9;
+$default-light: $accent-light;
+$default-dark: $accent-dark;
 
 // Button
-$button-close: if($topbar == 'light', #d20f39, #f38ba8);
-$button-max: if($topbar == 'light', #40a02b, #a6e3a1);
-$button-min: if($topbar == 'light', #fe640b, #fab387);
+$button-close: if($topbar == "light", #d20f39, #f38ba8);
+$button-max: if($topbar == "light", #40a02b, #a6e3a1);
+$button-min: if($topbar == "light", #fe640b, #fab387);

@@ -1,0 +1,386 @@
+/****************
+ * GtkAssistant *
+ ****************/
+
+window.assistant {
+	.sidebar {
+		padding: 4px 0;
+		// background-color: $base;
+		// border-top: 1px solid $divider;
+	}
+
+	// &.csd .sidebar { border-top-style: none; }
+
+	.sidebar label {
+		min-height: $medium-size;
+		padding: 0 $space-size * 2;
+		color: $text-disabled;
+		font-weight: 500;
+
+		&.highlight {
+			color: $text;
+		}
+	}
+}
+
+/**************
+ * ComboBoxes *
+ **************/
+
+combobox {
+	// @extend dropdown;
+
+	// Since cell view is taller than a plain label, make sure
+	// the button doesn't get stretched with a larger font
+	button {
+		padding-top: 2px;
+		padding-bottom: 2px;
+		min-height: 30px;
+	}
+}
+
+/***************
+ * GtkIconView *
+ ***************/
+
+iconview {
+	@extend %view;
+	&:hover,
+	&:selected {
+		border-radius: $corner-radius / 2;
+	}
+}
+
+/**************
+ * GtkInfoBar *
+ **************/
+
+infobar {
+	> revealer > box {
+		padding: $space-size;
+		border-spacing: $space-size * 2;
+		border-bottom: 1px solid $border-color;
+		box-shadow: none;
+	}
+
+	&.info {
+		& > revealer > box,
+		&:hover > revealer > box,
+		&:backdrop > revealer > box {
+			background-color: $base;
+			color: $text;
+
+			button {
+				&.text-button:not(:disabled):not(.suggested-action):not(
+						.destructive-action
+					) {
+					color: $primary;
+				}
+			}
+		}
+	}
+
+	&.action,
+	&.question {
+		& > revealer > box,
+		&:backdrop > revealer > box {
+			background-color: $primary;
+			color: on($primary);
+
+			button {
+				&,
+				&:hover,
+				&:focus,
+				&:active,
+				&:checked,
+				&.text-button:not(:disabled) {
+					color: on($primary);
+				}
+			}
+
+			*:link {
+				color: on($primary);
+			}
+		}
+
+		&:hover > revealer > box {
+			background-color: if(
+				$variant == 'light',
+				lighten($primary, 5%),
+				darken($primary, 5%)
+			);
+		}
+	}
+
+	&.warning {
+		& > revealer > box,
+		&:backdrop > revealer > box {
+			background-color: $warning;
+			color: on($warning);
+
+			button {
+				@extend %button-on-dark;
+
+				&,
+				&:hover,
+				&:focus,
+				&:active,
+				&:checked,
+				&.text-button:not(:disabled) {
+					color: on($warning);
+				}
+			}
+
+			*:link {
+				color: on($warning);
+			}
+		}
+
+		&:hover > revealer > box {
+			background-color: if(
+				$variant == 'light',
+				lighten($warning, 5%),
+				darken($warning, 5%)
+			);
+		}
+	}
+
+	&.error {
+		& > revealer > box,
+		&:backdrop > revealer > box {
+			background-color: $error;
+			color: on($error);
+
+			button {
+				&,
+				&:hover,
+				&:focus,
+				&:active,
+				&:checked,
+				&.text-button:not(:disabled) {
+					color: on($error);
+				}
+			}
+
+			*:link {
+				color: on($error);
+			}
+		}
+
+		&:hover > revealer > box {
+			background-color: if(
+				$variant == 'light',
+				lighten($error, 5%),
+				darken($error, 5%)
+			);
+		}
+	}
+}
+
+/****************
+ * GtkStatusBar *
+ ****************/
+
+statusbar {
+	padding: $space-size $space-size * 3;
+}
+
+/**************
+ * Tree Views *
+ **************/
+
+treeview.view {
+	@extend columnview;
+	border-left-color: $solid-border; // this is actually the tree lines color,
+	border-top-color: $solid-border; // while this is the grid lines color, better then nothing
+
+	// FIXME: Avoid transparency background-color being slightly darker
+	&:selected {
+		@extend %selected_items;
+	}
+
+	> rubberband {
+		@extend rubberband;
+	} // to avoid borders being overridden by the previously set props
+
+	&:hover,
+	&:selected {
+		border-radius: 0;
+	}
+
+	&:focus {
+		box-shadow: none;
+		outline: none;
+	}
+
+	&.separator {
+		min-height: 1px + 2px * 2;
+		color: $divider;
+	}
+
+	> dndtarget:drop(active) {
+		border-style: solid none;
+		border-width: 1px;
+		border-color: $overlay-selected;
+
+		&.after {
+			border-top-style: none;
+		}
+
+		&.before {
+			border-bottom-style: none;
+		}
+	}
+
+	&.expander {
+		min-width: 16px;
+		min-height: 16px;
+		-gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
+
+		&:dir(rtl) {
+			-gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl');
+		}
+
+		color: $text-secondary;
+
+		&:hover {
+			color: $text;
+		}
+
+		&:selected {
+			color: $text;
+
+			&:hover {
+				color: $text;
+			}
+		}
+
+		&:checked {
+			-gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
+		}
+
+		&:disabled {
+			color: $text-secondary-disabled;
+		}
+	}
+
+	&.progressbar {
+		// progress bar in treeviews
+		border-bottom: $space-size solid $primary;
+		box-shadow: none;
+		background-color: transparent;
+		background-image: none;
+
+		&:selected:hover {
+			box-shadow: none;
+		}
+	}
+
+	&.trough {
+		// progress bar trough in treeviews
+		border-bottom: $space-size solid $track-disabled;
+		box-shadow: none;
+		background-color: transparent;
+		background-image: none;
+
+		&:selected:hover {
+			box-shadow: none;
+		}
+	}
+}
+
+treeview entry {
+	&.flat,
+	& {
+		background-color: $base;
+
+		&,
+		&:focus-within {
+			border-image: none;
+			box-shadow: none;
+		}
+	}
+}
+stack.view treeview.view {
+	min-height: $medium-size;
+}
+
+/********************
+ * GtkShortcutLabel *
+ ********************/
+
+shortcut > .keycap {
+	min-width: 28px - 8px * 2;
+	min-height: 28px - 2px;
+	margin-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 8px;
+	padding-right: 8px;
+
+	border: solid 1px $divider;
+	border-radius: $corner-radius + 1px;
+	box-shadow: inset 0 -2px $divider;
+	background-color: $surface;
+	color: $text;
+	font-size: smaller;
+}
+
+/**********************
+ * GtkShortcutsWindow *
+ **********************/
+
+// shortcut window keys
+shortcuts-section {
+	margin: 20px;
+}
+
+.shortcuts-search-results {
+	margin: 20px;
+	border-spacing: 24px;
+}
+
+shortcut {
+	border-spacing: 6px;
+}
+
+// The following styles are deprecated in libadwaita and should be removed in 2.x
+
+// Transition shadows
+
+flap,
+leaflet {
+	@include transition-shadows($frame);
+}
+
+/*********************
+ * App Notifications *
+ *********************/
+
+// Deprecated: Use AdwToast
+
+.app-notification {
+	@extend %toolbar_osd;
+
+	margin: $space-size;
+	border-spacing: 0;
+	padding: 0;
+	border: none;
+	background-image: none;
+
+	button {
+		@extend %button-flat;
+
+		&.text-button:not(:disabled) {
+			color: $primary;
+		}
+	}
+
+	> box > label {
+		margin-left: $space-size * 1.5;
+	}
+
+	&.frame,
+	border {
+		border: none;
+	}
+}

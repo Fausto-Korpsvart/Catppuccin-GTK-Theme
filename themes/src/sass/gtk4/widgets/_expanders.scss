@@ -1,0 +1,48 @@
+/*************
+ * Expanders *
+ *************/
+
+expander {
+	transition: all $duration $ease-out;
+	min-width: 16px;
+	min-height: 16px;
+	color: $text-secondary;
+	-gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
+
+	&:dir(rtl) {
+		-gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl');
+	}
+
+	&:hover,
+	&:active {
+		color: $text;
+	}
+
+	&:checked {
+		-gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
+	}
+
+	&:disabled {
+		color: $text-secondary-disabled;
+	}
+}
+
+expander-widget {
+	> box > title {
+		border-radius: $corner-radius;
+
+		&:hover > expander {
+			color: $text-secondary; //only lightens the icon
+		}
+	}
+}
+
+.navigation-sidebar,
+placessidebar,
+stackswitcher,
+expander-widget {
+	&:not(decoration):not(window):drop(active):focus,
+	&:not(decoration):not(window):drop(active) {
+		box-shadow: none;
+	}
+}

@@ -1,0 +1,55 @@
+/****************
+ * Stackswitcher *
+ ****************/
+stackswitcher {
+	min-height: 0;
+	padding: $space-size / 2;
+	// margin: $space-size 0;
+	border-radius: $modal-radius + $space-size / 2;
+	background-color: $fill;
+	border: none;
+
+	&.linked:not(.vertical)
+		> button:not(.suggested-action):not(.destructive-action) {
+		margin: 0;
+		background-color: transparent;
+		border-radius: $modal-radius;
+		padding: ($medium-size - 24px - $space-size) / 2 ($medium-size - 16px) / 2;
+
+		+ button {
+			margin-left: $space-size / 2;
+		}
+
+		&.text-button {
+			min-width: 100px;
+		}
+
+		&:hover {
+			background-color: $primary;
+			color: on($primary);
+		}
+
+		&:focus:not(:hover):not(:checked) {
+			box-shadow: none;
+		}
+
+		&:checked {
+			transition: $transition;
+			background-color: $primary;
+			color: on($primary);
+			box-shadow: 0 1px 3px rgba(black, 0.06);
+		}
+	}
+
+	button.text-button {
+		min-width: 100px;
+	} // FIXME aggregate with buttons
+
+	button.circular,
+	button.text-button.circular {
+		// FIXME aggregate with buttons
+		min-width: $medium-size;
+		min-height: $medium-size;
+		padding: 0;
+	}
+}

@@ -1,0 +1,134 @@
+.flashspot {
+	background-color: $white;
+}
+
+// Links
+.cinnamon-link {
+	color: $link;
+	text-decoration: underline;
+
+	&:hover {
+		color: lighten($link, 10%);
+	}
+}
+
+// Lightbox
+.lightbox {
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+// Looking Glass Dialog
+#LookingGlassDialog {
+	background-color: $base;
+	spacing: $space-size;
+	padding: $space-size;
+	margin: 32px;
+	border-radius: $window_radius;
+	color: $text;
+	box-shadow: $shadow-z16;
+	border: none;
+}
+
+// Magnifier
+.magnifier-zoom-region {
+	border: 2px solid rgba(128, 0, 0, 1);
+
+	.full-screen {
+		border-width: 0px;
+	}
+}
+
+// Ripples
+.ripple-box {
+	width: 104px;
+	height: 104px;
+	background-image: url('#{$asset_path}/corner-ripple.svg');
+	background-size: contain;
+}
+
+// Scrollbars
+StScrollView {
+	&.vfade {
+		-st-vfade-offset: 0px;
+	}
+	&.hfade {
+		-st-hfade-offset: 0px;
+	}
+}
+
+StScrollBar {
+	padding: 8px;
+
+	StScrollView & {
+		min-width: 5px;
+		min-height: 5px;
+	}
+
+	StBin#trough {
+		background-color: transparentize($base, 0.9);
+		border-radius: $circular-radius;
+	}
+
+	StButton#vhandle,
+	StButton#hhandle {
+		border-radius: $circular-radius;
+		background-color: mix($text, $background, 40%);
+		border: 0px solid;
+		margin: 0px;
+
+		&:hover {
+			background-color: mix($text, $background, 30%);
+		}
+
+		&:active {
+			background-color: $primary;
+		}
+	}
+}
+
+// separator
+.separator {
+	-gradient-height: 1px;
+	-gradient-start: rgba(0, 0, 0, 0);
+	-gradient-end: rgba(0, 0, 0, 0);
+	-margin-horizontal: 1.5em;
+	height: 1em;
+}
+
+// Tooltip
+#Tooltip {
+	border-radius: $circular-radius;
+	padding: $space-size $space-size * 2;
+	background-color: $tooltip;
+	color: on($tooltip);
+	margin: $space-size;
+	box-shadow: $shadow-z4;
+	font-size: 1em;
+	font-weight: normal;
+	text-align: center;
+}
+
+// Tile Preview
+.tile-preview,
+.tile-preview.snap,
+.tile-hud,
+.tile-hud.snap {
+	background-color: transparentize($primary, 0.7);
+	border: 1px solid $primary;
+}
+
+// user avatar
+.user-icon {
+	width: 32px;
+	height: 32px;
+	background-color: transparent;
+	border: none;
+	border-radius: 0;
+}
+
+.user-label {
+	color: $text;
+	font-size: 1em;
+	font-weight: bold;
+	margin: 0px;
+}

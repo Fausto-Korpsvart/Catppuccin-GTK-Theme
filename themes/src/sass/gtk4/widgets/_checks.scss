@@ -1,0 +1,253 @@
+/*************************
+ * Check and Radio items *
+ *************************/
+
+checkbutton,
+radiobutton {
+	outline: none;
+	border-spacing: $space-size / 2;
+}
+
+check,
+radio {
+	min-height: 20px;
+	min-width: 20px;
+	margin: $space-size / 2;
+	padding: 0;
+	border-radius: $circular-radius;
+	border: none;
+	color: transparent;
+	background-color: $divider;
+	transition:
+		$transition,
+		box-shadow $ripple-fade-out-duration / 2 $ease-out;
+
+	&:hover {
+		box-shadow: 0 0 0 6px $fill;
+		background-color: rgba($text, 0.15);
+	}
+
+	&:active {
+		box-shadow: 0 0 0 6px $divider;
+		background-color: rgba($text, 0.2);
+	}
+
+	&:disabled {
+		background-color: $fill;
+	}
+
+	&:checked,
+	&:indeterminate {
+		color: on($assets-color, secondary);
+		background-color: $assets-color;
+
+		&:hover {
+			box-shadow: 0 0 0 6px rgba($assets-color, 0.15);
+			background-color: lighten($assets-color, 10%);
+		}
+
+		&:active {
+			box-shadow: 0 0 0 6px rgba($assets-color, 0.2);
+			background-color: $assets-color;
+		}
+
+		&:disabled {
+			color: on($assets-color, secondary);
+			background-color: rgba($assets-color, 0.35);
+		}
+	}
+
+	popover modelbutton.flat & {
+		&,
+		&:focus,
+		&:hover,
+		&:focus:hover,
+		&:active,
+		&:disabled {
+			transition: none; // FIXME: this is a workaround for a popover check/radio long transition issue
+			box-shadow: none;
+			background-image: none;
+		}
+
+		&.left:dir(rtl) {
+			margin-left: -$space-size / 2;
+			margin-right: $space-size;
+		}
+
+		&.right:dir(ltr) {
+			margin-left: $space-size;
+			margin-right: -$space-size / 2;
+		}
+	}
+
+	popover.menu & {
+		transition: none;
+		margin: 0; // this is a workaround for a menu check/radio size allocation issue
+		padding: 0;
+
+		&:dir(ltr) {
+			margin-right: $space-size;
+			margin-left: -$space-size / 2;
+		}
+
+		&:dir(rtl) {
+			margin-left: $space-size;
+			margin-right: -$space-size / 2;
+		}
+
+		&,
+		&:hover,
+		&:disabled,
+		&:checked:hover,
+		&:indeterminate:hover {
+			box-shadow: none;
+		}
+	}
+}
+
+%check,
+check {
+	-gtk-icon-size: 20px;
+
+	&:checked {
+		-gtk-icon-source: -gtk-scaled(
+			- gtk-recolor(url('assets/checkbox-checked-symbolic.svg')),
+			- gtk-recolor(url('assets/checkbox-checked-symbolic@2.svg'))
+		);
+	}
+	&:indeterminate {
+		-gtk-icon-source: -gtk-scaled(
+			- gtk-recolor(url('assets/checkbox-mixed-symbolic.svg')),
+			- gtk-recolor(url('assets/checkbox-mixed-symbolic@2.svg'))
+		);
+	}
+}
+
+%radio,
+radio {
+	-gtk-icon-size: 20px;
+
+	&:checked {
+		-gtk-icon-source: -gtk-scaled(
+			- gtk-recolor(url('assets/radio-checked-symbolic.svg')),
+			- gtk-recolor(url('assets/radio-checked-symbolic@2.svg'))
+		);
+	}
+	&:indeterminate {
+		-gtk-icon-source: -gtk-scaled(
+			- gtk-recolor(url('assets/radio-mixed-symbolic.svg')),
+			- gtk-recolor(url('assets/radio-mixed-symbolic@2.svg'))
+		);
+	}
+}
+
+%small_check,
+// treeview.view check,
+// columnview.view check,
+popover.menu check {
+	min-height: 16px;
+	min-width: 16px;
+	-gtk-icon-size: 16px;
+
+	&:checked {
+		-gtk-icon-source: -gtk-scaled(
+			- gtk-recolor(url('assets/small-checkbox-checked-symbolic.svg')),
+			- gtk-recolor(url('assets/small-checkbox-checked-symbolic@2.svg'))
+		);
+	}
+	&:indeterminate {
+		-gtk-icon-source: -gtk-scaled(
+			- gtk-recolor(url('assets/small-checkbox-mixed-symbolic.svg')),
+			- gtk-recolor(url('assets/small-checkbox-mixed-symbolic@2.svg'))
+		);
+	}
+}
+
+%small_radio,
+// treeview.view radio,
+// columnview.view radio,
+popover.menu radio {
+	min-height: 16px;
+	min-width: 16px;
+	-gtk-icon-size: 16px;
+
+	&:checked {
+		-gtk-icon-source: -gtk-scaled(
+			- gtk-recolor(url('assets/small-radio-checked-symbolic.svg')),
+			- gtk-recolor(url('assets/small-radio-checked-symbolic@2.svg'))
+		);
+	}
+	&:indeterminate {
+		-gtk-icon-source: -gtk-scaled(
+			- gtk-recolor(url('assets/small-radio-mixed-symbolic.svg')),
+			- gtk-recolor(url('assets/small-radio-mixed-symbolic@2.svg'))
+		);
+	}
+}
+
+// ANIMATION:
+// this is made with those pretty convoluted transitions, since checks and radios have to animate only on state changes,
+// the transformation is set on the active state and it get reset on the checked state.
+check:not(:checked):active {
+	-gtk-icon-transform: rotate(90deg);
+}
+
+// radio:not(:checked):active { -gtk-icon-transform: scale(0); }
+
+treeview.view,
+columnview.view {
+	radio,
+	check {
+		padding: 0;
+		margin: 0;
+		transition: none;
+
+		&,
+		&:hover,
+		&:disabled,
+		&:checked:hover,
+		&:indeterminate:hover {
+			box-shadow: none;
+		}
+	}
+
+	&:hover,
+	&:selected,
+	&:focus {
+		check,
+		radio {
+			box-shadow: none;
+
+			&:checked {
+				color: on($assets-color);
+				background-color: $assets-color;
+			}
+		}
+	}
+}
+
+// selection-mode
+checkbutton.selection-mode {
+	border-radius: $circular-radius;
+
+	check,
+	radio {
+		padding: $space-size;
+		border-radius: $circular-radius;
+
+		&:checked,
+		&:indeterminate {
+			color: on($assets-color);
+			background-color: $assets-color;
+		}
+	}
+
+	label {
+		&:dir(ltr) {
+			margin-right: $space-size;
+		}
+		&:dir(rtl) {
+			margin-left: $space-size;
+		}
+	}
+}

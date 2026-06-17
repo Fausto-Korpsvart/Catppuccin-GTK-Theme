@@ -1,0 +1,39 @@
+name: Generate Theme Release
+on:
+  push:
+    tags:
+      - 'v*'
+permissions:
+  contents: write
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+jobs:
+  build_and_release:
+    name: Compile and Publish Theme Assets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Install Build Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sassc
+      - name: Execute Combinatorial Theme Packager
+        working-directory: ./themes/release
+        run: |
+          chmod +x ./packager.sh
+          ./packager.sh
+      - name: Generate Elegant Changelog
+        working-directory: ./.github/scripts
+        run: |
+          chmod +x ./changelog.sh
+          ./changelog.sh
+      - name: Publish Assets to GitHub Releases
+        uses: softprops/action-gh-release@v2
+        with:
+          files: themes/release/*.tar.xz
+          body_path: changelog.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,204 @@
+/**************
+ * Scrollbars *
+ **************/
+
+scrollbar {
+	$_slider_min_length: 40px;
+
+	background-color: transparent;
+	transition: 300ms $ease-out;
+	outline: none;
+
+	&,
+	button {
+		border: none;
+	}
+
+	&.vertical button {
+		&.down {
+			-gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
+		}
+		&.up {
+			-gtk-icon-source: -gtk-icontheme('pan-up-symbolic');
+		}
+	}
+
+	&.horizontal button {
+		&.down {
+			-gtk-icon-source: -gtk-icontheme('pan-right-symbolic');
+		}
+		&.up {
+			-gtk-icon-source: -gtk-icontheme('pan-left-symbolic');
+		}
+	}
+
+	// slider
+	> range > trough {
+		background: none;
+		padding: 0;
+		margin: 0;
+		border: none;
+		outline: none;
+		transition: none;
+
+		> slider {
+			min-width: $space-size;
+			min-height: $space-size;
+			margin: 0;
+			border: none;
+			border-radius: $circular-radius;
+			background-clip: padding-box;
+			box-shadow: none;
+			outline: none;
+			transition: all 200ms linear;
+			background-color: $text-disabled;
+
+			&:hover {
+				background-color: $text-secondary-disabled;
+			}
+
+			&:active {
+				background-color: $text-secondary;
+			}
+
+			&:disabled {
+				background-color: $text-secondary-disabled;
+			}
+		}
+	}
+
+	> range.fine-tune {
+		> trough > slider {
+			min-width: $space-size - 2px;
+			min-height: $space-size - 2px;
+		}
+	}
+
+	&.overlay-indicator {
+		background: none;
+		color: inherit;
+		box-shadow: none;
+		padding: 0;
+
+		> range > trough {
+			outline: none;
+			background-color: $divider;
+			border-radius: $circular_radius;
+			margin: $space-size;
+
+			> slider {
+				outline: none;
+			}
+		}
+
+		&:not(.dragging):not(.hovering) {
+			opacity: 0.5;
+			border-color: transparent;
+			background-color: transparent;
+			box-shadow: none;
+
+			> range > trough {
+				background-color: transparent;
+				border: none;
+				margin: $space-size;
+
+				> slider {
+					margin: 0;
+					min-width: $space-size - 2px;
+					min-height: $space-size - 2px;
+					border: none;
+				}
+			}
+
+			&.horizontal > range > trough > slider {
+				min-width: $_slider_min_length;
+			}
+
+			&.vertical > range > trough > slider {
+				min-height: $_slider_min_length;
+			}
+		}
+
+		&.dragging,
+		&.hovering {
+			opacity: 1;
+		}
+	}
+
+	&.horizontal > range > trough > slider {
+		min-width: $_slider_min_length;
+	}
+	&.vertical > range > trough > slider {
+		min-height: $_slider_min_length;
+	}
+}
+
+// treeview ~ scrollbar.vertical {
+//   border-top: 1px solid $borders_color;
+//   margin-top: -1px;
+// }
+
+scrolledwindow {
+	viewport.frame {
+		// avoid double borders when viewport inside scrolled window
+		border: none;
+	}
+
+	stack &.frame {
+		// border-radius: $corner-radius;
+
+		viewport.frame list {
+			border: none;
+		}
+	}
+
+	> overshoot {
+		&.top {
+			@include overshoot(top);
+		}
+
+		&.bottom {
+			@include overshoot(bottom);
+		}
+
+		&.left {
+			@include overshoot(left);
+		}
+
+		&.right {
+			@include overshoot(right);
+		}
+	}
+
+	&.undershoot-top {
+		@include undershoot(top);
+	}
+
+	&.undershoot-bottom {
+		@include undershoot(bottom);
+	}
+
+	&.undershoot-start {
+		&:dir(ltr) {
+			@include undershoot(left);
+		}
+		&:dir(rtl) {
+			@include undershoot(right);
+		}
+	}
+
+	&.undershoot-end {
+		&:dir(ltr) {
+			@include undershoot(right);
+		}
+		&:dir(rtl) {
+			@include undershoot(left);
+		}
+	}
+
+	> undershoot {
+		background-image: none;
+		box-shadow: none;
+		border: none;
+	}
+}

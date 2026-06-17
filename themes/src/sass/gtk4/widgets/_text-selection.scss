@@ -1,0 +1,18 @@
+/**********************
+ * Touch Copy & Paste *
+ **********************/
+
+// touch selection handlebars for the Popover.osd above
+cursor-handle {
+	color: $primary;
+	-gtk-icon-source: -gtk-recolor(url('assets/cursor-handle-symbolic.svg'));
+
+	&.insertion-cursor:dir(ltr),
+	&.insertion-cursor:dir(rtl) {
+		padding-top: 6px;
+	}
+}
+
+magnifier {
+	background-color: $base;
+}

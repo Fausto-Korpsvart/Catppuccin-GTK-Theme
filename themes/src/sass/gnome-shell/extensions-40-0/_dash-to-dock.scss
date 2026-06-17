@@ -1,5 +1,11 @@
 // Dash to Dock
 
+$dashtodock_background: if(
+	$variant == 'light',
+	rgba($white, 0.35),
+	$panel
+) !important;
+
 // Scrollview style
 .bottom #dashtodockDashScrollview,
 .top #dashtodockDashScrollview {
@@ -94,15 +100,11 @@
 
 	#dash .dash-background {
 		// default-mode
-		// background-color: $panel;
-		background-color: if(
-			$variant == 'light',
-			rgba($white, 0.45),
-			rgba($black, 0.85)
-		);
+		background-color: $dashtodock_background;
 
-		@if $float == 'true' {
+		@if $float == 'true' and $panel_border == 'true' {
 			border: 2px solid $primary;
+			box-shadow: none !important;
 		}
 	}
 
@@ -192,9 +194,10 @@
 		}
 	}
 
-	&.extended:overview, // overview-mode #3
-  &.opaque.extended:overview,
-  &.transparent.extended:overview {
+	&.extended:overview,
+	// overview-mode #3
+	&.opaque.extended:overview,
+	&.transparent.extended:overview {
 		#dash .dash-background {
 			background-color: $panel;
 		}

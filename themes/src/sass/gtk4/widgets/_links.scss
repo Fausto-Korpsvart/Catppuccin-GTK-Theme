@@ -1,0 +1,36 @@
+/*********
+ * Links *
+ *********/
+
+link,
+%links {
+	color: $link;
+
+	&:visited {
+		color: $link-visited;
+	}
+}
+
+button.link {
+	&:link {
+		&,
+		&:focus,
+		&:hover,
+		&:active {
+			color: $link;
+		}
+	}
+
+	&:visited {
+		&,
+		&:focus,
+		&:hover,
+		&:active {
+			color: $link-visited;
+		}
+	}
+
+	> label {
+		text-decoration-line: underline;
+	}
+}

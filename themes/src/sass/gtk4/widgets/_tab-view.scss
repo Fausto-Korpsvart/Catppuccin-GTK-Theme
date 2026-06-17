@@ -1,0 +1,379 @@
+/************
+ * Tab View *
+ ************/
+
+$tab_needs_attention_gradient: radial-gradient(
+	ellipse at bottom,
+	transparentize(white, 0.2),
+	gtkalpha($primary, 0.4) 10%,
+	gtkalpha($primary, 0) 30%
+);
+
+@mixin undershoot-gradient($dir, $color) {
+	background: linear-gradient(
+		to #{$dir},
+		$color,
+		transparentize(black, 1) 20px
+	);
+}
+
+@mixin need-attention-gradient($dir) {
+	background: linear-gradient(
+		to #{$dir},
+		gtkalpha($primary, 0.5),
+		gtkalpha($primary, 0.3) 1px,
+		gtkalpha($primary, 0) 20px
+	);
+}
+
+$tab_needs_attention_gradient: radial-gradient(
+	ellipse at bottom,
+	transparentize(white, 0.2),
+	gtkalpha($primary, 0.4) 10%,
+	gtkalpha($primary, 0) 30%
+);
+
+@mixin undershoot-gradient($dir, $color) {
+	background: linear-gradient(
+		to #{$dir},
+		$color,
+		transparentize(black, 1) 20px
+	);
+}
+
+@mixin need-attention-gradient($dir) {
+	background: linear-gradient(
+		to #{$dir},
+		gtkalpha($primary, 0.5),
+		gtkalpha($primary, 0.3) 1px,
+		gtkalpha($primary, 0) 20px
+	);
+}
+
+%tabbar_tab {
+	min-width: $small-size;
+	min-height: $small-size;
+	padding: $space-size / 2 $space-size;
+	font-weight: 500;
+	color: $titlebar-text-secondary;
+	background-clip: padding-box;
+	border: none;
+	border-radius: $modal-radius;
+
+	@include button(flat-normal);
+
+	&:hover:not(:selected) {
+		@include button(flat-hover);
+		box-shadow: none;
+		background-color: if($variant == 'light', $grey-100, $fill);
+		color: $primary;
+	}
+
+	&:disabled {
+		@include button(flat-disabled);
+		color: $titlebar-text-secondary-disabled;
+	}
+
+	&:active {
+		@include button(flat-active);
+		box-shadow: none;
+		color: $titlebar-text;
+	}
+
+	&:selected:not(:active) {
+		transition:
+			$transition,
+			border-image $ripple-fade-in-duration $ease-out,
+			background-size 0ms,
+			background-image 0ms,
+			background-color 0ms;
+		background-color: if($variant == 'light', $grey-100, $fill);
+		color: $primary;
+		box-shadow: 0 1px 3px rgba(black, 0.1);
+
+		&:disabled {
+			color: $titlebar-text-disabled;
+		}
+	}
+}
+
+tabbar {
+	> revealer > box {
+		box-shadow: none;
+	}
+
+	.box {
+		background-color: $titlebar;
+		background-image: none;
+		padding: 0;
+		margin: 0;
+		border-radius: 0;
+		min-height: $medium-size;
+		border: none;
+		/* box-shadow: inset 0 -1px $border-color; */
+
+		&:backdrop {
+			background-color: $titlebar-backdrop;
+			transition: background-color $duration $ease-out;
+
+			> scrolledwindow,
+			> .start-action,
+			> .end-action {
+				filter: none;
+				transition: none;
+			}
+		}
+	}
+
+	tabbox {
+		padding: 0;
+		margin: 0;
+		min-height: $medium-size;
+
+		> background {
+			background: none;
+		}
+
+		> separator {
+			margin: $space-size * 1.5 0;
+			transition: opacity 150ms ease-in-out;
+
+			&.hidden {
+				opacity: 0;
+			}
+		}
+
+		> tabboxchild {
+			padding: 0;
+			margin: 0;
+		}
+	}
+
+	tab {
+		@extend %tabbar_tab;
+		padding: $space-size;
+		margin: $space-size 2px;
+
+		&.needs-attention {
+			background-image: $tab_needs_attention_gradient;
+
+			&:hover {
+				background-image:
+					image(gtkalpha(currentColor, 0.03)), $tab_needs_attention_gradient;
+			}
+		}
+	}
+
+	tabbox.single-tab tab {
+		&,
+		&:hover,
+		&:active {
+			background: none;
+		}
+	}
+
+	undershoot {
+		transition: background 150ms ease-in-out;
+
+		&.left {
+			@include undershoot-gradient('right', $base);
+		}
+
+		&.right {
+			@include undershoot-gradient('left', $base);
+		}
+	}
+
+	.needs-attention-left undershoot.left {
+		@include need-attention-gradient('right');
+	}
+
+	.needs-attention-right undershoot.right {
+		@include need-attention-gradient('left');
+	}
+
+	.start-action,
+	.end-action {
+		padding: 6px 5px;
+	}
+
+	.start-action:dir(ltr),
+	.end-action:dir(rtl) {
+		padding-right: 0;
+	}
+
+	.start-action:dir(rtl),
+	.end-action:dir(ltr) {
+		padding-left: 0;
+	}
+
+	&.inline {
+		@extend %tabbar-inline;
+	}
+}
+
+%tabbar-inline .box {
+	background-color: transparent;
+	color: inherit;
+	box-shadow: none;
+	padding-bottom: 0;
+
+	&:backdrop {
+		background-color: transparent;
+		transition: none;
+
+		> scrolledwindow,
+		> .start-action,
+		> .end-action {
+			filter: none;
+			transition: none;
+		}
+	}
+}
+
+%tabbar-shrunk {
+	tabbox,
+	.start-action,
+	.end-action {
+		padding-top: $space-size / 2;
+		padding-bottom: $space-size / 2;
+	}
+}
+
+dnd tab {
+	min-height: $small-size;
+	background-color: $titlebar;
+	color: $titlebar-text;
+
+	&.needs-attention {
+		background-image: $tab_needs_attention_gradient;
+	}
+
+	box-shadow:
+		0 1px 5px 1px transparentize(black, 0.91),
+		0 2px 14px 3px transparentize(black, 0.95),
+		0 0 0 1px transparentize(black, 0.95);
+
+	outline: 1px solid $window-border;
+	outline-offset: -1px;
+
+	margin: $small-size;
+}
+
+tabbar,
+dnd {
+	tab {
+		padding: $space-size;
+
+		button.image-button {
+			padding: 0;
+			margin: 0;
+			min-width: $small-size;
+			min-height: $small-size;
+			border-radius: $circular-radius;
+			color: $titlebar-text-secondary;
+
+			&:hover,
+			&:active {
+				color: $titlebar-text;
+			}
+
+			&:disabled {
+				color: $titlebar-text-secondary-disabled;
+			}
+		}
+
+		indicator {
+			min-height: 2px;
+			border-radius: 2px;
+			background: gtkalpha($primary, 0.5);
+			transform: translateY(4px);
+		}
+	}
+}
+
+tabthumbnail {
+	border-radius: $corner-radius;
+
+	> box {
+		margin: $space-size;
+	}
+
+	&:drop(active) {
+		box-shadow: inset 0 0 0 2px gtkalpha($drop_target_color, 0.4);
+		background-color: gtkalpha($drop_target_color, 0.1);
+	}
+
+	transition: $transition-shadow;
+
+	.needs-attention {
+		&:dir(ltr) {
+			transform: translate(8px, -8px);
+		}
+		&:dir(rtl) {
+			transform: translate(-8px, -8px);
+		}
+
+		> widget {
+			background: $primary;
+			min-width: $space-size * 2;
+			min-height: $space-size * 2;
+			border-radius: $modal-radius;
+			margin: $space-size / 2;
+			box-shadow: 0 1px 2px gtkalpha($primary, 0.4);
+		}
+	}
+
+	.card {
+		background: none;
+		border: none;
+		box-shadow: none;
+		color: inherit;
+
+		picture {
+			outline: 1px solid $border-color;
+			outline-offset: -1px;
+			border-radius: $corner-radius;
+		}
+	}
+
+	&.pinned .card {
+		background-color: $fill;
+		color: $text;
+	}
+
+	.icon-title-box {
+		border-spacing: $space-size;
+	}
+
+	.tab-unpin-icon {
+		margin: $space-size;
+		min-width: 24px;
+		min-height: 24px;
+	}
+
+	button.circular {
+		margin: $space-size;
+		background-color: $fill;
+		min-width: 24px;
+		min-height: 24px;
+
+		&:hover {
+			background-color: $overlay-hover;
+		}
+
+		&:active {
+			background-color: $overlay-active;
+		}
+	}
+}
+
+taboverview > .overview .new-tab-button {
+	margin: 18px;
+}
+
+tabview:drop(active),
+tabbox:drop(active),
+tabgrid:drop(active) {
+	box-shadow: none;
+}

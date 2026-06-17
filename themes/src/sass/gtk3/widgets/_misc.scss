@@ -1,0 +1,73 @@
+/***************
+ * Misc *
+ ********/
+// content view (grid/list)
+.content-view {
+	background-color: $background;
+
+	// &:hover { -gtk-icon-effect: highlight; }
+
+	rubberband,
+	.rubberband {
+		@extend rubberband;
+	}
+}
+
+// .scale-popup {
+//   .osd & { @extend %osd; }
+//
+//   .osd & button.flat { // FIXME: quick hack, redo properly
+//   }
+//
+//   button { // +/- buttons on GtkVolumeButton popup
+//   }
+// }
+.monospace {
+	font-family: monospace;
+}
+
+/**********************
+ * Touch Copy & Paste *
+ **********************/
+// touch selection handlebars for the Popover.osd above
+cursor-handle {
+	color: $primary;
+	-gtk-icon-source: -gtk-recolor(url('assets/cursor-handle-symbolic.svg'));
+
+	&.top:dir(ltr),
+	&.bottom:dir(rtl) {
+		-gtk-icon-transform: rotate(90deg);
+	}
+
+	&.bottom:dir(ltr),
+	&.top:dir(rtl) {
+		-gtk-icon-transform: unset;
+	}
+
+	&.insertion-cursor:dir(ltr),
+	&.insertion-cursor:dir(rtl) {
+		padding-top: 6px;
+		-gtk-icon-transform: rotate(45deg);
+	}
+}
+
+.context-menu {
+	font: initial;
+} // Decouple the font of context menus from their entry/textview
+
+// shortcut window keys
+.keycap {
+	min-width: 28px - 8px * 2;
+	min-height: 28px - 2px;
+	margin-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 8px;
+	padding-right: 8px;
+
+	border: solid 1px $divider;
+	border-radius: $corner-radius + 1px;
+	box-shadow: inset 0 -2px $divider;
+	background-color: $surface;
+	color: $text;
+	font-size: smaller;
+}

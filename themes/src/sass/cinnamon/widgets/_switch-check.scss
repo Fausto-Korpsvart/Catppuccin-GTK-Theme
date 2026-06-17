@@ -1,0 +1,73 @@
+// Switches
+.toggle-switch {
+	width: 46px;
+	height: 24px;
+	background-size: contain;
+
+	&,
+	.popup-menu-item:active & {
+		background-image: url('#{$asset_path}/toggle-off.svg');
+
+		&:checked {
+			background-image: url('#{$asset_path}/toggle-on#{$asset-suffix}.svg');
+		}
+	}
+}
+
+// Check Boxes
+.check-box {
+	CinnamonGenericContainer {
+		spacing: 0.2em;
+		min-height: 30px;
+		padding-top: 2px;
+	}
+
+	StLabel {
+		font-weight: normal;
+	}
+
+	StBin {
+		width: 24px;
+		height: 24px;
+	}
+
+	StBin,
+	&:focus StBin {
+		background-image: url('#{$asset_path}/checkbox-off.svg');
+	}
+
+	&:checked StBin,
+	&:focus:checked StBin {
+		background-image: url('#{$asset_path}/checkbox#{$asset-suffix}.svg');
+	}
+}
+
+// Radio Buttons
+.radiobutton {
+	CinnamonGenericContainer {
+		spacing: 0.2em;
+		min-height: 30px;
+		padding-top: 2px;
+	}
+
+	StLabel {
+		padding-top: 4px;
+		font-size: 0.9em;
+		box-shadow: none;
+	}
+
+	StBin {
+		width: 24px;
+		height: 24px;
+	}
+
+	StBin,
+	&:focus StBin {
+		background-image: url('#{$asset_path}/radiobutton-off.svg');
+	}
+
+	&:checked StBin,
+	&:focus:checked StBin {
+		background-image: url('#{$asset_path}/radiobutton#{$asset-suffix}.svg');
+	}
+}

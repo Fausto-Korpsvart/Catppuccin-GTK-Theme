@@ -1,0 +1,346 @@
+// Applets (applet.js)
+
+.applet {
+	&-separator {
+		padding: 1px $space-size / 2;
+	}
+
+	&-separator-line {
+		width: 1px;
+		background: rgba($panel_fg, 0.12);
+	}
+
+	&-box {
+		padding: 0 $space-size;
+		color: $panel_fg;
+		text-shadow: none;
+		transition-duration: 100ms;
+		border-radius: 0;
+
+		&.vertical {
+			padding: $space-size 0;
+		}
+
+		&:hover {
+			color: $panel_fg;
+			background-color: $fill;
+		}
+
+		&:checked,
+		&:checked:hover {
+			color: $panel_fg;
+			background-color: $divider;
+		}
+
+		&:highlight {
+			background-image: none;
+			border-image: none;
+			background-color: transparentize($error, 0.5);
+		}
+	}
+
+	&-label {
+		font-weight: bold;
+		color: $panel_fg;
+
+		.applet-box:checked & {
+			color: $panel_fg;
+			text-shadow: none;
+		}
+	}
+
+	&-icon {
+		color: $panel_fg;
+		icon-size: 16px;
+
+		.applet-box:checked & {
+			color: $panel_fg;
+			text-shadow: none;
+		}
+	}
+}
+
+// Notification Applet
+.notification-applet-padding {
+	padding: 0.5em 1em;
+}
+
+.notification-applet-container {
+	max-height: $circular-radius;
+}
+
+// Panel Launchers Applet (panelLaunchers.js)
+#panel-launchers-box {
+	padding: 0 6px;
+
+	&.vertical {
+		padding: 3px 0;
+	}
+}
+
+.panel-launcher {
+	padding: 2px;
+	transition-duration: 200ms;
+	border-radius: 0;
+
+	&:hover {
+		background-gradient-direction: none;
+		background-color: rgba($panel_fg, 0.1);
+	}
+
+	&:active {
+		background-color: rgba($panel_fg, 0.2);
+	}
+}
+
+// 3.2.x
+.launcher {
+	padding: 2px;
+	spacing: 2px;
+	transition-duration: 0.2s;
+	border-radius: 0;
+
+	&:hover {
+		background-gradient-direction: none;
+		background-color: rgba($panel_fg, 0.1);
+	}
+
+	&:active {
+		background-color: rgba($panel_fg, 0.2);
+	}
+
+	.icon-box {
+		padding: 2px;
+	}
+}
+
+// Sound Applet (status/volume.js)
+.sound-button {
+	width: 22px;
+	height: 13px;
+	padding: 8px;
+
+	@extend %button;
+
+	&-container {
+		padding-right: 3px;
+		padding-left: 3px;
+	}
+
+	StIcon {
+		icon-size: 1.4em;
+	}
+}
+
+.sound-track {
+	&-infos {
+		padding: 5px;
+	}
+	&-info {
+		padding-top: 2px;
+		padding-bottom: 2px;
+
+		StIcon {
+			icon-size: 16px;
+		}
+
+		StLabel {
+			padding-left: 5px;
+			padding-right: 5px;
+		}
+	}
+
+	&-box {
+		padding-left: 15px;
+		padding-right: 15px;
+		max-width: 220px;
+	}
+}
+
+.sound-seek-box {
+	padding-left: 15px;
+
+	StLabel {
+		padding-top: 2px;
+	}
+	StIcon {
+		icon-size: 16px;
+	}
+}
+
+.sound-seek-slider {
+	width: 140px;
+}
+
+.sound-volume-menu-item {
+	padding: 0.4em 1.75em;
+
+	StIcon {
+		icon-size: 1.14em;
+		padding-left: 8px;
+		padding-right: 8px;
+	}
+}
+
+.sound-playback-control {
+	padding: 5px 10px 10px 10px;
+}
+
+// 2.8
+.sound-player {
+	padding: 0 0;
+	margin-top: 6px;
+	border-radius: $corner-radius;
+	background-color: $sub_menu_bg;
+	color: on($sub_menu_bg);
+
+	> StBoxLayout:first-child {
+		padding: 5px 10px 10px 10px;
+		spacing: 0.5em;
+
+		StButton:small {
+			width: 24px;
+			height: 24px;
+			border-radius: $circular-radius;
+
+			&:hover {
+				background-color: on($sub_menu_bg, divider);
+			}
+			&:active {
+				background-color: on($sub_menu_bg, track);
+			}
+
+			StIcon {
+				icon-size: 16px;
+			}
+		}
+	}
+
+	&-generic-coverart {
+		background: rgba(black, 0.2);
+	}
+
+	&-overlay {
+		width: 290px;
+		height: 80px;
+		padding: $space-size * 2 $space-size * 3;
+		spacing: $space-size;
+		background-color: rgba(black, 0.45);
+		border: none;
+		border-radius: 0 0 $corner-radius $corner-radius;
+		color: on(dark);
+		text-shadow: none;
+
+		StButton {
+			width: 16px;
+			height: 16px;
+			padding: 8px;
+			margin: 0 $space-size $space-size;
+			color: on(dark);
+			border-radius: $circular-radius;
+			border: none;
+			text-shadow: none;
+
+			StIcon {
+				icon-size: 16px;
+			}
+
+			&:hover {
+				background-color: on(dark, divider);
+			}
+			&:active {
+				background-color: on(dark, track);
+			}
+			&:insensitive {
+				opacty: 0.35;
+				color: on(dark, disabled);
+			}
+		}
+
+		StLabel {
+			padding: 0 $space-size;
+		}
+
+		StBoxLayout {
+			padding-top: 2px;
+		}
+	}
+
+	.slider {
+		height: 0.5em;
+		padding: 0;
+		border: 0px solid darken($tooltip, 8%);
+		border-bottom: 1px;
+		-slider-height: 0.5em;
+		-slider-background-color: if(
+			$variant == 'light',
+			$divider,
+			darken($background, 5%)
+		);
+		-slider-border-color: rgba(0, 0, 0, 0);
+		-slider-active-background-color: $primary;
+		-slider-active-border-color: rgba(0, 0, 0, 0);
+		-slider-border-width: 0px;
+		-slider-handle-radius: 0px;
+	}
+}
+
+// Workspace Switcher applet (workspaceSwitcher.js)
+#workspaceSwitcher {
+	spacing: 0px;
+	padding: 3px;
+}
+
+/* Controls the styling when using the "Simple buttons" option */
+.workspace-switcher {
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+.workspace-button {
+	width: 20px;
+	height: 10px;
+	color: $panel_fg;
+	padding: 3px;
+	padding-top: 4px;
+	transition-duration: 300;
+
+	&:outlined,
+	&:outlined:hover {
+		color: $primary;
+	}
+	&:hover {
+		color: lighten($primary, 10%);
+	}
+}
+
+/* Controls the style when using the "Visual representation" option */
+.workspace-graph {
+	padding: 3px;
+	spacing: 3px;
+}
+
+.workspace-graph .workspace {
+	border: 1px solid transparentize(black, 0.6);
+	background-gradient-direction: none;
+	background-color: transparentize(black, 0.8);
+}
+
+.workspace-graph .workspace:active {
+	border: 1px solid $primary;
+	background-gradient-direction: none;
+}
+
+.workspace-graph .workspace .windows {
+	-active-window-background: lighten($panel_bg, 15%);
+	-active-window-border: rgba(0, 0, 0, 0.8);
+	-inactive-window-background: lighten($panel_bg, 15%);
+	-inactive-window-border: rgba(0, 0, 0, 0.8);
+}
+
+.workspace-graph .workspace:active .windows {
+	-active-window-background: lighten($panel_bg, 20%);
+	-active-window-border: rgba(0, 0, 0, 0.8);
+	-inactive-window-background: lighten($panel_bg, 5%);
+	-inactive-window-border: rgba(0, 0, 0, 0.8);
+}

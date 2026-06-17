@@ -1,0 +1,47 @@
+/**********
+ * Switch *
+ **********/
+
+switch {
+	transition: all $duration $ease-out;
+	margin: $space-size 0;
+	padding: 0;
+	border: none;
+	border-radius: $circular-radius;
+	background-color: $text-disabled;
+	background-clip: border-box;
+	font-size: 0;
+	color: transparent;
+
+	&:checked {
+		background-color: $assets-color;
+	}
+
+	&:disabled {
+		opacity: 0.5;
+	}
+
+	> slider {
+		transition: $transition-shadow;
+		min-width: $small-size - 6px;
+		min-height: $small-size - 6px;
+		margin: $space-size / 2;
+		border-radius: $circular-radius;
+		outline: none;
+		box-shadow:
+			0 0 0 0 transparent,
+			$shadow-z3;
+		background-color: $white;
+		border: none;
+	}
+
+	&:focus slider,
+	&:hover slider,
+	&:focus:hover slider {
+		box-shadow:
+			0 0 0 6px $divider,
+			0 3px 3px -2px transparent,
+			0 2px 3px -1px transparent,
+			0 1px 4px 0 transparent;
+	}
+}

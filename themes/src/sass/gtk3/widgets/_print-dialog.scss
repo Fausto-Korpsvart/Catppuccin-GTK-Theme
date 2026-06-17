@@ -1,0 +1,12 @@
+printdialog {
+	paper {
+		padding: 0;
+		border: 1px solid $divider;
+		background-color: $base;
+		color: $text;
+	}
+
+	.dialog-action-box {
+		margin: 12px;
+	}
+}

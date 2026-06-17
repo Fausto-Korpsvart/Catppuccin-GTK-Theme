@@ -1,0 +1,255 @@
+/*************
+ * Notebooks *
+ *************/
+
+%tabs_tab {
+	min-height: $small-size;
+	min-width: $small-size;
+	padding: $space-size / 2 $space-size;
+	border: none;
+	background-clip: padding-box;
+	font-weight: 500;
+	border-radius: $modal-radius;
+	@include button(flat-normal);
+
+	&:hover:not(:checked):not(:selected) {
+		@include button(flat-hover);
+		box-shadow: none;
+		background-color: if($variant == 'light', $grey-100, $fill);
+		color: $primary;
+	}
+
+	&:disabled {
+		@include button(flat-disabled);
+	}
+
+	&:active {
+		@include button(flat-active);
+		background-color: $base;
+		color: $text;
+		box-shadow: none;
+	}
+
+	&:checked {
+		transition:
+			$transition,
+			border-image $ripple-fade-in-duration $ease-out,
+			background-size 0ms,
+			background-image 0ms,
+			background-color 0ms;
+		background-color: if($variant == 'light', $grey-100, $fill);
+		color: $primary;
+		box-shadow: 0 1px 3px rgba(black, 0.1);
+
+		&:disabled {
+			color: $text-disabled;
+		}
+	}
+}
+
+notebook {
+	frame > paned > & > header,
+	&.frame > header {
+		background-color: $fill;
+	}
+
+	&,
+	&.frame {
+		background-color: if($variant == 'light', rgba($white, 0.6), $fill);
+		border-radius: $modal-radius + $space-size;
+	}
+
+	&.frame frame {
+		> border {
+			border: none;
+			border-radius: $modal-radius;
+		}
+
+		> list {
+			@extend %circular_list;
+
+			row.activatable {
+				border-radius: $corner-radius;
+			}
+		}
+	}
+
+	> header {
+		border: none;
+		background-color: $fill;
+		// padding: $space-size / 2;
+		margin: $space-size / 2;
+		border-radius: $modal-radius + $space-size / 2;
+		// background-clip: border-box;
+
+		&.top > tabs > arrow {
+			@extend %notebook_vert_arrows;
+
+			border-top-style: none;
+		}
+
+		&.bottom > tabs > arrow {
+			@extend %notebook_vert_arrows;
+
+			border-bottom-style: none;
+		}
+
+		@at-root %notebook_vert_arrows {
+			padding-left: 4px;
+			padding-right: 4px;
+
+			&.down {
+				margin-left: 0;
+				-gtk-icon-source: -gtk-icontheme('pan-start-symbolic');
+			}
+
+			&.up {
+				margin-right: 0;
+				-gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
+			}
+		}
+
+		&.left > tabs > arrow {
+			@extend %notebook_horz_arrows;
+
+			border-left-style: none;
+		}
+
+		&.right > tabs > arrow {
+			@extend %notebook_horz_arrows;
+
+			border-right-style: none;
+		}
+
+		@at-root %notebook_horz_arrows {
+			padding-top: 4px;
+			padding-bottom: 4px;
+
+			&.down {
+				margin-top: 0;
+				-gtk-icon-source: -gtk-icontheme('pan-up-symbolic');
+			}
+
+			&.up {
+				margin-bottom: 0;
+				-gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
+			}
+		}
+
+		> tabs {
+			> arrow {
+				@extend %button-flat-simple;
+
+				min-height: 16px;
+				min-width: 16px;
+				border-radius: $corner-radius;
+			}
+
+			> tab {
+				@extend %tabs_tab;
+				margin: $space-size;
+
+				// FIXME: The tab node doesn't have :drop(active), instead its child box has it.
+				> box {
+					transition: background-color $duration $ease-out;
+					margin: -$space-size -12px;
+					padding: $space-size 12px;
+
+					&:drop(active) {
+						background-color: $divider;
+						color: $text;
+					}
+				}
+
+				// colors the button like the label, overridden otherwise
+				button.flat {
+					@extend %small-button;
+
+					&:last-child {
+						margin-left: $space-size;
+						margin-right: -$space-size / 2;
+					}
+
+					&:first-child {
+						margin-left: -$space-size / 2;
+						margin-right: $space-size;
+					}
+				}
+
+				button.close-button {
+					min-width: $small-size;
+					min-height: $small-size;
+				}
+			}
+		}
+
+		&.top,
+		&.bottom {
+			> tabs {
+				padding-left: 0;
+				padding-right: 0;
+
+				&:not(:only-child) {
+					&:first-child {
+						margin-left: 0;
+					}
+
+					&:last-child {
+						margin-right: 0;
+					}
+				}
+
+				> tab {
+					&:not(:last-child) {
+						margin-right: 0;
+					}
+				}
+
+				tab.reorderable-page {
+					border-style: solid;
+				}
+			}
+		}
+
+		&.left,
+		&.right {
+			> tabs {
+				padding-top: 0;
+				padding-bottom: 0;
+
+				&:not(:only-child) {
+					&:first-child {
+						margin-top: 0;
+					}
+
+					&:last-child {
+						margin-bottom: 0;
+					}
+				}
+
+				> tab {
+					&:not(:last-child) {
+						margin-bottom: 0;
+					}
+				}
+
+				tab.reorderable-page {
+					border-style: solid;
+				}
+			}
+		}
+
+		> menubutton > button.image-button {
+			padding: $space-size / 2;
+			min-width: $small-size;
+			min-height: $small-size;
+			margin: 0 $space-size / 2;
+		}
+	}
+
+	> stack:not(:only-child) {
+		// the :not(:only-child) is for "hidden" notebooks
+		background-color: transparent;
+		border-radius: $corner-radius;
+	}
+}

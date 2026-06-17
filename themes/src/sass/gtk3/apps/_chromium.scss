@@ -1,0 +1,88 @@
+/************
+ * Chromium *
+ ************/
+window.background.chromium {
+	background-color: $base;
+	color: $text;
+
+	headerbar.titlebar {
+		padding: 0 $space-size * 2;
+		/* border-radius: $corner-radius $corner-radius 0 0; */
+
+		button.toggle {
+			border: none;
+			background-color: transparent;
+			background-image: none;
+
+			&:hover {
+				@include button(flat-hover);
+			}
+			&:checked,
+			&:active {
+				@include button(flat-active);
+			}
+		}
+
+		// from nav_button_provider_gtk3.cc (> 62.0.3202?)
+		button.titlebutton {
+			// title-buttons
+			// define global titlebutton class sizing
+			min-width: 16px;
+			min-height: 16px;
+			margin: 0; // unset margins
+			padding: 0;
+			background-size: 16px 16px;
+			color: transparent; // hide stock icons
+			border: none;
+		}
+	}
+
+	// FIXME: not for actual button widgets but for toolbar's separators
+	// crazy: src/+/master/chrome/browser/ui/libgtkui/gtk_ui.cc#891
+	button {
+		// for active-tab borders
+		border-width: 1px;
+		border-style: solid;
+		border-color: $solid-border;
+		background-color: $background;
+		color: $text;
+	}
+
+	entry.chromium {
+		&,
+		&:focus {
+			// overrides standard borders
+			border-image: none;
+			color: $text;
+		}
+
+		background-color: rgba($text, 0.06);
+	}
+
+	// internal region of toolbar's entry widget
+	> textview.view,
+	textview {
+		background-color: rgba($text, 0.06);
+		color: $text;
+	}
+
+	> menubar {
+		background-color: $titlebar-fill;
+	}
+
+	menu {
+		background-color: $titlebar;
+		border: 1px solid if($variant == 'light', $solid-border, $window-border);
+		border-radius: 0;
+
+		menuitem {
+			background-color: $fill;
+			border-radius: 0;
+
+			&:hover {
+				background-color: $fill;
+				color: $primary;
+			}
+		}
+	}
+}

@@ -1,0 +1,160 @@
+/**********************
+ * Popover Base Menus *
+ **********************/
+
+popover.menu {
+	box.inline-buttons {
+		color: $text;
+		padding: 0 $space-size;
+
+		button.image-button.model {
+			min-height: $menuitem-size;
+			min-width: $menuitem-size;
+			padding: 0;
+			border: none;
+			outline: none;
+			transition: none;
+
+			&:selected {
+				background: image($overlay-selected);
+			}
+		}
+	}
+
+	box.circular-buttons {
+		padding: $space-size;
+
+		button.circular.image-button.model {
+			@extend %small-button;
+			padding: $space-size;
+
+			&:focus {
+				background-color: $overlay-selected;
+			}
+		}
+	}
+
+	arrow.left,
+	radio.left,
+	check.left {
+		margin-left: -2px;
+		margin-right: 6px;
+	}
+
+	arrow.right,
+	radio.right,
+	check.right {
+		margin-left: 6px;
+		margin-right: -2px;
+	}
+
+	label.title {
+		font-weight: bold;
+		padding: 4px ($space-size + 20px); //this will fall apart with font sizing
+	}
+
+	modelbutton {
+		transition: background-color $duration $ease-out;
+		min-height: $menuitem-size - $space-size;
+		min-width: $menuitem-size * 2;
+		padding: $space-size / 2 $space-size * 1.5;
+		color: $text;
+		font: initial;
+		border-radius: $menuitem-radius;
+		@extend %button-flat-simple;
+
+		&:hover {
+			transition: none;
+			background-color: $fill;
+			color: $primary;
+
+			accelerator {
+				color: $primary;
+
+				&:disabled {
+					color: $text-disabled;
+				}
+			}
+		}
+
+		&:focus:not(:hover) {
+			transition: none;
+			box-shadow: none;
+			outline: none;
+		}
+
+		&:disabled {
+			color: $text-disabled;
+		}
+
+		accelerator {
+			color: $text-disabled;
+			margin-left: $space-size * 5;
+
+			&:disabled {
+				color: $divider;
+			}
+		}
+
+		arrow {
+			&.left {
+				-gtk-icon-source: -gtk-icontheme('go-previous-symbolic');
+			}
+			&.right {
+				-gtk-icon-source: -gtk-icontheme('go-next-symbolic');
+			}
+		}
+	}
+}
+
+/*********
+ * Menus *
+ *********/
+
+menubar {
+	padding: 0;
+	// box-shadow: inset 0 -1px $divider;
+	background-color: $titlebar;
+	color: $titlebar-text;
+
+	&:backdrop {
+		background-color: $titlebar-backdrop;
+		color: $titlebar-text-secondary;
+	}
+
+	.csd & {
+		transition: $transition;
+	}
+
+	> item {
+		transition: $transition;
+		min-height: 20px;
+		padding: $space-size - 2px $space-size + 2px;
+		color: $titlebar-text-secondary;
+
+		&:selected {
+			// Seems like it :hover even with keyboard focus
+			transition: none;
+			background-color: $overlay-checked;
+			color: $titlebar-text;
+		}
+
+		&:disabled {
+			color: $titlebar-text-secondary-disabled;
+		}
+
+		label:disabled {
+			color: inherit;
+		} // to inherit the above color
+	}
+
+	//nested submenus
+	& > item popover.menu popover.menu {
+		margin-left: $space-size * 1.5;
+	}
+
+	& > item popover.menu.background popover.menu.background > contents {
+		margin: 0;
+		border-radius: $menu-radius; //including top
+	}
+}

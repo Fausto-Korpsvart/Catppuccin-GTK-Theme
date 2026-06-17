@@ -1,0 +1,23 @@
+/************
+ * Tooltips *
+ ************/
+
+tooltip {
+	&.background {
+		// background-color needs to be set this way otherwise it gets drawn twice
+		// see https://bugzilla.gnome.org/show_bug.cgi?id=736155 for details.
+		background-color: $tooltip;
+		color: on($tooltip);
+		box-shadow: $shadow-z5;
+		border-radius: $corner-radius;
+		margin: 2px 6px 8px 6px;
+	}
+
+	padding: $space-size $space-size * 2;
+	box-shadow: none; // otherwise it gets inherited by windowframe.csd
+	border: none;
+
+	> box {
+		border-spacing: $space-size;
+	}
+}

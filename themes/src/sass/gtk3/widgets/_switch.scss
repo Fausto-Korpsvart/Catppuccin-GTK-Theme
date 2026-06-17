@@ -1,0 +1,48 @@
+/**********
+ * Switch *
+ **********/
+switch {
+	transition: all $duration $ease-out;
+	margin: $space-size 0;
+	border: none;
+	border-radius: $circular-radius;
+	background-color: $text-disabled;
+	background-clip: padding-box;
+	font-size: 0;
+	color: transparent;
+
+	&:checked {
+		background-color: $assets-color;
+	}
+
+	&:disabled {
+		opacity: 0.5;
+	}
+
+	// hide on/off icons for >=3.24.5
+	// image {
+	//   margin: -8px;
+	//   -gtk-icon-transform: scale(0);
+	// }
+
+	slider {
+		transition: all $duration $ease-out;
+		min-width: $small-size - 6px;
+		min-height: $small-size - 6px;
+		margin: $space-size / 2;
+		border-radius: $circular-radius;
+		outline: none;
+		box-shadow: $shadow-z3;
+		background-color: $white;
+		border: none;
+		color: transparent;
+	}
+
+	&:focus slider,
+	&:hover slider,
+	&:focus:hover slider {
+		box-shadow: 0 0 0 6px $divider;
+	}
+
+	// row:selected & { }
+}

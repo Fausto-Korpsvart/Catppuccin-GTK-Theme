@@ -4,7 +4,7 @@
 .message-list {
 	width: if($compact == 'true', 25.5em, 29em);
 	text-shadow: none;
-	border: solid $border;
+	border: solid $border-color;
 	padding: 0;
 
 	// padding and margins to account for scrollbar

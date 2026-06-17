@@ -1,0 +1,250 @@
+/**********
+ * Frames *
+ **********/
+
+frame,
+.frame {
+	border: 1px solid $divider;
+
+	> list {
+		border: none;
+	}
+
+	&.view {
+		border-radius: $corner-radius;
+	}
+
+	&.flat {
+		border-style: none;
+	}
+}
+
+frame {
+	border-radius: $corner-radius;
+
+	> label {
+		margin: 4px;
+	}
+
+	&.flat > border,
+	statusbar & > border {
+		border: none;
+	} // for backward compatibility
+}
+
+/**************
+ * Separators *
+ **************/
+
+separator {
+	min-width: 1px;
+	min-height: 1px;
+	background-color: transparent;
+
+	&.spacer,
+	&.sidebar {
+		@extend %hide_separators;
+	}
+}
+
+%hide_separators {
+	min-width: 0;
+	min-height: 0;
+	background-color: transparent;
+	background-image: none;
+}
+
+/**********
+ * Toasts *
+ **********/
+
+toast {
+	margin: $space-size * 2;
+	margin-bottom: $space-size * 4;
+	border-radius: $circular-radius;
+	border-spacing: $space-size;
+	padding: $space-size;
+	box-shadow:
+		$shadow-z6,
+		inset 0 1px highlight($popover);
+	background-color: $popover;
+	color: on($popover);
+	border: none;
+
+	&:dir(ltr) {
+		padding-left: $space-size * 2;
+	}
+	&:dir(rtl) {
+		padding-right: $space-size * 2;
+	}
+
+	> label {
+		margin: 0 $space-size;
+	}
+}
+
+/************
+ * GtkVideo *
+ ************/
+
+vide {
+	& image.osd {
+		min-width: 64px;
+		min-height: 64px;
+		border-radius: $circular-radius;
+		border: none;
+	}
+
+	background: black;
+	border-radius: $corner-radius;
+}
+
+/******************
+ * AdwAboutWindow *
+ ******************/
+
+window.about {
+	.main-page {
+		> viewport > clamp > box {
+			margin: $space-size * 2;
+			border-spacing: $space-size;
+
+			> box {
+				margin-top: $space-size * 3;
+				border-spacing: $space-size * 3;
+				margin-bottom: $space-size;
+			}
+		}
+
+		.app-version {
+			padding: $space-size / 2 $space-size * 3;
+			color: $primary;
+			border-radius: $corner-radius;
+			margin-top: $space-size / 2;
+		}
+	}
+
+	.subpage {
+		> viewport > clamp > box {
+			margin: $space-size * 3 $space-size * 2;
+			border-spacing: $space-size * 3;
+		}
+
+		> clamp > textview {
+			background: none;
+			color: inherit;
+		}
+	}
+}
+
+/*****************
+ * AdwStatusPage *
+ *****************/
+
+statuspage {
+	> scrolledwindow > viewport > box {
+		margin: $space-size * 6 $space-size * 2;
+		border-spacing: $space-size * 6;
+
+		> clamp > box {
+			border-spacing: $space-size * 2;
+
+			> .icon {
+				-gtk-icon-size: 128px;
+
+				color: gtkalpha(currentColor, 0.55);
+
+				&:disabled {
+					opacity: 0.35;
+				}
+
+				&:not(:last-child) {
+					margin-bottom: $space-size * 4;
+				}
+			}
+		}
+	}
+
+	&.compact > scrolledwindow > viewport > box {
+		margin: $space-size * 4 $space-size * 2;
+		border-spacing: $space-size * 4;
+
+		> clamp > box {
+			> .icon {
+				-gtk-icon-size: 96px;
+
+				&:not(:last-child) {
+					margin-bottom: $space-size * 2;
+				}
+			}
+
+			> .title {
+				font-size: 18pt;
+			}
+		}
+	}
+}
+
+/* Cards */
+
+.card {
+	@at-root %card,
+		& {
+		border-radius: $corner-radius;
+		border: 1px solid $border-color;
+		background-clip: border-box;
+		color: $text-secondary;
+		box-shadow: none;
+		outline: none;
+		background-color: if($variant == 'light', $grey-050, $fill);
+		color: $text;
+	}
+
+	&.activatable {
+		@include button(normal);
+		background-color: if($variant == 'light', rgba($base, 0.4), $fill);
+
+		&:hover {
+			@include button(hover);
+		}
+
+		&:active {
+			@include button(active);
+		}
+	}
+}
+
+/* Transition shadows */
+
+navigation-view,
+overlay-split-view {
+	@include transition-shadows($frame);
+}
+
+// NOTE: put this on _views file???
+// content view (grid/list)
+.content-view {
+	background-color: $background;
+
+	// &:hover { -gtk-icon-effect: highlight; }
+
+	rubberband,
+	.rubberband {
+		@extend rubberband;
+	}
+}
+
+.scale-popup {
+	.osd & {
+		> arrow,
+		> contents {
+			@extend %osd;
+		}
+	}
+
+	// .osd & button.flat { // FIXME: quick hack, redo properly
+	// }
+	//
+	// button { // +/- buttons on GtkVolumeButton popup
+	// }
+}

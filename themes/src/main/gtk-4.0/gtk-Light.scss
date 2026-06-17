@@ -3,8 +3,9 @@ $topbar: 'light';
 
 @import '../../sass/variables';
 @import '../../sass/colors';
-@import '../../sass/gtk/drawing-4.0';
-@import '../../sass/gtk/common-4.0';
-@import '../../sass/gtk/apps-4.0';
-@import '../../sass/gtk/colors-public';
-@import '../../sass/gtk/colors-libadwaita';
+@import '../../sass/gtk4/drawing';
+@import '../../sass/gtk4/widgets';
+@import '../../sass/gtk4/common';
+@import '../../sass/gtk4/apps';
+@import '../../sass/colors-public';
+@import '../../sass/colors-libadwaita';

@@ -1,0 +1,133 @@
+/************
+ * Popovers *
+ ************/
+
+popover {
+	&.background {
+		font: initial;
+
+		&,
+		&:backdrop {
+			background-color: transparent;
+		}
+	}
+
+	> arrow,
+	> contents {
+		padding: $space-size;
+		color: $text;
+		background-color: $menu;
+		background-clip: padding-box;
+		border-radius: $menu-radius;
+		box-shadow:
+			0 3px 6px 0
+				if(
+					$variant == 'light',
+					transparentize(black, 0.85),
+					transparentize(black, 0.85)
+				),
+			0 0 0 1px if($variant == 'light', gtkalpha(black, 0.03), $window_border);
+		transition: $transition-shadow;
+
+		@if $border == 'false' {
+			border: 1px
+				solid
+				if($variant== 'light', gtkalpha(black, 0.2), gtkmix(white, $menu, 8%));
+		} @else {
+			border: 2px solid $primary;
+		}
+	}
+
+	> arrow {
+		@if $border == 'false' {
+			border: 1px
+				solid
+				if($variant == 'light', gtkalpha(black, 0.2), gtkmix(white, $menu, 8%));
+		} @else {
+			border: 2px solid $primary;
+		}
+	}
+
+	> contents {
+		> list,
+		> .view,
+		> toolbar {
+			border-style: none;
+			box-shadow: none;
+			background-color: transparent;
+		}
+
+		separator {
+			background-color: $divider;
+			margin: 15px 10px;
+		}
+
+		list {
+			separator {
+				margin: 0;
+			}
+
+			> row {
+				border-radius: $menuitem-radius;
+			}
+		}
+
+		stack > box {
+			padding: 0;
+		}
+
+		> box > button {
+			margin: 0;
+		}
+	}
+
+	// FIXME: Use the popover color instead of transparent as a workaround for .view
+	.view:not(:selected),
+	toolbar {
+		background-color: $menu;
+	}
+
+	button,
+	entry,
+	combobox {
+		border-radius: $menuitem-radius;
+	}
+
+	.linked > button:not(.radio) {
+		border-radius: 0;
+
+		&:first-child {
+			border-radius: $menuitem-radius 0 0 $menuitem-radius;
+		}
+		&:last-child {
+			border-radius: 0 $menuitem-radius $menuitem-radius 0;
+		}
+		&:only-child {
+			border-radius: $menuitem-radius;
+		}
+	}
+
+	&.menu button,
+	button.model {
+		min-height: 32px;
+		padding: 0 8px;
+	}
+
+	.osd &,
+	&.touch-selection,
+	&.magnifier {
+		background-color: transparent;
+
+		> arrow,
+		> contents {
+			@extend %osd;
+		}
+	}
+
+	&.touch-selection,
+	&.magnifier {
+		button {
+			@extend %button-on-dark;
+		}
+	}
+}

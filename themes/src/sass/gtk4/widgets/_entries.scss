@@ -1,0 +1,203 @@
+/****************
+ * Text Entries *
+ ****************/
+
+%entry,
+entry {
+	%entry-basic,
+	& {
+		min-height: $medium-size - 4px;
+		padding: 2px $space-size + 4px;
+		// margin: $space-size 0;
+		border-spacing: $space-size;
+		border-radius: $corner-radius;
+		caret-color: currentColor; // this shouldn't be needed.
+
+		@include entry(normal);
+
+		&:focus-within {
+			@include entry(checked);
+		}
+
+		&:drop(active),
+		&:hover:not(:focus-within) {
+			@include entry(hover);
+		}
+
+		&:disabled {
+			@include entry(disabled);
+		}
+
+		// &.search { border-radius: $circular-radius; }
+
+		> text {
+			> placeholder {
+				color: $text-disabled;
+			}
+
+			> block-cursor {
+				color: $fill;
+				background-color: $text;
+			}
+
+			> selection {
+				@extend %selected_items_primary;
+			}
+		}
+
+		&.flat {
+			&:focus-within,
+			&:disabled,
+			&:hover,
+			& {
+				min-height: 0;
+				padding: 2px;
+				background-color: transparent;
+				box-shadow: none;
+				border-radius: 0;
+				outline: none;
+			}
+		}
+
+		> image {
+			// icons inside the entry
+			color: $text-secondary;
+
+			&:hover,
+			&:active {
+				color: $text;
+			}
+
+			&:disabled {
+				color: $text-disabled;
+			}
+
+			&.left {
+				margin: 0 6px 0 ($medium-size - 16px) / 2 - 8px;
+			}
+
+			&.right {
+				margin: 0 ($medium-size - 16px) / 2 - 8px 0 6px;
+			}
+		}
+
+		&.password image.caps-lock-indicator {
+			opacity: 0.35;
+		}
+
+		// entry error and warning style
+		@each $e_type, $e_color in (error, $error), (warning, $warning),
+			(success, $success)
+		{
+			&.#{$e_type} {
+				@include entry(normal, $e_color);
+				outline: none;
+
+				&:focus-within {
+					@include entry(checked, $e_color);
+					outline: none;
+				}
+
+				&:drop(active),
+				&:hover:not(:focus-within) {
+					@include entry(hover, $e_color);
+					outline: none;
+				}
+
+				&:disabled {
+					@include entry(disabled, $e_color);
+					outline: none;
+				}
+
+				> text {
+					> selection {
+						background-color: rgba($e_color, 0.25);
+						color: $e_color;
+					}
+
+					> cursor-handle > contents {
+						background-color: currentColor;
+					}
+				}
+
+				> image {
+					color: rgba($e_color, 0.75);
+
+					&:hover,
+					&:active {
+						color: $e_color;
+					}
+
+					&:disabled {
+						color: rgba($e_color, 0.35);
+					}
+				}
+			}
+		}
+	}
+
+	> progress,
+	progress > trough > progress {
+		margin: 0 -4px;
+		border-bottom: 2px solid $primary;
+		background-color: transparent;
+	}
+
+	.osd & > progress > trough > progress {
+		border-color: on($osd, fill);
+	}
+
+	button.image-button {
+		min-height: 24px;
+		min-width: 24px;
+		padding: 0;
+	}
+
+	// linked entries
+	.linked:not(.vertical) > & {
+		@extend %linked;
+	}
+
+	// Vertically linked entries
+	.linked.vertical > & {
+		@extend %linked-vertical;
+	}
+}
+
+.entry-tag {
+	margin: 2px;
+	border-radius: $circular-radius;
+	box-shadow: none;
+	background-color: $track-disabled;
+	color: $text;
+
+	&:hover {
+		background-image: image($overlay-hover);
+	}
+
+	// side margins: compensate the entry padding with a negative margin
+	// then the negative margin itself
+	:dir(ltr) & {
+		margin-left: 4px;
+		margin-right: 0;
+		padding-left: 12px;
+		padding-right: 8px;
+	}
+
+	:dir(rtl) & {
+		margin-left: 0;
+		margin-right: 4px;
+		padding-left: 8px;
+		padding-right: 12px;
+	}
+
+	// seems any sizing doesn't work
+	&.button {
+		box-shadow: none;
+		background-color: transparent;
+
+		&:not(:hover):not(:active) {
+			color: $text-secondary;
+		}
+	}
+}

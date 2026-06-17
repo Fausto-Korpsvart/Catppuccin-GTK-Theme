@@ -1,4 +1,4 @@
-// Theme ColorScheme palette: mocha/frappe/macchiato
+// Theme ColorScheme palette: night/moon/storm
 @import 'color-palette-default';
 
 $colorscheme: 'default';
@@ -16,16 +16,25 @@ $compact: 'false';
 $translucent: 'false';
 
 // Panel translucent opacity
-$panel_opacity: 0.6;
+$panel-opacity: 0.85;
 
 // Blackness style
 $blackness: 'false';
 
 // Windows outline style
-$outline: 'false';
+$border: 'false';
+
+// Roundness style
+$roundness: 12;
+
+// Panel border style
+$panel_border: 'true';
 
 // Windows button style : mac/normal
 $window_button: 'normal';
 
 // Gnome-Shell float panel version
 $float: 'false';
+
+// Nautilus Legacy style
+$files_legacy: 'false';

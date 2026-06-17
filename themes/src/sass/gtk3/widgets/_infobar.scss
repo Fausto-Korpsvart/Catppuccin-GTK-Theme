@@ -1,0 +1,126 @@
+infobar {
+	border: none;
+	margin-bottom: 0;
+
+	&.info {
+		& > revealer > box,
+		&:hover > revealer > box,
+		&:backdrop > revealer > box {
+			background-color: $base;
+
+			&,
+			link:link,
+			flowboxchild {
+				color: $primary;
+			}
+
+			button {
+				&.text-button:not(:disabled):not(.suggested-action):not(
+						.destructive-action
+					) {
+					color: $primary;
+				}
+			}
+		}
+	}
+
+	&.action,
+	&.question {
+		& > revealer > box,
+		&:backdrop > revealer > box {
+			background-color: $primary;
+
+			&,
+			link:link,
+			flowboxchild {
+				color: on($primary);
+			}
+
+			button {
+				&,
+				&:hover,
+				&:focus,
+				&:active,
+				&:checked,
+				&.text-button:not(:disabled) {
+					color: on($primary);
+				}
+			}
+		}
+
+		&:hover > revealer > box {
+			background-color: if(
+				$variant == 'light',
+				lighten($primary, 5%),
+				darken($primary, 5%)
+			);
+		}
+	}
+
+	&.warning {
+		& > revealer > box,
+		&:backdrop > revealer > box {
+			background-color: $warning;
+
+			&,
+			link:link,
+			flowboxchild {
+				color: on($warning);
+			}
+
+			button {
+				@extend %button-on-dark;
+
+				&,
+				&:hover,
+				&:focus,
+				&:active,
+				&:checked,
+				&.text-button:not(:disabled) {
+					color: on($warning);
+				}
+			}
+		}
+
+		&:hover > revealer > box {
+			background-color: if(
+				$variant == 'light',
+				lighten($warning, 5%),
+				darken($warning, 5%)
+			);
+		}
+	}
+
+	&.error {
+		& > revealer > box,
+		&:backdrop > revealer > box {
+			background-color: $error;
+			color: on($error);
+
+			&,
+			link:link,
+			flowboxchild {
+				color: on($error);
+			}
+
+			button {
+				&,
+				&:hover,
+				&:focus,
+				&:active,
+				&:checked,
+				&.text-button:not(:disabled) {
+					color: on($error);
+				}
+			}
+		}
+
+		&:hover > revealer > box {
+			background-color: if(
+				$variant == 'light',
+				lighten($error, 5%),
+				darken($error, 5%)
+			);
+		}
+	}
+}

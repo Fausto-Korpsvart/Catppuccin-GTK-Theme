@@ -1,0 +1,108 @@
+// Notifications
+#notification {
+	border-radius: $window-radius;
+	padding: $space-size * 2;
+	spacing-rows: $space-size * 1.5;
+	spacing-columns: $space-size * 1.5;
+	margin-from-right-edge-of-screen: $space-size * 3;
+	width: 28em;
+	color: $text;
+	background-color: $base;
+	box-shadow: 0 5px 12px rgba(black, 0.35);
+	margin: 7px 12px 17px 12px;
+
+	@if $border == 'false' and $variant == 'dark' {
+		border: 1px solid highlight($popover);
+		background-clip: border-box;
+	} @else {
+		border: 2px solid $primary;
+	}
+
+	.notification-button,
+	.notification-icon-button {
+		@extend %flat_button;
+		padding: $space-size;
+	}
+
+	StEntry {
+		@extend %entry;
+	}
+
+	.menu &,
+	.popup-menu & {
+		border: none;
+		border-radius: $corner-radius;
+		background-color: $base;
+		box-shadow: none;
+		margin: 0;
+
+		&:hover {
+			background-color: $surface;
+			box-shadow: 0 3px 8px rgba(black, 0.15);
+		}
+
+		&,
+		&.multi-line-notification {
+			color: $text;
+		}
+
+		.notification-button,
+		.notification-icon-button {
+			@extend %flat_button;
+			padding: $space-size;
+		}
+
+		StEntry {
+			@extend %entry;
+		}
+	}
+
+	&.multi-line-notification {
+		padding-bottom: $space-size * 2;
+		color: $text;
+	}
+
+	&-scrollview {
+		max-height: 10em;
+
+		> .top-shadow,
+		> .bottom-shadow {
+			height: 1em;
+		}
+
+		&:ltr > StScrollBar {
+			padding-left: $space-size;
+		}
+		&:rtl > StScrollBar {
+			padding-right: $space-size;
+		}
+	}
+
+	&-body {
+		spacing: $space-size;
+	}
+	&-actions {
+		spacing: $space-size * 1.5;
+	}
+}
+
+.notification {
+	&-with-image {
+		min-height: 159px;
+		color: $text;
+	}
+
+	&-button,
+	&-icon-button {
+		@extend %flat_button;
+		padding: $space-size;
+	}
+
+	&-icon-button > StIcon {
+		icon-size: 36px;
+	}
+
+	StEntry {
+		@extend %entry;
+	}
+}
