@@ -1,44 +1,42 @@
 #!/bin/bash
 
-# themes/release/changelog.sh
-# Dinamic changelog generator by categories
+# .github/scripts/changelog.sh
 
 CURRENT_TAG="$GITHUB_REF_NAME"
+CLEAN_VERSION="${CURRENT_TAG#v}"
+
 PREV_TAG=$(git describe --tags --abbrev=0 "${CURRENT_TAG}^" 2>/dev/null || echo "")
 COMMIT_RANGE="${PREV_TAG:+$PREV_TAG..}$CURRENT_TAG"
 
 echo "" > body.md
 
-BREAKING_LOGS=$(git log "$COMMIT_RANGE" --grep="!:" --grep="BREAKING CHANGE" --format="%s [\`%h\`](https://github.com/${GITHUB_REPOSITORY}/commit/%H)" | \
-        sed -E "s/^[a-z]+!(\([a-zA-Z0-9_-]+\))?:[[:space:]]*/- /" | \
-    awk '{print toupper(substr($0,1,3)) substr($0,4)}')
+MANUAL_CHANGELOG="../../CHANGELOG.md"
 
-if [ -n "$BREAKING_LOGS" ]; then
-    echo -e "## 🚨 BREAKING CHANGES\n> **⚠️ IMPORTANT:** This release introduces architectural changes that are not backward compatible.\n\n$BREAKING_LOGS\n\n***\n" >> body.md
+if [ -f "$MANUAL_CHANGELOG" ]; then
+    MANUAL_NOTES=$(sed -n "/## \[$CLEAN_VERSION\]/,/## \[/p" "$MANUAL_CHANGELOG" | sed '1d;$d')
+
+    if [ -n "$MANUAL_NOTES" ]; then
+        echo -e "$MANUAL_NOTES\n" >> body.md
+        echo -e "***\n" >> body.md
+    fi
+else
+    echo -e "## Release $CURRENT_TAG\n" >> body.md
 fi
 
-process_category() {
-    local prefix="$1"
-    local title="$2"
+ALL_COMMITS=$(git log "$COMMIT_RANGE" --format="%s [\`%h\`](https://github.com/${GITHUB_REPOSITORY}/commit/%H)" | \
+    awk '{print substr($0,1,1) toupper(substr($0,2,1)) substr($0,3)}')
 
-    local logs
-    logs=$(git log "$COMMIT_RANGE" --grep="^$prefix" --format="%s [\`%h\`](https://github.com/${GITHUB_REPOSITORY}/commit/%H)" | \
-            sed -E "s/^$prefix(\([a-zA-Z0-9_-]+\))?:[[:space:]]*/- /" | \
-        awk '{print toupper(substr($0,1,3)) substr($0,4)}')
+if [ -n "$ALL_COMMITS" ]; then
+    echo -e "<details>" >> body.md
+    echo -e "<summary><b>🛠️ Technical Changelog (Commits)</b></summary>\n" >> body.md
 
-    if [ -n "$logs" ]; then
-        echo -e "### $title\n$logs\n" >> body.md
-    fi
-}
+    while IFS= read -r line; do
+        echo -e "- $line" >> body.md
+    done <<< "$ALL_COMMITS"
 
-process_category "feat" "🚀 New Features & Ecosystem"
-process_category "fix" "🐛 Bug Fixes"
-process_category "style" "🎨 UI & Aesthetic Adjustments"
-process_category "docs" "📝 Documentation Changes"
-process_category "ci" "🧰 Maintenance & CI Pipeline"
-process_category "chore" "🧰 Maintenance & CI Pipeline"
-process_category "refactor" "🧰 Maintenance & CI Pipeline"
+    echo -e "\n</details>\n" >> body.md
+fi
 
-echo -e "***\n*Full Changelog: https://github.com/${GITHUB_REPOSITORY}/compare/${PREV_TAG:-main}...${CURRENT_TAG}*" >> body.md
+echo -e "*Full Changelog: https://github.com/${GITHUB_REPOSITORY}/compare/${PREV_TAG:-main}...${CURRENT_TAG}*" >> body.md
 
 cat body.md > ../../changelog.md
