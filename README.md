@@ -6,11 +6,11 @@
   and stylish space where you can maximize your productivity.
 </p>
 
-> [!NOTE]
+> [!INFO]
 > The inspiration for this theme came from my desire to have my favourite Neovim colour palettes integrated throughout my GNOME desktop.<br>
-> To achieve this, I drew inspiration from the stunning GTK theme designs by [VinceLiuice](https://github.com/vinceliuice)
-> and the [Gusbemacbe's](https://github.com/gusbemacbe): [Suru Plus Icon Theme](https://github.com/gusbemacbe/suru-plus).
-> And, of course, from the amazing colour palettes created by each designer and community.
+> To achieve this, I drew inspiration from [Catppuccin for Neovim](https://github.com/catppuccin/nvim), the stunning GTK theme designs
+> by [VinceLiuice](https://github.com/vinceliuice) and the [Gusbemacbe's](https://github.com/gusbemacbe): [Suru Plus Icon Theme](https://github.com/gusbemacbe/suru-plus),
+> and, of course, from the amazing colour palettes created by each designer and community.
 
 <p align="center">
   <img alt="OS" src="https://img.shields.io/badge/OS-Linux-FCC624?style=for-the-badge&logo=linux&logoColor=white"/>
@@ -38,7 +38,7 @@
 #### All Catppuccin + Black backgrounds
 
 | Variant | HEX Color |
-|:------- | ---------:|
+| ------- | --------- |
 | Mocha | ![Mocha](https://img.shields.io/badge/-%231E1E2E-1E1E2E) |
 | Macchiato | ![Macchiato](https://img.shields.io/badge/-%2324273A-24273A) |
 | Frappé | ![Frappé](https://img.shields.io/badge/-%23303446-303446) |
@@ -51,21 +51,21 @@
 <summary>Show accents</summary>
 
 | Name | HEX (light) | HEX (dark) |
-| ---- | ----------- | ----------:|
-| Blue | ![Blue Light](https://img.shields.io/badge/-%231E66F5-1E66F5) | ![Blue Dark](https://img.shields.io/badge/-%2389B4FA-89B4FA)|
-| Flamingo | ![Flamingo Light](https://img.shields.io/badge/-%23DD7878-DD7878)| ![Flamingo Dark](https://img.shields.io/badge/-%23F2CDCD-F2CDCD)|
-| Green | ![Green Light](https://img.shields.io/badge/-%2340A02B-40A02B)| ![Green Dark](https://img.shields.io/badge/-%23A6E3A1-A6E3A1)|
-| Lavender | ![Lavender Light](https://img.shields.io/badge/-%237287FD-7287FD)| ![Lavender Dark](https://img.shields.io/badge/-%23B4BEFE-B4BEFE)|
-| Maroon | ![Maroon Light](https://img.shields.io/badge/-%23E64553-E64553)| ![Maroon Dark](https://img.shields.io/badge/-%23EBA0AC-EBA0AC)|
-| Mauve | ![Mauve Light](https://img.shields.io/badge/-%238839EF-8839EF)| ![Mauve Dark](https://img.shields.io/badge/-%23CBA6F7-CBA6F7)|
-| Peach | ![Peach Light](https://img.shields.io/badge/-%23FE640B-FE640B)| ![Peach Dark](https://img.shields.io/badge/-%23FAB387-FAB387)|
-| Pink | ![Pink Light](https://img.shields.io/badge/-%23EA76CB-EA76CB)| ![Pink Dark](https://img.shields.io/badge/-%23F5C2E7-F5C2E7)|
-| Red | ![Red Light](https://img.shields.io/badge/-%23D20F39-D20F39)| ![Red Dark](https://img.shields.io/badge/-%23F38BA8-F38BA8)|
-| Rosewater | ![Rosewater Light](https://img.shields.io/badge/-%23DC8A78-DC8A78)| ![Rosewater Dark](https://img.shields.io/badge/-%23F5E0DC-F5E0DC)|
-| Sapphire | ![Sapphire Light](https://img.shields.io/badge/-%23209FB5-209FB5)| ![Sapphire Dark](https://img.shields.io/badge/-%2374C7EC-74C7EC)|
-| Sky | ![Sky Light](https://img.shields.io/badge/-%2304A5E5-04A5E5)| ![Sky Dark](https://img.shields.io/badge/-%2389DCEB-89DCEB)|
-| Teal | ![Teal Light](https://img.shields.io/badge/-%23179299-179299)| ![Teal Dark](https://img.shields.io/badge/-%2394E2D5-94E2D5)|
-| Yellow | ![Yellow Light](https://img.shields.io/badge/-%23DF8E1D-DF8E1D)| ![Yellow Dark](https://img.shields.io/badge/-%23F9E2AF-F9E2AF)|
+| ---- | ----------- | ---------- |
+| Blue | ![Blue Light](https://img.shields.io/badge/-%231E66F5-1E66F5) | ![Blue Dark](https://img.shields.io/badge/-%2389B4FA-89B4FA) |
+| Flamingo | ![Flamingo Light](https://img.shields.io/badge/-%23DD7878-DD7878) | ![Flamingo Dark](https://img.shields.io/badge/-%23F2CDCD-F2CDCD) |
+| Green | ![Green Light](https://img.shields.io/badge/-%2340A02B-40A02B) | ![Green Dark](https://img.shields.io/badge/-%23A6E3A1-A6E3A1) |
+| Lavender | ![Lavender Light](https://img.shields.io/badge/-%237287FD-7287FD) | ![Lavender Dark](https://img.shields.io/badge/-%23B4BEFE-B4BEFE) |
+| Maroon | ![Maroon Light](https://img.shields.io/badge/-%23E64553-E64553) | ![Maroon Dark](https://img.shields.io/badge/-%23EBA0AC-EBA0AC) |
+| Mauve | ![Mauve Light](https://img.shields.io/badge/-%238839EF-8839EF) | ![Mauve Dark](https://img.shields.io/badge/-%23CBA6F7-CBA6F7) |
+| Peach | ![Peach Light](https://img.shields.io/badge/-%23FE640B-FE640B) | ![Peach Dark](https://img.shields.io/badge/-%23FAB387-FAB387) |
+| Pink | ![Pink Light](https://img.shields.io/badge/-%23EA76CB-EA76CB) | ![Pink Dark](https://img.shields.io/badge/-%23F5C2E7-F5C2E7) |
+| Red | ![Red Light](https://img.shields.io/badge/-%23D20F39-D20F39) | ![Red Dark](https://img.shields.io/badge/-%23F38BA8-F38BA8) |
+| Rosewater | ![Rosewater Light](https://img.shields.io/badge/-%23DC8A78-DC8A78) | ![Rosewater Dark](https://img.shields.io/badge/-%23F5E0DC-F5E0DC) |
+| Sapphire | ![Sapphire Light](https://img.shields.io/badge/-%23209FB5-209FB5) | ![Sapphire Dark](https://img.shields.io/badge/-%2374C7EC-74C7EC) |
+| Sky | ![Sky Light](https://img.shields.io/badge/-%2304A5E5-04A5E5) | ![Sky Dark](https://img.shields.io/badge/-%2389DCEB-89DCEB) |
+| Teal | ![Teal Light](https://img.shields.io/badge/-%23179299-179299) | ![Teal Dark](https://img.shields.io/badge/-%2394E2D5-94E2D5) |
+| Yellow | ![Yellow Light](https://img.shields.io/badge/-%23DF8E1D-DF8E1D) | ![Yellow Dark](https://img.shields.io/badge/-%23F9E2AF-F9E2AF) |
 
 </details>
 
@@ -86,7 +86,7 @@ cd Catppuccin-GTK-Theme
 - Support for GTK4/Libadwaita with symbolic links
 
 ```bash
-./install.sh -l
+./install.sh --libadwaita
 ```
 
 - This only simulates the installation process. (It does not generate or install the theme)
@@ -102,7 +102,7 @@ cd Catppuccin-GTK-Theme
 - macOS window buttons
 
 ```bash
-./install.sh -l --tweaks files-legacy macos
+./install.sh --libadwaita --tweaks files-legacy macos
 ```
 
 - 14px rounded corners for windows & Gnome Shell
@@ -153,7 +153,7 @@ A detailed guide to a deeper understanding of how it works.
 ## Related Themes
 
 | Themes Projects | GitHub Repo | Gnome Look |
-| ------ |:------:|:------:|
+| --------------- | :---------: | :--------: |
 | Catppuccin GTK | [Source](https://github.com/Fausto-Korpsvart/Catppuccin-GTK-Theme) | [Package](https://www.pling.com/p/1715554/) |
 | Everforest GTK | [Source](https://github.com/Fausto-Korpsvart/Everforest-GTK-Theme) | [Package](https://www.pling.com/p/1695467/) |
 | Gruvbox GTK | [Source](https://github.com/Fausto-Korpsvart/Gruvbox-GTK-Theme) | [Package](https://www.pling.com/p/1681313/) |
@@ -163,7 +163,7 @@ A detailed guide to a deeper understanding of how it works.
 | Osaka GTK | [Source](https://github.com/Fausto-Korpsvart/Osaka-GTK-Theme) | [Package](https://www.pling.com/p/2284009/) |
 | Rose Pine GTK | [Source](https://github.com/Fausto-Korpsvart/Rose-Pine-GTK-Theme) | [Package](https://www.pling.com/p/1810530/) |
 | Tokyonight GTK | [Source](https://github.com/Fausto-Korpsvart/Tokyonight-GTK-Theme) | [Package](https://www.pling.com/p/1681315/) |
-| Vague GTK | [Soon](https://github.com/Fausto-Korpsvart/Vague-GTK-Theme) | [Soon](https://www.pling.com/p/) |
+| Vague GTK | [Source](https://github.com/Fausto-Korpsvart/Vague-GTK-Theme) | [Soon](https://www.pling.com/p/) |
 
 ## Support the Project
 

@@ -6,7 +6,7 @@ advanced usage examples to customise your Catppuccin GTK setup.
 ## Core Options
 
 | Option | Argument | Description | Default |
-| :--- | :--- | :--- | :--- |
+| ------ | -------- | ----------- | ------- |
 | `-d`, `--dest` | `DIR` | Target installation destination directory. | `~/.themes` *(or `/usr/share/themes` for root)* |
 | `-n`, `--name` | `NAME` | Set custom base theme name. | `Catppuccin` |
 | `-a`, `--accent` | `VARIANT` | Select accent colour variant(s) (accepts multiple). | `default` |
@@ -97,7 +97,7 @@ sudo ./install.sh --dest /usr/share/themes
 These flags modify the visual presentation of the GNOME Shell top panel, dock, and on-screen displays (OSD):
 
 | Tweak | Argument | Description | Default |
-| :--- | :--- | :--- | :--- |
+| ----- | -------- | ----------- | ------- |
 | `float` | — | Floating panel/dock style with margins and rounded corners. | Disabled |
 | `no-border` | — | Strip the borders from the floating top panel and dock. | Disabled |
 | `opacity` | `0.0–1.0` | Set top panel and dock background alpha opacity. | `0.85` |
@@ -134,7 +134,7 @@ These flags modify the visual presentation of the GNOME Shell top panel, dock, a
 These settings alter the aesthetic characteristics of application windows across GTK2, GTK3, and GTK4:
 
 | Tweak | Argument | Description | Default |
-| :--- | :--- | :--- | :--- |
+| ----- | -------- | ----------- | ------- |
 | `frappe` | — | Apply intermediate dark background (`#303446`). | Disabled |
 | `macchiato` | — | Apply warm dark background (`#24273a`). | Disabled |
 | `black` | — | OLED pure black background (`#000000`) for absolute power savings. | Disabled |
@@ -191,66 +191,44 @@ These settings alter the aesthetic characteristics of application windows across
 
 ### Borderless Version
 
-#### GTK options
-
-- Libadwaita Symlinks
-- Nautilus Legacy Design
-- Macchiato Theme
-- macOS Window Buttons
-- Border Radius 14px
-
-#### Shell options
-
-- Floating Panel
-- Borderless Panel
-- Panel Opacity 55%
-- Border Radius 14px
+| GTK options | Shell options |
+| ----------- | ------------- |
+| Libadwaita Symlinks | Floating Panel |
+| Nautilus Legacy Style | No Border |
+| Macchiato Theme | Opacity 55% |
+| macOS Window Buttons | Border Radius 14px |
+| Border Radius 14px | |
 
 ```bash
- ./install.sh -l --tweaks files-legacy macchiato macos radius 14 --shell float no-border opacity 55 radius 14
+ ./install.sh --libadwaita --tweaks files-legacy macchiato macos radius 14 --shell float no-border opacity 55 radius 14
 ```
 
 ### Border Version
 
-#### GTK options
-
-- Libadwaita Symlinks
-- Frappé Theme
-- Nautilus Modern Design
-- Legacy Window Buttons
-- Border 2px Accent Color
-- Accent Color Flamingo
-- Border Radius 9px
-
-#### Shell options
-
-- Floating Panel
-- Border 2px Accent Color
-- Panel Opacity 95%
-- Border Radius 9px
+| GTK options | Shell options |
+| ----------- | ------------- |
+| Libadwaita Symlinks | Floating Panel 2px border accent color |
+| Frappé Theme | Opacity 95% |
+| 2px Border with accent color | Border Radius 9px |
+| Border Radius 9px | Border Radius 9px |
+| Accent Color Flamingo | |
 
 ```bash
- ./install.sh -l --tweaks frappe border radius 9 -t flamingo --shell float opacity 95 radius 9
+ ./install.sh --libadwaita --tweaks frappe border radius 9 -t flamingo --shell float opacity 95 radius 9
 ```
 
 ### Square GTK - Legacy Panel - Black Version
 
-#### GTK options
-
-- Libadwaita Symlinks
-- Name Catppuccin-Black-Square
-- Black Theme
-- Nautilus Modern Design
-- macOS Window Buttons
-- Border Radius 2px
-
-#### Shell options
-
-- Legacy Panel
-- Panel Opacity 75%
+| GTK options | Shell options |
+| ----------- | ------------- |
+| Libadwaita Symlinks | Opacity 75% |
+| Name Catppuccin-Black-Square | |
+| Black Theme | |
+| mcOS Window Buttons | |
+| Border Radius 2px | |
 
 ```bash
- ./install.sh -l --name "Catppuccin-Black-Square" --tweaks black macos radius 2 --shell opacity 75
+ ./install.sh --libadwaita --name "Catppuccin-Black-Square" --tweaks black macos radius 2 --shell opacity 75
 ```
 
 > [!NOTE]
