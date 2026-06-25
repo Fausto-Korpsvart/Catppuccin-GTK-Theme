@@ -23,8 +23,7 @@ else
     echo -e "## Release $CURRENT_TAG\n" >> body.md
 fi
 
-ALL_COMMITS=$(git log "$COMMIT_RANGE" --format="%s [\`%h\`](https://github.com/${GITHUB_REPOSITORY}/commit/%H)" | \
-    awk '{print substr($0,1,1) toupper(substr($0,2,1)) substr($0,3)}')
+ALL_COMMITS=$(git log "$COMMIT_RANGE" --format="%s [\`%h\`](https://github.com/${GITHUB_REPOSITORY}/commit/%H)")
 
 if [ -n "$ALL_COMMITS" ]; then
     echo -e "<details>" >> body.md

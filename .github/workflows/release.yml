@@ -23,6 +23,7 @@ jobs:
       - name: Execute Combinatorial Theme Packager
         working-directory: ./themes/release
         run: |
+          mkdir -p /home/runner/.cache
           chmod +x ./packager.sh
           ./packager.sh
       - name: Generate Elegant Changelog
