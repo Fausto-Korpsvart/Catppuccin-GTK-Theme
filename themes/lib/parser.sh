@@ -24,7 +24,7 @@ OPTIONS:
 
   -v, --verbose           Display detailed installation logs
 
-  -S, --dry-run			  Simulate installation without making changes
+  -S, --dry-run           Simulate installation without making changes
 
   -r, --remove,
   -u, --uninstall         Uninstall/Remove installed themes or links
@@ -41,6 +41,7 @@ OPTIONS:
                            3. border        Windows with 2px border style
                            4. macos         macOS-style window buttons
                            5. radius        Set custom border radius (0 to 32)
+                           6. files-legacy  Nautilus classic legacy style
 
   -h, --help              Show this help message
 EOF
